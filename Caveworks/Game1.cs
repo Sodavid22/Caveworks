@@ -10,6 +10,8 @@ namespace Caveworks
         private SpriteBatch _spriteBatch;
 
         Texture2D playerTexture;
+        Vector2 playerPositon;
+        float playerSpeed;
 
         public Game1()
         {
@@ -23,6 +25,9 @@ namespace Caveworks
             // TODO: Add your initialization logic here
 
             base.Initialize();
+
+            playerPositon = new Vector2(_graphics.PreferredBackBufferWidth/2, _graphics.PreferredBackBufferHeight/2);
+            playerSpeed = 100f;
         }
 
         protected override void LoadContent()
@@ -39,6 +44,29 @@ namespace Caveworks
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            float playerMoveDistance = playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                playerPositon.X -= playerMoveDistance;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                playerPositon.X += playerMoveDistance;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            {
+                playerPositon.Y -= playerMoveDistance;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                playerPositon.Y += playerMoveDistance;
+            }
+
+
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -49,7 +77,7 @@ namespace Caveworks
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
-            _spriteBatch.Draw(playerTexture, new Vector2(0,0), Color.White);
+            _spriteBatch.Draw(playerTexture, playerPositon, Color.White);
             _spriteBatch.End();
 
             // TODO: Add your drawing code here
