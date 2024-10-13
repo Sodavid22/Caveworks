@@ -9,6 +9,8 @@ namespace Caveworks
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        Texture2D playerTexture;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -27,6 +29,8 @@ namespace Caveworks
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            playerTexture = Content.Load<Texture2D>("BlueMan");
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -43,6 +47,10 @@ namespace Caveworks
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(playerTexture, new Vector2(0,0), Color.White);
+            _spriteBatch.End();
 
             // TODO: Add your drawing code here
 
