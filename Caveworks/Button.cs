@@ -1,38 +1,29 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using SharpDX.Direct2D1;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using System.Diagnostics;
+using System.Xml;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+
 
 namespace Caveworks
 {
     public class Button
     {
-        private Texture2D texture;
+        public Rectangle rectangle;
+        public Color color;
+        public string text;
 
-        Vector2 position;
-        Vector2 size;
-        string text;
-
-        public Button(Vector2 position, Vector2 size, string text)
+        public Button(Rectangle rectangle, Vector4 color, string text)
         {
-            this.position = position;
-            this.size = size;
+            this.rectangle = rectangle;
+            this.color = Color.FromNonPremultiplied(color);
             this.text = text;
         }
 
-        public void Update()
+        public bool IsClicked() // TODO
         {
-            return;
-        }
-
-        public void Draw()
-        {
-            return;
+            return false;
         }
     }
 }

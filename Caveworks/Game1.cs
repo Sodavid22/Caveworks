@@ -12,6 +12,7 @@ namespace Caveworks
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
         public Texture2D whiteRectangle;
+        public int testInt; //Useless
 
         public Game1()
         {
@@ -22,8 +23,15 @@ namespace Caveworks
 
         protected override void Initialize() // TODO: Add your initialization logic here
         {
+            // set screen parameters
+            graphics.PreferredBackBufferWidth = Globals.screenWidth;
+            graphics.PreferredBackBufferHeight = Globals.screenHeight;
+            graphics.ApplyChanges();
+
+            // create sprite batch
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            // create empty texture for future use
             whiteRectangle = new Texture2D(GraphicsDevice, 1, 1);
             whiteRectangle.SetData(new[] { Color.White });
         }
@@ -35,7 +43,20 @@ namespace Caveworks
 
         protected override void Update(GameTime gameTime) // TODO: Add your update logic here
         {
+            KeyboardManager.Update();
 
+            // turn off the game
+            if (KeyboardManager.IsHeld(Keys.Escape))
+            {
+                Exit();
+            }
+
+            // toggle fullscreen
+            if (KeyboardManager.IsPressed(Keys.F11))
+            {
+                graphics.ToggleFullScreen();
+                graphics.ApplyChanges();
+            }
         }
 
         protected override void Draw(GameTime gameTime) // TODO: Add your drawing code here

@@ -1,15 +1,16 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Diagnostics;
+using System.Xml;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Input;
+
 
 namespace Caveworks
 {
     public static class Globals
     {
-        
+        public static int screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+        public static int screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
     }
 }
