@@ -46,5 +46,11 @@ namespace Caveworks
             return false;
         }
 
+        public static Vector2 GetMousePosition()
+        {
+            MouseState mouse = Mouse.GetState();
+            Vector2 mousPosition = new Vector2(mouse.X, mouse.Y);
+            return mousPosition;
+        }
     }
 }

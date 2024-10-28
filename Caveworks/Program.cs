@@ -1,3 +1,3 @@
 ﻿
-using var game = new Caveworks.Game1();
+using var game = new Caveworks.Game();
 game.Run();
