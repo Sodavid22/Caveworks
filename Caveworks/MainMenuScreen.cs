@@ -15,6 +15,16 @@ namespace Caveworks
         public static void Update()
         {
             startButton.UpdatePosition(new Vector2((Globals.GetScreenSize().X - startButton.buttonRectangle.Width) / 2 , (Globals.GetScreenSize().Y - startButton.buttonRectangle.Height) / 2));
+
+            // USELESS TEST CODE
+            if (startButton.IsUnderCursor() && KeyboardManager.IsHeldMouse(1))
+            {
+                startButton.borderSize += 1;
+            }
+            if (startButton.IsUnderCursor() && KeyboardManager.IsHeldMouse(2))
+            {
+                startButton.borderSize -= 1;
+            }
         }
 
         public static void Draw()

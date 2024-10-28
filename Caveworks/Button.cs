@@ -41,7 +41,7 @@ namespace Caveworks
         public void Draw()
         {
             // draw button background
-            Game.spriteBatch.Draw(Globals.whitePixel, new Rectangle(buttonRectangle.X - borderSize, buttonRectangle.Y - borderSize, buttonRectangle.Width + borderSize*2, buttonRectangle.Height + borderSize*2), Color.FromNonPremultiplied(new Vector4(1, 1, 1, 1)));
+            Game.spriteBatch.Draw(Globals.whitePixel, new Rectangle(buttonRectangle.X - borderSize, buttonRectangle.Y - borderSize, buttonRectangle.Width + borderSize*2, buttonRectangle.Height + borderSize*2), Color.FromNonPremultiplied(new Vector4(0, 0, 0, 1)));
 
             if (IsUnderCursor())
             {                

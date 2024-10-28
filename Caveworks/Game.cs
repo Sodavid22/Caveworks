@@ -11,7 +11,6 @@ namespace Caveworks
     {
         public static GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
-        Texture2D texture;
 
         public Game()
         {
@@ -43,7 +42,7 @@ namespace Caveworks
 
         protected override void LoadContent() // TODO: use this.Content to load your game content here
         {
-            texture = Content.Load<Texture2D>("Backgrounds/factorio_background");
+            Globals.menuBackground = Content.Load<Texture2D>("factorio_background");
         }
 
         protected override void Update(GameTime gameTime) // TODO: Add your update logic here
@@ -51,13 +50,13 @@ namespace Caveworks
             KeyboardManager.Update();
 
             // turn off the game
-            if (KeyboardManager.IsHeld(Keys.Escape))
+            if (KeyboardManager.IsHeldKey(Keys.Escape))
             {
                 Exit();
             }
 
             // toggle fullscreen
-            if (KeyboardManager.IsPressed(Keys.F11))
+            if (KeyboardManager.IsPressedKey(Keys.F11))
             {
                 if (Globals.isFullscreen)
                 {
@@ -79,20 +78,24 @@ namespace Caveworks
                     graphics.IsFullScreen= true;
                     graphics.ApplyChanges();
                 }
-
-                base.Update(gameTime);
             }
+
+            if (Globals.activeScreen == 0)
+            {
+                MainMenuScreen.Update();
+            }
+
+            base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime) // TODO: Add your drawing code here
         {
             spriteBatch.Begin();
 
-            spriteBatch.Draw(Globals.menuBackground, new Rectangle(100, 100, 100, 100), Color.White);
+            spriteBatch.Draw(Globals.menuBackground, new Rectangle(0, 0, (int)Globals.GetScreenSize().X, (int)Globals.GetScreenSize().Y), Color.White);
 
             if (Globals.activeScreen == 0)
             {
-                MainMenuScreen.Update();
                 MainMenuScreen.Draw();
             }
 
