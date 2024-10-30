@@ -22,6 +22,8 @@ namespace Caveworks
 
         public static Texture2D menuBackground;
 
+        public static SpriteFont arial;
+
         public static Vector2 GetScreenSize() // get curerent screen width
         {
             return new Vector2(Game.graphics.PreferredBackBufferWidth, Game.graphics.PreferredBackBufferHeight);

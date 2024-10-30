@@ -43,6 +43,7 @@ namespace Caveworks
         protected override void LoadContent() // TODO: use this.Content to load your game content here
         {
             Globals.menuBackground = Content.Load<Texture2D>("factorio_background");
+            Globals.arial = Content.Load<SpriteFont>("Arial");
         }
 
         protected override void Update(GameTime gameTime) // TODO: Add your update logic here
@@ -90,6 +91,8 @@ namespace Caveworks
 
         protected override void Draw(GameTime gameTime) // TODO: Add your drawing code here
         {
+            GraphicsDevice.Clear(Color.White);
+
             spriteBatch.Begin();
 
             spriteBatch.Draw(Globals.menuBackground, new Rectangle(0, 0, (int)Globals.GetScreenSize().X, (int)Globals.GetScreenSize().Y), Color.White);
