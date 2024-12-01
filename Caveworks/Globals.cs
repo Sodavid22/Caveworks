@@ -17,9 +17,13 @@ namespace Caveworks
 
         public static Texture2D whitePixel; // empty texture for future use
 
-        public static int activeScreen; // witch screen should be loaded, 0 - main menu
+        public static Enums.GameScreen activeScreen = Enums.GameScreen.MainMenu;// witch screen should be loaded, 0 - main menu
 
-        public static Texture2D menuBackground;
+        public static Texture2D menuBackground; // background
+
+        public static bool activeGame = false; // is there a game to load
+
+        public static float gameVolume = 1.0f; // global game volume
 
         public static Vector2 GetScreenSize() // get curerent screen width
         {

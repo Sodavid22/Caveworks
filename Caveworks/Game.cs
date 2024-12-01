@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Xml;
 using Caveworks.GameScreens;
+using Caveworks.SoundEffects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -43,7 +44,8 @@ namespace Caveworks
             Globals.whitePixel.SetData(new[] { Color.White });
 
             // set current screen to main menu
-            Globals.activeScreen = 0;
+            Globals.activeScreen = Enums.GameScreen.MainMenu;
+            MainMenuScreen.Load();
         }
 
         protected override void LoadContent() // TODO: use this.Content to load your game content here
@@ -56,14 +58,23 @@ namespace Caveworks
             Fonts.menuButtonFont = Content.Load<SpriteFont>("Fonts/TitilliumWebSemiBold32");
 
             // load sounds (use instances, not originals !!!)
-            Sounds.buttonClick = Content.Load<SoundEffect>("SoundEffects/UI/modern-ui-hover");
-            Sounds.AdjustVolume();
+            Sounds.buttonClick = new MySoundEffect(Content.Load<SoundEffect>("SoundEffects/UI/modern-ui-hover"), 0.5f);
+            Sounds.buttonDecline = new MySoundEffect(Content.Load<SoundEffect>("SoundEffects/UI/modern-ui-decline"), 0.5f);
+            Sounds.buttonClick2 = new MySoundEffect(Content.Load<SoundEffect>("SoundEffects/UI/ui-button-click"), 0.5f);
         }
 
         protected override void Update(GameTime gameTime) // TODO: Add your update logic here
         {
             // update keyboard state
             KeyboardManager.Update();
+
+            // go to main menu
+            if (KeyboardManager.IsPressed(Keys.Escape))
+            {
+                Sounds.buttonClick2.play(1.0f);
+                Globals.activeScreen = Enums.GameScreen.MainMenu;
+                MainMenuScreen.Load();
+            }
 
             // turn off the game
             if (KeyboardManager.IsHeld(Keys.F4))
@@ -74,38 +85,28 @@ namespace Caveworks
             // toggle FPS counter
             if (KeyboardManager.IsPressed(Keys.F3))
             {
+                Sounds.buttonClick2.play(1.0f);
                 FpsCounter.Toggle();
             }
 
-            // toggle fullscreen
-            if (KeyboardManager.IsPressed(Keys.F11))
-            {
-                if (Globals.isFullscreen)
-                {    // disable fullscreen
-                    Globals.isFullscreen = false;
-                    graphics.PreferredBackBufferWidth = Globals.DISPLAY_WIDTH/2;
-                    graphics.PreferredBackBufferHeight = Globals.DISPLAY_HEIGHT/2;
-                    graphics.ToggleFullScreen();
-                    graphics.IsFullScreen = false;
-                    graphics.ApplyChanges();
-                }
-                else
-                {   // enable fullscreen
-                    Globals.isFullscreen = true;
-                    graphics.PreferredBackBufferWidth = Globals.DISPLAY_WIDTH;
-                    graphics.PreferredBackBufferHeight = Globals.DISPLAY_HEIGHT;
-                    graphics.ToggleFullScreen();
-                    graphics.IsFullScreen= true;
-                    graphics.ApplyChanges();
-                }
-            }
-
             // update screens
-            if (Globals.activeScreen == 0)
+            if (Globals.activeScreen == Enums.GameScreen.MainMenu)
             {
                 MainMenuScreen.Update();
             }
-            
+            else if (Globals.activeScreen == Enums.GameScreen.Start)
+            {
+                StartScreen.Update();
+            }
+            else if (Globals.activeScreen == Enums.GameScreen.Settings)
+            {
+                SettingsScreen.Update();
+            }
+            else if (Globals.activeScreen == Enums.GameScreen.Credits)
+            {
+                CreditsScreen.Update();
+            }
+
             base.Update(gameTime);
         }
 
@@ -115,9 +116,21 @@ namespace Caveworks
             mainSpriteBatch.Begin();
 
             // draw screens
-            if (Globals.activeScreen == 0)
+            if (Globals.activeScreen == Enums.GameScreen.MainMenu)
             {
                 MainMenuScreen.Draw();
+            }
+            else if (Globals.activeScreen == Enums.GameScreen.Start)
+            {
+                StartScreen.Draw();
+            }
+            else if (Globals.activeScreen == Enums.GameScreen.Settings)
+            {
+                SettingsScreen.Draw();
+            }
+            else if (Globals.activeScreen == Enums.GameScreen.Credits)
+            {
+                CreditsScreen.Draw();
             }
 
             // draw FPS counter

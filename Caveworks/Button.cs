@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Xml;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -47,20 +48,22 @@ namespace Caveworks
         public void Draw()
         {
             // draw button background
-            Game.mainSpriteBatch.Draw(Globals.whitePixel, new Rectangle(buttonRectangle.X - borderSize, buttonRectangle.Y - borderSize, buttonRectangle.Width + borderSize*2, buttonRectangle.Height + borderSize*2), Color.FromNonPremultiplied(new Vector4(0, 0, 0, 1)));
+            Game.mainSpriteBatch.Draw(Globals.whitePixel, new Rectangle(buttonRectangle.X - borderSize, buttonRectangle.Y - borderSize, buttonRectangle.Width + borderSize * 2, buttonRectangle.Height + borderSize * 2), Color.FromNonPremultiplied(new Vector4(0, 0, 0, 1)));
 
-            if (IsUnderCursor())
-            {                
-                //draw darker
+            if (IsUnderCursor() && active)
+            {   // draw darker
                 Game.mainSpriteBatch.Draw(Globals.whitePixel, buttonRectangle, Color.FromNonPremultiplied(new Vector4(color[0] * 0.8f, color[1] * 0.8f, color[2] * 0.8f, 1)));
             }
-            else
-            {
-                // draw normally
+            else if (active)
+            {   // draw normally
                 Game.mainSpriteBatch.Draw(Globals.whitePixel, buttonRectangle, Color.FromNonPremultiplied(new Vector4(color[0], color[1], color[2], 1)));
             }
+            else // draw dark
+            {
+                Game.mainSpriteBatch.Draw(Globals.whitePixel, buttonRectangle, Color.FromNonPremultiplied(new Vector4(color[0] * 0.5f, color[1] * 0.5f, color[2] * 0.5f, 1)));
+            }
             //draw text
-            Game.mainSpriteBatch.DrawString(font, text, new Vector2(buttonRectangle.X + (buttonRectangle.Width/2) - (textSize.X/2), buttonRectangle.Y + (buttonRectangle.Height / 2) - (textSize.Y / 2)), Color.White);
+            Game.mainSpriteBatch.DrawString(font, text, new Vector2(buttonRectangle.X + (buttonRectangle.Width / 2) - (textSize.X / 2), buttonRectangle.Y + (buttonRectangle.Height / 2) - (textSize.Y / 2)), Color.White);
 
         }
 
@@ -73,5 +76,27 @@ namespace Caveworks
         {
             buttonRectangle = new Rectangle((int)position.X, (int)position.Y, buttonRectangle.Width, buttonRectangle.Height);
         }
+
+        public void ChangeText(string text)
+        {
+            this.text = text;
+            textSize = font.MeasureString(text);
+        }
+
+        public bool IsActivated()
+        {
+            return active;
+        }
+
+        public void Activate()
+        {
+            active = true;
+        }
+
+        public void Deactivate()
+        {
+            active = false;
+        }
+
     }
 }

@@ -58,3 +58,9 @@
 /processorParam:Quality=Best
 /build:SoundEffects/UI/modern-ui-hover.wav
 
+#begin SoundEffects/UI/ui-button-click.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/UI/ui-button-click.wav
+

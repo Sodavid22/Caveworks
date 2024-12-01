@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.Xml;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,9 +7,15 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Caveworks
 {
-    public class Fonts
+    public class Enums
     {
-        public static SpriteFont menuButtonFont;
-        public static SpriteFont defaultFont;
+        public enum GameScreen
+        {
+            MainMenu,
+            Start,
+            MainGame,
+            Settings,
+            Credits,
+        }
     }
 }

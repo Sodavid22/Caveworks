@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Caveworks
 {
-    internal class FpsCounter
+    public class FpsCounter
     {
         static bool active = false;
 
