@@ -13,7 +13,6 @@ namespace Caveworks
         public static KeyboardState lastKeyboardState;
         public static MouseState currentMouseState;
         public static MouseState lastMouseState;
-        public static KeyboardState[] lastKeyboardStates;
 
 
         public static void Update()
@@ -24,7 +23,7 @@ namespace Caveworks
             currentMouseState = Mouse.GetState();
         }
 
-        public static bool IsPressedKey(Keys key)
+        public static bool IsPressed(Keys key)
         {
             if (currentKeyboardState.IsKeyDown(key) && !lastKeyboardState.IsKeyDown(key))
             {
@@ -33,7 +32,7 @@ namespace Caveworks
             return false;
         }
 
-        public static bool IsHeldKey(Keys key)
+        public static bool IsHeld(Keys key)
         {
             if (currentKeyboardState.IsKeyDown(key))
             {
@@ -42,7 +41,7 @@ namespace Caveworks
             return false;
         }
 
-        public static bool IsReleasedKey(Keys key)
+        public static bool IsReleased(Keys key)
         {
             if (!currentKeyboardState.IsKeyDown(key) && lastKeyboardState.IsKeyDown(key))
             {
@@ -54,55 +53,58 @@ namespace Caveworks
         public static Vector2 GetMousePosition()
         {
             MouseState mouse = Mouse.GetState();
-            Vector2 mousPosition = new Vector2(mouse.X, mouse.Y);
-            return mousPosition;
+            Vector2 mousePosition = new Vector2(mouse.X, mouse.Y);
+            return mousePosition;
         }
 
-        public static bool IsPressedMouse(int button)
+        public static bool LeftClicked()
         {
-            if (button == 1 && currentMouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
-            {
-                return true;
-            }
-            if (button == 2 && currentMouseState.RightButton == ButtonState.Pressed && lastMouseState.RightButton == ButtonState.Released)
-            {
-                return true;
-            }
-            if (button == 3 && currentMouseState.MiddleButton == ButtonState.Pressed && lastMouseState.MiddleButton == ButtonState.Released)
+            if (currentMouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
             {
                 return true;
             }
             return false;
         }
 
-        public static bool IsHeldMouse(int button)
+        public static bool RightClicked()
         {
-            if (button == 1 && currentMouseState.LeftButton == ButtonState.Pressed)
-            {
-                return true;
-            }
-            if (button == 2 && currentMouseState.RightButton == ButtonState.Pressed)
-            {
-                return true;
-            }
-            if (button == 3 && currentMouseState.MiddleButton == ButtonState.Pressed)
+            if (currentMouseState.RightButton == ButtonState.Pressed && lastMouseState.RightButton == ButtonState.Released)
             {
                 return true;
             }
             return false;
         }
 
-        public static bool IsReleasedMouse(int button)
+        public static bool LeftHeld()
         {
-            if (button == 1 && currentMouseState.LeftButton == ButtonState.Released && lastMouseState.LeftButton == ButtonState.Pressed)
+            if (currentMouseState.LeftButton == ButtonState.Pressed)
             {
                 return true;
             }
-            if (button == 2 && currentMouseState.RightButton == ButtonState.Released && lastMouseState.RightButton == ButtonState.Pressed)
+            return false;
+        }
+
+        public static bool RightHeld()
+        {
+            if (currentMouseState.RightButton == ButtonState.Pressed)
             {
                 return true;
             }
-            if (button == 3 && currentMouseState.MiddleButton == ButtonState.Released && lastMouseState.MiddleButton == ButtonState.Pressed)
+            return false;
+        }
+
+        public static bool LeftReleased()
+        {
+            if (currentMouseState.LeftButton == ButtonState.Released && lastMouseState.LeftButton == ButtonState.Pressed)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool RightReleased()
+        {
+            if (currentMouseState.RightButton == ButtonState.Released && lastMouseState.RightButton == ButtonState.Pressed)
             {
                 return true;
             }

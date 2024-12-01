@@ -10,17 +10,23 @@ namespace Caveworks
 {
     public class Button
     {
-        public Rectangle buttonRectangle; // position and size
-        public float[] color = new float[3]; // RGB color
-        public int borderSize; // size of button border
-        public string text; // displayed text
+        Rectangle buttonRectangle; // position and size
+        float[] color = new float[3]; // RGB color
+        int borderSize; // size of button border
+        string text; // displayed text
+        SpriteFont font;
+        Vector2 textSize;
+        bool active;
 
-        public Button(Rectangle rectangle, float[] color, string text, int borderSize)
+        public Button(Rectangle rectangle, float[] color, int borderSize, string text, SpriteFont font)
         {
             this.buttonRectangle = rectangle;
             this.color = color;
-            this.text = text;
             this.borderSize = borderSize;
+            this.text = text;
+            this.font = font;
+            textSize = font.MeasureString(text);
+            active = true;
         }
 
         // find out if mouse is hovering over the button
@@ -41,18 +47,26 @@ namespace Caveworks
         public void Draw()
         {
             // draw button background
-            Game.spriteBatch.Draw(Globals.whitePixel, new Rectangle(buttonRectangle.X - borderSize, buttonRectangle.Y - borderSize, buttonRectangle.Width + borderSize*2, buttonRectangle.Height + borderSize*2), Color.FromNonPremultiplied(new Vector4(0, 0, 0, 1)));
+            Game.mainSpriteBatch.Draw(Globals.whitePixel, new Rectangle(buttonRectangle.X - borderSize, buttonRectangle.Y - borderSize, buttonRectangle.Width + borderSize*2, buttonRectangle.Height + borderSize*2), Color.FromNonPremultiplied(new Vector4(0, 0, 0, 1)));
 
             if (IsUnderCursor())
             {                
                 //draw darker
-                Game.spriteBatch.Draw(Globals.whitePixel, buttonRectangle, Color.FromNonPremultiplied(new Vector4(color[0] - 0.3f, color[1] - 0.3f, color[2] - 0.3f, 1)));
+                Game.mainSpriteBatch.Draw(Globals.whitePixel, buttonRectangle, Color.FromNonPremultiplied(new Vector4(color[0] * 0.8f, color[1] * 0.8f, color[2] * 0.8f, 1)));
             }
             else
             {
                 // draw normally
-                Game.spriteBatch.Draw(Globals.whitePixel, buttonRectangle, Color.FromNonPremultiplied(new Vector4(color[0], color[1], color[2], 1)));
+                Game.mainSpriteBatch.Draw(Globals.whitePixel, buttonRectangle, Color.FromNonPremultiplied(new Vector4(color[0], color[1], color[2], 1)));
             }
+            //draw text
+            Game.mainSpriteBatch.DrawString(font, text, new Vector2(buttonRectangle.X + (buttonRectangle.Width/2) - (textSize.X/2), buttonRectangle.Y + (buttonRectangle.Height / 2) - (textSize.Y / 2)), Color.White);
+
+        }
+
+        public Rectangle GetRectangle()
+        {
+            return buttonRectangle;
         }
 
         public void UpdatePosition(Vector2 position)

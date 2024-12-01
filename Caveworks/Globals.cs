@@ -4,7 +4,6 @@ using System.Xml;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SharpDX.Direct3D9;
 
 
 namespace Caveworks
@@ -21,8 +20,6 @@ namespace Caveworks
         public static int activeScreen; // witch screen should be loaded, 0 - main menu
 
         public static Texture2D menuBackground;
-
-        public static SpriteFont arial;
 
         public static Vector2 GetScreenSize() // get curerent screen width
         {
