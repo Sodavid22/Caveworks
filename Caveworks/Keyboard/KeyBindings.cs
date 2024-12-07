@@ -7,15 +7,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Caveworks
 {
-    public class Enums
+    public static class KeyBindings
     {
-        public enum GameScreen
-        {
-            MainMenu,
-            Start,
-            MainGame,
-            Settings,
-            Credits,
-        }
+        public static Keys MENU_KEY = Keys.Escape;
+        public static Keys SHUTDOWN_KEY = Keys.F4;
+        public static Keys FPS_KEY = Keys.F3;
     }
 }

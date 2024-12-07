@@ -20,7 +20,7 @@ namespace Caveworks.GameScreens
         }
         public static void Draw()
         {
-            Game.mainSpriteBatch.Draw(Globals.menuBackground, new Rectangle(0, 0, (int)Globals.GetScreenSize().X, (int)Globals.GetScreenSize().Y), Color.White);
+
         }
     }
 }

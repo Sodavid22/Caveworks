@@ -20,8 +20,7 @@ namespace Caveworks.GameScreens
         }
         public static void Draw()
         {
-            Game.mainSpriteBatch.Draw(Globals.menuBackground, new Rectangle(0, 0, (int)Globals.GetScreenSize().X, (int)Globals.GetScreenSize().Y), Color.White);
-            Game.mainSpriteBatch.DrawString(Fonts.menuButtonFont, "Made by: David Sobek", new Vector2((Globals.GetScreenSize().X - Fonts.menuButtonFont.MeasureString("Made by: David Sobek").X) / 2, Globals.GetScreenSize().Y / 2), Color.Yellow);
+            Game.mainSpriteBatch.DrawString(Fonts.menuButtonFont, "Made by: David Sobek", new Vector2((GameWindow.windowSize.X - Fonts.menuButtonFont.MeasureString("Made by: David Sobek").X) / 2, GameWindow.windowSize.Y / 2), Color.Yellow);
         }
     }
 }

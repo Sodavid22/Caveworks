@@ -24,20 +24,20 @@ namespace Caveworks.GameScreens
             {
                 continueButton.Deactivate();
             }
-            continueButton.UpdatePosition(new Vector2((Globals.GetScreenSize().X - continueButton.GetRectangle().Width) / 2, (Globals.GetScreenSize().Y - continueButton.GetRectangle().Height) / 2 - 60));
-            startButton.UpdatePosition(new Vector2((Globals.GetScreenSize().X - startButton.GetRectangle().Width) / 2, (Globals.GetScreenSize().Y - startButton.GetRectangle().Height) / 2 + 0));
-            settingsButton.UpdatePosition(new Vector2((Globals.GetScreenSize().X - settingsButton.GetRectangle().Width) / 2, (Globals.GetScreenSize().Y - settingsButton.GetRectangle().Height) / 2 + 60));
-            creditsButton.UpdatePosition(new Vector2((Globals.GetScreenSize().X - creditsButton.GetRectangle().Width) / 2, (Globals.GetScreenSize().Y - creditsButton.GetRectangle().Height) / 2 + 120));
+            continueButton.UpdatePosition(new Vector2((GameWindow.windowSize.X - continueButton.GetRectangle().Width) / 2, (GameWindow.windowSize.Y - continueButton.GetRectangle().Height) / 2 - 60));
+            startButton.UpdatePosition(new Vector2((GameWindow.windowSize.X - startButton.GetRectangle().Width) / 2, (GameWindow.windowSize.Y - startButton.GetRectangle().Height) / 2 + 0));
+            settingsButton.UpdatePosition(new Vector2((GameWindow.windowSize.X - settingsButton.GetRectangle().Width) / 2, (GameWindow.windowSize.Y - settingsButton.GetRectangle().Height) / 2 + 60));
+            creditsButton.UpdatePosition(new Vector2((GameWindow.windowSize.X - creditsButton.GetRectangle().Width) / 2, (GameWindow.windowSize.Y - creditsButton.GetRectangle().Height) / 2 + 120));
         }
 
         public static void Update() // do every frame
         {
-            if (continueButton.IsUnderCursor() && KeyboardManager.LeftClicked())
+            if (continueButton.IsUnderCursor() && MyKeyboard.IsPressed(MouseKey.Left))
             {
                 if (continueButton.IsActivated())
                 {
                     Sounds.buttonClick.play(1.0f);
-                    Globals.activeScreen = Enums.GameScreen.MainGame;
+                    Globals.activeScreen = GameScreen.MainGame;
                 }
                 else
                 {
@@ -45,30 +45,28 @@ namespace Caveworks.GameScreens
                 }
             }
 
-            if (startButton.IsUnderCursor() && KeyboardManager.LeftClicked())
+            if (startButton.IsUnderCursor() && MyKeyboard.IsPressed(MouseKey.Left))
             {
                 Sounds.buttonClick.play(1.0f);
-                Globals.activeScreen = Enums.GameScreen.Start;
+                Globals.activeScreen = GameScreen.Start;
             }
 
-            if (settingsButton.IsUnderCursor() && KeyboardManager.LeftClicked())
+            if (settingsButton.IsUnderCursor() && MyKeyboard.IsPressed(MouseKey.Left))
             {
                 Sounds.buttonClick.play(1.0f);
-                Globals.activeScreen = Enums.GameScreen.Settings;
+                Globals.activeScreen = GameScreen.Settings;
                 SettingsScreen.Load();
             }
 
-            if (creditsButton.IsUnderCursor() && KeyboardManager.LeftClicked())
+            if (creditsButton.IsUnderCursor() && MyKeyboard.IsPressed(MouseKey.Left))
             {
                 Sounds.buttonClick.play(1.0f);
-                Globals.activeScreen = Enums.GameScreen.Credits;
+                Globals.activeScreen = GameScreen.Credits;
             }
         }
 
         public static void Draw() // draw everything
         {
-            Game.mainSpriteBatch.Draw(Globals.menuBackground, new Rectangle(0, 0, (int)Globals.GetScreenSize().X, (int)Globals.GetScreenSize().Y), Color.White);
-
             foreach (Button button in buttons)
             {
                 button.Draw();
