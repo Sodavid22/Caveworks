@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Xml;
 using Caveworks.GameScreens;
-using Caveworks.SoundEffects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Caveworks.SoundEffects
+namespace Caveworks
 {
     public class MySoundEffect
     {

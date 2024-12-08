@@ -63,7 +63,7 @@ namespace Caveworks
                 Game.mainSpriteBatch.Draw(Textures.emptyTexture, buttonRectangle, Color.FromNonPremultiplied(new Vector4(color[0] * 0.5f, color[1] * 0.5f, color[2] * 0.5f, 1)));
             }
             //draw text
-            Game.mainSpriteBatch.DrawString(font, text, new Vector2(buttonRectangle.X + buttonRectangle.Width / 2 - textSize.X / 2, buttonRectangle.Y + buttonRectangle.Height / 2 - textSize.Y / 2), Color.White);
+            Game.mainSpriteBatch.DrawString(font, text, new Vector2((int)(buttonRectangle.X + buttonRectangle.Width / 2 - textSize.X / 2), (int)(buttonRectangle.Y + buttonRectangle.Height / 2 - textSize.Y / 2)), Color.White);
 
         }
 

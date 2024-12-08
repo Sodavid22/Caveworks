@@ -8,7 +8,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Caveworks.SoundEffects
+namespace Caveworks
 {
     public class Sounds // use instances, not originals !!!
     {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Xml;
-using Caveworks.SoundEffects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
