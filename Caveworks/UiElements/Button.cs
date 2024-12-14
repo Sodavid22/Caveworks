@@ -9,7 +9,7 @@ namespace Caveworks
         protected static float hoverOverlayStrength = 0.2f;
         protected static float inactiveOverlayStrength = 0.5f;
 
-        protected bool active;
+        protected bool active = true;
         protected bool hovered;
 
         public Button(Vector2 size, Vector4 color, int border, string text, SpriteFont font) : base(size, color, border, text, font)
@@ -19,7 +19,6 @@ namespace Caveworks
         new public void Load(Vector2 position, Anchor anchor)
         {
             base.Load(position, anchor);
-            active = true;
         }
 
         public void Update()
