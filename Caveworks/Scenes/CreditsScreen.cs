@@ -10,9 +10,13 @@ namespace Caveworks.GameScreens
 {
     internal class CreditsScreen
     {
+
+        // TEST CODE
+        static TextBox credits = new TextBox(new Vector2(200, 60), new Vector4(0, 0.5f, 0.5f, 1), 2, "Made by David", Fonts.defaultFont);
+
         public static void Load()
         {
-
+            credits.Load(new Vector2(GameWindow.windowSize.X / 2, GameWindow.windowSize.Y / 2), Anchor.Middle);
         }
         public static void Update()
         {
@@ -20,7 +24,7 @@ namespace Caveworks.GameScreens
         }
         public static void Draw()
         {
-            Game.mainSpriteBatch.DrawString(Fonts.menuButtonFont, "Made by: David Sobek", new Vector2((int)((GameWindow.windowSize.X - Fonts.menuButtonFont.MeasureString("Made by: David Sobek").X) / 2), (int)(GameWindow.windowSize.Y / 2)), Color.Yellow);
+            credits.Draw();
         }
     }
 }

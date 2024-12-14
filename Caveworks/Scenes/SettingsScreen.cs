@@ -9,20 +9,20 @@ namespace Caveworks.GameScreens
 {
     public static class SettingsScreen
     {
-        public static Button toggleFullScreenButton = new Button(new Rectangle(0, 0, 500, 50), new float[] { 0, 0.3f, 0.3f }, 2, "Fullscreen: " + GameWindow.isFullscreen, Fonts.menuButtonFont);
-
-        public static Button[] buttons = { toggleFullScreenButton};
+        public static Button toggleFullScreenButton = new Button(new Vector2(400, 60), new Vector4(0, 0.5f, 0.5f, 1), 2, "Fullscreen", Fonts.menuButtonFont);
 
         public static void Load()
         {
-            toggleFullScreenButton.UpdatePosition(new Vector2((GameWindow.windowSize.X - toggleFullScreenButton.GetRectangle().Width) / 2, (GameWindow.windowSize.Y - toggleFullScreenButton.GetRectangle().Height) / 2 - 180));
+            toggleFullScreenButton.ChangeText("Fullscreen: " + GameWindow.isFullscreen);
+            toggleFullScreenButton.Load(new Vector2(GameWindow.windowSize.X / 2, GameWindow.windowSize.Y / 2 - 100), Anchor.Middle);
         }
 
-        public static void Update() // do every frame
+        public static void Update()
         {
-            if (toggleFullScreenButton.IsUnderCursor() && MyKeyboard.IsPressed(MouseKey.Left))
+            toggleFullScreenButton.Update();
+
+            if (toggleFullScreenButton.IsPressed(MouseKey.Left))
             {
-                Sounds.buttonClick.play(1.0f);
                 GameWindow.ToggleFullscreen();
                 toggleFullScreenButton.ChangeText("Fullscreen: " + GameWindow.isFullscreen);
                 SettingsScreen.Load();
@@ -31,10 +31,7 @@ namespace Caveworks.GameScreens
         }
         public static void Draw()
         {
-            foreach (Button button in buttons)
-            {
-                button.Draw();
-            }
+            toggleFullScreenButton.Draw();
         }
     }
 }
