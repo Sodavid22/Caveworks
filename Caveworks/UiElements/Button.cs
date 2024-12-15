@@ -4,24 +4,31 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Caveworks
 {
-    public class Button : TextBox
+    public class Button : UiElement
     {
+        protected string text;
+        protected SpriteFont font;
+        protected Vector2 textSize;
+
         protected static float hoverOverlayStrength = 0.2f;
         protected static float inactiveOverlayStrength = 0.5f;
 
         protected bool active = true;
         protected bool hovered;
 
-        public Button(Vector2 size, Vector4 color, int border, string text, SpriteFont font) : base(size, color, border, text, font)
+        public Button(Vector2 size, Vector4 color, int border, string text, SpriteFont font) : base(size, color, border)
         {
+            this.text = text;
+            this.font = font;
         }
 
-        new public void Load(Vector2 position, Anchor anchor)
+        public override void Load(Vector2 position, Anchor anchor)
         {
             base.Load(position, anchor);
+            textSize = font.MeasureString(text);
         }
 
-        new public void Update()
+       public override void Update()
         {
             Vector2 mousePosition = MyKeyboard.GetMousePosition();
 
@@ -37,7 +44,7 @@ namespace Caveworks
             else { hovered= false;}
         }
 
-        new public void Draw()
+        public override void Draw()
         {
             base.Draw();
             if (!active)
@@ -48,6 +55,8 @@ namespace Caveworks
             {
                 Game.mainSpriteBatch.Draw(Textures.emptyTexture, rectangle, Color.FromNonPremultiplied(1, 1, 1, (int)(color.A * hoverOverlayStrength)));
             }
+            // draw text
+            Game.mainSpriteBatch.DrawString(font, text, new Vector2((int)(rectangle.X + rectangle.Width / 2 - textSize.X / 2), (int)(rectangle.Y + rectangle.Height / 2 - textSize.Y / 2)), Color.Black);
         }
 
         public bool IsPressed(MouseKey mouseKey)

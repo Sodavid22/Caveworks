@@ -16,13 +16,13 @@ namespace Caveworks
         }
 
 
-        new public void Load(Vector2 position, Anchor anchor)
+        public override void Load(Vector2 position, Anchor anchor)
         {
             base.Load(position, anchor);
             textSize = font.MeasureString(text);
         }
 
-        new public void Draw()
+        public override void Draw()
         {
             base.Draw();
             Game.mainSpriteBatch.DrawString(font, text, new Vector2((int)(rectangle.X + rectangle.Width/2 - textSize.X/2), (int)(rectangle.Y + rectangle.Height/2 - textSize.Y/2)), Color.Black);

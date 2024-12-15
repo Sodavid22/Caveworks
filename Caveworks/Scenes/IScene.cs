@@ -4,8 +4,22 @@ namespace Caveworks
 {
     public interface IScene
     {
-        public void Update(GameTime gameTime) { }
+        protected static UiElement[] uiElements;
 
-        public void Draw(GameTime gameTime) { }
+        public virtual void Update(GameTime gameTime)
+        {
+            foreach (UiElement uiElement in uiElements)
+            {
+                uiElement.Update();
+            }
+        }
+
+        public virtual void Draw(GameTime gameTime)
+        {
+            foreach (UiElement uiElement in uiElements)
+            {
+                uiElement.Draw();
+            }
+        }
     }
 }

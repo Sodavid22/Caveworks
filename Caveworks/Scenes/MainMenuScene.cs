@@ -9,7 +9,7 @@ namespace Caveworks
         private static Button settingsButton = new Button(new Vector2(200, 60), new Vector4(0, 0.5f, 0.5f, 1), 2, "Settings", Fonts.menuButtonFont);
         private static Button creditsButton = new Button(new Vector2(200, 60), new Vector4(0, 0.5f, 0.5f, 1), 2, "Credits", Fonts.menuButtonFont);
 
-        private static Button[] buttons = {continueButton, startButton, settingsButton, creditsButton };
+        private static UiElement[] uiElements = {continueButton, startButton, settingsButton, creditsButton };
 
         public MainMenuScene()
         {
@@ -26,9 +26,9 @@ namespace Caveworks
 
         public void Update(GameTime gameTime) // do every frame
         {
-            foreach (Button button in buttons)
+            foreach (UiElement uiElement in uiElements)
             {
-                button.Update();
+                uiElement.Update();
             }
 
             if (continueButton.IsPressed(MouseKey.Left))
@@ -54,9 +54,9 @@ namespace Caveworks
 
         public void Draw(GameTime gameTime) // draw everything
         {
-            foreach (Button button in buttons)
+            foreach (UiElement uiElement in uiElements)
             {
-                button.Draw();
+                uiElement.Draw();
             }
         }
     }
