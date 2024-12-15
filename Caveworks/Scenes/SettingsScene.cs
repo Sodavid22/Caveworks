@@ -2,7 +2,7 @@
 
 namespace Caveworks
 {
-    public class SettingsScene : IScene
+    public class SettingsScene : Scene
     {
         private static Button fullscreenButton = new Button(new Vector2(400, 60), new Vector4(0, 0.5f, 0.5f, 1), 2, "Fullscreen: ", Fonts.menuButtonFont);
 

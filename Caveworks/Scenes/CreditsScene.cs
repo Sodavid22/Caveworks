@@ -2,7 +2,7 @@
 
 namespace Caveworks
 {
-    public class CreditsScene : IScene
+    public class CreditsScene : Scene
     {
         private static TextBox madeByTextBox = new TextBox(new Vector2(600, 60), new Vector4(0.5f, 0.5f, 0.5f, 1), 2, "Made by: David Sobek", Fonts.menuButtonFont);
 

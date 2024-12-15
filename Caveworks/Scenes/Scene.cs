@@ -1,10 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace Caveworks
 {
-    public interface IScene
+    public class Scene
     {
-        protected static UiElement[] uiElements;
+        protected static List<UiElement> uiElements;
 
         public virtual void Update(GameTime gameTime)
         {

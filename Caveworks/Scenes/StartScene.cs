@@ -2,7 +2,7 @@
 
 namespace Caveworks
 {
-    internal class StartScene : IScene
+    internal class StartScene : Scene
     {
         public void Update(GameTime gameTime)
         {

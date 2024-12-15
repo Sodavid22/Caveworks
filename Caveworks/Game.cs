@@ -73,7 +73,7 @@ namespace Caveworks
             }
 
             // update scenes
-            IScene scene = Globals.GetActiveScene();
+            Scene scene = Globals.GetActiveScene();
             scene.Update(gameTime);
 
             FpsCounter.Update(gameTime);
@@ -89,7 +89,7 @@ namespace Caveworks
             Game.mainSpriteBatch.Draw(Textures.menuBackground, new Rectangle(0, 0, (int)GameWindow.GetWindowSize().X, (int)GameWindow.GetWindowSize().Y), Color.White);
 
             // draw screens
-            IScene scene = Globals.GetActiveScene();
+            Scene scene = Globals.GetActiveScene();
             scene.Draw(gameTime);
 
             // draw FPS counter
