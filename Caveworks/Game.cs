@@ -1,5 +1,4 @@
-﻿using Caveworks.GameScreens;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 namespace Caveworks
 {
@@ -27,10 +26,6 @@ namespace Caveworks
 
             // create sprite batches
             mainSpriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // set starting screen
-            Globals.activeScreen = GameScreen.MainMenu;
-            MainMenuScreen.Load();
         }
 
         protected override void LoadContent() // TODO: use this.Content to load your game content here
@@ -47,6 +42,9 @@ namespace Caveworks
 
             // load all sounds
             Sounds.Load(Content);
+
+            // set starting screen
+            Globals.SetActiveScene(new MainMenuScene());
         }
 
         protected override void Update(GameTime gameTime) // TODO: Add your update logic here
@@ -57,9 +55,8 @@ namespace Caveworks
             // go to main menu
             if (MyKeyboard.IsPressed(KeyBindings.MENU_KEY))
             {
-                Sounds.buttonClick2.play(1.0f);
-                Globals.activeScreen = GameScreen.MainMenu;
-                MainMenuScreen.Load();
+                Sounds.ButtonClick2.play(1.0f);
+                Globals.SetActiveScene(new MainMenuScene());
             }
 
             // turn off the game
@@ -71,27 +68,13 @@ namespace Caveworks
             // toggle FPS counter
             if (MyKeyboard.IsPressed(KeyBindings.FPS_KEY))
             {
-                Sounds.buttonClick2.play(1.0f);
+                Sounds.ButtonClick2.play(1.0f);
                 FpsCounter.Toggle();
             }
 
-            // update screens
-            if (Globals.activeScreen == GameScreen.MainMenu)
-            {
-                MainMenuScreen.Update();
-            }
-            else if (Globals.activeScreen == GameScreen.Start)
-            {
-                StartScreen.Update();
-            }
-            else if (Globals.activeScreen == GameScreen.Settings)
-            {
-                SettingsScreen.Update();
-            }
-            else if (Globals.activeScreen == GameScreen.Credits)
-            {
-                CreditsScreen.Update();
-            }
+            // update scenes
+            IScene scene = Globals.GetActiveScene();
+            scene.Update(gameTime);
 
             FpsCounter.Update(gameTime);
             base.Update(gameTime);
@@ -103,25 +86,11 @@ namespace Caveworks
             mainSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             // draw background
-            Game.mainSpriteBatch.Draw(Textures.menuBackground, new Rectangle(0, 0, (int)GameWindow.windowSize.X, (int)GameWindow.windowSize.Y), Color.White);
+            Game.mainSpriteBatch.Draw(Textures.menuBackground, new Rectangle(0, 0, (int)GameWindow.GetWindowSize().X, (int)GameWindow.GetWindowSize().Y), Color.White);
 
             // draw screens
-            if (Globals.activeScreen == GameScreen.MainMenu)
-            {
-                MainMenuScreen.Draw();
-            }
-            else if (Globals.activeScreen == GameScreen.Start)
-            {
-                StartScreen.Draw();
-            }
-            else if (Globals.activeScreen == GameScreen.Settings)
-            {
-                SettingsScreen.Draw();
-            }
-            else if (Globals.activeScreen == GameScreen.Credits)
-            {
-                CreditsScreen.Draw();
-            }
+            IScene scene = Globals.GetActiveScene();
+            scene.Draw(gameTime);
 
             // draw FPS counter
             if (FpsCounter.IsActive())

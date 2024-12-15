@@ -21,19 +21,23 @@ namespace Caveworks
             base.Load(position, anchor);
         }
 
-        public void Update()
+        new public void Update()
         {
-            if (IsUnderCursor())
+            Vector2 mousePosition = MyKeyboard.GetMousePosition();
+
+            if (mousePosition.X > base.rectangle.X && mousePosition.X < base.rectangle.X + base.rectangle.Width)
             {
-                hovered = true;
+                if (mousePosition.Y > base.rectangle.Y && mousePosition.Y < base.rectangle.Y + base.rectangle.Height)
+                {
+                    hovered = true;
+                    return;
+                }
+                else { hovered = false;}
             }
-            else
-            {
-                hovered = false;
-            }
+            else { hovered= false;}
         }
 
-        new public void Draw() 
+        new public void Draw()
         {
             base.Draw();
             if (!active)
@@ -46,20 +50,6 @@ namespace Caveworks
             }
         }
 
-        public bool IsUnderCursor()
-        {
-            Vector2 mousePosition = MyKeyboard.GetMousePosition();
-
-            if (mousePosition.X > base.rectangle.X && mousePosition.X < base.rectangle.X + base.rectangle.Width)
-            {
-                if (mousePosition.Y > base.rectangle.Y && mousePosition.Y < base.rectangle.Y + base.rectangle.Height)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         public bool IsPressed(MouseKey mouseKey)
         {
             if (MyKeyboard.IsPressed(mouseKey))
@@ -68,12 +58,12 @@ namespace Caveworks
                 {
                     if (active)
                     {
-                        Sounds.buttonClick.play(1.0f);
+                        Sounds.ButtonClick.play(1.0f);
                         return true;
                     }
                     else
                     {
-                        Sounds.buttonDecline.play(1.0f);
+                        Sounds.ButtonDecline.play(1.0f);
                     }
                 }
             }

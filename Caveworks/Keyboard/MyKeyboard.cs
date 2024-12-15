@@ -9,10 +9,10 @@ namespace Caveworks
 {
     public static class MyKeyboard
     {
-        public static KeyboardState currentKeyboardState;
-        public static KeyboardState lastKeyboardState;
-        public static MouseState currentMouseState;
-        public static MouseState lastMouseState;
+        private static KeyboardState currentKeyboardState;
+        private static KeyboardState lastKeyboardState;
+        private static MouseState currentMouseState;
+        private static MouseState lastMouseState;
 
         public static void Update()
         {

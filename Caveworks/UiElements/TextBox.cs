@@ -1,10 +1,9 @@
-﻿using Caveworks.UiElements;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Caveworks
 {
-    public class TextBox : UiElementBase
+    public class TextBox : UiElement
     {
         protected string text;
         protected SpriteFont font;

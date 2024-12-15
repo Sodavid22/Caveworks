@@ -9,8 +9,8 @@ namespace Caveworks
 {
     public static class KeyBindings
     {
-        public static Keys MENU_KEY = Keys.Escape;
-        public static Keys SHUTDOWN_KEY = Keys.F4;
-        public static Keys FPS_KEY = Keys.F3;
+        public const Keys MENU_KEY = Keys.Escape;
+        public const Keys SHUTDOWN_KEY = Keys.F4;
+        public const Keys FPS_KEY = Keys.F3;
     }
 }

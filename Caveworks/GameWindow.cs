@@ -6,16 +6,26 @@ namespace Caveworks
     public static class GameWindow
     {
         // monitor size in pixels:
-        static Vector2 DISPLAY_SIZE = new Vector2((int)GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, (int)GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
+        private static Vector2 DISPLAY_SIZE = new Vector2((int)GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, (int)GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
 
         // game window size in pixels:
-        public static Vector2 windowSize = new Vector2((int)DISPLAY_SIZE.X/2, (int)DISPLAY_SIZE.Y/2);
+        private static Vector2 windowSize = new Vector2((int)DISPLAY_SIZE.X/2, (int)DISPLAY_SIZE.Y/2);
 
         // is in fullscreen mode
-        public static bool isFullscreen = false;
+        private static bool isFullscreen = false;
 
         // is vertical synchronization enabled
-        static bool vSync = true;
+        private static bool vSync = true;
+
+        public static bool IsFullscreen()
+        {
+            return isFullscreen;
+        }
+
+        public static Vector2 GetWindowSize()
+        {
+            return windowSize;
+        }
 
         public static Vector2 UpdateWindowSize() // get curerent screen width
         {

@@ -12,15 +12,15 @@ namespace Caveworks
 {
     public class Sounds // use instances, not originals !!!
     {
-        public static MySoundEffect buttonClick;
-        public static MySoundEffect buttonDecline;
-        public static MySoundEffect buttonClick2;
+        public static MySoundEffect ButtonClick;
+        public static MySoundEffect ButtonDecline;
+        public static MySoundEffect ButtonClick2;
 
         public static void Load(ContentManager contentManager)
         {
-            Sounds.buttonClick = new MySoundEffect(contentManager.Load<SoundEffect>("SoundEffects/UI/modern-ui-hover"), 0.5f);
-            Sounds.buttonDecline = new MySoundEffect(contentManager.Load<SoundEffect>("SoundEffects/UI/modern-ui-decline"), 0.5f);
-            Sounds.buttonClick2 = new MySoundEffect(contentManager.Load<SoundEffect>("SoundEffects/UI/ui-button-click"), 0.5f);
+            ButtonClick = new MySoundEffect(contentManager.Load<SoundEffect>("SoundEffects/UI/modern-ui-hover"), 0.5f);
+            ButtonDecline = new MySoundEffect(contentManager.Load<SoundEffect>("SoundEffects/UI/modern-ui-decline"), 0.5f);
+            ButtonClick2 = new MySoundEffect(contentManager.Load<SoundEffect>("SoundEffects/UI/ui-button-click"), 0.5f);
         }
     }
 }

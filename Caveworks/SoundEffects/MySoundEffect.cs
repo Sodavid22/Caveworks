@@ -9,8 +9,8 @@ namespace Caveworks
 {
     public class MySoundEffect
     {
-        SoundEffect soundEffect;
-        float soundVolume;
+        private SoundEffect soundEffect;
+        private float soundVolume;
 
         public MySoundEffect(SoundEffect soundEffect, float volume)
         {
@@ -21,7 +21,7 @@ namespace Caveworks
         public void play(float volume)
         {
             SoundEffectInstance soundEffectInstance = soundEffect.CreateInstance();
-            soundEffectInstance.Volume = soundVolume * Globals.gameVolume * volume;
+            soundEffectInstance.Volume = soundVolume * Globals.GetGlobalVolume() * volume;
             soundEffectInstance.Play();
         }
     }

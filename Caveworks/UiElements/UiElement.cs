@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Caveworks.UiElements
+namespace Caveworks
 {
-    public class UiElementBase
+    public class UiElement
     {
         protected Rectangle rectangle;
         protected Vector2 position;
@@ -12,7 +12,7 @@ namespace Caveworks.UiElements
         protected Color color;
         protected int border;
 
-        public UiElementBase(Vector2 size, Vector4 color, int border)
+        public UiElement(Vector2 size, Vector4 color, int border)
         {
             this.size = size;
             this.color = Color.FromNonPremultiplied(color);
