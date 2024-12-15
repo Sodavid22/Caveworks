@@ -2,11 +2,11 @@
 
 namespace Caveworks
 {
-    public class SettingsScene : Scene
+    public class SettingsScene : IScene
     {
         private static Button fullscreenButton = new Button(new Vector2(400, 60), new Vector4(0, 0.5f, 0.5f, 1), 2, "Fullscreen: ", Fonts.menuButtonFont);
 
-        private static Button[] buttons = {fullscreenButton};
+        private static UiElement[] uiElements = {fullscreenButton};
 
         public SettingsScene()
         {
@@ -15,9 +15,9 @@ namespace Caveworks
         }
         public void Update(GameTime gameTime)
         {
-            foreach (Button button in buttons)
+            foreach (UiElement uiElement in uiElements)
             {
-                button.Update();
+                uiElement.Update();
             }
 
             if (fullscreenButton.IsPressed(MouseKey.Left))
@@ -30,9 +30,9 @@ namespace Caveworks
 
         public void Draw(GameTime gameTime)
         {
-            foreach (Button button in buttons)
+            foreach (UiElement uiElement in uiElements)
             {
-                button.Draw();
+                uiElement.Draw();
             }
         }
     }

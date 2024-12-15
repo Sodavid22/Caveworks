@@ -4,18 +4,18 @@ namespace Caveworks
 {
     public static class Globals // all global variables
     {
-        private static Scene activeScene;// witch screen should be loaded, 0 - main menu
+        private static IScene activeScene;// witch screen should be loaded, 0 - main menu
 
         private static bool existsSaveFile = false; // is there a game to load
 
         private static float globalVolume = 1.0f; // global game volume
 
-        public static Scene GetActiveScene()
+        public static IScene GetActiveScene()
         {
             return activeScene;
         }
 
-        public static void SetActiveScene(Scene scene)
+        public static void SetActiveScene(IScene scene)
         {
             activeScene = scene;
         }

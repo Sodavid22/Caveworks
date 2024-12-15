@@ -2,11 +2,11 @@
 
 namespace Caveworks
 {
-    public class CreditsScene : Scene
+    public class CreditsScene : IScene
     {
         private static TextBox madeByTextBox = new TextBox(new Vector2(600, 60), new Vector4(0.5f, 0.5f, 0.5f, 1), 2, "Made by: David Sobek", Fonts.menuButtonFont);
 
-        private static TextBox[] textBoxes = { madeByTextBox };
+        private static UiElement[] uiElements = {madeByTextBox };
 
         public CreditsScene()
         {
@@ -15,14 +15,17 @@ namespace Caveworks
 
         public void Update(GameTime gameTime)
         {
-            return;
+            foreach (UiElement uiElement in uiElements)
+            {
+                uiElement.Update();
+            }
         }
 
         public void Draw(GameTime gameTime)
         {
-            foreach (TextBox textBox in textBoxes)
+            foreach (UiElement uiElement in uiElements)
             {
-                textBox.Draw();
+                uiElement.Draw();
             }
         }
     }
