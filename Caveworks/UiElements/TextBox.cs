@@ -33,5 +33,10 @@ namespace Caveworks
             // text
             Game.mainSpriteBatch.DrawString(font, text, new Vector2((int)(rectangle.X + rectangle.Width/2 - textSize.X/2), (int)(rectangle.Y + rectangle.Height/2 - textSize.Y/2)), Color.Black);
         }
+        public void ChangeText(string text)
+        {
+            this.text = text;
+            textSize = font.MeasureString(text);
+        }
     }
 }

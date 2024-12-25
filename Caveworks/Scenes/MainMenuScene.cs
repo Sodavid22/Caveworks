@@ -4,10 +4,10 @@ namespace Caveworks
 {
     internal class MainMenuScene : IScene
     {
-        private static Button continueButton = new Button(new Vector2(200, 60), new Vector4(0, 0.5f, 0.5f, 1), 2, "Continue", Fonts.menuButtonFont);
-        private static Button startButton = new Button(new Vector2(200, 60), new Vector4(0, 0.5f, 0.5f, 1), 2, "Start", Fonts.menuButtonFont);
-        private static Button settingsButton = new Button(new Vector2(200, 60), new Vector4(0, 0.5f, 0.5f, 1), 2, "Settings", Fonts.menuButtonFont);
-        private static Button creditsButton = new Button(new Vector2(200, 60), new Vector4(0, 0.5f, 0.5f, 1), 2, "Credits", Fonts.menuButtonFont);
+        private static Button continueButton = new Button(new Vector2(200, 60), Globals.GetUIButtonColor(), 2, "Continue", Fonts.menuButtonFont);
+        private static Button startButton = new Button(new Vector2(200, 60), Globals.GetUIButtonColor(), 2, "Start", Fonts.menuButtonFont);
+        private static Button settingsButton = new Button(new Vector2(200, 60), Globals.GetUIButtonColor(), 2, "Settings", Fonts.menuButtonFont);
+        private static Button creditsButton = new Button(new Vector2(200, 60), Globals.GetUIButtonColor(), 2, "Credits", Fonts.menuButtonFont);
 
         private static UiElement[] uiElements = {continueButton, startButton, settingsButton, creditsButton };
 

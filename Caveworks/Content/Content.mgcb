@@ -25,6 +25,13 @@
 /processorParam:TextureFormat=Color
 /build:factorio_background.jpg
 
+#begin Fonts/Verdana08.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Verdana08.spritefont
+
 #begin Fonts/Verdana12.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

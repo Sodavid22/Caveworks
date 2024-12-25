@@ -4,7 +4,7 @@ namespace Caveworks
 {
     public class CreditsScene : IScene
     {
-        private static TextBox madeByTextBox = new TextBox(new Vector2(600, 60), new Vector4(0.5f, 0.5f, 0.5f, 1), 2, "Made by: David Sobek", Fonts.menuButtonFont);
+        private static TextBox madeByTextBox = new TextBox(new Vector2(600, 60), Globals.GetUITextBoxColor(), 2, "Made by: David Sobek", Fonts.menuButtonFont);
 
         private static UiElement[] uiElements = {madeByTextBox };
 

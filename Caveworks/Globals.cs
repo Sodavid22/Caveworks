@@ -10,6 +10,10 @@ namespace Caveworks
 
         private static float globalVolume = 0.5f; // global game volume
 
+        private static Vector4 UIButtonColor = new Vector4(0, 0.6f, 1, 1);
+
+        private static Vector4 UITextBoxColor = new Vector4(0, 0.8f, 1, 1);
+
         public static IScene GetActiveScene()
         {
             return activeScene;
@@ -33,6 +37,16 @@ namespace Caveworks
         public static void SetGlobalVolume(float volume)
         {
             globalVolume = volume;
+        }
+
+        public static Vector4 GetUIButtonColor()
+        {
+            return UIButtonColor;
+        }
+
+        public static Vector4 GetUITextBoxColor()
+        {
+            return UITextBoxColor;
         }
     }
 }

@@ -14,11 +14,13 @@ namespace Caveworks
     {
         public static SpriteFont menuButtonFont;
         public static SpriteFont defaultFont;
+        public static SpriteFont smallFont;
 
         public static void Load(ContentManager contentManager)
         {
             defaultFont = contentManager.Load<SpriteFont>("Fonts/Verdana12");
             menuButtonFont = contentManager.Load<SpriteFont>("Fonts/Verdana32");
+            smallFont = contentManager.Load<SpriteFont>("Fonts/Verdana08");
         }
     }
 }
