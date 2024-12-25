@@ -37,7 +37,6 @@ namespace Caveworks
                 if (mousePosition.Y > base.rectangle.Y && mousePosition.Y < base.rectangle.Y + base.rectangle.Height)
                 {
                     hovered = true;
-                    return;
                 }
                 else { hovered = false;}
             }
@@ -46,12 +45,16 @@ namespace Caveworks
 
         public override void Draw()
         {
-            base.Draw();
-            if (!active)
+            // borders
+            Game.mainSpriteBatch.Draw(Textures.emptyTexture, rectangle, Color.Black);
+            // main body
+            Game.mainSpriteBatch.Draw(Textures.emptyTexture, new Rectangle(rectangle.X + border, rectangle.Y + border, rectangle.Width - border * 2, rectangle.Height - border * 2), color);
+
+            if (!active) // darken if inactive
             {
                 Game.mainSpriteBatch.Draw(Textures.emptyTexture, rectangle, Color.FromNonPremultiplied(1, 1, 1, (int)(color.A * inactiveOverlayStrength)));
             }
-            else if (hovered)
+            else if (hovered) // darken if hovered
             {
                 Game.mainSpriteBatch.Draw(Textures.emptyTexture, rectangle, Color.FromNonPremultiplied(1, 1, 1, (int)(color.A * hoverOverlayStrength)));
             }

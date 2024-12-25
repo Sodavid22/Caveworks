@@ -58,8 +58,7 @@ namespace Caveworks
 
         public virtual void Draw()
         {
-            Game.mainSpriteBatch.Draw(Textures.emptyTexture, rectangle, Color.Black);
-            Game.mainSpriteBatch.Draw(Textures.emptyTexture, new Rectangle(rectangle.X + border, rectangle.Y + border, rectangle.Width - border*2, rectangle.Height - border*2), color);
+            return;
         }
     }
 }

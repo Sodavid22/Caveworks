@@ -24,7 +24,13 @@ namespace Caveworks
 
         public override void Draw()
         {
-            base.Draw();
+            // borders
+            Game.mainSpriteBatch.Draw(Textures.emptyTexture, rectangle, Color.Black);
+
+            // main body
+            Game.mainSpriteBatch.Draw(Textures.emptyTexture, new Rectangle(rectangle.X + border, rectangle.Y + border, rectangle.Width - border * 2, rectangle.Height - border * 2), color);
+
+            // text
             Game.mainSpriteBatch.DrawString(font, text, new Vector2((int)(rectangle.X + rectangle.Width/2 - textSize.X/2), (int)(rectangle.Y + rectangle.Height/2 - textSize.Y/2)), Color.Black);
         }
     }

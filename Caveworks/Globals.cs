@@ -8,7 +8,7 @@ namespace Caveworks
 
         private static bool existsSaveFile = false; // is there a game to load
 
-        private static float globalVolume = 1.0f; // global game volume
+        private static float globalVolume = 0.5f; // global game volume
 
         public static IScene GetActiveScene()
         {
@@ -28,6 +28,11 @@ namespace Caveworks
         public static float GetGlobalVolume()
         {
             return globalVolume;
+        }
+
+        public static void SetGlobalVolume(float volume)
+        {
+            globalVolume = volume;
         }
     }
 }

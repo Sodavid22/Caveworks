@@ -11,6 +11,7 @@ namespace Caveworks
 
         private static UiElement[] uiElements = {continueButton, startButton, settingsButton, creditsButton };
 
+
         public MainMenuScene()
         {
             if (!Globals.ExistsSaveFile())
@@ -23,6 +24,7 @@ namespace Caveworks
             settingsButton.Place(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2), Anchor.Middle);
             creditsButton.Place(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2 + 70), Anchor.Middle);
         }
+
 
         public void Update(GameTime gameTime) // do every frame
         {
@@ -51,6 +53,7 @@ namespace Caveworks
                 Globals.SetActiveScene(new CreditsScene());
             }
         }
+
 
         public void Draw(GameTime gameTime) // draw everything
         {

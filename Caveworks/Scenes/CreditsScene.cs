@@ -8,10 +8,12 @@ namespace Caveworks
 
         private static UiElement[] uiElements = {madeByTextBox };
 
+
         public CreditsScene()
         {
             madeByTextBox.Place(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2 - 140), Anchor.Middle);
         }
+
 
         public void Update(GameTime gameTime)
         {
@@ -20,6 +22,7 @@ namespace Caveworks
                 uiElement.Update();
             }
         }
+
 
         public void Draw(GameTime gameTime)
         {
