@@ -10,7 +10,7 @@ namespace Caveworks
 
         public SettingsScene()
         {
-            fullscreenButton.Load(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2 - 140), Anchor.Middle);
+            fullscreenButton.Place(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2 - 140), Anchor.Middle);
             fullscreenButton.ChangeText("Fullscreen: " + GameWindow.IsFullscreen());
         }
         public void Update(GameTime gameTime)

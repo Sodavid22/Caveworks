@@ -13,13 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Arial.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:Arial.spritefont
-
 #begin factorio_background.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -32,19 +25,33 @@
 /processorParam:TextureFormat=Color
 /build:factorio_background.jpg
 
-#begin Fonts/TitilliumWeb16.spritefont
+#begin Fonts/Verdana12.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=NoChange
-/build:Fonts/TitilliumWeb16.spritefont
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Verdana12.spritefont
 
-#begin Fonts/TitilliumWebSemiBold32.spritefont
+#begin Fonts/Verdana16.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=NoChange
-/build:Fonts/TitilliumWebSemiBold32.spritefont
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Verdana16.spritefont
+
+#begin Fonts/Verdana24.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Verdana24.spritefont
+
+#begin Fonts/Verdana32.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Verdana32.spritefont
 
 #begin SoundEffects/UI/modern-ui-decline.wav
 /importer:WavImporter

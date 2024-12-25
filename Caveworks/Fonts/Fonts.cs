@@ -17,8 +17,8 @@ namespace Caveworks
 
         public static void Load(ContentManager contentManager)
         {
-            defaultFont = contentManager.Load<SpriteFont>("Fonts/TitilliumWeb16");
-            menuButtonFont = contentManager.Load<SpriteFont>("Fonts/TitilliumWebSemiBold32");
+            defaultFont = contentManager.Load<SpriteFont>("Fonts/Verdana12");
+            menuButtonFont = contentManager.Load<SpriteFont>("Fonts/Verdana32");
         }
     }
 }

@@ -22,9 +22,9 @@ namespace Caveworks
             this.font = font;
         }
 
-        public override void Load(Vector2 position, Anchor anchor)
+        public override void Place(Vector2 position, Anchor anchor)
         {
-            base.Load(position, anchor);
+            base.Place(position, anchor);
             textSize = font.MeasureString(text);
         }
 

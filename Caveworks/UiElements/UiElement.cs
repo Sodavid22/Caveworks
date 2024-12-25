@@ -44,7 +44,7 @@ namespace Caveworks
             this.rectangle = new Rectangle((int)newPosition.X, (int)newPosition.Y, (int)size.X, (int)size.Y);
         }
 
-        public virtual void Load(Vector2 position, Anchor anchor)
+        public virtual void Place(Vector2 position, Anchor anchor)
         {
             this.position = position;
             this.anchorPoint = anchor;

@@ -18,10 +18,10 @@ namespace Caveworks
                 continueButton.Deactivate();
             }
 
-            continueButton.Load(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2 - 140), Anchor.Middle);
-            startButton.Load(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2 - 70), Anchor.Middle);
-            settingsButton.Load(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2), Anchor.Middle);
-            creditsButton.Load(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2 + 70), Anchor.Middle);
+            continueButton.Place(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2 - 140), Anchor.Middle);
+            startButton.Place(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2 - 70), Anchor.Middle);
+            settingsButton.Place(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2), Anchor.Middle);
+            creditsButton.Place(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2 + 70), Anchor.Middle);
         }
 
         public void Update(GameTime gameTime) // do every frame
