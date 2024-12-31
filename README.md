@@ -2,7 +2,6 @@ My school project.
 
 Dependencies:
 - monogame
-- TitilliumWeb font
 
 notes:
 - fonts cant be renamed
