@@ -1,17 +1,20 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Runtime.CompilerServices;
 namespace Caveworks
 {
     public class Game : Microsoft.Xna.Framework.Game
     {
         public static GraphicsDeviceManager graphics;
         public static SpriteBatch mainSpriteBatch;
+        public static Game Self { get; private set; }
 
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            Self = this;
         }
 
         protected override void Initialize() // TODO: Add your initialization logic here
@@ -42,6 +45,9 @@ namespace Caveworks
 
             // load all sounds
             Sounds.Load(Content);
+
+            // load save files
+            SaveManager.LoadGame();
 
             // set starting screen
             Globals.SetActiveScene(new MainMenuScene());

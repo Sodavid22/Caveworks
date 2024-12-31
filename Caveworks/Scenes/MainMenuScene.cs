@@ -8,8 +8,9 @@ namespace Caveworks
         private static Button startButton = new Button(new Vector2(200, 60), Globals.GetUIButtonColor(), 2, "Start", Fonts.menuButtonFont);
         private static Button settingsButton = new Button(new Vector2(200, 60), Globals.GetUIButtonColor(), 2, "Settings", Fonts.menuButtonFont);
         private static Button creditsButton = new Button(new Vector2(200, 60), Globals.GetUIButtonColor(), 2, "Credits", Fonts.menuButtonFont);
+        private static Button exitButton = new Button(new Vector2(200, 60), Globals.GetUIButtonColor(), 2, "Exit", Fonts.menuButtonFont);
 
-        private static UiElement[] uiElements = {continueButton, startButton, settingsButton, creditsButton };
+        private static UiElement[] uiElements = {continueButton, startButton, settingsButton, creditsButton, exitButton };
 
 
         public MainMenuScene()
@@ -23,6 +24,7 @@ namespace Caveworks
             startButton.Place(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2 - 70), Anchor.Middle);
             settingsButton.Place(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2), Anchor.Middle);
             creditsButton.Place(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2 + 70), Anchor.Middle);
+            exitButton.Place(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2 + 140), Anchor.Middle);
         }
 
 
@@ -51,6 +53,12 @@ namespace Caveworks
             if (creditsButton.IsPressed(MouseKey.Left))
             {
                 Globals.SetActiveScene(new CreditsScene());
+            }
+
+            if (exitButton.IsPressed(MouseKey.Left))
+            {
+                SaveManager.SaveGame();
+                Game.Self.Exit();
             }
         }
 
