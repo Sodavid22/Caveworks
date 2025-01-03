@@ -1,15 +1,15 @@
-﻿using Microsoft.Xna.Framework;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+
 
 namespace Caveworks
 {
     public static class SaveManager
     {
         private const string SETTINGS_SAVEFILE_PATH = "CaveworksSettings.data";
-
         private static SettingsSaveFile SettingsFile {  get; set; }
+
 
         private static void Serialize(object data, string path)
         {
@@ -33,6 +33,7 @@ namespace Caveworks
             }
             return data;
         }
+
 
         public static void SaveGame()
         {

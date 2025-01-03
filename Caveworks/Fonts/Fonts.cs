@@ -1,26 +1,20 @@
-﻿using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Reflection.Metadata;
-using System.Xml;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+
 
 namespace Caveworks
 {
     public class Fonts
     {
-        public static SpriteFont menuButtonFont;
-        public static SpriteFont defaultFont;
-        public static SpriteFont smallFont;
+        public static SpriteFont MenuButtonFont { get; private set; }
+        public static SpriteFont DefaultFont { get; private set; }
+        public static SpriteFont SmallFont { get; private set; }
 
         public static void Load(ContentManager contentManager)
         {
-            defaultFont = contentManager.Load<SpriteFont>("Fonts/Verdana12");
-            menuButtonFont = contentManager.Load<SpriteFont>("Fonts/Verdana32");
-            smallFont = contentManager.Load<SpriteFont>("Fonts/Verdana08");
+            DefaultFont = contentManager.Load<SpriteFont>("Fonts/Verdana12");
+            MenuButtonFont = contentManager.Load<SpriteFont>("Fonts/Verdana32");
+            SmallFont = contentManager.Load<SpriteFont>("Fonts/Verdana08");
         }
     }
 }

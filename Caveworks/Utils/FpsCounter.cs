@@ -1,22 +1,23 @@
 ﻿using Microsoft.Xna.Framework;
 
+
 namespace Caveworks
 {
     public static class FpsCounter
     {
-        private static bool active = false;
+        const int updateDelay = 200; // how often is the displayed number updated
+        const int sampleSize = 100; // from how many frames is the avearage calculated
 
-        private static double[] frameTimes = new double[100]; // in milliseconds
-        private static int currentFrame = 0;
-        private static int sampleSize = 100; // from how many frames is the avearage calculated
+        static double[] frameTimes = new double[100]; // in milliseconds
+        static int currentFrame = 0;
+        static double timeSinceLastUpdate = 0;
+        
+        public static bool Active { get; private set; } = false;
+        public static double Fps { get; private set; } = 0; // final FPS
 
-        private static double timeSinceLastUpdate = 0;
-        private static int updateDelay = 200; // how often is the avearage updated in milliseconds
-        private static double Fps = 0; // final FPS
 
         public static void Update(GameTime gameTime)
         {
-
             timeSinceLastUpdate += gameTime.ElapsedGameTime.TotalMilliseconds;
             frameTimes[currentFrame] = gameTime.ElapsedGameTime.TotalMilliseconds;
             currentFrame++;
@@ -38,26 +39,17 @@ namespace Caveworks
             }
         }
 
+
         public static void Toggle()
         {
-            if (active)
+            if (Active)
             {
-                active = false;
+                Active = false;
             }
             else
             {
-                active = true;
+                Active = true;
             }
-        }
-
-        public static double GetFps()
-        {
-            return Fps;
-        }
-
-        public static bool IsActive()
-        {
-            return active;
         }
     }
 }

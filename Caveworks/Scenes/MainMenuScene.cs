@@ -1,30 +1,31 @@
 ﻿using Microsoft.Xna.Framework;
 
+
 namespace Caveworks
 {
     internal class MainMenuScene : IScene
     {
-        private static Button continueButton = new Button(new Vector2(200, 60), Globals.GetUIButtonColor(), 2, "Continue", Fonts.menuButtonFont);
-        private static Button startButton = new Button(new Vector2(200, 60), Globals.GetUIButtonColor(), 2, "Start", Fonts.menuButtonFont);
-        private static Button settingsButton = new Button(new Vector2(200, 60), Globals.GetUIButtonColor(), 2, "Settings", Fonts.menuButtonFont);
-        private static Button creditsButton = new Button(new Vector2(200, 60), Globals.GetUIButtonColor(), 2, "Credits", Fonts.menuButtonFont);
-        private static Button exitButton = new Button(new Vector2(200, 60), Globals.GetUIButtonColor(), 2, "Exit", Fonts.menuButtonFont);
+        readonly static Button continueButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Continue", Fonts.MenuButtonFont);
+        readonly static Button startButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Start", Fonts.MenuButtonFont);
+        readonly static Button settingsButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Settings", Fonts.MenuButtonFont);
+        readonly static Button creditsButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Credits", Fonts.MenuButtonFont);
+        readonly static Button exitButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Exit", Fonts.MenuButtonFont);
 
-        private static UiElement[] uiElements = {continueButton, startButton, settingsButton, creditsButton, exitButton };
+        readonly static UiElement[] uiElements = {continueButton, startButton, settingsButton, creditsButton, exitButton };
 
 
         public MainMenuScene()
         {
-            if (!Globals.ExistsSaveFile())
+            if (!Globals.ExistsSaveFile)
             {
                 continueButton.Deactivate();
             }
 
-            continueButton.Place(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2 - 140), Anchor.Middle);
-            startButton.Place(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2 - 70), Anchor.Middle);
-            settingsButton.Place(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2), Anchor.Middle);
-            creditsButton.Place(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2 + 70), Anchor.Middle);
-            exitButton.Place(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2 + 140), Anchor.Middle);
+            continueButton.Place(new Vector2(GameWindow.WindowSize.X / 2, GameWindow.WindowSize.Y / 2 - 140), Anchor.Middle);
+            startButton.Place(new Vector2(GameWindow.WindowSize.X / 2, GameWindow.WindowSize.Y / 2 - 70), Anchor.Middle);
+            settingsButton.Place(new Vector2(GameWindow.WindowSize.X / 2, GameWindow.WindowSize.Y / 2), Anchor.Middle);
+            creditsButton.Place(new Vector2(GameWindow.WindowSize.X / 2, GameWindow.WindowSize.Y / 2 + 70), Anchor.Middle);
+            exitButton.Place(new Vector2(GameWindow.WindowSize.X / 2, GameWindow.WindowSize.Y / 2 + 140), Anchor.Middle);
         }
 
 
@@ -37,22 +38,22 @@ namespace Caveworks
 
             if (continueButton.IsPressed(MouseKey.Left))
             {
-                Globals.SetActiveScene(null);
+                Globals.ActiveScene = null;
             }
 
             if (startButton.IsPressed(MouseKey.Left))
             {
-                Globals.SetActiveScene(new StartScene());
+                Globals.ActiveScene = new StartScene();
             }
 
             if (settingsButton.IsPressed(MouseKey.Left))
             {
-                Globals.SetActiveScene(new SettingsScene());
+                Globals.ActiveScene = new SettingsScene();
             }
 
             if (creditsButton.IsPressed(MouseKey.Left))
             {
-                Globals.SetActiveScene(new CreditsScene());
+                Globals.ActiveScene = new CreditsScene();
             }
 
             if (exitButton.IsPressed(MouseKey.Left))

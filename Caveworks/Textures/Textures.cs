@@ -1,25 +1,27 @@
-﻿using System;
-using System.Diagnostics;
-using System.Reflection.Metadata;
-using System.Xml;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
+
 
 namespace Caveworks
 {
     public static class Textures
     {
         // empty texture
-        public static Texture2D emptyTexture;
+        public static Texture2D EmptyTexture { get; private set; }
 
         // game background
-        public static Texture2D menuBackground;
+        public static Texture2D MenuBackground { get; private set; }
+
 
         public static void Load(ContentManager contentManager)
         {
-            Textures.menuBackground = contentManager.Load<Texture2D>("factorio_background");
+            // create empty texture
+            Textures.EmptyTexture = new Texture2D(Game.Graphics.GraphicsDevice, 1, 1);
+            Textures.EmptyTexture.SetData(new[] { Color.White });
+
+            // background
+            Textures.MenuBackground = contentManager.Load<Texture2D>("factorio_background");
         }
     }
 }

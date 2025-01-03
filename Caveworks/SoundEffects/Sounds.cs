@@ -1,20 +1,15 @@
 ﻿using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Caveworks
 {
     public class Sounds // use instances, not originals !!!
     {
-        public static MySoundEffect ButtonClick;
-        public static MySoundEffect ButtonDecline;
-        public static MySoundEffect ButtonClick2;
+        public static MySoundEffect ButtonClick {  get; private set; }
+        public static MySoundEffect ButtonDecline { get; private set; }
+        public static MySoundEffect ButtonClick2 { get; private set; }
+
 
         public static void Load(ContentManager contentManager)
         {

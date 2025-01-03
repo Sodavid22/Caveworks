@@ -5,16 +5,16 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Caveworks
 {
     public class Button : UiElement
-    {
+    {        
+        const float hoverOverlayStrength = 0.2f;
+        const float inactiveOverlayStrength = 0.5f;
+
         protected string text;
         protected SpriteFont font;
         protected Vector2 textSize;
-
-        protected static float hoverOverlayStrength = 0.2f;
-        protected static float inactiveOverlayStrength = 0.5f;
-
         protected bool active = true;
         protected bool hovered;
+
 
         public Button(Vector2 size, Vector4 color, int border, string text, SpriteFont font) : base(size, color, border)
         {
@@ -22,11 +22,13 @@ namespace Caveworks
             this.font = font;
         }
 
+
         public override void Place(Vector2 position, Anchor anchor)
         {
             base.Place(position, anchor);
             textSize = font.MeasureString(text);
         }
+
 
        public override void Update()
         {
@@ -43,24 +45,28 @@ namespace Caveworks
             else { hovered= false;}
         }
 
+
         public override void Draw()
         {
             // borders
-            Game.mainSpriteBatch.Draw(Textures.emptyTexture, rectangle, Color.Black);
+            Game.MainSpriteBatch.Draw(Textures.EmptyTexture, rectangle, Color.Black);
+
             // main body
-            Game.mainSpriteBatch.Draw(Textures.emptyTexture, new Rectangle(rectangle.X + border, rectangle.Y + border, rectangle.Width - border * 2, rectangle.Height - border * 2), color);
+            Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(rectangle.X + border, rectangle.Y + border, rectangle.Width - border * 2, rectangle.Height - border * 2), color);
 
             if (!active) // darken if inactive
             {
-                Game.mainSpriteBatch.Draw(Textures.emptyTexture, rectangle, Color.FromNonPremultiplied(1, 1, 1, (int)(color.A * inactiveOverlayStrength)));
+                Game.MainSpriteBatch.Draw(Textures.EmptyTexture, rectangle, Color.FromNonPremultiplied(1, 1, 1, (int)(color.A * inactiveOverlayStrength)));
             }
             else if (hovered) // darken if hovered
             {
-                Game.mainSpriteBatch.Draw(Textures.emptyTexture, rectangle, Color.FromNonPremultiplied(1, 1, 1, (int)(color.A * hoverOverlayStrength)));
+                Game.MainSpriteBatch.Draw(Textures.EmptyTexture, rectangle, Color.FromNonPremultiplied(1, 1, 1, (int)(color.A * hoverOverlayStrength)));
             }
+
             // draw text
-            Game.mainSpriteBatch.DrawString(font, text, new Vector2((int)(rectangle.X + rectangle.Width / 2 - textSize.X / 2), (int)(rectangle.Y + rectangle.Height / 2 - textSize.Y / 2)), Color.Black);
+            Game.MainSpriteBatch.DrawString(font, text, new Vector2((int)(rectangle.X + rectangle.Width / 2 - textSize.X / 2), (int)(rectangle.Y + rectangle.Height / 2 - textSize.Y / 2)), Color.Black);
         }
+
 
         public bool IsPressed(MouseKey mouseKey)
         {
@@ -82,26 +88,29 @@ namespace Caveworks
             return false;
         }
 
+
         public void ChangeText(string text)
         {
             this.text = text;
             textSize = font.MeasureString(text);
         }
 
+
         public bool IsActivated()
         {
             return active;
         }
+
 
         public void Activate()
         {
             active = true;
         }
 
+
         public void Deactivate()
         {
             active = false;
         }
-
     }
 }

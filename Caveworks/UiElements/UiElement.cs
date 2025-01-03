@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+
 
 namespace Caveworks
 {
@@ -12,12 +12,14 @@ namespace Caveworks
         protected Color color;
         protected int border;
 
+
         public UiElement(Vector2 size, Vector4 color, int border)
         {
             this.size = size;
             this.color = Color.FromNonPremultiplied(color);
             this.border = border;
         }
+
 
         private void CreateRectangle()
         {   
@@ -41,8 +43,10 @@ namespace Caveworks
                 newPosition.X = position.X - size.X/2;
                 newPosition.Y = position.Y - size.Y/2;
             }
+
             this.rectangle = new Rectangle((int)newPosition.X, (int)newPosition.Y, (int)size.X, (int)size.Y);
         }
+
 
         public virtual void Place(Vector2 position, Anchor anchor)
         {
@@ -51,10 +55,12 @@ namespace Caveworks
             CreateRectangle();
         }
 
+
         public virtual void Update()
         {
             return;
         }
+
 
         public virtual void Draw()
         {

@@ -1,5 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
+
 
 namespace Caveworks
 {
@@ -12,14 +12,14 @@ namespace Caveworks
 
         public void GetNewData()
         {
-            GlobalVolume = Globals.GetGlobalVolume();
-            Fullscreen = GameWindow.IsFullscreen();
+            this.GlobalVolume = Globals.GlobalVolume;
+            this.Fullscreen = GameWindow.IsFullscreen;
         }
 
         public void LoadData()
         {
-            Globals.SetGlobalVolume(GlobalVolume);
-            if (GameWindow.IsFullscreen() != Fullscreen) { GameWindow.ToggleFullscreen(); }
+            Globals.GlobalVolume = this.GlobalVolume;
+            if (GameWindow.IsFullscreen != Fullscreen) { GameWindow.ToggleFullscreen(); }
         }
     }
 }

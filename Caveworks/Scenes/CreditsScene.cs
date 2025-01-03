@@ -1,17 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 
+
 namespace Caveworks
 {
     public class CreditsScene : IScene
     {
-        private static TextBox madeByTextBox = new TextBox(new Vector2(600, 60), Globals.GetUITextBoxColor(), 2, "Made by: David Sobek", Fonts.menuButtonFont);
+        readonly static TextBox madeByTextBox = new TextBox(new Vector2(600, 60), Globals.UITextBoxColor, 2, "Made by: David Sobek", Fonts.MenuButtonFont);
 
-        private static UiElement[] uiElements = {madeByTextBox };
+        readonly static UiElement[] uiElements = {madeByTextBox };
 
 
         public CreditsScene()
         {
-            madeByTextBox.Place(new Vector2(GameWindow.GetWindowSize().X / 2, GameWindow.GetWindowSize().Y / 2 - 140), Anchor.Middle);
+            madeByTextBox.Place(new Vector2(GameWindow.WindowSize.X / 2, GameWindow.WindowSize.Y / 2 - 140), Anchor.Middle);
         }
 
 

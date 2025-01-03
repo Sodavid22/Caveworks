@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
+
 namespace Caveworks
 {
     internal class StartScene : IScene

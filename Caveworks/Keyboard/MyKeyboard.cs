@@ -1,9 +1,6 @@
-﻿using System;
-using System.Diagnostics;
-using System.Xml;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+
 
 namespace Caveworks
 {
@@ -14,6 +11,7 @@ namespace Caveworks
         private static MouseState currentMouseState;
         private static MouseState lastMouseState;
 
+
         public static void Update()
         {
             lastKeyboardState = currentKeyboardState;
@@ -21,6 +19,7 @@ namespace Caveworks
             lastMouseState = currentMouseState;
             currentMouseState = Mouse.GetState();
         }
+
 
         public static bool IsPressed(Keys key)
         {
@@ -30,6 +29,7 @@ namespace Caveworks
             }
             return false;
         }
+
 
         public static bool IsPressed(MouseKey key)
         {

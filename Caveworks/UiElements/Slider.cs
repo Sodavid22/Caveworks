@@ -1,23 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using static System.Net.Mime.MediaTypeNames;
 
 
 namespace Caveworks
 {
     public class Slider : UiElement
     {
+        readonly static SpriteFont font = Fonts.DefaultFont;
+
+        protected int knobSize = 2;
         protected float value;
         protected bool moving;
         protected Vector2 textSize;
-
-        protected static float hoverOverlayStrength = 0.2f;
-        protected static float inactiveOverlayStrength = 0.5f;
-        protected static SpriteFont font = Fonts.defaultFont;
-        protected static int knobSize = 42;
-        
-
         protected bool active = true;
         protected bool hovered;
 
@@ -26,12 +21,15 @@ namespace Caveworks
         {
             this.value = startValue;
             this.textSize = font.MeasureString(value.ToString());
+            this.knobSize = (int)size.Y * 2;
         }
+
 
         public override void Place(Vector2 position, Anchor anchor)
         {
             base.Place(position, anchor);
         }
+
 
         public override void Update()
         {
@@ -65,24 +63,27 @@ namespace Caveworks
             }
         }
 
+
         public override void Draw()
         {
             base.Draw();
 
             // main borders
-            Game.mainSpriteBatch.Draw(Textures.emptyTexture, rectangle, Color.Black);
+            Game.MainSpriteBatch.Draw(Textures.EmptyTexture, rectangle, Color.Black);
+
             // main body
-            Game.mainSpriteBatch.Draw(Textures.emptyTexture, new Rectangle(rectangle.X + border, rectangle.Y + border, rectangle.Width - border * 2, rectangle.Height - border * 2), color);
+            Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(rectangle.X + border, rectangle.Y + border, rectangle.Width - border * 2, rectangle.Height - border * 2), color);
 
             // knob borders
-            Game.mainSpriteBatch.Draw(Textures.emptyTexture, new Rectangle((int)(rectangle.X + (value * rectangle.Width) - knobSize/2), rectangle.Y - knobSize/4, knobSize, knobSize), Color.Black);
+            Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle((int)(rectangle.X + (value * rectangle.Width) - knobSize/2), rectangle.Y - knobSize/4, knobSize, knobSize), Color.Black);
 
             // knob body
-            Game.mainSpriteBatch.Draw(Textures.emptyTexture, new Rectangle((int)(rectangle.X + (value * rectangle.Width) - knobSize/2 + border), rectangle.Y - knobSize/4 + border, knobSize - border*2, knobSize - border*2), color);
+            Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle((int)(rectangle.X + (value * rectangle.Width) - knobSize/2 + border), rectangle.Y - knobSize/4 + border, knobSize - border*2, knobSize - border*2), color);
 
             // text
-            Game.mainSpriteBatch.DrawString(font, value.ToString(), new Vector2((int)(rectangle.X + (value * rectangle.Width) - knobSize/2 + (knobSize - textSize.X) / 2), rectangle.Y - knobSize/4 + (knobSize - textSize.Y) / 2), Color.Black);
+            Game.MainSpriteBatch.DrawString(font, value.ToString(), new Vector2((int)(rectangle.X + (value * rectangle.Width) - knobSize/2 + (knobSize - textSize.X) / 2), rectangle.Y - knobSize/4 + (knobSize - textSize.Y) / 2), Color.Black);
         }
+
 
         public float GetValue()
         {
