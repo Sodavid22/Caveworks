@@ -1,11 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace Caveworks
 {
     public class FloorBase
     {
-        static readonly int textureSize = 32;
+        static readonly int textureSize = 1;
         public Tile Tile { get; set; }
         public Texture2D Texture { get; set; }
 
@@ -17,7 +18,7 @@ namespace Caveworks
         public void Draw(Camera camera)
         {
             Vector2 screenCoordinates = camera.WrldToScrnCords(Tile.Coordinates);
-            Rectangle floorRectangle = new Rectangle((int)screenCoordinates.X, (int)screenCoordinates.Y, textureSize, textureSize);
+            Rectangle floorRectangle = new Rectangle((int)screenCoordinates.X, (int)screenCoordinates.Y, (int)MathF.Ceiling(textureSize * camera.Scale), (int)MathF.Ceiling(textureSize * camera.Scale));
             Game.FloorSpriteBatch.Draw(Textures.StoneFloor, floorRectangle, Color.White);
         }
     }

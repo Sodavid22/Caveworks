@@ -12,7 +12,7 @@ namespace Caveworks
         public Tile(Chunk chunk, Vector2 coordinates)
         {
             Chunk = chunk;
-            Coordinates = new Vector2();
+            Coordinates = coordinates;
             Floor = new StoneFloor(this);
         }
 

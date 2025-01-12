@@ -7,7 +7,7 @@ namespace Caveworks
     {
         public World World { get; private set; }
         public Vector2 Coordinates {  get; set; }
-        public int Scale { get; set; }
+        public float Scale { get; set; }
         public Vector2 ScreenCenter { get; set; }
 
         public Camera(World world, Vector2 coordinates, int scale)
@@ -21,13 +21,30 @@ namespace Caveworks
         {
             ScreenCenter = new Vector2(GameWindow.WindowSize.X / 2, GameWindow.WindowSize.Y / 2);
 
-            if(MyKeyboard.IsPressed(Keys.NumPad9))
+            if(MyKeyboard.IsHeld(Keys.NumPad9))
             {
-                Scale += 1;
+                Scale *= 1.01f;
             }
-            if (MyKeyboard.IsPressed(Keys.NumPad3))
+            if (MyKeyboard.IsHeld(Keys.NumPad3))
             {
-                Scale -= 1;
+                Scale *= 0.99f;
+            }
+
+            if (MyKeyboard.IsHeld(Keys.NumPad4))
+            {
+                Coordinates = new Vector2(Coordinates.X - 1f / Scale, Coordinates.Y);
+            }
+            if (MyKeyboard.IsHeld(Keys.NumPad6))
+            {
+                Coordinates = new Vector2(Coordinates.X + 1f / Scale, Coordinates.Y);
+            }
+            if (MyKeyboard.IsHeld(Keys.NumPad8))
+            {
+                Coordinates = new Vector2(Coordinates.X, Coordinates.Y - 1f / Scale);
+            }
+            if (MyKeyboard.IsHeld(Keys.NumPad2))
+            {
+                Coordinates = new Vector2(Coordinates.X, Coordinates.Y + 1f / Scale);
             }
         }
 

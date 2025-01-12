@@ -16,6 +16,8 @@ namespace Caveworks
 
         public MainMenuScene()
         {
+            continueButton.Activate();
+
             if (Globals.World == null)
             {
                 continueButton.Deactivate();
@@ -38,7 +40,7 @@ namespace Caveworks
 
             if (continueButton.IsPressed(MouseKey.Left))
             {
-                Globals.ActiveScene = null;
+                Globals.ActiveScene = new WorldScene();
             }
 
             if (startButton.IsPressed(MouseKey.Left))

@@ -7,9 +7,9 @@ namespace Caveworks
     public class Game : Microsoft.Xna.Framework.Game
     {
         public static GraphicsDeviceManager Graphics { get; private set; }
-        public static SpriteBatch MainSpriteBatch { get; private set; }
-
+        public static SpriteBatch BackgroundSpriteBatch { get; private set; }
         public static SpriteBatch FloorSpriteBatch { get; private set; }
+        public static SpriteBatch MainSpriteBatch { get; private set; }
         public static Game Self { get; private set; }
 
 
@@ -33,6 +33,8 @@ namespace Caveworks
             GameWindow.ToggleVSync(this, Graphics);
 
             // create sprite batches
+            BackgroundSpriteBatch = new SpriteBatch(GraphicsDevice);
+            FloorSpriteBatch = new SpriteBatch(GraphicsDevice);
             MainSpriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
@@ -97,11 +99,12 @@ namespace Caveworks
         {
             GraphicsDevice.Clear(Color.White);
 
+            BackgroundSpriteBatch.Begin();
             FloorSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
             MainSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             // draw background
-            Game.MainSpriteBatch.Draw(Textures.MenuBackground, new Rectangle(0, 0, (int)GameWindow.WindowSize.X, (int)GameWindow.WindowSize.Y), Color.White);
+            Game.BackgroundSpriteBatch.Draw(Textures.MenuBackground, new Rectangle(0, 0, (int)GameWindow.WindowSize.X, (int)GameWindow.WindowSize.Y), Color.White);
 
             // draw screens
             IScene scene = Globals.ActiveScene;
@@ -113,6 +116,7 @@ namespace Caveworks
                 MainSpriteBatch.DrawString(Fonts.DefaultFont, (FpsCounter.Fps + " FPS").ToString(), new Vector2(0, 0), Color.White);
             }
 
+            BackgroundSpriteBatch.End();
             FloorSpriteBatch.End();
             MainSpriteBatch.End();
 
