@@ -13,6 +13,9 @@ namespace Caveworks
         // game background
         public static Texture2D MenuBackground { get; private set; }
 
+        // floors:
+        public static Texture2D StoneFloor { get; private set; }
+
 
         public static void Load(ContentManager contentManager)
         {
@@ -22,6 +25,9 @@ namespace Caveworks
 
             // background
             Textures.MenuBackground = contentManager.Load<Texture2D>("factorio_background");
+
+            // floors:
+            Textures.StoneFloor = contentManager.Load<Texture2D>("Floors/StoneFloor");
         }
     }
 }

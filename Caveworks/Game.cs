@@ -8,6 +8,8 @@ namespace Caveworks
     {
         public static GraphicsDeviceManager Graphics { get; private set; }
         public static SpriteBatch MainSpriteBatch { get; private set; }
+
+        public static SpriteBatch FloorSpriteBatch { get; private set; }
         public static Game Self { get; private set; }
 
 
@@ -86,12 +88,16 @@ namespace Caveworks
 
             FpsCounter.Update(gameTime);
             base.Update(gameTime);
+
+            Globals.WorldDeltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
         }
 
 
         protected override void Draw(GameTime gameTime) // TODO: Add your drawing code here
         {
             GraphicsDevice.Clear(Color.White);
+
+            FloorSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
             MainSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             // draw background
@@ -107,7 +113,9 @@ namespace Caveworks
                 MainSpriteBatch.DrawString(Fonts.DefaultFont, (FpsCounter.Fps + " FPS").ToString(), new Vector2(0, 0), Color.White);
             }
 
+            FloorSpriteBatch.End();
             MainSpriteBatch.End();
+
             base.Draw(gameTime);
         }
     }

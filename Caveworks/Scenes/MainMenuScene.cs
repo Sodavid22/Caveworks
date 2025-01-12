@@ -11,12 +11,12 @@ namespace Caveworks
         readonly static Button creditsButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Credits", Fonts.MenuButtonFont);
         readonly static Button exitButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Exit", Fonts.MenuButtonFont);
 
-        readonly static UiElement[] uiElements = {continueButton, startButton, settingsButton, creditsButton, exitButton };
+        readonly static UiElement[] uiElements = { continueButton, startButton, settingsButton, creditsButton, exitButton };
 
 
         public MainMenuScene()
         {
-            if (!Globals.ExistsSaveFile)
+            if (Globals.World == null)
             {
                 continueButton.Deactivate();
             }

@@ -11,9 +11,9 @@ namespace Caveworks
         readonly static Button fullscreenButton = new Button(new Vector2(350, 60), Globals.UIButtonColor, 2, GameWindow.IsFullscreen.ToString(), Fonts.MenuButtonFont);
 
         readonly static TextBox volumeText = new TextBox(new Vector2(350, 60), Globals.UIButtonColor, 2, "Volume:", Fonts.MenuButtonFont);
-        readonly static Slider volumeSlider = new Slider(new Vector2(350, 20), Globals.UIButtonColor, 2, Globals.GlobalVolume);
+        readonly static Slider volumeSlider = new Slider(new Vector2(350, 20), Globals.UIButtonColor, 2, 0, Globals.GlobalVolume * 100, 100);
 
-        readonly static UiElement[] uiElements = { backgroundBox, fullscreenText, fullscreenButton, volumeText, volumeSlider};
+        readonly static UiElement[] uiElements = { backgroundBox, fullscreenText, fullscreenButton, volumeText, volumeSlider };
 
 
         public SettingsScene()
@@ -42,7 +42,7 @@ namespace Caveworks
                 Globals.ActiveScene = new SettingsScene();
             }
 
-            Globals.GlobalVolume = volumeSlider.GetValue();
+            Globals.GlobalVolume = volumeSlider.GetValue() / 100;
         }
 
 

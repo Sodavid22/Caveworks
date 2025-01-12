@@ -25,6 +25,12 @@
 /processorParam:TextureFormat=Color
 /build:factorio_background.jpg
 
+#begin Floors/StoneFloor.png
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Floors/StoneFloor.png
+
 #begin Fonts/Verdana08.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
