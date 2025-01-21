@@ -6,7 +6,6 @@ namespace Caveworks
     {
         public int WorldSize { get; set; }
         public Chunk[,] Chunks {  get; set; }
-
         public Camera Camera { get; set; }
 
 
@@ -23,7 +22,7 @@ namespace Caveworks
                 }
             }
 
-            Camera = new Camera(this, new Vector2(0, 0), 32);
+            Camera = new Camera(this, new Vector2(worldSize/2, worldSize/2), 32);
         }
 
 
@@ -31,10 +30,12 @@ namespace Caveworks
         {
             Camera.Update();
 
+            /* 
             foreach (Chunk chunk in Chunks)
             { 
                 chunk.Update();
             }
+            */
         }
 
 

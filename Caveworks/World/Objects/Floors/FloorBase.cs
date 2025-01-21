@@ -17,7 +17,7 @@ namespace Caveworks
 
         public void Draw(Camera camera)
         {
-            Vector2 screenCoordinates = camera.WrldToScrnCords(Tile.Coordinates);
+            Vector2 screenCoordinates = camera.WorldToScreenCords(Tile.Coordinates);
             Rectangle floorRectangle = new Rectangle((int)screenCoordinates.X, (int)screenCoordinates.Y, (int)MathF.Ceiling(textureSize * camera.Scale), (int)MathF.Ceiling(textureSize * camera.Scale));
             Game.FloorSpriteBatch.Draw(Textures.StoneFloor, floorRectangle, Color.White);
         }

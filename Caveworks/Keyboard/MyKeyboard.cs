@@ -10,6 +10,9 @@ namespace Caveworks
         private static KeyboardState lastKeyboardState;
         private static MouseState currentMouseState;
         private static MouseState lastMouseState;
+        private static int currentScrollWheelState;
+        private static int lastScrollWheelState;
+        private static int scrollWheelMovement;
 
 
         public static void Update()
@@ -18,6 +21,15 @@ namespace Caveworks
             currentKeyboardState = Keyboard.GetState();
             lastMouseState = currentMouseState;
             currentMouseState = Mouse.GetState();
+            lastScrollWheelState = currentScrollWheelState;
+            currentScrollWheelState = currentMouseState.ScrollWheelValue;
+            scrollWheelMovement = currentScrollWheelState - lastScrollWheelState;
+        }
+
+
+        public static int GetScrollWheelMovement()
+        {
+            return scrollWheelMovement;
         }
 
 

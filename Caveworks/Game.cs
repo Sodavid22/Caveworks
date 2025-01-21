@@ -6,6 +6,7 @@ namespace Caveworks
 {
     public class Game : Microsoft.Xna.Framework.Game
     {
+        public const bool DEVMODE = false;
         public static GraphicsDeviceManager Graphics { get; private set; }
         public static SpriteBatch BackgroundSpriteBatch { get; private set; }
         public static SpriteBatch FloorSpriteBatch { get; private set; }
