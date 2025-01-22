@@ -8,10 +8,10 @@ namespace Caveworks
     public class Camera
     {
         private const int renderDistance = 1;
-        public World World { get; private set; }
-        public MyVector2 Coordinates { get; set; }
-        public float Scale { get; set; }
-        public MyVector2 ScreenCenter { get; set; }
+        public World World;
+        public MyVector2 Coordinates;
+        public float Scale;
+        public MyVector2 ScreenCenter;
 
         public Camera(World world, MyVector2 coordinates, int scale)
         {
@@ -89,10 +89,7 @@ namespace Caveworks
 
         public MyVector2 WorldToScreenCords(MyVector2 worldCoordinates) // world coordinastes to screen coordinates
         {
-            MyVector2 screenCoordinates = new MyVector2(0, 0);
-            screenCoordinates.X = ScreenCenter.X + ((worldCoordinates.X - Coordinates.X) * Scale);
-            screenCoordinates.Y = ScreenCenter.Y + ((worldCoordinates.Y - Coordinates.Y) * Scale);
-            return screenCoordinates;
+            return new MyVector2(ScreenCenter.X + ((worldCoordinates.X - Coordinates.X) * Scale), ScreenCenter.Y + ((worldCoordinates.Y - Coordinates.Y) * Scale));
         }
 
         public MyVector2 WorldCordsToChunk(MyVector2 worldCoordinates)

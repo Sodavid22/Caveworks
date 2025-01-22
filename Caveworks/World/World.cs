@@ -6,10 +6,10 @@ namespace Caveworks
     [Serializable]
     public class World
     {
-        public int WorldSize { get; set; }
-        public Chunk[,] Chunks {  get; set; }
-        public Camera Camera { get; set; }
-        public float DeltaTime {  get; set; } = 0;
+        public int WorldSize;
+        public Chunk[,] Chunks;
+        public Camera Camera;
+        public float DeltaTime = 0;
 
         public bool Paused { get; set; } = false;
 

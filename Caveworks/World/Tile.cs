@@ -6,10 +6,10 @@ namespace Caveworks
     [Serializable]
     public class Tile
     {
-        public Chunk Chunk {  get; set; }
-        public MyVector2 Coordinates { get; set; }
-        public BaseFloor Floor { get; set; }
-        public BaseWall Wall { get; set; }
+        public Chunk Chunk;
+        public MyVector2 Coordinates;
+        public BaseFloor Floor;
+        public BaseWall Wall;
 
         
         public Tile(Chunk chunk, MyVector2 coordinates)

@@ -8,9 +8,9 @@ namespace Caveworks
     public class Chunk
     {
         public const int chunkSize = 32;
-        public World World { get; set; }
-        public MyVector2 Coordinates { get; set; }
-        public Tile[,] Tiles { get; set; }
+        public World World;
+        public MyVector2 Coordinates;
+        public Tile[,] Tiles;
 
 
         public Chunk(World world, MyVector2 coordinates)

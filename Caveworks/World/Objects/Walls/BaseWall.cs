@@ -5,7 +5,7 @@ namespace Caveworks
     [Serializable]
     public class BaseWall
     {
-        public Tile Tile { get; set; }
+        public Tile Tile;
 
         public BaseWall(Tile tile)
         {
