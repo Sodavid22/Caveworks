@@ -8,7 +8,7 @@ namespace Caveworks
         readonly static TextBox backgroundBox = new TextBox(new Vector2(800, 400), Globals.UITextBoxColor, 4, "", Fonts.MenuButtonFont);
 
         readonly static TextBox worldSizeText = new TextBox(new Vector2(350, 60), Globals.UIButtonColor, 2, "World size:", Fonts.MenuButtonFont);
-        readonly static Slider worldSizeSlider = new Slider(new Vector2(350, 20), Globals.UIButtonColor, 2, 8, 32, 64);
+        readonly static Slider worldSizeSlider = new Slider(new Vector2(350, 20), Globals.UIButtonColor, 2, 4, 16, 32);
 
         readonly static Button startButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Start", Fonts.MenuButtonFont);
 

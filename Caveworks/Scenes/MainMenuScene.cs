@@ -3,7 +3,7 @@
 
 namespace Caveworks
 {
-    internal class MainMenuScene : IScene
+    public class MainMenuScene : IScene
     {
         readonly static Button continueButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Continue", Fonts.MenuButtonFont);
         readonly static Button startButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Start", Fonts.MenuButtonFont);
@@ -17,11 +17,7 @@ namespace Caveworks
         public MainMenuScene()
         {
             continueButton.Activate();
-
-            if (Globals.World == null)
-            {
-                continueButton.Deactivate();
-            }
+            if (!Globals.ExistsSave) { continueButton.Deactivate(); }
 
             continueButton.Place(new Vector2(GameWindow.WindowSize.X / 2, GameWindow.WindowSize.Y / 2 - 140), Anchor.Middle);
             startButton.Place(new Vector2(GameWindow.WindowSize.X / 2, GameWindow.WindowSize.Y / 2 - 70), Anchor.Middle);
@@ -40,7 +36,20 @@ namespace Caveworks
 
             if (continueButton.IsPressed(MouseKey.Left))
             {
-                Globals.ActiveScene = new WorldScene();
+                if (Globals.World != null) 
+                {
+                    Globals.ActiveScene = new WorldScene();
+                }
+                else if (SaveManager.LoadWorldSave())
+                {
+                    Globals.ActiveScene = new WorldScene();
+                }
+                else 
+                {
+                    Globals.ExistsSave = false;
+                    Globals.ActiveScene = new MainMenuScene();
+                }
+                
             }
 
             if (startButton.IsPressed(MouseKey.Left))

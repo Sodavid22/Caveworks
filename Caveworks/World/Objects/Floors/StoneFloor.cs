@@ -1,10 +1,18 @@
-﻿namespace Caveworks
+﻿using Microsoft.Xna.Framework;
+using System;
+
+namespace Caveworks
 {
-    internal class StoneFloor : FloorBase
+    [Serializable]
+    internal class StoneFloor : BaseFloor
     {
-        public StoneFloor(Tile tile) : base(tile)
+        public StoneFloor(Tile tile) : base(tile) { }
+
+        public override void Draw(Camera camera)
         {
-            Texture = Textures.EmptyTexture;
+            MyVector2 screenCoordinates = camera.WorldToScreenCords(Tile.Coordinates);
+            Rectangle floorRectangle = new Rectangle((int)screenCoordinates.X, (int)screenCoordinates.Y, (int)MathF.Ceiling(camera.Scale), (int)MathF.Ceiling(camera.Scale));
+            Game.FloorSpriteBatch.Draw(Textures.StoneFloor, floorRectangle, Color.White);
         }
     }
 }

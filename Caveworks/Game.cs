@@ -10,6 +10,7 @@ namespace Caveworks
         public static GraphicsDeviceManager Graphics { get; private set; }
         public static SpriteBatch BackgroundSpriteBatch { get; private set; }
         public static SpriteBatch FloorSpriteBatch { get; private set; }
+        public static SpriteBatch WallSpritebatch { get; private set; }
         public static SpriteBatch MainSpriteBatch { get; private set; }
         public static Game Self { get; private set; }
 
@@ -36,6 +37,7 @@ namespace Caveworks
             // create sprite batches
             BackgroundSpriteBatch = new SpriteBatch(GraphicsDevice);
             FloorSpriteBatch = new SpriteBatch(GraphicsDevice);
+            WallSpritebatch = new SpriteBatch(GraphicsDevice);
             MainSpriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
@@ -52,7 +54,8 @@ namespace Caveworks
             Sounds.Load(Content);
 
             // load save files
-            SaveManager.LoadGame();
+            SaveManager.LoadSettings();
+            Globals.ExistsSave = SaveManager.ExistsWorldSave();
 
             // set starting screen
             Globals.ActiveScene = new MainMenuScene();
@@ -90,9 +93,8 @@ namespace Caveworks
             scene.Update(gameTime);
 
             FpsCounter.Update(gameTime);
-            base.Update(gameTime);
 
-            Globals.WorldDeltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            base.Update(gameTime);
         }
 
 
@@ -102,6 +104,7 @@ namespace Caveworks
 
             BackgroundSpriteBatch.Begin();
             FloorSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+            WallSpritebatch.Begin(samplerState: SamplerState.PointClamp);
             MainSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             // draw background
@@ -119,6 +122,7 @@ namespace Caveworks
 
             BackgroundSpriteBatch.End();
             FloorSpriteBatch.End();
+            WallSpritebatch.End();
             MainSpriteBatch.End();
 
             base.Draw(gameTime);

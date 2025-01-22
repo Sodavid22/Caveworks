@@ -11,7 +11,7 @@ namespace Caveworks
 
         public void Update(GameTime gameTime)
         {
-            Globals.World.Update();
+            Globals.World.Update(gameTime);
         }
 
 

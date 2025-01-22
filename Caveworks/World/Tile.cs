@@ -1,19 +1,21 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace Caveworks
 {
+    [Serializable]
     public class Tile
     {
         public Chunk Chunk {  get; set; }
-        public Vector2 Coordinates { get; set; }
-        public FloorBase Floor { get; set; }
+        public MyVector2 Coordinates { get; set; }
+        public BaseFloor Floor { get; set; }
+        public BaseWall Wall { get; set; }
 
         
-        public Tile(Chunk chunk, Vector2 coordinates)
+        public Tile(Chunk chunk, MyVector2 coordinates)
         {
             Chunk = chunk;
-            Coordinates = coordinates;
-            Floor = new StoneFloor(this);
+            Coordinates = new MyVector2(coordinates.X, coordinates.Y);
         }
 
 
@@ -25,7 +27,8 @@ namespace Caveworks
 
         public void Draw(Camera camera)
         {
-            Floor.Draw(camera);
+           if (Wall != null) { Wall.Draw(camera); }
+           else { Floor.Draw(camera); }
         }
     }
 }

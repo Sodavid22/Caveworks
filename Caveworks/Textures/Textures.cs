@@ -16,6 +16,9 @@ namespace Caveworks
         // floors:
         public static Texture2D StoneFloor { get; private set; }
 
+        // walls:
+        public static Texture2D StoneWall { get; private set; }
+
 
         public static void Load(ContentManager contentManager)
         {
@@ -28,6 +31,10 @@ namespace Caveworks
 
             // floors:
             Textures.StoneFloor = contentManager.Load<Texture2D>("Floors/StoneFloor");
+
+            // walls:
+
+            Textures.StoneWall = contentManager.Load<Texture2D>("Walls/StoneWall");
         }
     }
 }
