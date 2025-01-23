@@ -17,7 +17,7 @@ namespace Caveworks
         public MainMenuScene()
         {
             continueButton.Activate();
-            if (!Globals.ExistsSave) { continueButton.Deactivate(); }
+            if (!Globals.ExistsSave && Globals.World == null) { continueButton.Deactivate(); }
 
             continueButton.Place(new Vector2(GameWindow.WindowSize.X / 2, GameWindow.WindowSize.Y / 2 - 140), Anchor.Middle);
             startButton.Place(new Vector2(GameWindow.WindowSize.X / 2, GameWindow.WindowSize.Y / 2 - 70), Anchor.Middle);
