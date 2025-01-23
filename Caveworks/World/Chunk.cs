@@ -16,14 +16,14 @@ namespace Caveworks
         public Chunk(World world, MyVector2 coordinates)
         {
             World = world;
-            Coordinates = new MyVector2(coordinates.X, coordinates.Y);
+            Coordinates = coordinates;
             Tiles = new Tile[chunkSize, chunkSize];
 
             for (int x = 0; x < chunkSize; x++)
             {
                 for (int y = 0; y < chunkSize; y++)
                 {
-                    Tiles[x, y] = new Tile(this, new MyVector2(Coordinates.X * chunkSize + x, Coordinates.Y * chunkSize + y));
+                    Tiles[x, y] = new Tile(this, new MyVector2(x, y));
                 }
             }
         }

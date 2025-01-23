@@ -36,12 +36,11 @@ namespace Caveworks
             DeltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             Camera.Update();
-            /* 
+
             foreach (Chunk chunk in Chunks)
             { 
                 chunk.Update();
             }
-            */
         }
 
 

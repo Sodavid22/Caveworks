@@ -10,7 +10,7 @@ namespace Caveworks
 
         public override void Draw(Camera camera)
         {
-            MyVector2 screenCoordinates = camera.WorldToScreenCords(Tile.Coordinates);
+            MyVector2 screenCoordinates = camera.WorldToScreenCords(Tile.GlobalCoordinates);
             Rectangle wallRectangle = new Rectangle((int)screenCoordinates.X, (int)screenCoordinates.Y, (int)MathF.Ceiling(camera.Scale), (int)MathF.Ceiling(camera.Scale));
             Game.WallSpritebatch.Draw(Textures.StoneWall, wallRectangle, Color.White);
         }
