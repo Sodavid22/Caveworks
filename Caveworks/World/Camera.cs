@@ -10,7 +10,7 @@ namespace Caveworks
         private const int renderDistance = 1;
         public World World;
         public MyVector2 Coordinates;
-        public float Scale;
+        public int Scale;
         public MyVector2 ScreenCenter;
 
         public Camera(World world, MyVector2 coordinates, int scale)
@@ -68,7 +68,14 @@ namespace Caveworks
         {
             if (Game.DEVMODE)
             {
-                Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, this.Coordinates.ToString() + " zoom: " + this.Scale.ToString(), new Vector2(100, 100), Color.White);
+                try
+                {
+                    Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, "X", new Vector2(GameWindow.WindowSize.X / 2 - 6, GameWindow.WindowSize.Y / 2 - 6), Color.White);
+                    Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, " position: " + this.Coordinates.ToString(), new Vector2(100, 100), Color.White);
+                    Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, " zoom: " + this.Scale.ToString(), new Vector2(100, 120), Color.White);
+                    Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, " tile cords: " + this.World.GlobalCordsToTile(this.Coordinates.ToMyVector2Int()).GlobalCoords, new Vector2(100, 140), Color.White);
+                }
+                catch { Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, "X", new Vector2(GameWindow.WindowSize.X / 2 - 6, GameWindow.WindowSize.Y / 2 - 6), Color.Red); }
             }
 
             MyVector2 cameraChunk = WorldCordsToChunk(this.Coordinates);

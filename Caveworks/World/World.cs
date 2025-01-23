@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace Caveworks
 {
@@ -33,13 +35,13 @@ namespace Caveworks
             }
             if (Paused) return;
 
-            DeltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            DeltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000;
 
             Camera.Update();
 
             foreach (Chunk chunk in Chunks)
             { 
-                chunk.Update();
+                chunk.Update(DeltaTime);
             }
         }
 
@@ -62,7 +64,7 @@ namespace Caveworks
             {
                 for (int y = 0; y < WorldSize; y++)
                 {
-                    Chunks[x, y] = new Chunk(this, new MyVector2(x, y));
+                    Chunks[x, y] = new Chunk(this, new MyVector2Int(x, y));
                 }
             }
 
@@ -74,19 +76,40 @@ namespace Caveworks
                     {
                         for (int tile_y = 0; tile_y < Chunk.chunkSize; tile_y++)
                         {
-                            Chunks[chunk_x, chunk_y].Tiles[tile_x, tile_y].Floor = new StoneFloor(Chunks[chunk_x, chunk_y].Tiles[tile_x, tile_y]);
+                            Chunks[chunk_x, chunk_y].Tiles[tile_x, tile_y].Floor = new StoneFloor();
 
                             randomNumber = rnd.Next(100);
 
                             if (randomNumber < 10)
                             {
-                                Chunks[chunk_x, chunk_y].Tiles[tile_x, tile_y].Wall = new StoneWall(Chunks[chunk_x, chunk_y].Tiles[tile_x, tile_y]);
+                                Chunks[chunk_x, chunk_y].Tiles[tile_x, tile_y].Wall = new StoneWall();
                             }
                             
                         }
                     }
                 }
             }
+            Chunks[0, 0].Tiles[2, 2].Wall = null;
+            Chunks[0, 0].Tiles[2, 2].AddCreature(new Player(Chunks[0, 0].Tiles[2, 2]));
+
+        }
+
+
+        public Tile GlobalCordsToTile(MyVector2Int globalCords)
+        {
+            return Chunks[globalCords.X / 32, globalCords.X / 32].Tiles[globalCords.X % 32, globalCords.Y % 32];
+        }
+
+        public Tile GetTileByRelativePosition(Tile tile, MyVector2Int relativePosition)
+        {
+            if (tile.GlobalCoords.X + relativePosition.X > 0 && tile.GlobalCoords.Y + relativePosition.Y > 0)
+            {
+                if (tile.GlobalCoords.X + relativePosition.X < WorldSize * Chunk.chunkSize && tile.GlobalCoords.Y + relativePosition.Y < WorldSize * Chunk.chunkSize)
+                {
+                    return GlobalCordsToTile(new MyVector2Int(tile.GlobalCoords.X + relativePosition.X, tile.GlobalCoords.Y + relativePosition.Y));
+                }
+            }
+            return null;
         }
     }
 }

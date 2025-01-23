@@ -3,12 +3,12 @@
 namespace Caveworks
 {
     [Serializable]
-    public class MyVector2
+    public class MyVector2Int
     {
-        public float X;
-        public float Y;
+        public int X;
+        public int Y;
 
-        public MyVector2(float x, float y)
+        public MyVector2Int(int x, int y)
         {
             this.X = x;
             this.Y = y;
@@ -20,10 +20,9 @@ namespace Caveworks
             return "[ " + X + ", " + Y + " ]";
         }
 
-
-        public MyVector2Int ToMyVector2Int()
+        public MyVector2 ToMyVector2()
         {
-            return new MyVector2Int((int)this.X, (int)this.Y);
+            return new MyVector2(this.X, this.Y);
         }
     }
 }

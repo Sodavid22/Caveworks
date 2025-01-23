@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Caveworks
 {
@@ -9,28 +11,34 @@ namespace Caveworks
     {
         public const int chunkSize = 32;
         public World World;
-        public MyVector2 Coordinates;
+        public MyVector2Int GlobalCoords;
         public Tile[,] Tiles;
+        public List<BaseCreature> Creatures;
 
 
-        public Chunk(World world, MyVector2 coordinates)
+        public Chunk(World world, MyVector2Int coordinates)
         {
             World = world;
-            Coordinates = coordinates;
+            GlobalCoords = coordinates;
             Tiles = new Tile[chunkSize, chunkSize];
+            Creatures = new List<BaseCreature>();
 
             for (int x = 0; x < chunkSize; x++)
             {
                 for (int y = 0; y < chunkSize; y++)
                 {
-                    Tiles[x, y] = new Tile(this, new MyVector2(x, y));
+                    Tiles[x, y] = new Tile(this, new MyVector2Int(GlobalCoords.X * chunkSize + x, GlobalCoords.Y * chunkSize + y));
                 }
             }
         }
 
-        public void Update()
-        {
 
+        public void Update(float deltaTime)
+        {
+            foreach (BaseCreature creature in Creatures.ToList()) 
+            {
+                creature.Update(deltaTime);
+            }
         }
 
 
@@ -39,6 +47,11 @@ namespace Caveworks
             foreach (Tile tile in Tiles)
             {
                 tile.Draw(camera);
+            }
+
+            foreach (BaseCreature creature in Creatures)
+            {
+                creature.Draw(camera);
             }
         }
     }
