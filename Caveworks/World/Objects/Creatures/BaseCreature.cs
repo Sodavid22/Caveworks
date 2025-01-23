@@ -86,6 +86,16 @@ namespace Caveworks
                                 return true;
                             }
                         }
+                        foreach (BaseCreature creature in checkedTile.Creatures)
+                        {
+                            if (creature != this)
+                            {
+                                if (Math.Abs(creature.Coordinates.X - position.X) < this.HitboxSize / 2 + creature.HitboxSize / 2 && Math.Abs(creature.Coordinates.Y - position.Y) < this.HitboxSize / 2 + creature.HitboxSize / 2)
+                                {
+                                    return true;
+                                }
+                            }
+                        }
                     }
                 }
             }

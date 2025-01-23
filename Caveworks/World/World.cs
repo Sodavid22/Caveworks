@@ -89,7 +89,8 @@ namespace Caveworks
 
             Chunks[0, 0].Tiles[2, 2].Wall = null;
             Chunks[0, 0].Tiles[2, 2].AddCreature(new Player(Chunks[0, 0].Tiles[2, 2]));
-
+            Chunks[0, 0].Tiles[3, 3].Wall = null;
+            Chunks[0, 0].Tiles[3, 3].AddCreature(new Player(Chunks[0, 0].Tiles[3, 3]));
         }
 
 
