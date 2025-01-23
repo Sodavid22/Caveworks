@@ -6,12 +6,12 @@ namespace Caveworks
 {
     public class Game : Microsoft.Xna.Framework.Game
     {
-        public const bool DEVMODE = true;
+        public const bool DEVMODE = false;
         public static GraphicsDeviceManager Graphics { get; private set; }
         public static SpriteBatch BackgroundSpriteBatch { get; private set; }
         public static SpriteBatch FloorSpriteBatch { get; private set; }
-        public static SpriteBatch WallSpritebatch { get; private set; }
         public static SpriteBatch CreatureSpritebatch { get; private set; }
+        public static SpriteBatch WallSpritebatch { get; private set; }
         public static SpriteBatch MainSpriteBatch { get; private set; }
         public static Game Self { get; private set; }
 
@@ -38,8 +38,8 @@ namespace Caveworks
             // create sprite batches
             BackgroundSpriteBatch = new SpriteBatch(GraphicsDevice);
             FloorSpriteBatch = new SpriteBatch(GraphicsDevice);
-            WallSpritebatch = new SpriteBatch(GraphicsDevice);
             CreatureSpritebatch = new SpriteBatch(GraphicsDevice);
+            WallSpritebatch = new SpriteBatch(GraphicsDevice);
             MainSpriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
@@ -106,8 +106,8 @@ namespace Caveworks
 
             BackgroundSpriteBatch.Begin();
             FloorSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
-            WallSpritebatch.Begin(samplerState: SamplerState.PointClamp);
             CreatureSpritebatch.Begin(samplerState: SamplerState.PointClamp);
+            WallSpritebatch.Begin(samplerState: SamplerState.PointClamp);
             MainSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             // draw background
@@ -125,8 +125,8 @@ namespace Caveworks
 
             BackgroundSpriteBatch.End();
             FloorSpriteBatch.End();
-            WallSpritebatch.End();
             CreatureSpritebatch.End();
+            WallSpritebatch.End();
             MainSpriteBatch.End();
 
             base.Draw(gameTime);

@@ -11,7 +11,7 @@ namespace Caveworks
     {
         public const int chunkSize = 32;
         public World World;
-        public MyVector2Int GlobalCoords;
+        public MyVector2Int Coordinates;
         public Tile[,] Tiles;
         public List<BaseCreature> Creatures;
 
@@ -19,7 +19,7 @@ namespace Caveworks
         public Chunk(World world, MyVector2Int coordinates)
         {
             World = world;
-            GlobalCoords = coordinates;
+            Coordinates = coordinates;
             Tiles = new Tile[chunkSize, chunkSize];
             Creatures = new List<BaseCreature>();
 
@@ -27,7 +27,7 @@ namespace Caveworks
             {
                 for (int y = 0; y < chunkSize; y++)
                 {
-                    Tiles[x, y] = new Tile(this, new MyVector2Int(GlobalCoords.X * chunkSize + x, GlobalCoords.Y * chunkSize + y));
+                    Tiles[x, y] = new Tile(this, new MyVector2Int(Coordinates.X * chunkSize + x, Coordinates.Y * chunkSize + y));
                 }
             }
         }

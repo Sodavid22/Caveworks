@@ -12,6 +12,7 @@ namespace Caveworks
         public MyVector2 Coordinates;
         public int Scale;
         public MyVector2 ScreenCenter;
+        public Player player;
 
         public Camera(World world, MyVector2 coordinates, int scale)
         {
@@ -34,6 +35,7 @@ namespace Caveworks
             {
                 Scale -= 1;
             }
+
             if (Scale > 64) { Scale = 64; } // zoom minimum
             if (!Game.DEVMODE)
             {
@@ -44,23 +46,9 @@ namespace Caveworks
                 if (Scale < 1) { Scale = 1; } // zoom maximum
             }
 
-
-
-            if (MyKeyboard.IsHeld(Keys.NumPad4))
+            if (player != null)
             {
-                Coordinates.X = Coordinates.X - 0.1f / Scale;
-            }
-            if (MyKeyboard.IsHeld(Keys.NumPad6))
-            {
-                Coordinates.X = Coordinates.X + 0.1f / Scale;
-            }
-            if (MyKeyboard.IsHeld(Keys.NumPad8))
-            {
-                Coordinates.Y = Coordinates.Y - 0.1f / Scale;
-            }
-            if (MyKeyboard.IsHeld(Keys.NumPad2))
-            {
-                Coordinates.Y = Coordinates.Y + 0.1f / Scale;
+                this.Coordinates = player.Coordinates;
             }
         }
 
@@ -73,7 +61,7 @@ namespace Caveworks
                     Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, "X", new Vector2(GameWindow.WindowSize.X / 2 - 6, GameWindow.WindowSize.Y / 2 - 6), Color.White);
                     Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, " position: " + this.Coordinates.ToString(), new Vector2(100, 100), Color.White);
                     Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, " zoom: " + this.Scale.ToString(), new Vector2(100, 120), Color.White);
-                    Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, " tile cords: " + this.World.GlobalCordsToTile(this.Coordinates.ToMyVector2Int()).GlobalCoords, new Vector2(100, 140), Color.White);
+                    Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, " tile cords: " + this.World.GlobalCordsToTile(this.Coordinates.ToMyVector2Int()).Coordinates, new Vector2(100, 140), Color.White);
                 }
                 catch { Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, "X", new Vector2(GameWindow.WindowSize.X / 2 - 6, GameWindow.WindowSize.Y / 2 - 6), Color.Red); }
             }

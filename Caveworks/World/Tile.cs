@@ -8,7 +8,7 @@ namespace Caveworks
     public class Tile
     {
         public Chunk Chunk;
-        public MyVector2Int GlobalCoords;
+        public MyVector2Int Coordinates;
         public BaseFloor Floor;
         public BaseWall Wall;
         public List<BaseCreature> Creatures;
@@ -17,7 +17,7 @@ namespace Caveworks
         public Tile(Chunk chunk, MyVector2Int coordinates)
         {
             Chunk = chunk;
-            GlobalCoords = coordinates;
+            Coordinates = coordinates;
             Creatures = new List<BaseCreature>();
         }
 

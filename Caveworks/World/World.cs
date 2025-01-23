@@ -9,6 +9,7 @@ namespace Caveworks
     public class World
     {
         public int WorldSize;
+        public int WorldDiameter;
         public Chunk[,] Chunks;
         public Camera Camera;
         public float DeltaTime = 0;
@@ -19,10 +20,11 @@ namespace Caveworks
         public World(int worldSize)
         {
             WorldSize = worldSize;
+            WorldDiameter = worldSize * Chunk.chunkSize;
+
+            Camera = new Camera(this, new MyVector2(worldSize / 2, worldSize / 2), 32);
 
             GenerateWorld();
-
-            Camera = new Camera(this, new MyVector2(worldSize/2, worldSize/2), 32);
         }
 
 
@@ -58,6 +60,7 @@ namespace Caveworks
         {
             Random rnd = new Random();
             int randomNumber;
+            Tile tile;
 
             Chunks = new Chunk[WorldSize, WorldSize];
             for (int x = 0; x < WorldSize; x++)
@@ -68,27 +71,22 @@ namespace Caveworks
                 }
             }
 
-            for (int chunk_x = 0; chunk_x < WorldSize; chunk_x++)
+            for (int x = 0; x < WorldDiameter; x++)
             {
-                for (int chunk_y = 0; chunk_y < WorldSize; chunk_y++)
+                for (int y = 0; y < WorldDiameter; y++)
                 {
-                    for (int tile_x = 0; tile_x < Chunk.chunkSize; tile_x++)
+                    tile = GlobalCordsToTile(new MyVector2Int(x, y));
+
+                    tile.Floor = new StoneFloor();
+
+                    randomNumber = rnd.Next(0, 100);
+                    if (randomNumber < 10 || x == 0 || y == 0 || x == WorldDiameter - 1 || y == WorldDiameter - 1)
                     {
-                        for (int tile_y = 0; tile_y < Chunk.chunkSize; tile_y++)
-                        {
-                            Chunks[chunk_x, chunk_y].Tiles[tile_x, tile_y].Floor = new StoneFloor();
-
-                            randomNumber = rnd.Next(100);
-
-                            if (randomNumber < 10)
-                            {
-                                Chunks[chunk_x, chunk_y].Tiles[tile_x, tile_y].Wall = new StoneWall();
-                            }
-                            
-                        }
+                        tile.Wall = new StoneWall();
                     }
                 }
             }
+
             Chunks[0, 0].Tiles[2, 2].Wall = null;
             Chunks[0, 0].Tiles[2, 2].AddCreature(new Player(Chunks[0, 0].Tiles[2, 2]));
 
@@ -97,16 +95,20 @@ namespace Caveworks
 
         public Tile GlobalCordsToTile(MyVector2Int globalCords)
         {
-            return Chunks[globalCords.X / 32, globalCords.X / 32].Tiles[globalCords.X % 32, globalCords.Y % 32];
+            if (globalCords.X >= 0 && globalCords.X < WorldDiameter && globalCords.Y >= 0 && globalCords.Y < WorldDiameter)
+            {
+                return Chunks[globalCords.X / 32, globalCords.Y / 32].Tiles[globalCords.X % 32, globalCords.Y % 32];
+            }
+            return null;
         }
 
         public Tile GetTileByRelativePosition(Tile tile, MyVector2Int relativePosition)
         {
-            if (tile.GlobalCoords.X + relativePosition.X > 0 && tile.GlobalCoords.Y + relativePosition.Y > 0)
+            if (tile.Coordinates.X + relativePosition.X >= 0 && tile.Coordinates.Y + relativePosition.Y >= 0)
             {
-                if (tile.GlobalCoords.X + relativePosition.X < WorldSize * Chunk.chunkSize && tile.GlobalCoords.Y + relativePosition.Y < WorldSize * Chunk.chunkSize)
+                if (tile.Coordinates.X + relativePosition.X < WorldSize * Chunk.chunkSize && tile.Coordinates.Y + relativePosition.Y < WorldSize * Chunk.chunkSize)
                 {
-                    return GlobalCordsToTile(new MyVector2Int(tile.GlobalCoords.X + relativePosition.X, tile.GlobalCoords.Y + relativePosition.Y));
+                    return GlobalCordsToTile(new MyVector2Int(tile.Coordinates.X + relativePosition.X, tile.Coordinates.Y + relativePosition.Y));
                 }
             }
             return null;
