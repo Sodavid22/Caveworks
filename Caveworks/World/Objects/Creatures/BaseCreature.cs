@@ -40,12 +40,25 @@ namespace Caveworks
 
         public void Move(float deltaTime)
         {
-            MyVector2 newPosition = new MyVector2(Coordinates.X + Velocity.X * deltaTime, Coordinates.Y);
+            MyVector2 newCoordinates = new MyVector2(Coordinates.X + Velocity.X * deltaTime, Coordinates.Y);
             Tile newTile = null;
 
-            if (newPosition.X > Tile.Coordinates.X + 1 || newPosition.X < Tile.Coordinates.X)
+
+            if (CheckForColision(this.Tile, newCoordinates))
             {
-                newTile = Tile.Chunk.World.GlobalCordsToTile(newPosition.ToMyVector2Int());
+                newCoordinates.X = Coordinates.X;
+            }
+
+            newCoordinates.Y = Coordinates.Y + Velocity.Y * deltaTime;
+
+            if (CheckForColision(this.Tile, newCoordinates))
+            {
+                newCoordinates.Y = Coordinates.Y;
+            }
+
+            if (newCoordinates.X > Tile.Coordinates.X + 1 || newCoordinates.X < Tile.Coordinates.X || newCoordinates.Y > Tile.Coordinates.Y + 1 || newCoordinates.Y < Tile.Coordinates.Y)
+            {
+                newTile = Tile.Chunk.World.GlobalCordsToTile(newCoordinates.ToMyVector2Int());
                 this.Tile.Creatures.Remove(this);
                 this.Tile.Chunk.Creatures.Remove(this);
                 this.Tile = newTile;
@@ -53,28 +66,7 @@ namespace Caveworks
                 newTile.Chunk.Creatures.Add(this);
             }
 
-            if (!CheckForColision(this.Tile, newPosition))
-            {
-                this.Coordinates = newPosition;
-            }
-
-            newPosition = new MyVector2(Coordinates.X, Coordinates.Y + Velocity.Y * deltaTime);
-            newTile = null;
-
-            if (newPosition.Y > Tile.Coordinates.Y + 1 || newPosition.Y < Tile.Coordinates.Y)
-            {
-                newTile = Tile.Chunk.World.GlobalCordsToTile(newPosition.ToMyVector2Int());
-                this.Tile.Creatures.Remove(this);
-                this.Tile.Chunk.Creatures.Remove(this);
-                this.Tile = newTile;
-                newTile.Creatures.Add(this);
-                newTile.Chunk.Creatures.Add(this);
-            }
-
-            if (!CheckForColision(this.Tile, newPosition))
-            {
-                this.Coordinates = newPosition;
-            }
+            this.Coordinates = newCoordinates;
         }
 
 
