@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Caveworks
@@ -24,8 +23,9 @@ namespace Caveworks
 
         public void Draw(Camera camera)
         {
-           if (Wall != null) { Wall.Draw(this, camera); }
-           else { Floor.Draw(this, camera); }
+            if (Wall != null) { Wall.Draw(this, camera); }
+            else if (Floor != null) { Floor.Draw(this, camera); }
+            else { Chunk.World.defaultFloor.Draw(this, camera); };
         }
 
 

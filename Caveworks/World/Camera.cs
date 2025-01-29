@@ -74,7 +74,7 @@ namespace Caveworks
                 {
                     if (0 <= (camera_x + x) && (camera_x + x) < World.WorldSize && 0 <= (camera_y + y) && (camera_y + y) < World.WorldSize)
                     {
-                        World.Chunks[camera_x + x, camera_y + y].Draw(this);
+                        World.ChunkList[camera_x + x, camera_y + y].Draw(this);
                     }
                 }
             }

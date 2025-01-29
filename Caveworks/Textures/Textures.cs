@@ -22,6 +22,9 @@ namespace Caveworks
         // creatures
         public static Texture2D Player {  get; private set; }
 
+        // items
+        public static Texture2D RawIronOre { get; private set; }
+
         public static void Load(ContentManager contentManager)
         {
             // create empty texture
@@ -39,6 +42,9 @@ namespace Caveworks
 
             // creatures:
             Textures.Player = contentManager.Load<Texture2D>("Creatures/Player");
+
+            // items:
+            Textures.RawIronOre = contentManager.Load<Texture2D>("Items/Ores/RawIronOre");
         }
     }
 }
