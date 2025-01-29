@@ -25,22 +25,25 @@ namespace Caveworks
 
         public void Draw(Camera camera)
         {
-            if (Wall != null) { Wall.Draw(this, camera); }
-            else if (Floor != null) { Floor.Draw(this, camera); }
-            else { Chunk.World.defaultFloor.Draw(this, camera); };
-
-            foreach (BaseItem item in Items) 
+            MyVector2 screenCords = camera.WorldToScreenCords(Position.ToMyVector2());
+            if (screenCords.X > -camera.Scale && screenCords.Y > -camera.Scale && screenCords.X < GameWindow.WindowSize.X && screenCords.Y < GameWindow.WindowSize.Y)
             {
-                item.Draw(this, camera );
-            }
+                if (Wall != null) { Wall.Draw(this, camera); }
+                else if (Floor != null) { Floor.Draw(this, camera); }
+                else { Chunk.World.defaultFloor.Draw(this, camera); };
 
+                foreach (BaseItem item in Items)
+                {
+                    item.Draw(this, camera);
+                }
+            }
         }
 
 
         public void AddCreature(BaseCreature creature)
         {
             Creatures.Add(creature);
-            this.Chunk.Creatures.Add(creature);
+            Chunk.Creatures.Add(creature);
         }
 
         public void AddItem(BaseItem item)

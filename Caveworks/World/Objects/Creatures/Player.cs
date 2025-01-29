@@ -64,9 +64,8 @@ namespace Caveworks
 
         public override void Draw(Camera camera)
         {
-            MyVector2 screenCoordinates = camera.WorldToScreenCords(new MyVector2(Coordinates.X + 0.5f, Coordinates.Y + 0.5f));
-            Rectangle playerRectangle = new Rectangle((int)screenCoordinates.X - camera.Scale / 2, (int)screenCoordinates.Y - camera.Scale / 2, camera.Scale, camera.Scale);
-            Game.CreatureSpritebatch.Draw(Textures.Player, playerRectangle, new Rectangle(0, 0, 32, 32), Color.White, Rotation, new Vector2(16, 16), SpriteEffects.None, 0);
+            MyVector2 screenCoordinates = camera.WorldToScreenCords(Coordinates);
+            Game.CreatureSpritebatch.Draw(Textures.Player, new Rectangle((int)screenCoordinates.X, (int)screenCoordinates.Y, camera.Scale, camera.Scale), new Rectangle(0, 0, 32, 32), Color.White, Rotation, new Vector2(16, 16), SpriteEffects.None, 0);
         }
     }
 }
