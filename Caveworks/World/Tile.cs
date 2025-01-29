@@ -50,5 +50,10 @@ namespace Caveworks
         {
             Items.Add(item);
         }
+
+        public void Delete()
+        {
+            Chunk.TileList[Position.X - Chunk.Index.X * Chunk.chunkSize, Position.Y - Chunk.Index.Y * Chunk.chunkSize] = null;
+        }
     }
 }

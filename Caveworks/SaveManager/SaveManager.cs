@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using SharpDX.Direct2D1.Effects;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -46,8 +47,10 @@ namespace Caveworks
             SettingsFile = new SettingsSaveFile();
             SettingsFile.GetNewData();
             Serialize(SettingsFile, SETTINGS_SAVEFILE_PATH);
+
             if (Globals.World != null)
             {
+                Globals.World.RemoveEmptyTiles();
                 Serialize(Globals.World, WORLD_SAVEFILE_PATH);
             }
         }
@@ -80,6 +83,7 @@ namespace Caveworks
                 if (ExistsWorldSave())
                 {
                     Globals.World = DeSerialize(WORLD_SAVEFILE_PATH) as World;
+                    Globals.World.FillEmptyTiles();
                     return true;
                 }
                 return false;

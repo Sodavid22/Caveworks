@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
+using SharpDX.Direct2D1.Effects;
 using System;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace Caveworks
 {
@@ -61,26 +63,35 @@ namespace Caveworks
             Random rnd = new Random();
             int randomNumber;
             Tile tile;
+            Chunk chunk;
 
             ChunkList = new Chunk[WorldSize, WorldSize];
-            for (int x = 0; x < WorldSize; x++)
-            {
-                for (int y = 0; y < WorldSize; y++)
-                {
-                    ChunkList[x, y] = new Chunk(this, new MyVector2Int(x, y));
-                }
-            }
 
-            for (int x = 0; x < WorldDiameter; x++)
+            for (int chunk_x = 0; chunk_x < WorldSize; chunk_x++)
             {
-                for (int y = 0; y < WorldDiameter; y++)
+                for (int chunk_y = 0; chunk_y < WorldSize; chunk_y++)
                 {
-                    tile = GlobalCordsToTile(new MyVector2Int(x, y));
+                    chunk = new Chunk(this, new MyVector2Int(chunk_x, chunk_y));
+                    ChunkList[chunk_x, chunk_y] = chunk;
 
-                    randomNumber = rnd.Next(0, 100);
-                    if (randomNumber < 10 || x == 0 || y == 0 || x == WorldDiameter - 1 || y == WorldDiameter - 1)
+                    for (int tile_x = 0; tile_x < Chunk.chunkSize; tile_x++)
                     {
-                        tile.Wall = new StoneWall();
+                        for (int tile_y = 0; tile_y < Chunk.chunkSize; tile_y++)
+                        {
+                            tile = chunk.TileList[tile_x, tile_y];
+
+                            randomNumber = rnd.Next(100);
+
+                            if (randomNumber < 10)
+                            {
+                                tile.Wall = new StoneWall();
+                            }
+
+                            if (tile.Position.X == 0 || tile.Position.Y == 0 || tile.Position.X == WorldDiameter - 1 || tile.Position.Y == WorldDiameter - 1)
+                            {
+                                tile.Wall = new StoneWall();
+                            }
+                        }
                     }
                 }
             }
@@ -116,6 +127,49 @@ namespace Caveworks
                 }
             }
             return null;
+        }
+
+        public void RemoveEmptyTiles()
+        {
+            Tile tile;
+            for (int chunk_x = 0; chunk_x < WorldSize; chunk_x++)
+            {
+                for (int chunk_y = 0; chunk_y < WorldSize; chunk_y++)
+                {
+                    for (int tile_x = 0; tile_x < Chunk.chunkSize; tile_x++)
+                    {
+                        for (int tile_y = 0; tile_y < Chunk.chunkSize; tile_y++)
+                        {
+                            tile = ChunkList[chunk_x, chunk_y].TileList[tile_x, tile_y];
+
+                            if (tile.Floor == null && tile.Wall == null && tile.Creatures.Count == 0 && tile.Items.Count == 0)
+                            {
+                                tile.Delete();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        public void FillEmptyTiles()
+        {
+            for (int chunk_x = 0; chunk_x < WorldSize; chunk_x++)
+            {
+                for (int chunk_y = 0; chunk_y < WorldSize; chunk_y++)
+                {
+                    for (int tile_x = 0; tile_x < Chunk.chunkSize; tile_x++)
+                    {
+                        for (int tile_y = 0; tile_y < Chunk.chunkSize; tile_y++)
+                        {
+                            if (ChunkList[chunk_x, chunk_y].TileList[tile_x, tile_y] == null)
+                            {
+                                ChunkList[chunk_x, chunk_y].TileList[tile_x, tile_y] = new Tile(ChunkList[chunk_x, chunk_y], new MyVector2Int(chunk_x * Chunk.chunkSize + tile_x, chunk_y * Chunk.chunkSize + tile_y));
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

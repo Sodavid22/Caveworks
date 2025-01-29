@@ -9,15 +9,15 @@ namespace Caveworks
     {
         public const int chunkSize = 32;
         public World World;
-        public MyVector2Int Position;
+        public MyVector2Int Index;
         public Tile[,] TileList;
         public List<BaseCreature> Creatures;
 
 
-        public Chunk(World world, MyVector2Int position)
+        public Chunk(World world, MyVector2Int index)
         {
             World = world;
-            Position = position;
+            Index = index;
             TileList = new Tile[chunkSize, chunkSize];
             Creatures = new List<BaseCreature>();
 
@@ -25,7 +25,7 @@ namespace Caveworks
             {
                 for (int y = 0; y < chunkSize; y++)
                 {
-                    TileList[x, y] = new Tile(this, new MyVector2Int(Position.X * chunkSize + x, Position.Y * chunkSize + y));
+                    TileList[x, y] = new Tile(this, new MyVector2Int(this.Index.X * chunkSize + x, this.Index.Y * chunkSize + y));
                 }
             }
         }
