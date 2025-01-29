@@ -77,7 +77,7 @@ namespace Caveworks
         {
             try
             {
-                if (File.Exists(WORLD_SAVEFILE_PATH))
+                if (ExistsWorldSave())
                 {
                     Globals.World = DeSerialize(WORLD_SAVEFILE_PATH) as World;
                     return true;

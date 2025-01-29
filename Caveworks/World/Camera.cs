@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using System;
 
 namespace Caveworks
@@ -60,7 +59,7 @@ namespace Caveworks
                 {
                     Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, " position: " + this.Coordinates.ToString(), new Vector2(100, 100), Color.White);
                     Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, " zoom: " + this.Scale.ToString(), new Vector2(100, 120), Color.White);
-                    Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, " tile cords: " + this.World.GlobalCordsToTile(this.Coordinates.ToMyVector2Int()).Coordinates, new Vector2(100, 140), Color.White);
+                    Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, " tile cords: " + this.World.GlobalCordsToTile(this.Coordinates.ToMyVector2Int()).Position, new Vector2(100, 140), Color.White);
                 }
                 catch { Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, "X", new Vector2(GameWindow.WindowSize.X / 2 - 6, GameWindow.WindowSize.Y / 2 - 6), Color.Red); }
             }

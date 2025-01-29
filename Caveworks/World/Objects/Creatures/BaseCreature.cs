@@ -20,7 +20,7 @@ namespace Caveworks
         public BaseCreature(Tile tile)
         {
             this.Tile = tile;
-            this.Coordinates = new MyVector2(tile.Coordinates.X + 0.5f, tile.Coordinates.Y + 0.5f);
+            this.Coordinates = new MyVector2(tile.Position.X + 0.5f, tile.Position.Y + 0.5f);
             this.Velocity = new MyVector2(0, 0);
             this.Rotation = 0;
         }
@@ -56,7 +56,7 @@ namespace Caveworks
                 newCoordinates.Y = Coordinates.Y;
             }
 
-            if (newCoordinates.X > Tile.Coordinates.X + 1 || newCoordinates.X < Tile.Coordinates.X || newCoordinates.Y > Tile.Coordinates.Y + 1 || newCoordinates.Y < Tile.Coordinates.Y)
+            if (newCoordinates.X > Tile.Position.X + 1 || newCoordinates.X < Tile.Position.X || newCoordinates.Y > Tile.Position.Y + 1 || newCoordinates.Y < Tile.Position.Y)
             {
                 newTile = Tile.Chunk.World.GlobalCordsToTile(newCoordinates.ToMyVector2Int());
                 this.Tile.Creatures.Remove(this);
@@ -70,7 +70,7 @@ namespace Caveworks
         }
 
 
-        private bool CheckForColision(Tile tile, MyVector2 position) // !!! only works with walls
+        private bool CheckForColision(Tile tile, MyVector2 coordinates) // !!! only works with walls
         {
             for (int x = -1; x <= 1; x++)
             {
@@ -81,7 +81,7 @@ namespace Caveworks
                     {
                         if (checkedTile.Wall != null)
                         {
-                            if (Math.Abs(checkedTile.Coordinates.X + 0.5 - position.X) < this.HitboxSize / 2 + 0.5 && Math.Abs(checkedTile.Coordinates.Y + 0.5 - position.Y) < this.HitboxSize / 2 + 0.5)
+                            if (Math.Abs(checkedTile.Position.X + 0.5 - coordinates.X) < this.HitboxSize / 2 + 0.5 && Math.Abs(checkedTile.Position.Y + 0.5 - coordinates.Y) < this.HitboxSize / 2 + 0.5)
                             {
                                 return true;
                             }
@@ -90,7 +90,7 @@ namespace Caveworks
                         {
                             if (creature != this)
                             {
-                                if (Math.Abs(creature.Coordinates.X - position.X) < this.HitboxSize / 2 + creature.HitboxSize / 2 && Math.Abs(creature.Coordinates.Y - position.Y) < this.HitboxSize / 2 + creature.HitboxSize / 2)
+                                if (Math.Abs(creature.Coordinates.X - coordinates.X) < this.HitboxSize / 2 + creature.HitboxSize / 2 && Math.Abs(creature.Coordinates.Y - coordinates.Y) < this.HitboxSize / 2 + creature.HitboxSize / 2)
                                 {
                                     return true;
                                 }

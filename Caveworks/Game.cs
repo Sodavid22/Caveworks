@@ -10,6 +10,7 @@ namespace Caveworks
         public static GraphicsDeviceManager Graphics { get; private set; }
         public static SpriteBatch BackgroundSpriteBatch { get; private set; }
         public static SpriteBatch FloorSpriteBatch { get; private set; }
+        public static SpriteBatch ItemSpritebatch { get; private set; }
         public static SpriteBatch CreatureSpritebatch { get; private set; }
         public static SpriteBatch WallSpritebatch { get; private set; }
         public static SpriteBatch MainSpriteBatch { get; private set; }
@@ -38,6 +39,7 @@ namespace Caveworks
             // create sprite batches
             BackgroundSpriteBatch = new SpriteBatch(GraphicsDevice);
             FloorSpriteBatch = new SpriteBatch(GraphicsDevice);
+            ItemSpritebatch = new SpriteBatch(GraphicsDevice);
             CreatureSpritebatch = new SpriteBatch(GraphicsDevice);
             WallSpritebatch = new SpriteBatch(GraphicsDevice);
             MainSpriteBatch = new SpriteBatch(GraphicsDevice);
@@ -106,6 +108,7 @@ namespace Caveworks
 
             BackgroundSpriteBatch.Begin();
             FloorSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+            ItemSpritebatch.Begin(samplerState: SamplerState.PointClamp);
             CreatureSpritebatch.Begin(samplerState: SamplerState.PointClamp);
             WallSpritebatch.Begin(samplerState: SamplerState.PointClamp);
             MainSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
@@ -125,6 +128,7 @@ namespace Caveworks
 
             BackgroundSpriteBatch.End();
             FloorSpriteBatch.End();
+            ItemSpritebatch.End();
             CreatureSpritebatch.End();
             WallSpritebatch.End();
             MainSpriteBatch.End();

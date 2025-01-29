@@ -8,7 +8,7 @@ namespace Caveworks
     {
         public override void Draw(Tile tile, Camera camera)
         {
-            MyVector2 screenCoordinates = camera.WorldToScreenCords(tile.Coordinates.ToMyVector2());
+            MyVector2 screenCoordinates = camera.WorldToScreenCords(tile.Position.ToMyVector2());
             Rectangle wallRectangle = new Rectangle((int)screenCoordinates.X, (int)screenCoordinates.Y, camera.Scale, camera.Scale);
             Game.WallSpritebatch.Draw(Textures.StoneWall, wallRectangle, Color.White);
         }

@@ -89,6 +89,11 @@ namespace Caveworks
             ChunkList[0, 0].TileList[2, 2].AddCreature(new Player(ChunkList[0, 0].TileList[2, 2]));
             ChunkList[0, 0].TileList[3, 3].Wall = null;
             ChunkList[0, 0].TileList[3, 3].AddCreature(new Player(ChunkList[0, 0].TileList[3, 3]));
+
+            ChunkList[0, 0].TileList[4, 4].AddItem(new RawIronOre(ChunkList[0, 0].TileList[4, 4], new MyVector2(0.1f, 0.1f), 10));
+            ChunkList[0, 0].TileList[4, 4].AddItem(new RawIronOre(ChunkList[0, 0].TileList[4, 4], new MyVector2(0.1f, 0.9f), 10));
+            ChunkList[0, 0].TileList[4, 4].AddItem(new RawIronOre(ChunkList[0, 0].TileList[4, 4], new MyVector2(0.9f, 0.1f), 10));
+            ChunkList[0, 0].TileList[4, 4].AddItem(new RawIronOre(ChunkList[0, 0].TileList[4, 4], new MyVector2(0.9f, 0.9f), 10));
         }
 
 
@@ -103,11 +108,11 @@ namespace Caveworks
 
         public Tile GetTileByRelativePosition(Tile tile, MyVector2Int relativePosition)
         {
-            if (tile.Coordinates.X + relativePosition.X >= 0 && tile.Coordinates.Y + relativePosition.Y >= 0)
+            if (tile.Position.X + relativePosition.X >= 0 && tile.Position.Y + relativePosition.Y >= 0)
             {
-                if (tile.Coordinates.X + relativePosition.X < WorldSize * Chunk.chunkSize && tile.Coordinates.Y + relativePosition.Y < WorldSize * Chunk.chunkSize)
+                if (tile.Position.X + relativePosition.X < WorldSize * Chunk.chunkSize && tile.Position.Y + relativePosition.Y < WorldSize * Chunk.chunkSize)
                 {
-                    return GlobalCordsToTile(new MyVector2Int(tile.Coordinates.X + relativePosition.X, tile.Coordinates.Y + relativePosition.Y));
+                    return GlobalCordsToTile(new MyVector2Int(tile.Position.X + relativePosition.X, tile.Position.Y + relativePosition.Y));
                 }
             }
             return null;
