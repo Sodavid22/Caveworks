@@ -12,6 +12,7 @@ namespace Caveworks
         public BaseWall Wall;
         public List<BaseCreature> Creatures;
         public List<BaseItem> Items;
+        public BaseBuilding Building;
 
 
         public Tile(Chunk chunk, MyVector2Int position)
@@ -46,10 +47,19 @@ namespace Caveworks
             Chunk.Creatures.Add(creature);
         }
 
+
         public void AddItem(BaseItem item)
         {
             Items.Add(item);
         }
+
+
+        public void AddBuilding(BaseBuilding building)
+        {
+            Building = building;
+            Chunk.Buildings.Add(building);
+        }
+
 
         public void Delete()
         {

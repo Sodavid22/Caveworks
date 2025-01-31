@@ -12,6 +12,7 @@ namespace Caveworks
         public MyVector2Int Index;
         public Tile[,] TileList;
         public List<BaseCreature> Creatures;
+        public List<BaseBuilding> Buildings;
 
 
         public Chunk(World world, MyVector2Int index)
@@ -20,6 +21,8 @@ namespace Caveworks
             Index = index;
             TileList = new Tile[chunkSize, chunkSize];
             Creatures = new List<BaseCreature>();
+            Buildings = new List<BaseBuilding>();
+
 
             for (int x = 0; x < chunkSize; x++)
             {
@@ -37,6 +40,11 @@ namespace Caveworks
             {
                 creature.Update(deltaTime);
             }
+
+            foreach (BaseBuilding building in Buildings)
+            {
+                building.Update(World.DeltaTime);
+            }
         }
 
 
@@ -50,6 +58,11 @@ namespace Caveworks
             foreach (BaseCreature creature in Creatures)
             {
                 creature.Draw(camera);
+            }
+
+            foreach (BaseBuilding building in Buildings)
+            {
+                building.Draw(camera, World.DeltaTime);
             }
         }
     }

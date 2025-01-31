@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Diagnostics;
+﻿using System;
 
 namespace Caveworks
 {
@@ -62,8 +60,7 @@ namespace Caveworks
                 this.Tile.Creatures.Remove(this);
                 this.Tile.Chunk.Creatures.Remove(this);
                 this.Tile = newTile;
-                newTile.Creatures.Add(this);
-                newTile.Chunk.Creatures.Add(this);
+                newTile.AddCreature(this);
             }
 
             this.Coordinates = newCoordinates;

@@ -91,6 +91,18 @@ namespace Caveworks
                             {
                                 tile.Wall = new StoneWall();
                             }
+
+                            if (tile.Position.Y == 4 && tile.Position.X > 2 && tile.Position.X < 16)
+                            {
+                                tile.Wall = null;
+                                tile.AddBuilding(new YellowBelt(tile, new MyVector2Int(1, 0)));
+                            }
+
+                            if (tile.Position.X == 16 && tile.Position.Y > 3 && tile.Position.Y < 16)
+                            {
+                                tile.Wall = null;
+                                tile.AddBuilding(new YellowBelt(tile, new MyVector2Int(0, 1)));
+                            }
                         }
                     }
                 }
@@ -101,10 +113,10 @@ namespace Caveworks
             ChunkList[0, 0].TileList[3, 3].Wall = null;
             ChunkList[0, 0].TileList[3, 3].AddCreature(new Player(ChunkList[0, 0].TileList[3, 3]));
 
+            ChunkList[0, 0].TileList[4, 3].Wall = null;
+            ChunkList[0, 0].TileList[4, 3].AddItem(new RawIronOre(ChunkList[0, 0].TileList[4, 3], new MyVector2(0.1f, 0.1f), 10));
+            ChunkList[0, 0].TileList[4, 4].Wall = null;
             ChunkList[0, 0].TileList[4, 4].AddItem(new RawIronOre(ChunkList[0, 0].TileList[4, 4], new MyVector2(0.1f, 0.1f), 10));
-            ChunkList[0, 0].TileList[4, 4].AddItem(new RawIronOre(ChunkList[0, 0].TileList[4, 4], new MyVector2(0.1f, 0.9f), 10));
-            ChunkList[0, 0].TileList[4, 4].AddItem(new RawIronOre(ChunkList[0, 0].TileList[4, 4], new MyVector2(0.9f, 0.1f), 10));
-            ChunkList[0, 0].TileList[4, 4].AddItem(new RawIronOre(ChunkList[0, 0].TileList[4, 4], new MyVector2(0.9f, 0.9f), 10));
         }
 
 
@@ -142,7 +154,7 @@ namespace Caveworks
                         {
                             tile = ChunkList[chunk_x, chunk_y].TileList[tile_x, tile_y];
 
-                            if (tile.Floor == null && tile.Wall == null && tile.Creatures.Count == 0 && tile.Items.Count == 0)
+                            if (tile.Floor == null && tile.Wall == null && tile.Creatures.Count == 0 && tile.Items.Count == 0 && tile.Building == null)
                             {
                                 tile.Delete();
                             }
