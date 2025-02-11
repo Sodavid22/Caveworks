@@ -13,7 +13,7 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Buildings/Belts/YellowBelt.png
+#begin Buildings/Belts/SlowBelt.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -23,7 +23,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Buildings/Belts/YellowBelt.png
+/build:Buildings/Belts/SlowBelt.png
 
 #begin Creatures/Player.png
 /importer:TextureImporter

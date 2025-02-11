@@ -17,7 +17,7 @@ namespace Caveworks
         {
             MyVector2 screenCoordinates = camera.WorldToScreenCords(new MyVector2(Position.X + 0.5f, Position.Y + 0.5f));
             float rotation = MathF.Atan2(Rotation.Y, Rotation.X);
-            Game.FloorSpriteBatch.Draw(Textures.YellowBelt, new Rectangle((int)screenCoordinates.X, (int)screenCoordinates.Y, camera.Scale, camera.Scale), new Rectangle(0, 0, 32, 32), Color.White, rotation, new Vector2(16, 16), SpriteEffects.None, 0);
+            Game.FloorSpriteBatch.Draw(Textures.SlowBelt, new Rectangle((int)screenCoordinates.X, (int)screenCoordinates.Y, camera.Scale, camera.Scale), new Rectangle(0, 0, 16, 16), Color.White, rotation, new Vector2(8, 8), SpriteEffects.None, 0);
         }
     }
 }

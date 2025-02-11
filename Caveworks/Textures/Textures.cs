@@ -27,7 +27,7 @@ namespace Caveworks
 
         // buildings
 
-        public static Texture2D YellowBelt { get; private set; }
+        public static Texture2D SlowBelt { get; private set; }
 
         public static void Load(ContentManager contentManager)
         {
@@ -51,7 +51,7 @@ namespace Caveworks
             Textures.RawIronOre = contentManager.Load<Texture2D>("Items/Ores/RawIronOre");
 
             // buildings:
-            Textures.YellowBelt = contentManager.Load<Texture2D>("Buildings/Belts/YellowBelt");
+            Textures.SlowBelt = contentManager.Load<Texture2D>("Buildings/Belts/SlowBelt");
         }
     }
 }
