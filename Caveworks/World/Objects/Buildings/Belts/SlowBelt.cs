@@ -5,9 +5,9 @@ using System;
 namespace Caveworks
 {
     [Serializable]
-    public class YellowBelt : BaseBelt
+    public class SlowBelt : BaseBelt
     {
-        public YellowBelt(Tile tile, MyVector2Int rotation) : base(tile, rotation)
+        public SlowBelt(Tile tile, MyVector2Int rotation) : base(tile, rotation)
         {
             BeltSpeed = 2;
         }

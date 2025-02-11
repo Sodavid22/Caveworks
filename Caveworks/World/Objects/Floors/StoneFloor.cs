@@ -6,6 +6,8 @@ namespace Caveworks
     [Serializable]
     internal class StoneFloor : BaseFloor
     {
+        public StoneFloor(Tile tile) : base(tile) { }
+
         public override void Draw(Tile tile, Camera camera)
         {
             MyVector2 screenCoordinates = camera.WorldToScreenCords(tile.Position.ToMyVector2());

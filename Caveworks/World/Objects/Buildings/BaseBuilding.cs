@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Caveworks
 {
@@ -9,13 +10,24 @@ namespace Caveworks
         public Tile Tile;
         public MyVector2Int Position;
         public MyVector2Int Rotation;
+        public static int Size;
         public static bool Collisions;
 
 
-        public BaseBuilding(Tile tile) 
+        public BaseBuilding(Tile tile, int size)
         {
-            this.Tile = tile;
-            this.Position = Tile.Position;
+            Tile = tile;
+            this.Position = tile.Position;
+
+
+            Tile.Chunk.Buildings.Add(this);
+            for (int x = 0; x <= size - 1; x++) 
+            {
+                for (int y = 0; y <= size - 1; y++)
+                {
+                    tile.Chunk.World.GlobalCordsToTile(new MyVector2Int(Position.X + x, Position.Y + y)).Building = this;
+                }
+            }
         }
 
 

@@ -31,33 +31,12 @@ namespace Caveworks
             {
                 if (Wall != null) { Wall.Draw(this, camera); }
                 else if (Floor != null) { Floor.Draw(this, camera); }
-                else { Chunk.World.defaultFloor.Draw(this, camera); };
 
                 foreach (BaseItem item in Items)
                 {
                     item.Draw(this, camera);
                 }
             }
-        }
-
-
-        public void AddCreature(BaseCreature creature)
-        {
-            Creatures.Add(creature);
-            Chunk.Creatures.Add(creature);
-        }
-
-
-        public void AddItem(BaseItem item)
-        {
-            Items.Add(item);
-        }
-
-
-        public void AddBuilding(BaseBuilding building)
-        {
-            Building = building;
-            Chunk.Buildings.Add(building);
         }
 
 

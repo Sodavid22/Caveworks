@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using SharpDX.Direct2D1.Effects;
 using System;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace Caveworks
 {
@@ -13,7 +11,6 @@ namespace Caveworks
         public Chunk[,] ChunkList;
         public Camera Camera;
         public float DeltaTime = 0;
-        public BaseFloor defaultFloor;
 
         public bool Paused { get; set; } = false;
 
@@ -22,7 +19,6 @@ namespace Caveworks
         {
             WorldSize = worldSize;
             WorldDiameter = worldSize * Chunk.chunkSize;
-            defaultFloor = new StoneFloor();
 
             Camera = new Camera(this, new MyVector2(worldSize / 2, worldSize / 2), 32);
 
@@ -79,9 +75,9 @@ namespace Caveworks
                         for (int tile_y = 0; tile_y < Chunk.chunkSize; tile_y++)
                         {
                             tile = chunk.TileList[tile_x, tile_y];
+                           new StoneFloor(tile);
 
                             randomNumber = rnd.Next(100);
-
                             if (randomNumber < 10)
                             {
                                 tile.Wall = new StoneWall();
@@ -95,13 +91,13 @@ namespace Caveworks
                             if (tile.Position.Y == 4 && tile.Position.X > 2 && tile.Position.X < 16)
                             {
                                 tile.Wall = null;
-                                tile.AddBuilding(new YellowBelt(tile, new MyVector2Int(1, 0)));
+                                new SlowBelt(tile, new MyVector2Int(1, 0));
                             }
 
                             if (tile.Position.X == 16 && tile.Position.Y > 3 && tile.Position.Y < 16)
                             {
                                 tile.Wall = null;
-                                tile.AddBuilding(new YellowBelt(tile, new MyVector2Int(0, 1)));
+                                new SlowBelt(tile, new MyVector2Int(0, 1));
                             }
                         }
                     }
@@ -109,14 +105,14 @@ namespace Caveworks
             }
 
             ChunkList[0, 0].TileList[2, 2].Wall = null;
-            ChunkList[0, 0].TileList[2, 2].AddCreature(new Player(ChunkList[0, 0].TileList[2, 2]));
+            new Player(ChunkList[0, 0].TileList[2, 2]);
             ChunkList[0, 0].TileList[3, 3].Wall = null;
-            ChunkList[0, 0].TileList[3, 3].AddCreature(new Player(ChunkList[0, 0].TileList[3, 3]));
+            new Player(ChunkList[0, 0].TileList[3, 3]);
 
             ChunkList[0, 0].TileList[4, 3].Wall = null;
-            ChunkList[0, 0].TileList[4, 3].AddItem(new RawIronOre(ChunkList[0, 0].TileList[4, 3], new MyVector2(0.1f, 0.1f), 10));
+            new RawIronOre(ChunkList[0, 0].TileList[4, 3], new MyVector2(0.1f, 0.1f), 10);
             ChunkList[0, 0].TileList[4, 4].Wall = null;
-            ChunkList[0, 0].TileList[4, 4].AddItem(new RawIronOre(ChunkList[0, 0].TileList[4, 4], new MyVector2(0.1f, 0.1f), 10));
+            new RawIronOre(ChunkList[0, 0].TileList[4, 4], new MyVector2(0.1f, 0.1f), 10);
         }
 
 
@@ -154,7 +150,7 @@ namespace Caveworks
                         {
                             tile = ChunkList[chunk_x, chunk_y].TileList[tile_x, tile_y];
 
-                            if (tile.Floor == null && tile.Wall == null && tile.Creatures.Count == 0 && tile.Items.Count == 0 && tile.Building == null)
+                            if (tile.Floor is StoneFloor && tile.Wall == null && tile.Creatures.Count == 0 && tile.Items.Count == 0 && tile.Building == null)
                             {
                                 tile.Delete();
                             }
@@ -166,6 +162,7 @@ namespace Caveworks
 
         public void FillEmptyTiles()
         {
+            Tile tile;
             for (int chunk_x = 0; chunk_x < WorldSize; chunk_x++)
             {
                 for (int chunk_y = 0; chunk_y < WorldSize; chunk_y++)
@@ -176,7 +173,9 @@ namespace Caveworks
                         {
                             if (ChunkList[chunk_x, chunk_y].TileList[tile_x, tile_y] == null)
                             {
-                                ChunkList[chunk_x, chunk_y].TileList[tile_x, tile_y] = new Tile(ChunkList[chunk_x, chunk_y], new MyVector2Int(chunk_x * Chunk.chunkSize + tile_x, chunk_y * Chunk.chunkSize + tile_y));
+                                tile = new Tile(ChunkList[chunk_x, chunk_y], new MyVector2Int(chunk_x * Chunk.chunkSize + tile_x, chunk_y * Chunk.chunkSize + tile_y));
+                                ChunkList[chunk_x, chunk_y].TileList[tile_x, tile_y] = tile;
+                                new StoneFloor(tile);
                             }
                         }
                     }

@@ -7,9 +7,10 @@ namespace Caveworks
     public class BaseBelt : BaseBuilding
     {
         public static float BeltSpeed;
+        new public static int Size = 1;
 
 
-        public BaseBelt(Tile tile, MyVector2Int rotation) : base(tile)
+        public BaseBelt(Tile tile, MyVector2Int rotation) : base(tile, BaseBelt.Size)
         {
             this.Rotation = rotation;
             Collisions = true;

@@ -21,6 +21,9 @@ namespace Caveworks
             this.Coordinates = new MyVector2(tile.Position.X + 0.5f, tile.Position.Y + 0.5f);
             this.Velocity = new MyVector2(0, 0);
             this.Rotation = 0;
+
+            Tile.Creatures.Add(this);
+            Tile.Chunk.Creatures.Add(this);
         }
 
 
@@ -60,7 +63,8 @@ namespace Caveworks
                 this.Tile.Creatures.Remove(this);
                 this.Tile.Chunk.Creatures.Remove(this);
                 this.Tile = newTile;
-                newTile.AddCreature(this);
+                newTile.Creatures.Add(this);
+                newTile.Chunk.Creatures.Add(this);
             }
 
             this.Coordinates = newCoordinates;

@@ -15,6 +15,8 @@ namespace Caveworks
             this.Tile = tile;
             this.Coordinates = new MyVector2(tile.Position.X + position.X, tile.Position.Y + position.Y);
             this.count = count;
+
+            Tile.Items.Add(this);
         }
 
         public virtual void Draw(Tile tile, Camera camera) { }
