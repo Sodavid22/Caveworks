@@ -25,6 +25,9 @@ namespace Caveworks
             GenerateWorld();
         }
 
+        // TESTCODE
+        float i = 0;
+        float z = 0;
 
         public void Update(GameTime gameTime)
         {
@@ -36,6 +39,24 @@ namespace Caveworks
             if (Paused) return;
 
             DeltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000;
+            if (DeltaTime > 0.02f)
+            {
+                DeltaTime = 0.02f;
+            }
+
+            // TESTCODE
+            i += DeltaTime;
+            z += DeltaTime;
+            if (i > 0.25f && z < 30)
+            {
+                i -= 0.25f;
+                new RawIronOre(ChunkList[0, 0].TileList[4, 2], new MyVector2(0.5f, 0.5f), 10);
+            }
+            if (z > 20 && ChunkList[0, 0].TileList[3, 5].Building == null)
+            {
+                ChunkList[0, 0].TileList[3, 5].Wall = null;
+                new SlowBelt(ChunkList[0, 0].TileList[3, 5], new MyVector2Int(0, -1));
+            }
 
             Camera.Update();
 
@@ -56,7 +77,7 @@ namespace Caveworks
 
         public void GenerateWorld()
         {
-            Random rnd = new Random();
+            Random rnd = new();
             int randomNumber;
             Tile tile;
             Chunk chunk;
@@ -88,31 +109,43 @@ namespace Caveworks
                                 tile.Wall = new StoneWall();
                             }
 
-                            if (tile.Position.Y == 4 && tile.Position.X > 2 && tile.Position.X < 16)
+                            // TESTCODE
+                            if (tile.Position.Y == 4 && tile.Position.X > 2 && tile.Position.X < 10)
                             {
                                 tile.Wall = null;
                                 new SlowBelt(tile, new MyVector2Int(1, 0));
                             }
-
-                            if (tile.Position.X == 16 && tile.Position.Y > 3 && tile.Position.Y < 16)
+                            if (tile.Position.X == 10 && tile.Position.Y > 3 && tile.Position.Y < 11)
                             {
                                 tile.Wall = null;
                                 new SlowBelt(tile, new MyVector2Int(0, 1));
+                            }
+                            if (tile.Position.Y == 11 && tile.Position.X > 3 && tile.Position.X < 11)
+                            {
+                                tile.Wall = null;
+                                new SlowBelt(tile, new MyVector2Int(-1, 0));
+                            }
+                            if (tile.Position.X == 3 && tile.Position.Y > 5 && tile.Position.Y < 12)
+                            {
+                                tile.Wall = null;
+                                new SlowBelt(tile, new MyVector2Int(0, -1));
                             }
                         }
                     }
                 }
             }
 
+            // TESTCODE
             ChunkList[0, 0].TileList[2, 2].Wall = null;
             new Player(ChunkList[0, 0].TileList[2, 2]);
             ChunkList[0, 0].TileList[3, 3].Wall = null;
             new Player(ChunkList[0, 0].TileList[3, 3]);
 
+            // TESTCODE
+            ChunkList[0, 0].TileList[4, 2].Wall = null;
+            new SlowBelt(ChunkList[0, 0].TileList[4, 2], new MyVector2Int(0, 1));
             ChunkList[0, 0].TileList[4, 3].Wall = null;
-            new RawIronOre(ChunkList[0, 0].TileList[4, 3], new MyVector2(0.1f, 0.1f), 10);
-            ChunkList[0, 0].TileList[4, 4].Wall = null;
-            new RawIronOre(ChunkList[0, 0].TileList[4, 4], new MyVector2(0.1f, 0.1f), 10);
+            new SlowBelt(ChunkList[0, 0].TileList[4, 3], new MyVector2Int(0, 1));
         }
 
 

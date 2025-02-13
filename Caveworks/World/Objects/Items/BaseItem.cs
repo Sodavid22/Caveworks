@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Caveworks
 {
@@ -27,12 +28,29 @@ namespace Caveworks
             Coordinates.X += movement.X;
             Coordinates.Y += movement.Y;
 
-            if (Coordinates.X < Tile.Position.X || Coordinates.Y < Tile.Position.Y || Coordinates.X > Tile.Position.X + 1|| Coordinates.Y > Tile.Position.Y + 1)
+            if (CheckForNewTile())
             {
-                Tile.Items.Remove(this);
-                Tile = Tile.Chunk.World.GlobalCordsToTile(Coordinates.ToMyVector2Int());
-                Tile.AddItem(this);
+                UpdateTile();
             }
+        }
+
+
+        public bool CheckForNewTile()
+        {
+            if (Coordinates.X < Tile.Position.X || Coordinates.Y < Tile.Position.Y || Coordinates.X > Tile.Position.X + 1 || Coordinates.Y > Tile.Position.Y + 1)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
+        public void UpdateTile()
+        {
+            Tile.Items.Remove(this);
+            Tile = Tile.Chunk.World.GlobalCordsToTile(Coordinates.ToMyVector2Int());
+            Tile.Items.Add(this);
+            Tile.Items = Tile.Items.OrderBy(item => item.Coordinates.X + item.Coordinates.Y).ToList();
         }
     }
 }
