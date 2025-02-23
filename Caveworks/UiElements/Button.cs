@@ -11,6 +11,7 @@ namespace Caveworks
 
         protected string text;
         protected SpriteFont font;
+        protected Texture2D texture;
         protected Vector2 textSize;
         protected bool active = true;
         protected bool hovered;
@@ -23,10 +24,19 @@ namespace Caveworks
         }
 
 
+        public Button(Vector2 size, Vector4 color, int border, Texture2D texture) : base(size, color, border)
+        {
+            this.texture = texture;
+        }
+
+
         public override void Place(Vector2 position, Anchor anchor)
         {
             base.Place(position, anchor);
-            textSize = font.MeasureString(text);
+            if (text != null)
+            {
+                textSize = font.MeasureString(text);
+            }
         }
 
 
@@ -64,7 +74,16 @@ namespace Caveworks
             }
 
             // draw text
-            Game.MainSpriteBatch.DrawString(font, text, new Vector2((int)(rectangle.X + rectangle.Width / 2 - textSize.X / 2), (int)(rectangle.Y + rectangle.Height / 2 - textSize.Y / 2)), Color.Black);
+            if (text != null)
+            {
+                Game.MainSpriteBatch.DrawString(font, text, new Vector2((int)(rectangle.X + rectangle.Width / 2 - textSize.X / 2), (int)(rectangle.Y + rectangle.Height / 2 - textSize.Y / 2)), Color.Black);
+            }
+            // draw image
+            else
+            {
+                Game.MainSpriteBatch.Draw(texture, new Rectangle(rectangle.X + border + 2, rectangle.Y + border + 2, rectangle.Width - border * 2 - 4, rectangle.Height - border * 2 - 4), Color.White);
+            }
+            
         }
 
 
