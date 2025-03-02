@@ -38,7 +38,7 @@ namespace Caveworks
             if (fullscreenButton.IsPressed(MouseKey.Left))
             {
                 GameWindow.ToggleFullscreen();
-                fullscreenButton.ChangeText(GameWindow.IsFullscreen.ToString());
+                fullscreenButton.SetText(GameWindow.IsFullscreen.ToString());
                 Globals.ActiveScene = new SettingsScene();
             }
 

@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-
 namespace Caveworks
 {
     public class Button : UiElement
@@ -9,33 +8,34 @@ namespace Caveworks
         const float hoverOverlayStrength = 0.2f;
         const float inactiveOverlayStrength = 0.5f;
 
-        protected string text;
-        protected SpriteFont font;
-        protected Texture2D texture;
+        protected string Text;
+        protected SpriteFont Font;
+        protected Texture2D Texture;
         protected Vector2 textSize;
-        protected bool active = true;
-        protected bool hovered;
+        protected bool Active = true;
+        protected bool Hovered;
+        protected bool Muted = false;
 
 
         public Button(Vector2 size, Vector4 color, int border, string text, SpriteFont font) : base(size, color, border)
         {
-            this.text = text;
-            this.font = font;
+            this.Text = text;
+            this.Font = font;
         }
 
 
         public Button(Vector2 size, Vector4 color, int border, Texture2D texture) : base(size, color, border)
         {
-            this.texture = texture;
+            this.Texture = texture;
         }
 
 
         public override void Place(Vector2 position, Anchor anchor)
         {
             base.Place(position, anchor);
-            if (text != null)
+            if (Text != null)
             {
-                textSize = font.MeasureString(text);
+                textSize = Font.MeasureString(Text);
             }
         }
 
@@ -48,11 +48,11 @@ namespace Caveworks
             {
                 if (mousePosition.Y > base.rectangle.Y && mousePosition.Y < base.rectangle.Y + base.rectangle.Height)
                 {
-                    hovered = true;
+                    Hovered = true;
                 }
-                else { hovered = false;}
+                else { Hovered = false;}
             }
-            else { hovered= false;}
+            else { Hovered= false;}
         }
 
 
@@ -64,26 +64,26 @@ namespace Caveworks
             // main body
             Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(rectangle.X + border, rectangle.Y + border, rectangle.Width - border * 2, rectangle.Height - border * 2), color);
 
-            if (!active) // darken if inactive
+            if (!Active) // darken if inactive
             {
                 Game.MainSpriteBatch.Draw(Textures.EmptyTexture, rectangle, Color.FromNonPremultiplied(1, 1, 1, (int)(color.A * inactiveOverlayStrength)));
             }
-            else if (hovered) // darken if hovered
+            else if (Hovered) // darken if hovered
             {
                 Game.MainSpriteBatch.Draw(Textures.EmptyTexture, rectangle, Color.FromNonPremultiplied(1, 1, 1, (int)(color.A * hoverOverlayStrength)));
             }
 
-            // draw text
-            if (text != null)
-            {
-                Game.MainSpriteBatch.DrawString(font, text, new Vector2((int)(rectangle.X + rectangle.Width / 2 - textSize.X / 2), (int)(rectangle.Y + rectangle.Height / 2 - textSize.Y / 2)), Color.Black);
-            }
+
             // draw image
-            else
+            if (Texture != null)
             {
-                Game.MainSpriteBatch.Draw(texture, new Rectangle(rectangle.X + border + 2, rectangle.Y + border + 2, rectangle.Width - border * 2 - 4, rectangle.Height - border * 2 - 4), Color.White);
+                Game.MainSpriteBatch.Draw(Texture, new Rectangle(rectangle.X + border + 2, rectangle.Y + border + 2, rectangle.Width - border * 2 - 4, rectangle.Height - border * 2 - 4), Color.White);
             }
-            
+            // draw text
+            if (Text != null)
+            {
+                Game.MainSpriteBatch.DrawString(Font, Text, new Vector2((int)(rectangle.X + rectangle.Width / 2 - textSize.X / 2), (int)(rectangle.Y + rectangle.Height / 2 - textSize.Y / 2)), Color.Black);
+            }
         }
 
 
@@ -91,16 +91,16 @@ namespace Caveworks
         {
             if (MyKeyboard.IsPressed(mouseKey))
             {
-                if (hovered)
+                if (Hovered)
                 {
-                    if (active)
+                    if (Active)
                     {
-                        Sounds.ButtonClick.play(1.0f);
+                        if (!Muted) { Sounds.ButtonClick.Play(1.0f); }
                         return true;
                     }
                     else
                     {
-                        Sounds.ButtonDecline.play(1.0f);
+                        if (!Muted) { Sounds.ButtonDecline.Play(1.0f); }
                     }
                 }
             }
@@ -108,28 +108,43 @@ namespace Caveworks
         }
 
 
-        public void ChangeText(string text)
+        public void SetTexture(Texture2D texture)
         {
-            this.text = text;
-            textSize = font.MeasureString(text);
+            Texture = texture;
+        }
+
+
+        public void SetText(string text)
+        {
+            this.Text = text;
+            if (Text != null)
+            {
+                textSize = Font.MeasureString(text);
+            }
         }
 
 
         public bool IsActivated()
         {
-            return active;
+            return Active;
         }
 
 
         public void Activate()
         {
-            active = true;
+            Active = true;
         }
 
 
         public void Deactivate()
         {
-            active = false;
+            Active = false;
+        }
+
+
+        public void Mute()
+        {
+            Muted = true;
         }
     }
 }

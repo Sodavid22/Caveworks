@@ -34,12 +34,12 @@ namespace Caveworks
 
             if (imageButton.IsPressed(MouseKey.Left))
             {
-                Sounds.ButtonClick.play(1);
+                Sounds.ButtonClick.Play(1);
             }
 
             if (imageButton.IsPressed(MouseKey.Right))
             {
-                Sounds.ButtonClick2.play(1);
+                Sounds.ButtonClick2.Play(1);
             }
         }
 

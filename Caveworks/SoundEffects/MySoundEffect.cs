@@ -16,7 +16,7 @@ namespace Caveworks
         }
 
 
-        public void play(float volume)
+        public void Play(float volume)
         {
             SoundEffectInstance soundEffectInstance = soundEffect.CreateInstance();
             soundEffectInstance.Volume = soundVolume * Globals.GlobalVolume * volume;

@@ -9,5 +9,8 @@ namespace Caveworks
         public const Keys SHUTDOWN_KEY = Keys.F4;
         public const Keys FPS_KEY = Keys.F3;
         public const Keys PAUE_KEY = Keys.P;
+        public const Keys PLAYER_INVENTORY_KEY = Keys.Tab;
+        public const Keys ROTATE_KEY = Keys.R;
+        public const Keys CANCEL_KEY = Keys.Q;
     }
 }

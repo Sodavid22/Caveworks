@@ -74,8 +74,10 @@ namespace Caveworks
             // go to main menu
             if (MyKeyboard.IsPressed(KeyBindings.MENU_KEY))
             {
-                Sounds.ButtonClick2.play(1.0f);
+                Sounds.ButtonClick2.Play(1.0f);
                 Globals.ActiveScene = new MainMenuScene();
+                Globals.World.PlayerInventory.Close();
+                Globals.World.InventoryOpened = false;
             }
 
             // turn off the game
@@ -88,7 +90,7 @@ namespace Caveworks
             // toggle FPS counter
             if (MyKeyboard.IsPressed(KeyBindings.FPS_KEY))
             {
-                Sounds.ButtonClick2.play(1.0f);
+                Sounds.ButtonClick2.Play(1.0f);
                 FpsCounter.Toggle();
             }
 

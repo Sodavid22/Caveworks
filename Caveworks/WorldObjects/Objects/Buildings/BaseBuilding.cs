@@ -31,6 +31,13 @@ namespace Caveworks
         }
 
 
+        public static void DeleteBuilding(BaseBuilding building)
+        {
+            building.Tile.Building = null;
+            building.Tile.Chunk.Buildings.Remove(building);
+        }
+
+
         public virtual void Update(float deltaTime) { }
 
 
