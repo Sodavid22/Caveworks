@@ -11,7 +11,7 @@ namespace Caveworks
         public MyVector2 Coordinates;
         public int Scale;
         public MyVector2 ScreenCenter;
-        public Player player;
+        public PlayerBody player;
 
         public Camera(World world, MyVector2 coordinates, int scale)
         {
@@ -23,8 +23,8 @@ namespace Caveworks
 
         public void Update()
         {
-            ScreenCenter.X = GameWindow.WindowSize.X / 2;
-            ScreenCenter.Y = GameWindow.WindowSize.Y / 2;
+            ScreenCenter.X = GameWindow.Size.X / 2;
+            ScreenCenter.Y = GameWindow.Size.Y / 2;
 
             if (MyKeyboard.GetScrollWheelMovement() > 0) // zoom in
             {
@@ -38,7 +38,7 @@ namespace Caveworks
             if (Scale > 64) { Scale = 64; } // zoom minimum
             if (!Game.DEVMODE)
             {
-                if (Scale < GameWindow.WindowSize.X / 64) { Scale = (int)(GameWindow.WindowSize.X / 64); } // zoom maximum
+                if (Scale < GameWindow.Size.X / 64) { Scale = (int)(GameWindow.Size.X / 64); } // zoom maximum
             }
             else
             {
@@ -61,7 +61,7 @@ namespace Caveworks
                     Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, " zoom: " + this.Scale.ToString(), new Vector2(100, 120), Color.White);
                     Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, " tile cords: " + this.World.GlobalCordsToTile(this.Coordinates.ToMyVector2Int()).Position, new Vector2(100, 140), Color.White);
                 }
-                catch { Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, "X", new Vector2(GameWindow.WindowSize.X / 2 - 6, GameWindow.WindowSize.Y / 2 - 6), Color.Red); }
+                catch { Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, "X", new Vector2(GameWindow.Size.X / 2 - 6, GameWindow.Size.Y / 2 - 6), Color.Red); }
             }
 
             MyVector2 cameraChunk = WorldCordsToChunk(this.Coordinates);

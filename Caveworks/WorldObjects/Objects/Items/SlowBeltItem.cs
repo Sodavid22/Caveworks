@@ -20,17 +20,13 @@ namespace Caveworks
         {
             Tile tile = Globals.World.MouseTile;
 
-            if (tile.Wall == null)
+            if (tile.Wall == null & tile.Building == null)
             {
-                if (tile.Building != null)
-                {
-                    BaseBuilding.DeleteBuilding(tile.Building);
-                }
                 new SlowBelt(tile, new MyVector2Int(itemRotation.X, itemRotation.Y));
                 Count -= 1;
                 if (Count == 0)
                 {
-                    Globals.World.PlayerHand = null;
+                    Globals.World.Player.HeldItem = null;
                 }
                 return true;
             }

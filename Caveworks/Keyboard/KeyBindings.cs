@@ -12,5 +12,6 @@ namespace Caveworks
         public const Keys PLAYER_INVENTORY_KEY = Keys.Tab;
         public const Keys ROTATE_KEY = Keys.R;
         public const Keys CANCEL_KEY = Keys.Q;
+        public const Keys PICKUP_KEY = Keys.F;
     }
 }

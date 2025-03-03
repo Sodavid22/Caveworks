@@ -13,6 +13,12 @@ namespace Caveworks
         public SlowBelt(Tile tile, MyVector2Int rotation) : base(tile, rotation) { }
 
 
+        public override BaseItem ToItem()
+        {
+            return new SlowBeltItem(1);
+        }
+
+
         public override void Update(float deltaTime)
         {
             base.UpdateBelt(deltaTime, BeltSpeed);

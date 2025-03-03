@@ -17,12 +17,12 @@ namespace Caveworks
 
         public StartScene()
         { 
-            backgroundBox.Place(new Vector2(GameWindow.WindowSize.X / 2, GameWindow.WindowSize.Y / 2), Anchor.Middle);
+            backgroundBox.Place(new Vector2(GameWindow.Size.X / 2, GameWindow.Size.Y / 2), Anchor.Middle);
 
-            worldSizeText.Place(new Vector2(GameWindow.WindowSize.X / 2 - 200, GameWindow.WindowSize.Y / 2 - 140), Anchor.Middle);
-            worldSizeSlider.Place(new Vector2(GameWindow.WindowSize.X / 2 + 200, GameWindow.WindowSize.Y / 2 - 140), Anchor.Middle);
+            worldSizeText.Place(new Vector2(GameWindow.Size.X / 2 - 200, GameWindow.Size.Y / 2 - 140), Anchor.Middle);
+            worldSizeSlider.Place(new Vector2(GameWindow.Size.X / 2 + 200, GameWindow.Size.Y / 2 - 140), Anchor.Middle);
 
-            startButton.Place(new Vector2(GameWindow.WindowSize.X / 2, GameWindow.WindowSize.Y / 2 + 140), Anchor.Middle);
+            startButton.Place(new Vector2(GameWindow.Size.X / 2, GameWindow.Size.Y / 2 + 140), Anchor.Middle);
         }
 
 

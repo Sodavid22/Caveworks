@@ -10,6 +10,7 @@ namespace Caveworks
         private static KeyboardState lastKeyboardState;
         private static MouseState currentMouseState;
         private static MouseState lastMouseState;
+        private static Vector2 mousePosition;
         private static int currentScrollWheelState;
         private static int lastScrollWheelState;
         private static int scrollWheelMovement;
@@ -21,9 +22,13 @@ namespace Caveworks
             currentKeyboardState = Keyboard.GetState();
             lastMouseState = currentMouseState;
             currentMouseState = Mouse.GetState();
+
             lastScrollWheelState = currentScrollWheelState;
             currentScrollWheelState = currentMouseState.ScrollWheelValue;
             scrollWheelMovement = currentScrollWheelState - lastScrollWheelState;
+
+            MouseState mouse = Mouse.GetState();
+            mousePosition = new Vector2(mouse.X, mouse.Y);
         }
 
 
@@ -120,8 +125,6 @@ namespace Caveworks
 
         public static Vector2 GetMousePosition()
         {
-            MouseState mouse = Mouse.GetState();
-            Vector2 mousePosition = new Vector2(mouse.X, mouse.Y);
             return mousePosition;
         }
     }

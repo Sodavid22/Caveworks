@@ -31,6 +31,9 @@ namespace Caveworks
         }
 
 
+        public virtual BaseItem ToItem() { return null; }
+
+
         public static void DeleteBuilding(BaseBuilding building)
         {
             building.Tile.Building = null;

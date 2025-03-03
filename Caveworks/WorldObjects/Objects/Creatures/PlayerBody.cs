@@ -7,9 +7,9 @@ using System;
 namespace Caveworks
 {
     [Serializable]
-    public class Player : BaseCreature
+    public class PlayerBody : BaseCreature
     {
-        public Player(Tile tile) : base(tile)
+        public PlayerBody(Tile tile) : base(tile)
         {
             HitboxSize = 0.8f;
             Health = 100;

@@ -59,7 +59,7 @@ namespace Caveworks
             item.Count -= 1;
             if (item.Count == 0)
             {
-                Globals.World.PlayerHand = null;
+                Globals.World.Player.HeldItem = null;
             }
             tile.Items.Add(newItem);
         }

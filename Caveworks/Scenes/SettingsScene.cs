@@ -18,13 +18,13 @@ namespace Caveworks
 
         public SettingsScene()
         {
-            backgroundBox.Place(new Vector2(GameWindow.WindowSize.X / 2, GameWindow.WindowSize.Y / 2), Anchor.Middle);
+            backgroundBox.Place(new Vector2(GameWindow.Size.X / 2, GameWindow.Size.Y / 2), Anchor.Middle);
 
-            fullscreenText.Place(new Vector2(GameWindow.WindowSize.X / 2 - 200, GameWindow.WindowSize.Y / 2 - 140), Anchor.Middle);
-            fullscreenButton.Place(new Vector2(GameWindow.WindowSize.X / 2 + 200, GameWindow.WindowSize.Y / 2 - 140), Anchor.Middle);
+            fullscreenText.Place(new Vector2(GameWindow.Size.X / 2 - 200, GameWindow.Size.Y / 2 - 140), Anchor.Middle);
+            fullscreenButton.Place(new Vector2(GameWindow.Size.X / 2 + 200, GameWindow.Size.Y / 2 - 140), Anchor.Middle);
 
-            volumeText.Place(new Vector2(GameWindow.WindowSize.X / 2 - 200, GameWindow.WindowSize.Y / 2 - 70), Anchor.Middle);
-            volumeSlider.Place(new Vector2(GameWindow.WindowSize.X / 2 + 200, GameWindow.WindowSize.Y / 2 - 70), Anchor.Middle);
+            volumeText.Place(new Vector2(GameWindow.Size.X / 2 - 200, GameWindow.Size.Y / 2 - 70), Anchor.Middle);
+            volumeSlider.Place(new Vector2(GameWindow.Size.X / 2 + 200, GameWindow.Size.Y / 2 - 70), Anchor.Middle);
         }
 
 

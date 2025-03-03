@@ -12,5 +12,14 @@ namespace Caveworks
             Rectangle wallRectangle = new Rectangle((int)screenCoordinates.X, (int)screenCoordinates.Y, camera.Scale, camera.Scale);
             Game.WallSpritebatch.Draw(Textures.StoneWall, wallRectangle, Color.White);
         }
+
+
+        public override int GetHardness() { return 10; }
+
+
+        public override bool IsDestructible()
+        {
+            return true;
+        }
     }
 }

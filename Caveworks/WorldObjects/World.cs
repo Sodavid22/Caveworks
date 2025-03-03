@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 
 namespace Caveworks
@@ -11,12 +10,9 @@ namespace Caveworks
         public int WorldDiameter;
         public Chunk[,] ChunkList;
         public Camera Camera;
+        public Player Player;
+        public PlayerBody PlayerBody;
         public float DeltaTime = 0;
-
-        public Inventory PlayerInventory = new Inventory(30);
-        public bool InventoryOpened = false;
-        public BaseItem PlayerHand = null;
-        public MyVector2Int ItemRotation = new MyVector2Int(1, 0);
 
         public MyVector2 WorldMousePos;
         public Tile MouseTile;
@@ -31,13 +27,17 @@ namespace Caveworks
             WorldSize = worldSize;
             WorldDiameter = worldSize * Chunk.chunkSize;
 
-            Camera = new Camera(this, new MyVector2(worldSize / 2, worldSize / 2), 32);
-
             GenerateWorld();
+
+            Camera = new Camera(this, new MyVector2(worldSize / 2, worldSize / 2), 32);
+            Player = new Player(this);
+            PlayerBody = new PlayerBody(ChunkList[0, 0].TileList[2, 2]);
+
+            WorldMousePos = GetWorldMousePos();
+            LastMouseTile = MouseTile;
+            MouseTile = GlobalCordsToTile(WorldMousePos.ToMyVector2Int());
         }
 
-        // TESTCODE
-        float i = 0;
 
         public void Update(GameTime gameTime)
         {
@@ -58,111 +58,24 @@ namespace Caveworks
                 DeltaTime = 0.02f;
             }
 
-            // TESTCODE
-            i += DeltaTime;
-            if (i > 0.5f)
-            {
-                PlayerInventory.AddItem(new RawIronOreItem(1));
-                PlayerInventory.AddItem(new SlowBeltItem(1));
-                i = 0;
-            }
-
             Camera.Update();
+
+            Player.Update();
 
             foreach (Chunk chunk in ChunkList)
             { 
                 chunk.Update(DeltaTime);
-            }
-
-            if (MyKeyboard.IsPressed(KeyBindings.PLAYER_INVENTORY_KEY)) // open inventory
-            {
-                InventoryOpened = !InventoryOpened;
-                Sounds.ButtonClick.Play(1);
-
-                if (InventoryOpened)
-                {
-                    PlayerInventory.Open(new MyVector2Int((int)GameWindow.WindowSize.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize)/2), (int)GameWindow.WindowSize.Y / 2 + 50));
-                }
-                else
-                {
-                    PlayerInventory.Close();
-                }
-            }
-
-            if (InventoryOpened)
-            {
-                PlayerInventory.Update();
-            }
-
-            if (MyKeyboard.IsPressed(KeyBindings.ROTATE_KEY))
-            {
-                if (ItemRotation.X == 1) // right to down
-                {
-                    ItemRotation.X = 0;
-                    ItemRotation.Y = 1;
-                }
-                else if (ItemRotation.Y == 1) // down to left
-                {
-                    ItemRotation.X = -1;
-                    ItemRotation.Y = 0;
-                }
-                else if (ItemRotation.X == -1) // left to up
-                {
-                    ItemRotation.X = 0;
-                    ItemRotation.Y = -1;
-                }
-                else // up to right
-                {
-                    ItemRotation.X = 1;
-                    ItemRotation.Y = 0;
-                }
-            }
-
-            if (PlayerHand != null && !InventoryOpened && MyKeyboard.IsPressed(MouseKey.Left)) // use items
-            {
-                PlayerHand.PrimaryUse(ItemRotation);
-            }
-            else if (PlayerHand != null && !InventoryOpened && MyKeyboard.IsPressed(MouseKey.Right)) // secondary use item
-            {
-                PlayerHand.SecondaryUse(ItemRotation);
-            }
-
-            if (PlayerHand != null && !InventoryOpened && MyKeyboard.IsHeld(MouseKey.Left) && MouseTile != LastMouseTile) // use items contnuosly
-            {
-                PlayerHand.PrimaryUse(ItemRotation);
-            }
-            else if (PlayerHand != null && !InventoryOpened && MyKeyboard.IsHeld(MouseKey.Right) && MouseTile != LastMouseTile) // secondary use item continuosly
-            {
-                PlayerHand.SecondaryUse(ItemRotation);
-            }
-
-            if (MyKeyboard.IsPressed(KeyBindings.CANCEL_KEY) && PlayerHand != null) // stop holding item
-            {
-                if (PlayerInventory.AddItem(PlayerHand))
-                {
-                    PlayerHand = null;
-                }
             }
         }
 
 
         public void Draw()
         {
-            if (Paused) Game.MainSpriteBatch.DrawString(Fonts.MenuButtonFont, "PAUSED", new Vector2(GameWindow.WindowSize.X / 2 - 100, GameWindow.WindowSize.Y / 2), Color.White);
+            if (Paused) Game.MainSpriteBatch.DrawString(Fonts.MenuButtonFont, "PAUSED", new Vector2(GameWindow.Size.X / 2 - 100, GameWindow.Size.Y / 2), Color.White);
 
             Camera.DrawWorld();
 
-            if (InventoryOpened) // draw inventory
-            {
-                PlayerInventory.Draw();
-            }
-
-            if (PlayerHand != null) // draw held items
-            {
-                Rectangle rectangle = new Rectangle((int)MyKeyboard.GetMousePosition().X, (int)MyKeyboard.GetMousePosition().Y, Camera.Scale, Camera.Scale);
-                Game.MainSpriteBatch.Draw(PlayerHand.GetTexture(), rectangle, new Rectangle(0, 0, PlayerHand.GetTexture().Width, PlayerHand.GetTexture().Height), Color.White, RotationToAngle(ItemRotation), new Vector2(PlayerHand.GetTexture().Width/2, PlayerHand.GetTexture().Height/2), SpriteEffects.None, 0);
-                Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, PlayerHand.Count.ToString(), new Vector2((int)MyKeyboard.GetMousePosition().X + 16, (int)MyKeyboard.GetMousePosition().Y + 2), Color.Black);
-            }
+            Player.Draw();
         }
 
 
@@ -203,9 +116,6 @@ namespace Caveworks
                     }
                 }
             }
-
-            ChunkList[0, 0].TileList[2, 2].Wall = null;
-            new Player(ChunkList[0, 0].TileList[2, 2]);
         }
 
 
@@ -234,7 +144,7 @@ namespace Caveworks
 
         private MyVector2 GetWorldMousePos()
         {
-            return new MyVector2(Camera.Coordinates.X + (MyKeyboard.GetMousePosition().X - GameWindow.WindowSize.X / 2) / Camera.Scale, Camera.Coordinates.Y + (MyKeyboard.GetMousePosition().Y - GameWindow.WindowSize.Y / 2) / Camera.Scale);
+            return new MyVector2(Camera.Coordinates.X + (MyKeyboard.GetMousePosition().X - GameWindow.Size.X / 2) / Camera.Scale, Camera.Coordinates.Y + (MyKeyboard.GetMousePosition().Y - GameWindow.Size.Y / 2) / Camera.Scale);
         }
 
 

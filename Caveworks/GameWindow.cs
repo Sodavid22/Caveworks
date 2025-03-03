@@ -10,7 +10,7 @@ namespace Caveworks
         private static Vector2 DISPLAY_SIZE = new Vector2((int)GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, (int)GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
 
         // game window size in pixels
-        public static Vector2 WindowSize { get; private set; } = new Vector2((int)DISPLAY_SIZE.X/2, (int)DISPLAY_SIZE.Y/2);
+        public static Vector2 Size { get; private set; } = new Vector2((int)DISPLAY_SIZE.X/2, (int)DISPLAY_SIZE.Y/2);
 
         // is in fullscreen mode
         public static bool IsFullscreen {get; private set;} = false;
@@ -53,7 +53,7 @@ namespace Caveworks
                 Game.Graphics.ToggleFullScreen();
                 Game.Graphics.IsFullScreen = false;
                 Game.Graphics.ApplyChanges();
-                WindowSize = UpdateWindowSize();
+                Size = UpdateWindowSize();
                 IsFullscreen = false;
             }
             else
@@ -63,7 +63,7 @@ namespace Caveworks
                 Game.Graphics.ToggleFullScreen();
                 Game.Graphics.IsFullScreen = true;
                 Game.Graphics.ApplyChanges();
-                WindowSize = UpdateWindowSize();
+                Size = UpdateWindowSize();
                 IsFullscreen = true;
             }
         }
@@ -71,8 +71,8 @@ namespace Caveworks
 
         public static void Initialize(GraphicsDeviceManager graphicsDeviceManager)
         {   // set screen parameters
-            graphicsDeviceManager.PreferredBackBufferWidth = (int)WindowSize.X;
-            graphicsDeviceManager.PreferredBackBufferHeight = (int)WindowSize.Y;
+            graphicsDeviceManager.PreferredBackBufferWidth = (int)Size.X;
+            graphicsDeviceManager.PreferredBackBufferHeight = (int)Size.Y;
             graphicsDeviceManager.HardwareModeSwitch = false;
             graphicsDeviceManager.ApplyChanges();
         }

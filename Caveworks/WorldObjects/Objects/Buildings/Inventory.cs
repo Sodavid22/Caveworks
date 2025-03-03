@@ -14,34 +14,34 @@ namespace Caveworks
         public BaseItem[] Items;
         public int Size;
         MyVector2Int Position;
+        public Player Player;
 
         [NonSerialized]
         Button[] Buttons;
 
 
-        public Inventory(int size)
+        public Inventory(int size, Player player)
         {
             Items = new BaseItem[size];
-            this.Size = size;
+            Size = size;
+            Player = player;
         }
 
 
-        public bool AddItem(BaseItem item)
+        public void AddItem(BaseItem item)
         {
             for (int i = 0; i < Size; i++)
             {
                 if (Items[i] == null)
                 {
                     Items[i] = item;
-                    return true;
                 }
                 else if (Items[i].GetType() == item.GetType())
                 {
-                    if (Items[i].Count + item.Count < BaseItem.StackSize)
+                    if (Items[i].Count + item.Count <= BaseItem.StackSize)
                     {
                         Items[i].Count += item.Count;
                         item.Count = 0;
-                        return true;
                     }
                     else
                     {
@@ -50,7 +50,7 @@ namespace Caveworks
                     }
                 }
             }
-            return false;
+            Globals.World.PlayerBody.Tile.Items.Clear();
         }
 
 
@@ -132,11 +132,11 @@ namespace Caveworks
             {
                 if (Buttons[i].IsPressed(MouseKey.Left))
                 {
-                    if (Globals.World.PlayerHand == null) // take items to hand
+                    if (Player.HeldItem == null) // take items to hand
                     {
                         if (Items[i] != null)
                         {
-                            Globals.World.PlayerHand = Items[i];
+                            Player.HeldItem = Items[i];
                             Items[i] = null;
                             Sounds.ButtonClick.Play(1);
                         }
@@ -145,21 +145,21 @@ namespace Caveworks
                     {
                         if (Items[i] == null) // put items from hand to empty slot
                         {
-                            Items[i] = Globals.World.PlayerHand;
-                            Globals.World.PlayerHand = null;
+                            Items[i] = Player.HeldItem;
+                            Player.HeldItem = null;
                             Sounds.ButtonClick.Play(1);
                         }
-                        else if (Items[i].GetType() == Globals.World.PlayerHand.GetType())
+                        else if (Items[i].GetType() == Player.HeldItem.GetType())
                         {
-                            if (Items[i].Count + Globals.World.PlayerHand.Count <= BaseItem.StackSize) // put items from hand to slot
+                            if (Items[i].Count + Player.HeldItem.Count <= BaseItem.StackSize) // put items from hand to slot
                             {
-                                Items[i].Count += Globals.World.PlayerHand.Count;
-                                Globals.World.PlayerHand = null;
+                                Items[i].Count += Player.HeldItem.Count;
+                                Player.HeldItem = null;
                                 Sounds.ButtonClick.Play(1);
                             }
                             else // put SOME items from hand to slot
                             {
-                                Globals.World.PlayerHand.Count -= BaseItem.StackSize - Items[i].Count;
+                                Player.HeldItem.Count -= BaseItem.StackSize - Items[i].Count;
                                 Items[i].Count = BaseItem.StackSize;
                                 Sounds.ButtonClick.Play(1);
                             }
@@ -172,38 +172,38 @@ namespace Caveworks
                 }
                 else if (Buttons[i].IsPressed(MouseKey.Right))
                 {
-                    if (Globals.World.PlayerHand == null && Items[i] != null)
+                    if (Player.HeldItem == null && Items[i] != null)
                     {
                         if (Items[i].Count > 1) // take half items
                         {
-                            Globals.World.PlayerHand = Cloning.DeepClone(Items[i]);
-                            Globals.World.PlayerHand.Count = Items[i].Count / 2;
-                            Items[i].Count -= Globals.World.PlayerHand.Count;
+                            Player.HeldItem = Cloning.DeepClone(Items[i]);
+                            Player.HeldItem.Count = Items[i].Count / 2;
+                            Items[i].Count -= Player.HeldItem.Count;
                             Sounds.ButtonClick.Play(1);
                         }
                     }
-                    else if (Globals.World.PlayerHand != null)
+                    else if (Player.HeldItem != null)
                     {
                         if (Items[i] == null) // put one item to empty tile
                         {
-                            Items[i] = Cloning.DeepClone(Globals.World.PlayerHand);
+                            Items[i] = Cloning.DeepClone(Player.HeldItem);
                             Items[i].Count = 1;
-                            Globals.World.PlayerHand.Count -= 1;
-                            if (Globals.World.PlayerHand.Count == 0)
+                            Player.HeldItem.Count -= 1;
+                            if (Player.HeldItem.Count == 0)
                             {
-                                Globals.World.PlayerHand = null;
+                                Player.HeldItem = null;
                             }
                             Sounds.ButtonClick.Play(1);
                         }
-                        else if (Items[i].GetType() == Globals.World.PlayerHand.GetType()) // add one item to tile
+                        else if (Items[i].GetType() == Player.HeldItem.GetType()) // add one item to tile
                         {
                             if (Items[i].Count < BaseItem.StackSize)
                             {
                                 Items[i].Count += 1;
-                                Globals.World.PlayerHand.Count -= 1;
-                                if (Globals.World.PlayerHand.Count == 0)
+                                Player.HeldItem.Count -= 1;
+                                if (Player.HeldItem.Count == 0)
                                 {
-                                    Globals.World.PlayerHand = null;
+                                    Player.HeldItem = null;
                                 }
                             }
                             Sounds.ButtonClick.Play(1);

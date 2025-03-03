@@ -19,11 +19,11 @@ namespace Caveworks
             continueButton.Activate();
             if (!Globals.ExistsSave && Globals.World == null) { continueButton.Deactivate(); }
 
-            continueButton.Place(new Vector2(GameWindow.WindowSize.X / 2, GameWindow.WindowSize.Y / 2 - 140), Anchor.Middle);
-            startButton.Place(new Vector2(GameWindow.WindowSize.X / 2, GameWindow.WindowSize.Y / 2 - 70), Anchor.Middle);
-            settingsButton.Place(new Vector2(GameWindow.WindowSize.X / 2, GameWindow.WindowSize.Y / 2), Anchor.Middle);
-            creditsButton.Place(new Vector2(GameWindow.WindowSize.X / 2, GameWindow.WindowSize.Y / 2 + 70), Anchor.Middle);
-            exitButton.Place(new Vector2(GameWindow.WindowSize.X / 2, GameWindow.WindowSize.Y / 2 + 140), Anchor.Middle);
+            continueButton.Place(new Vector2(GameWindow.Size.X / 2, GameWindow.Size.Y / 2 - 140), Anchor.Middle);
+            startButton.Place(new Vector2(GameWindow.Size.X / 2, GameWindow.Size.Y / 2 - 70), Anchor.Middle);
+            settingsButton.Place(new Vector2(GameWindow.Size.X / 2, GameWindow.Size.Y / 2), Anchor.Middle);
+            creditsButton.Place(new Vector2(GameWindow.Size.X / 2, GameWindow.Size.Y / 2 + 70), Anchor.Middle);
+            exitButton.Place(new Vector2(GameWindow.Size.X / 2, GameWindow.Size.Y / 2 + 140), Anchor.Middle);
         }
 
 

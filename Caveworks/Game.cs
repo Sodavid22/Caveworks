@@ -76,8 +76,10 @@ namespace Caveworks
             {
                 Sounds.ButtonClick2.Play(1.0f);
                 Globals.ActiveScene = new MainMenuScene();
-                Globals.World.PlayerInventory.Close();
-                Globals.World.InventoryOpened = false;
+                if (Globals.World != null)
+                {
+                    Globals.World.Player.CloseUi();
+                }
             }
 
             // turn off the game
@@ -116,7 +118,7 @@ namespace Caveworks
             MainSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             // draw background
-            Game.BackgroundSpriteBatch.Draw(Textures.MenuBackground, new Rectangle(0, 0, (int)GameWindow.WindowSize.X, (int)GameWindow.WindowSize.Y), Color.White);
+            Game.BackgroundSpriteBatch.Draw(Textures.MenuBackground, new Rectangle(0, 0, (int)GameWindow.Size.X, (int)GameWindow.Size.Y), Color.White);
 
             // draw screens
             IScene scene = Globals.ActiveScene;
