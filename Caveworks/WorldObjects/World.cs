@@ -50,8 +50,12 @@ namespace Caveworks
         public void Update(GameTime gameTime)
         {
             WorldMousePos = GetWorldMousePos();
-            LastMouseTile = MouseTile;
-            MouseTile = GlobalCordsToTile(WorldMousePos.ToMyVector2Int());
+            Tile newMouseTile = GlobalCordsToTile(WorldMousePos.ToMyVector2Int());
+            if (newMouseTile != null)
+            {
+                LastMouseTile = MouseTile;
+                MouseTile = newMouseTile;
+            }
 
             if (MyKeyboard.IsPressed(KeyBindings.PAUE_KEY))
             {
