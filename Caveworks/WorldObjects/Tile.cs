@@ -10,7 +10,6 @@ namespace Caveworks
         public MyVector2Int Position;
         public BaseFloor Floor;
         public BaseWall Wall;
-        public List<BaseCreature> Creatures;
         public List<BaseItem> Items;
         public BaseBuilding Building;
 
@@ -19,7 +18,6 @@ namespace Caveworks
         {
             Chunk = chunk;
             Position = position;
-            Creatures = new List<BaseCreature>();
             Items = new List<BaseItem>();
         }
 

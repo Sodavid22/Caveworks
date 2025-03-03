@@ -13,7 +13,7 @@ namespace Caveworks
 
         public BaseItem[] Items;
         public int Size;
-        MyVector2Int Position;
+        MyVector2Int WindowPosition;
         public Player Player;
 
         [NonSerialized]
@@ -28,13 +28,14 @@ namespace Caveworks
         }
 
 
-        public void AddItem(BaseItem item)
+        public bool TryAddItem(BaseItem item)
         {
             for (int i = 0; i < Size; i++)
             {
                 if (Items[i] == null)
                 {
                     Items[i] = item;
+                    return true;
                 }
                 else if (Items[i].GetType() == item.GetType())
                 {
@@ -42,6 +43,7 @@ namespace Caveworks
                     {
                         Items[i].Count += item.Count;
                         item.Count = 0;
+                        return true;
                     }
                     else
                     {
@@ -50,11 +52,11 @@ namespace Caveworks
                     }
                 }
             }
-            Globals.World.PlayerBody.Tile.Items.Clear();
+            return false;
         }
 
 
-        public bool AddItem(BaseItem item, int position)
+        public bool TryAddItem(BaseItem item, int position)
         {
             if (Items[position].GetType() == item.GetType())
             {
@@ -90,7 +92,7 @@ namespace Caveworks
 
         public void Open(MyVector2Int position)
         {
-            this.Position = position;
+            this.WindowPosition = position;
             Buttons = new Button[Size];
 
             for (int i = 0; i < Size; i++)
@@ -220,8 +222,8 @@ namespace Caveworks
 
         public void Draw()
         {
-            Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(Position.X - Border - 2, Position.Y - Border - 2, ButtonSpacing * (RowLength - 1) + ButtonSize + Border * 2 + 4, ButtonSpacing * (Size / RowLength - 1) + ButtonSize + Border * 2 + 4), Color.Black);
-            Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(Position.X - Border, Position.Y - Border, ButtonSpacing*(RowLength - 1) + ButtonSize + Border*2, ButtonSpacing*(Size / RowLength - 1) + ButtonSize + Border*2), Color.FromNonPremultiplied(Globals.InventoryBoxColor));
+            Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(WindowPosition.X - Border - 2, WindowPosition.Y - Border - 2, ButtonSpacing * (RowLength - 1) + ButtonSize + Border * 2 + 4, ButtonSpacing * (Size / RowLength - 1) + ButtonSize + Border * 2 + 4), Color.Black);
+            Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(WindowPosition.X - Border, WindowPosition.Y - Border, ButtonSpacing*(RowLength - 1) + ButtonSize + Border*2, ButtonSpacing*(Size / RowLength - 1) + ButtonSize + Border*2), Color.FromNonPremultiplied(Globals.InventoryBoxColor));
 
             foreach (Button button in Buttons)
             {

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using System;
 using SharpDX.Direct2D1.Effects;
+using System.Linq;
 
 namespace Caveworks
 {
@@ -81,7 +82,10 @@ namespace Caveworks
 
             if (MyKeyboard.IsPressed(KeyBindings.CANCEL_KEY) && HeldItem != null) // stop holding item
             {
-                HeldItem = null;
+                if (Inventory.TryAddItem(HeldItem))
+                {
+                    HeldItem = null;
+                }
             }
 
             if (World.MouseTile != World.LastMouseTile) // reset wall mining
@@ -91,9 +95,20 @@ namespace Caveworks
 
             if (MyKeyboard.IsHeld(KeyBindings.PICKUP_KEY))
             {
-                foreach (BaseItem item in World.MouseTile.Items)
+                for (int x = -1; x <= 1; x++)
                 {
-                    Inventory.AddItem(item);
+                    for (int y = -1; y <= 1; y++)
+                    {
+                        Tile checkedTile = World.GetTileByRelativePosition(World.PlayerBody.Tile, new MyVector2Int(x, y));
+
+                        foreach (BaseItem item in checkedTile.Items.ToList())
+                        {
+                            if (Inventory.TryAddItem(item))
+                            {
+                                checkedTile.Items.Remove(item);
+                            }
+                        }
+                    }
                 }
             }
 
@@ -101,13 +116,17 @@ namespace Caveworks
             {
                 if (HeldItem != null) // holding item
                 {
-                    if (MyKeyboard.IsPressed(MouseKey.Left)) // use items
+                    if (MyKeyboard.IsPressed(MouseKey.Left)) // use item
                     {
                         HeldItem.PrimaryUse(ItemRotation);
                     }
-                    else if (MyKeyboard.IsPressed(MouseKey.Right)) // use items
+                    else if (MyKeyboard.IsPressed(MouseKey.Right)) // secondary use item
                     {
                         HeldItem.SecondaryUse(ItemRotation);
+                    }
+                    else if (MyKeyboard.IsPressed(KeyBindings.DROP_KEY)) // drop item
+                    {
+                        BaseItem.Drop(HeldItem);
                     }
                     else if (MyKeyboard.IsHeld(MouseKey.Left) && World.MouseTile != World.LastMouseTile) // use items contnuosly
                     {
@@ -141,8 +160,10 @@ namespace Caveworks
                     {
                         if (World.MouseTile.Building != null)
                         {
-                            World.Player.Inventory.AddItem(World.MouseTile.Building.ToItem());
-                            BaseBuilding.DeleteBuilding(World.MouseTile.Building);
+                            if (World.Player.Inventory.TryAddItem(World.MouseTile.Building.ToItem()))
+                            {
+                                BaseBuilding.DeleteBuilding(World.MouseTile.Building);
+                            }
                         }
                     }
                 }

@@ -11,7 +11,6 @@ namespace Caveworks
         public MyVector2 Coordinates;
         public int Scale;
         public MyVector2 ScreenCenter;
-        public PlayerBody player;
 
         public Camera(World world, MyVector2 coordinates, int scale)
         {
@@ -45,9 +44,9 @@ namespace Caveworks
                 if (Scale < 1) { Scale = 1; } // zoom maximum
             }
 
-            if (player != null)
+            if (World.PlayerBody != null)
             {
-                this.Coordinates = player.Coordinates;
+                this.Coordinates = World.PlayerBody.Coordinates;
             }
         }
 

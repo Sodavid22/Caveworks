@@ -34,13 +34,6 @@ namespace Caveworks
         }
 
 
-        public override bool SecondaryUse(MyVector2Int itemRotation)
-        {
-            Drop(this);
-            return true;
-        }
-
-
         public override void Draw(Tile tile, Camera camera)
         {
             base.DrawSimple(tile, camera, GetTexture());

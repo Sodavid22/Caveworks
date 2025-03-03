@@ -33,6 +33,14 @@ namespace Caveworks
             Player = new Player(this);
             PlayerBody = new PlayerBody(ChunkList[0, 0].TileList[2, 2]);
 
+            // TESTCODE
+            Player.Inventory.TryAddItem(new SlowBeltItem(50));
+            Player.Inventory.TryAddItem(new SlowBeltItem(50));
+            Player.Inventory.TryAddItem(new SlowBeltItem(50));
+            Player.Inventory.TryAddItem(new SlowBeltItem(50));
+            Player.Inventory.TryAddItem(new RawIronOreItem(50));
+            Player.Inventory.TryAddItem(new RawIronOreItem(50));
+
             WorldMousePos = GetWorldMousePos();
             LastMouseTile = MouseTile;
             MouseTile = GlobalCordsToTile(WorldMousePos.ToMyVector2Int());
@@ -59,8 +67,8 @@ namespace Caveworks
             }
 
             Camera.Update();
-
             Player.Update();
+            PlayerBody.Update(DeltaTime);
 
             foreach (Chunk chunk in ChunkList)
             { 
@@ -74,8 +82,8 @@ namespace Caveworks
             if (Paused) Game.MainSpriteBatch.DrawString(Fonts.MenuButtonFont, "PAUSED", new Vector2(GameWindow.Size.X / 2 - 100, GameWindow.Size.Y / 2), Color.White);
 
             Camera.DrawWorld();
-
             Player.Draw();
+            PlayerBody.Draw(Camera);
         }
 
 
@@ -167,7 +175,7 @@ namespace Caveworks
                         {
                             tile = ChunkList[chunk_x, chunk_y].TileList[tile_x, tile_y];
 
-                            if (tile.Floor is StoneFloor && tile.Wall == null && tile.Creatures.Count == 0 && tile.Items.Count == 0 && tile.Building == null)
+                            if (tile.Floor is StoneFloor && tile.Wall == null && tile.Items.Count == 0 && tile.Building == null)
                             {
                                 tile.Delete();
                             }
