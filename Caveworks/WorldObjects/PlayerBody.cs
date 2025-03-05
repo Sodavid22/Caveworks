@@ -80,16 +80,21 @@ namespace Caveworks
 
         public void Move(float deltaTime)
         {
+            if (CheckForColision(Tile, Coordinates))
+            {
+                Coordinates = new MyVector2(Tile.Position.X + 0.5f, Tile.Position.Y + 0.5f);
+            }
+
             MyVector2 newCoordinates = new MyVector2(Coordinates.X + Velocity.X * deltaTime, Coordinates.Y);
 
-            if (CheckForColision(this.Tile, newCoordinates))
+            if (CheckForColision(Tile, newCoordinates))
             {
                 newCoordinates.X = Coordinates.X;
             }
 
             newCoordinates.Y = Coordinates.Y + Velocity.Y * deltaTime;
 
-            if (CheckForColision(this.Tile, newCoordinates))
+            if (CheckForColision(Tile, newCoordinates))
             {
                 newCoordinates.Y = Coordinates.Y;
             }
@@ -117,6 +122,16 @@ namespace Caveworks
                             if (Math.Abs(checkedTile.Position.X + 0.5 - coordinates.X) < this.HitboxSize / 2 + 0.5 && Math.Abs(checkedTile.Position.Y + 0.5 - coordinates.Y) < this.HitboxSize / 2 + 0.5)
                             {
                                 return true;
+                            }
+                        }
+                        if (checkedTile.Building != null)
+                        {
+                            if (checkedTile.Building.HasCollision())
+                            {
+                                if (Math.Abs(checkedTile.Position.X + 0.5 - coordinates.X) < this.HitboxSize / 2 + 0.5 && Math.Abs(checkedTile.Position.Y + 0.5 - coordinates.Y) < this.HitboxSize / 2 + 0.5)
+                                {
+                                    return true;
+                                }
                             }
                         }
                     }

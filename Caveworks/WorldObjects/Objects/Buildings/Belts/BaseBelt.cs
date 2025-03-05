@@ -8,17 +8,15 @@ namespace Caveworks
     [Serializable]
     public class BaseBelt : BaseBuilding
     {
-        new public static int Size = 1;
         public const int MaxItems = 4;
         public const float MinItemDistance = 0.24f;
         public const float MaxCenterDistance = 0.01f;
 
 
 
-        public BaseBelt(Tile tile, MyVector2Int rotation) : base(tile, BaseBelt.Size)
+        public BaseBelt(Tile tile, MyVector2Int rotation) : base(tile, 1)
         {
             this.Rotation = rotation;
-            Collisions = true;
         }
 
 

@@ -11,7 +11,7 @@ namespace Caveworks
         public MyVector2Int Position;
         public MyVector2Int Rotation;
         public static int Size;
-        public static bool Collisions;
+        public Inventory Inventory;
 
 
         public BaseBuilding(Tile tile, int size)
@@ -29,6 +29,12 @@ namespace Caveworks
                 }
             }
         }
+
+
+        public virtual bool HasUI() { return false; }
+
+
+        public virtual bool HasCollision() { return false; }
 
 
         public virtual BaseItem ToItem() { return null; }

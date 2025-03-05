@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System;
-using SharpDX.Direct2D1.Effects;
 using System.Linq;
 
 namespace Caveworks
