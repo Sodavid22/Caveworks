@@ -23,6 +23,7 @@ namespace Caveworks
             if (tile.Wall == null & tile.Building == null)
             {
                 new SlowBelt(tile, new MyVector2Int(itemRotation.X, itemRotation.Y));
+                Sounds.PlayPlaceSound();
                 Count -= 1;
                 if (Count == 0)
                 {

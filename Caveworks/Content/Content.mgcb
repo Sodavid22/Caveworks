@@ -120,6 +120,24 @@
 /processorParam:TextureFormat=Color
 /build:Items/Ores/RawIronOre.png
 
+#begin SoundEffects/Items/pickaxe.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Items/pickaxe.wav
+
+#begin SoundEffects/Items/thud.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Items/thud.wav
+
+#begin SoundEffects/Items/woosh.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Items/woosh.wav
+
 #begin SoundEffects/UI/modern-ui-decline.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

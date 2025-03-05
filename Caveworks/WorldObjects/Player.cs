@@ -29,7 +29,7 @@ namespace Caveworks
 
         public void CloseUi()
         {
-            Globals.World.Player.Inventory.Close();
+            Globals.World.Player.Inventory.CloseUI();
             Globals.World.Player.InventoryOpened = false;
         }
 
@@ -43,11 +43,11 @@ namespace Caveworks
 
                 if (InventoryOpened)
                 {
-                    Inventory.Open(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + 50));
+                    Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + 50));
                 }
                 else
                 {
-                    Inventory.Close();
+                    Inventory.CloseUI();
                     if (OpenedBuilding != null)
                     {
                         OpenedBuilding.CloseUI();
@@ -58,7 +58,7 @@ namespace Caveworks
 
             if (InventoryOpened) // update player inventory
             {
-                Inventory.Update();
+                Inventory.UpdateUI();
             }
 
             if (OpenedBuilding != null) // update building UI
@@ -97,6 +97,13 @@ namespace Caveworks
                     if (Inventory.TryAddItem(HeldItem))
                     {
                         HeldItem = null;
+                        Sounds.Woosh.Play(1);
+                    }
+                    else
+                    {
+                        BaseItem.Drop(HeldItem);
+                        HeldItem = null;
+                        Sounds.Woosh.Play(1);
                     }
                 }
             }
@@ -140,6 +147,7 @@ namespace Caveworks
                     else if (MyKeyboard.IsPressed(KeyBindings.DROP_KEY)) // drop item
                     {
                         BaseItem.Drop(HeldItem);
+                        Sounds.Woosh.Play(1);
                     }
                     else if (MyKeyboard.IsHeld(MouseKey.Left) && World.MouseTile != World.LastMouseTile) // use items contnuosly
                     {
@@ -160,12 +168,12 @@ namespace Caveworks
                             {
                                 World.MouseTile.Wall = null;
                                 WallHits = 0;
-                                Sounds.ButtonClick2.Play(1); // TEMPORARY
+                                Sounds.Pickaxe.Play(1);
                             }
                             else if (World.MouseTile.Wall.IsDestructible())
                             {
                                 WallHits += 1;
-                                Sounds.ButtonClick.Play(1); // TEMPORARY
+                                Sounds.Pickaxe.Play(1);
                             }
                         }
                         else if (World.MouseTile.Building != null) // open building UI
@@ -174,7 +182,7 @@ namespace Caveworks
                             {
                                 OpenedBuilding = World.MouseTile.Building;
                                 OpenedBuilding.OpenUI();
-                                Inventory.Open(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + 50));
+                                Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + 50));
                                 InventoryOpened = true;
                             }
                         }
@@ -183,9 +191,39 @@ namespace Caveworks
                     {
                         if (World.MouseTile.Building != null)// deconstruct buildings
                         {
-                            if (World.Player.Inventory.TryAddItem(World.MouseTile.Building.ToItem()))
+                            bool emptyBuilding = true;
+                            if (World.MouseTile.Building.Inventory != null)
                             {
-                                BaseBuilding.DeleteBuilding(World.MouseTile.Building);
+                                for (int i = 0; i < World.MouseTile.Building.Inventory.Size; i++) // clear inventory
+                                {
+                                    if (World.MouseTile.Building.Inventory.Items[i] != null)
+                                    {
+                                        if (Inventory.TryAddItem(World.MouseTile.Building.Inventory.Items[i]))
+                                        {
+                                            World.MouseTile.Building.Inventory.Items[i] = null;
+                                        }
+                                        else
+                                        {
+                                            emptyBuilding = false;
+                                        }
+                                    }
+                                }
+                            }
+                            if (emptyBuilding)
+                            {
+                                if (World.Player.Inventory.TryAddItem(World.MouseTile.Building.ToItem())) // remove building
+                                {
+                                    BaseBuilding.DeleteBuilding(World.MouseTile.Building);
+                                    Sounds.PlayPlaceSound();
+                                }
+                                else if(MyKeyboard.IsPressed(MouseKey.Right))
+                                {
+                                    Sounds.ButtonDecline.Play(1);
+                                }
+                            }
+                            else if (MyKeyboard.IsPressed(MouseKey.Right))
+                            {
+                                Sounds.ButtonDecline.Play(1);
                             }
                         }
                     }
@@ -198,7 +236,7 @@ namespace Caveworks
         {
             if (InventoryOpened) // draw inventory
             {
-                Inventory.Draw();
+                Inventory.DrawUI();
             }
 
             if (OpenedBuilding != null)

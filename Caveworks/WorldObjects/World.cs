@@ -34,13 +34,12 @@ namespace Caveworks
             PlayerBody = new PlayerBody(ChunkList[0, 0].TileList[2, 2]);
 
             // TESTCODE
-            Player.Inventory.TryAddItem(new SlowBeltItem(50));
-            Player.Inventory.TryAddItem(new SlowBeltItem(50));
-            Player.Inventory.TryAddItem(new SlowBeltItem(50));
-            Player.Inventory.TryAddItem(new SlowBeltItem(50));
-            Player.Inventory.TryAddItem(new RawIronOreItem(50));
-            Player.Inventory.TryAddItem(new RawIronOreItem(50));
-            Player.Inventory.TryAddItem(new RawIronOreItem(50));
+            for (int i = 0; i < 10; i++)
+            {
+                Player.Inventory.TryAddItem(new SlowBeltItem(100));
+            }
+            Player.Inventory.TryAddItem(new RawIronOreItem(100));
+            Player.Inventory.TryAddItem(new RawIronOreItem(100));
             Player.Inventory.TryAddItem(new IronChestItem(50));
 
             WorldMousePos = GetWorldMousePos();
@@ -75,6 +74,7 @@ namespace Caveworks
             Camera.Update();
             Player.Update();
             PlayerBody.Update(DeltaTime);
+            Sounds.PlaceSoundCooldown -= DeltaTime;
 
             foreach (Chunk chunk in ChunkList)
             { 

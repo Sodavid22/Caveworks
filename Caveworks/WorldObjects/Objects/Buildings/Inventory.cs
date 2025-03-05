@@ -90,7 +90,7 @@ namespace Caveworks
         }
 
 
-        public void Open(MyVector2Int position)
+        public void OpenUI(MyVector2Int position)
         {
             this.WindowPosition = position;
             Buttons = new Button[Size];
@@ -107,13 +107,13 @@ namespace Caveworks
         }
 
 
-        public void Close()
+        public void CloseUI()
         {
             Buttons = new Button[Size];
         }
 
 
-        public void Update()
+        public void UpdateUI()
         {
             for (int i = 0; i < Size; i++)
             {
@@ -140,7 +140,7 @@ namespace Caveworks
                         {
                             Player.HeldItem = Items[i];
                             Items[i] = null;
-                            Sounds.ButtonClick.Play(1);
+                            Sounds.Woosh.Play(1); ;
                         }
                     }
                     else
@@ -149,7 +149,7 @@ namespace Caveworks
                         {
                             Items[i] = Player.HeldItem;
                             Player.HeldItem = null;
-                            Sounds.ButtonClick.Play(1);
+                            Sounds.Woosh.Play(1); ;
                         }
                         else if (Items[i].GetType() == Player.HeldItem.GetType())
                         {
@@ -157,18 +157,14 @@ namespace Caveworks
                             {
                                 Items[i].Count += Player.HeldItem.Count;
                                 Player.HeldItem = null;
-                                Sounds.ButtonClick.Play(1);
+                                Sounds.Woosh.Play(1); ;
                             }
                             else // put SOME items from hand to slot
                             {
                                 Player.HeldItem.Count -= BaseItem.StackSize - Items[i].Count;
                                 Items[i].Count = BaseItem.StackSize;
-                                Sounds.ButtonClick.Play(1);
+                                Sounds.Woosh.Play(1);
                             }
-                        }
-                        else
-                        {
-                            Sounds.ButtonDecline.Play(1);
                         }
                     }
                 }
@@ -181,7 +177,7 @@ namespace Caveworks
                             Player.HeldItem = Cloning.DeepClone(Items[i]);
                             Player.HeldItem.Count = Items[i].Count / 2;
                             Items[i].Count -= Player.HeldItem.Count;
-                            Sounds.ButtonClick.Play(1);
+                            Sounds.Woosh.Play(1);
                         }
                     }
                     else if (Player.HeldItem != null)
@@ -195,7 +191,7 @@ namespace Caveworks
                             {
                                 Player.HeldItem = null;
                             }
-                            Sounds.ButtonClick.Play(1);
+                            Sounds.Woosh.Play(1);
                         }
                         else if (Items[i].GetType() == Player.HeldItem.GetType()) // add one item to tile
                         {
@@ -208,11 +204,7 @@ namespace Caveworks
                                     Player.HeldItem = null;
                                 }
                             }
-                            Sounds.ButtonClick.Play(1);
-                        }
-                        else
-                        {
-                            Sounds.ButtonDecline.Play(1);
+                            Sounds.Woosh.Play(1);
                         }
                     }
                 }
@@ -220,7 +212,7 @@ namespace Caveworks
         }
 
 
-        public void Draw()
+        public void DrawUI()
         {
             Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(WindowPosition.X - Border - 2, WindowPosition.Y - Border - 2, ButtonSpacing * (RowLength - 1) + ButtonSize + Border * 2 + 4, ButtonSpacing * (Size / RowLength - 1) + ButtonSize + Border * 2 + 4), Color.Black);
             Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(WindowPosition.X - Border, WindowPosition.Y - Border, ButtonSpacing*(RowLength - 1) + ButtonSize + Border*2, ButtonSpacing*(Size / RowLength - 1) + ButtonSize + Border*2), Color.FromNonPremultiplied(Globals.InventoryBoxColor));

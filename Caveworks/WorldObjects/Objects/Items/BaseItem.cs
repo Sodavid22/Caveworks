@@ -11,7 +11,7 @@ namespace Caveworks
         public Tile Tile;
         public MyVector2 Coordinates;
         public int Count;
-        public const int StackSize = 50;
+        public const int StackSize = 100;
         static float DropCooldown = 0;
 
         public BaseItem(Tile tile, MyVector2 position, int count)

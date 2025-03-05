@@ -24,6 +24,7 @@ namespace Caveworks
             if (tile.Wall == null & tile.Building == null & Globals.World.PlayerBody.Tile != tile)
             {
                 new IronChest(tile);
+                Sounds.PlayPlaceSound();
                 Count -= 1;
                 if (Count == 0)
                 {
