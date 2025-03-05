@@ -30,15 +30,19 @@ namespace Caveworks
             }
         }
 
+        public virtual bool HasCollision() { return false; }
 
         public virtual bool HasUI() { return false; }
 
+        public virtual void OpenUI() { return; }
 
-        public virtual bool HasCollision() { return false; }
+        public virtual void UpdateUI() { return; }
 
+        public virtual void DrawUI() { return; }
+
+        public virtual void CloseUI() { return; }
 
         public virtual BaseItem ToItem() { return null; }
-
 
         public static void DeleteBuilding(BaseBuilding building)
         {
