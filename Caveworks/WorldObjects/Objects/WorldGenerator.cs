@@ -19,19 +19,6 @@ namespace Caveworks
                 }
             }
 
-            // outer walls
-            for (int x = 0; x < worldDiameter; x++)
-            {
-                for (int y = 0; y < worldDiameter; y++)
-                {
-                    if (x == 0 || x == worldDiameter - 1 || y == 0 || y == worldDiameter - 1)
-                    {
-                        CaveMap[x, y] = 8;
-                    }
-                }
-            }
-
-
             for (int i = 0; i < 8; i++)
             {
                 CaveMap = Smoothen(CaveMap, worldDiameter);
@@ -77,6 +64,10 @@ namespace Caveworks
                         if (x > 0 && y > 0 && x < mapDiameter && y < mapDiameter)
                         {
                             neighbours += map[x, y];
+                        }
+                        else
+                        {
+                            neighbours += 2;
                         }
                     }
                 }
@@ -134,7 +125,7 @@ namespace Caveworks
                             tile = chunk.TileList[tile_x, tile_y];
                             new StoneFloor(tile);
 
-                            if (map[chunk_x * Chunk.chunkSize + tile_x, chunk_y * Chunk.chunkSize + tile_y] == 1)
+                            if (map[chunk_x * Chunk.chunkSize + tile_x, chunk_y * Chunk.chunkSize + tile_y] > 0)
                             {
                                 new StoneWall(tile);
                             }
