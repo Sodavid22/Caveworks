@@ -25,7 +25,7 @@ namespace Caveworks
 
             Rotation = 0;
             HitboxSize = 0.8f;
-            MaxSpeed = 10;
+            MaxSpeed = 6;
         }
 
 
@@ -108,7 +108,7 @@ namespace Caveworks
         }
 
 
-        private bool CheckForColision(Tile tile, MyVector2 coordinates) // !!! only works with walls
+        private bool CheckForColision(Tile tile, MyVector2 coordinates)
         {
             for (int x = -1; x <= 1; x++)
             {

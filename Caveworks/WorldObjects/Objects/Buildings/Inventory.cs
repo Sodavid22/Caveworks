@@ -100,7 +100,7 @@ namespace Caveworks
                 int x = i % RowLength;
                 int y = i / RowLength;
 
-                Buttons[i] = new Button(new Vector2(ButtonSize, ButtonSize), Globals.InventoryButtonColor, 2, "", Fonts.DefaultFont);
+                Buttons[i] = new Button(new Vector2(ButtonSize, ButtonSize), Globals.InventoryButtonColor, 2, "", Fonts.DefaultFontBold);
                 Buttons[i].Place(new Vector2(position.X + x * ButtonSpacing, position.Y + y * ButtonSpacing), Anchor.TopLeft);
                 Buttons[i].Mute();
             }

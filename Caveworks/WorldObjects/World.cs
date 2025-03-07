@@ -31,7 +31,7 @@ namespace Caveworks
 
             Camera = new Camera(this, new MyVector2(worldSize / 2, worldSize / 2), 32);
             Player = new Player(this);
-            PlayerBody = new PlayerBody(ChunkList[0, 0].TileList[2, 2]);
+            PlayerBody = new PlayerBody(GlobalCordsToTile(new MyVector2Int(WorldDiameter/2, WorldDiameter/2)));
 
             // TESTCODE
             for (int i = 0; i < 10; i++)
@@ -95,41 +95,7 @@ namespace Caveworks
 
         public void GenerateWorld()
         {
-            Random rnd = new();
-            int randomNumber;
-            Tile tile;
-            Chunk chunk;
-
-            ChunkList = new Chunk[WorldSize, WorldSize];
-
-            for (int chunk_x = 0; chunk_x < WorldSize; chunk_x++)
-            {
-                for (int chunk_y = 0; chunk_y < WorldSize; chunk_y++)
-                {
-                    chunk = new Chunk(this, new MyVector2Int(chunk_x, chunk_y));
-                    ChunkList[chunk_x, chunk_y] = chunk;
-
-                    for (int tile_x = 0; tile_x < Chunk.chunkSize; tile_x++)
-                    {
-                        for (int tile_y = 0; tile_y < Chunk.chunkSize; tile_y++)
-                        {
-                            tile = chunk.TileList[tile_x, tile_y];
-                           new StoneFloor(tile);
-
-                            randomNumber = rnd.Next(100);
-                            if (randomNumber < 10)
-                            {
-                                tile.Wall = new StoneWall();
-                            }
-
-                            if (tile.Position.X == 0 || tile.Position.Y == 0 || tile.Position.X == WorldDiameter - 1 || tile.Position.Y == WorldDiameter - 1)
-                            {
-                                tile.Wall = new StoneWall();
-                            }
-                        }
-                    }
-                }
-            }
+            ChunkList = WorldGenerator.GenerateWorld(this, WorldSize, WorldDiameter);
         }
 
 

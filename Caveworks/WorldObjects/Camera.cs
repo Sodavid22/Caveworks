@@ -27,22 +27,20 @@ namespace Caveworks
 
             if (MyKeyboard.GetScrollWheelMovement() > 0) // zoom in
             {
-                Scale += 1;
+                Scale += Scale/20;
             }
             if (MyKeyboard.GetScrollWheelMovement() < 0) // zoom out
             {
-                Scale -= 1;
+                Scale -= Scale/20;
+            }
+            if (Scale%2 != 0)
+            {
+                Scale += 1;
             }
 
-            if (Scale > 64) { Scale = 64; } // zoom minimum
-            if (!Game.DEVMODE)
-            {
-                if (Scale < GameWindow.Size.X / 64) { Scale = (int)(GameWindow.Size.X / 64); } // zoom maximum
-            }
-            else
-            {
-                if (Scale < 1) { Scale = 1; } // zoom maximum
-            }
+            if (Scale > 128) { Scale = 128; } // zoom minimum
+            
+            if (Scale < GameWindow.Size.X / 64) { Scale = (int)(GameWindow.Size.X / 64); } // zoom maximum
 
             if (World.PlayerBody != null)
             {
@@ -52,17 +50,6 @@ namespace Caveworks
 
         public void DrawWorld()
         {
-            if (Game.DEVMODE)
-            {
-                try
-                {
-                    Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, " position: " + this.Coordinates.ToString(), new Vector2(100, 100), Color.White);
-                    Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, " zoom: " + this.Scale.ToString(), new Vector2(100, 120), Color.White);
-                    Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, " tile cords: " + this.World.GlobalCordsToTile(this.Coordinates.ToMyVector2Int()).Position, new Vector2(100, 140), Color.White);
-                }
-                catch { Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, "X", new Vector2(GameWindow.Size.X / 2 - 6, GameWindow.Size.Y / 2 - 6), Color.Red); }
-            }
-
             MyVector2 cameraChunk = WorldCordsToChunk(this.Coordinates);
             int camera_x = (int)cameraChunk.X;
             int camera_y = (int)cameraChunk.Y;

@@ -87,6 +87,13 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/Verdana12.spritefont
 
+#begin Fonts/Verdana12Bold.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Verdana12Bold.spritefont
+
 #begin Fonts/Verdana16.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

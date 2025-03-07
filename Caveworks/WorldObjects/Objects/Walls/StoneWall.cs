@@ -6,6 +6,11 @@ namespace Caveworks
     [Serializable]
     internal class StoneWall : BaseWall
     {
+        public StoneWall(Tile tile)
+        {
+            tile.Wall = this;
+        }
+
         public override void Draw(Tile tile, Camera camera)
         {
             MyVector2 screenCoordinates = camera.WorldToScreenCords(tile.Position.ToMyVector2());
@@ -14,7 +19,7 @@ namespace Caveworks
         }
 
 
-        public override int GetHardness() { return 10; }
+        public override int GetHardness() { return 4; }
 
 
         public override bool IsDestructible()
