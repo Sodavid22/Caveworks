@@ -24,6 +24,8 @@ namespace Caveworks
 
         // items
         public static Texture2D RawIronOre { get; private set; }
+        public static Texture2D RawCopperOre { get; private set; }
+        public static Texture2D RawStone { get; private set; }
 
         // buildings
 
@@ -50,6 +52,8 @@ namespace Caveworks
 
             // items:
             Textures.RawIronOre = contentManager.Load<Texture2D>("Items/Ores/RawIronOre");
+            Textures.RawCopperOre = contentManager.Load<Texture2D>("Items/Ores/RawCopperOre");
+            Textures.RawStone = contentManager.Load<Texture2D>("Items/Ores/RawStone");
 
             // buildings:
             Textures.SlowBelt = contentManager.Load<Texture2D>("Buildings/Belts/SlowBelt");
