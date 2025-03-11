@@ -65,10 +65,6 @@ namespace Caveworks
                                 }
                             }
                         }
-                        else if (otherItem != item)
-                        {
-                            otherItem.Coordinates.Y -= Rotation.Y * 0.5f;
-                        }
                     }
                     if (!collided)
                     {
@@ -107,10 +103,6 @@ namespace Caveworks
                                     break;
                                 }
                             }
-                        }
-                        else if (otherItem != item)
-                        {
-                            otherItem.Coordinates.Y -= Rotation.Y * 0.5f;
                         }
                     }
                     if (!collided)
