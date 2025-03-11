@@ -4,9 +4,9 @@ using System;
 namespace Caveworks
 {
     [Serializable]
-    internal class StoneWall : BaseWall
+    internal class RawIronOreWall : BaseWall
     {
-        public StoneWall(Tile tile)
+        public RawIronOreWall(Tile tile)
         {
             tile.Wall = this;
         }
@@ -14,13 +14,12 @@ namespace Caveworks
         public override bool IsDestructible() { return true; }
 
 
-        public override int GetHardness() { return 4; }
+        public override int GetHardness() { return 10; }
 
 
         public override void WhenMined(Player player, Tile wallTile)
         {
-            wallTile.Wall = null;
-            player.Inventory.TryAddItem(new RawStoneItem(1));
+            player.Inventory.TryAddItem(new RawIronOreItem(1));
         }
 
 
@@ -28,7 +27,7 @@ namespace Caveworks
         {
             MyVector2 screenCoordinates = camera.WorldToScreenCords(tile.Position.ToMyVector2());
             Rectangle wallRectangle = new Rectangle((int)screenCoordinates.X, (int)screenCoordinates.Y, camera.Scale, camera.Scale);
-            Game.WallSpritebatch.Draw(Textures.StoneWall, wallRectangle, Color.White);
+            Game.WallSpritebatch.Draw(Textures.RawIronOreWall, wallRectangle, Color.White);
         }
     }
 }

@@ -1,10 +1,18 @@
 ﻿using SharpDX;
 using System;
+using System.Diagnostics;
 namespace Caveworks
 {
     public static class WorldGenerator
     {
         public static int[,] CaveMap;
+
+        enum Walls
+        {
+            None = 0,
+            Stone = 1,
+            Iron = 10,
+        }
 
         public static Chunk[,] GenerateWorld(World world, int worldSize, int worldDiameter)
         {
@@ -19,7 +27,9 @@ namespace Caveworks
                 }
             }
 
-            for (int i = 0; i < 8; i++)
+            AddOreVein(CaveMap, worldDiameter, 20, 10, 2);
+
+            for (int i = 0; i < 10; i++)
             {
                 CaveMap = Smoothen(CaveMap, worldDiameter);
             }
@@ -63,11 +73,14 @@ namespace Caveworks
                     {
                         if (x > 0 && y > 0 && x < mapDiameter && y < mapDiameter)
                         {
-                            neighbours += map[x, y];
+                            if (map[x, y] > 0)
+                            {
+                                neighbours += 1;
+                            }
                         }
                         else
                         {
-                            neighbours += 2;
+                            neighbours += 8;
                         }
                     }
                 }
@@ -90,7 +103,14 @@ namespace Caveworks
                     neighbours = CountNeigbours(map, mapDiameter, x, y);
                     if (neighbours > split)
                     {
-                        newMap[x, y] = 1;
+                        if (map[x, y] == 0)
+                        {
+                            newMap[x, y] = 1;
+                        }
+                        else
+                        {
+                            newMap[x, y] = map[x, y];
+                        }
                     }
                     else if (neighbours < split)
                     {
@@ -108,6 +128,7 @@ namespace Caveworks
         public static Chunk[,] ConvertToTiles(World world, int[,] map, int worldSize)
         {
             Tile tile;
+            int tileValue;
             Chunk chunk;
             Chunk[,] ChunkList = new Chunk[worldSize, worldSize];
 
@@ -124,10 +145,15 @@ namespace Caveworks
                         {
                             tile = chunk.TileList[tile_x, tile_y];
                             new StoneFloor(tile);
+                            tileValue = map[chunk_x * Chunk.chunkSize + tile_x, chunk_y * Chunk.chunkSize + tile_y];
 
-                            if (map[chunk_x * Chunk.chunkSize + tile_x, chunk_y * Chunk.chunkSize + tile_y] > 0)
+                            if (tileValue == 1)
                             {
                                 new StoneWall(tile);
+                            }
+                            else if (tileValue == 2)
+                            {
+                                new RawIronOreWall(tile);
                             }
                         }
                     }
@@ -135,6 +161,34 @@ namespace Caveworks
             }
 
             return ChunkList;
+        }
+
+
+        public static void AddOreVein(int[,] map, int mapDiameter, int centerDistance, int size, int wallType) //TODO
+        {
+            Random random = new Random();
+            int veinX = random.Next(centerDistance - 1);
+            int veinY = (int)Math.Sqrt((centerDistance * centerDistance) - (veinX * veinX));
+
+            if (random.Next(100) > 50)
+            {
+                veinX = -veinX;
+            }
+            if (random.Next(100) > 50)
+            {
+                veinY = -veinY;
+            }
+            veinX = mapDiameter / 2 + veinX;
+            veinY = mapDiameter / 2 + veinY;
+
+            for (int x = -size/2; x <= size/2; x++)
+            {
+                for (int y = -size/2; y <= size/2; y++)
+                {
+                    if (x*x+y*y < size*size/4)
+                    map[veinX + x, veinY + y] = wallType;
+                }
+            }
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Caveworks
 
             GenerateWorld();
 
-            Camera = new Camera(this, new MyVector2(worldSize / 2, worldSize / 2), 32);
+            Camera = new Camera(this, new MyVector2(worldSize / 2, worldSize / 2), (int)(GameWindow.Size.X / 64));
             Player = new Player(this);
             PlayerBody = new PlayerBody(GlobalCordsToTile(new MyVector2Int(WorldDiameter/2, WorldDiameter/2)));
 

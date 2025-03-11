@@ -18,6 +18,7 @@ namespace Caveworks
 
         // walls:
         public static Texture2D StoneWall { get; private set; }
+        public static Texture2D RawIronOreWall { get; private set; }
 
         // creatures
         public static Texture2D Player {  get; private set; }
@@ -46,6 +47,7 @@ namespace Caveworks
 
             // walls:
             Textures.StoneWall = contentManager.Load<Texture2D>("Walls/StoneWall");
+            Textures.RawIronOreWall = contentManager.Load<Texture2D>("Walls/RawIronOreWall");
 
             // creatures:
             Textures.Player = contentManager.Load<Texture2D>("Creatures/Player");

@@ -40,6 +40,9 @@ namespace Caveworks
         public virtual Texture2D GetTexture() { return null; }
 
 
+        public virtual bool CanRotate() { return false; }
+
+
         public virtual void Draw(Tile tile, Camera camera) { }
 
 

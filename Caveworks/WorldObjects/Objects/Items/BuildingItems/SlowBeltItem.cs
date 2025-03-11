@@ -10,6 +10,12 @@ namespace Caveworks
         public SlowBeltItem(int count) : base(count) { }
 
 
+        public override bool CanRotate()
+        {
+            return true;
+        }
+
+
         public override Texture2D GetTexture()
         {
             return Textures.SlowBelt;

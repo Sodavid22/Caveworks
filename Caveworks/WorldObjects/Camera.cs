@@ -27,15 +27,11 @@ namespace Caveworks
 
             if (MyKeyboard.GetScrollWheelMovement() > 0) // zoom in
             {
-                Scale += Scale/20;
+                Scale += 2;
             }
             if (MyKeyboard.GetScrollWheelMovement() < 0) // zoom out
             {
-                Scale -= Scale/20;
-            }
-            if (Scale%2 != 0)
-            {
-                Scale += 1;
+                Scale -= 2;
             }
 
             if (Scale > 128) { Scale = 128; } // zoom minimum

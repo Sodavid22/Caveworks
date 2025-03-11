@@ -29,8 +29,13 @@ namespace Caveworks
 
         public void CloseUi()
         {
-            Globals.World.Player.Inventory.CloseUI();
-            Globals.World.Player.InventoryOpened = false;
+            Inventory.CloseUI();
+            InventoryOpened = false;
+            if (OpenedBuilding != null)
+            {
+                OpenedBuilding.CloseUI();
+                OpenedBuilding = null;
+            }
         }
 
 
@@ -160,13 +165,13 @@ namespace Caveworks
                 }
                 else // empty hand
                 {
-                    if (MyKeyboard.IsPressed(MouseKey.Left)) // break walls
+                    if (MyKeyboard.IsPressed(MouseKey.Left)) // mine walls
                     {
                         if (World.MouseTile.Wall != null)
                         {
                             if (WallHits >= World.MouseTile.Wall.GetHardness() - 1)
                             {
-                                World.MouseTile.Wall = null;
+                                World.MouseTile.Wall.WhenMined(this, World.MouseTile);
                                 WallHits = 0;
                                 Sounds.Pickaxe.Play(1);
                             }
@@ -247,6 +252,8 @@ namespace Caveworks
             if (HeldItem != null) // draw held items
             {
                 Rectangle rectangle;
+                float itemRotationAngle;
+
                 if (InventoryOpened)
                 {
                     rectangle = new Rectangle((int)MyKeyboard.GetMousePosition().X, (int)MyKeyboard.GetMousePosition().Y, Inventory.ButtonSize / 2, Inventory.ButtonSize / 2);
@@ -256,7 +263,18 @@ namespace Caveworks
                     MyVector2 screenCords = World.Camera.WorldToScreenCords(new MyVector2(World.MouseTile.Position.X + 0.5f, World.MouseTile.Position.Y + 0.5f));
                     rectangle = new Rectangle((int)screenCords.X, (int)screenCords.Y, World.Camera.Scale * (HeldItem.GetTexture().Width) / 16, World.Camera.Scale * (HeldItem.GetTexture().Height) / 16);
                 }
-                Game.MainSpriteBatch.Draw(HeldItem.GetTexture(), rectangle, new Rectangle(0, 0, HeldItem.GetTexture().Width, HeldItem.GetTexture().Height), Color.FromNonPremultiplied(new Vector4(1,1,1,0.5f)), World.RotationToAngle(ItemRotation), new Vector2(HeldItem.GetTexture().Width / 2, HeldItem.GetTexture().Height / 2), SpriteEffects.None, 0);
+
+                if (HeldItem.CanRotate())
+                {
+
+                    itemRotationAngle = World.RotationToAngle(ItemRotation);
+                }
+                else
+                {
+                    itemRotationAngle = 0;
+                }
+
+                Game.MainSpriteBatch.Draw(HeldItem.GetTexture(), rectangle, new Rectangle(0, 0, HeldItem.GetTexture().Width, HeldItem.GetTexture().Height), Color.FromNonPremultiplied(new Vector4(1, 1, 1, 0.5f)), itemRotationAngle, new Vector2(HeldItem.GetTexture().Width / 2, HeldItem.GetTexture().Height / 2), SpriteEffects.None, 0);
                 Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, HeldItem.Count.ToString(), new Vector2((int)MyKeyboard.GetMousePosition().X + 16, (int)MyKeyboard.GetMousePosition().Y + 2), Color.Black);
             }
             else if (World.MouseTile.Wall != null) // block mining progress

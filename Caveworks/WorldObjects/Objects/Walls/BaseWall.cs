@@ -5,10 +5,13 @@ namespace Caveworks
     [Serializable]
     public class BaseWall
     {
-        public virtual void Draw(Tile tile, Camera camera) { }
+        public virtual bool IsDestructible() { return false; }
 
         public virtual int GetHardness() { return 0; }
 
-        public virtual bool IsDestructible() { return false; }
+        public virtual void WhenMined(Player player, Tile wallTile) { }
+
+        public virtual void Draw(Tile tile, Camera camera) { }
+
     }
 }
