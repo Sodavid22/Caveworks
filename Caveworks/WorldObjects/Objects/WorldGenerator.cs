@@ -16,7 +16,7 @@ namespace Caveworks
 
         public static Chunk[,] GenerateWorld(World world, int worldSize, int worldDiameter)
         {
-            CaveMap = GenerateRandomNumberMap(worldDiameter, 0.48f);
+            CaveMap = GenerateRandomNumberMap(worldDiameter, 0.5f);
 
             // makes spawn empty
             for (int x = worldDiameter/2 - 1; x < worldDiameter/2 + 2; x++)
@@ -29,7 +29,7 @@ namespace Caveworks
 
             AddOreVein(CaveMap, worldDiameter, 20, 10, 2);
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 8; i++)
             {
                 CaveMap = Smoothen(CaveMap, worldDiameter);
             }
