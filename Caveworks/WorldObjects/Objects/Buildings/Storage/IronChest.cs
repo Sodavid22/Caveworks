@@ -13,6 +13,9 @@ namespace Caveworks.WorldObjects.Objects.Buildings.Storage
         }
 
 
+        public virtual int GetLightLevel() { return LightManager.MaxLightStrength; } //TESTCODE
+
+
         public override bool HasCollision() { return true; }
 
 

@@ -14,7 +14,7 @@ namespace Caveworks
         public Inventory Inventory;
 
 
-        public BaseBuilding(Tile tile, int size)
+        public BaseBuilding(Tile tile, int size) // TODO fix placing large buildings on map edge
         {
             Tile = tile;
             this.Position = tile.Position;
@@ -29,6 +29,8 @@ namespace Caveworks
                 }
             }
         }
+
+        public virtual int GetLightLevel() { return 0; }
 
         public virtual bool HasCollision() { return false; }
 

@@ -1,5 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
+using Microsoft.Xna.Framework.Input;
 
 namespace Caveworks
 {
@@ -11,6 +11,7 @@ namespace Caveworks
         public MyVector2 Coordinates;
         public int Scale;
         public MyVector2 ScreenCenter;
+        public LightManager LightMap;
 
         public Camera(World world, MyVector2 coordinates, int scale)
         {
@@ -18,6 +19,7 @@ namespace Caveworks
             Coordinates = new MyVector2(coordinates.X , coordinates.Y);
             Scale = scale;
             ScreenCenter = new MyVector2(0, 0);
+            LightMap = new LightManager(this, renderDistance);
         }
 
         public void Update()
@@ -46,9 +48,14 @@ namespace Caveworks
 
         public void DrawWorld()
         {
+            LightMap.CreateLightmap(this, World);
+            LightMap.UpdateLightmap();
+            LightMap.DrawLightMap(this);
+
             MyVector2 cameraChunk = WorldCordsToChunk(this.Coordinates);
             int camera_x = (int)cameraChunk.X;
             int camera_y = (int)cameraChunk.Y;
+
             for (int x = -renderDistance; x <= renderDistance; x++)
             {
                 for (int y = -renderDistance; y <= renderDistance; y++)

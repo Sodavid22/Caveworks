@@ -12,6 +12,7 @@ namespace Caveworks
         public static SpriteBatch ItemSpritebatch { get; private set; }
         public static SpriteBatch CreatureSpritebatch { get; private set; }
         public static SpriteBatch WallSpritebatch { get; private set; }
+        public static SpriteBatch ShadowSpriteBatch { get; private set; }
         public static SpriteBatch MainSpriteBatch { get; private set; }
         public static Game Self { get; private set; }
 
@@ -41,6 +42,7 @@ namespace Caveworks
             ItemSpritebatch = new SpriteBatch(GraphicsDevice);
             CreatureSpritebatch = new SpriteBatch(GraphicsDevice);
             WallSpritebatch = new SpriteBatch(GraphicsDevice);
+            ShadowSpriteBatch = new SpriteBatch(GraphicsDevice);
             MainSpriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
@@ -114,6 +116,7 @@ namespace Caveworks
             ItemSpritebatch.Begin(samplerState: SamplerState.PointClamp);
             CreatureSpritebatch.Begin(samplerState: SamplerState.PointClamp);
             WallSpritebatch.Begin(samplerState: SamplerState.PointClamp);
+            ShadowSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
             MainSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             // draw background
@@ -135,6 +138,7 @@ namespace Caveworks
             ItemSpritebatch.End();
             CreatureSpritebatch.End();
             WallSpritebatch.End();
+            ShadowSpriteBatch.End();
             MainSpriteBatch.End();
 
             base.Draw(gameTime);

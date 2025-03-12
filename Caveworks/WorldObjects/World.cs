@@ -45,14 +45,14 @@ namespace Caveworks
 
             WorldMousePos = GetWorldMousePos();
             LastMouseTile = MouseTile;
-            MouseTile = GlobalCordsToTile(WorldMousePos.ToMyVector2Int());
+            MouseTile = TryGlobalCordsToTile(WorldMousePos.ToMyVector2Int());
         }
 
 
         public void Update(GameTime gameTime)
         {
             WorldMousePos = GetWorldMousePos();
-            Tile newMouseTile = GlobalCordsToTile(WorldMousePos.ToMyVector2Int());
+            Tile newMouseTile = TryGlobalCordsToTile(WorldMousePos.ToMyVector2Int());
             if (newMouseTile != null)
             {
                 LastMouseTile = MouseTile;
@@ -102,6 +102,12 @@ namespace Caveworks
 
         public Tile GlobalCordsToTile(MyVector2Int globalCords)
         {
+            return ChunkList[globalCords.X / 32, globalCords.Y / 32].TileList[globalCords.X % 32, globalCords.Y % 32];
+        }
+
+
+        public Tile TryGlobalCordsToTile(MyVector2Int globalCords)
+        {
             if (globalCords.X >= 0 && globalCords.X < WorldDiameter && globalCords.Y >= 0 && globalCords.Y < WorldDiameter)
             {
                 return ChunkList[globalCords.X / 32, globalCords.Y / 32].TileList[globalCords.X % 32, globalCords.Y % 32];
@@ -114,7 +120,7 @@ namespace Caveworks
         {
             if (tile.Position.X + relativePosition.X >= 0 && tile.Position.Y + relativePosition.Y >= 0)
             {
-                if (tile.Position.X + relativePosition.X < WorldSize * Chunk.chunkSize && tile.Position.Y + relativePosition.Y < WorldSize * Chunk.chunkSize)
+                if (tile.Position.X + relativePosition.X < WorldDiameter && tile.Position.Y + relativePosition.Y < WorldDiameter)
                 {
                     return GlobalCordsToTile(new MyVector2Int(tile.Position.X + relativePosition.X, tile.Position.Y + relativePosition.Y));
                 }
