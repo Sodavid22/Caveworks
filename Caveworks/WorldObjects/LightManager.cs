@@ -6,11 +6,13 @@ using Microsoft.Xna.Framework;
 namespace Caveworks
 {
     [Serializable]
-    public class LightManager
+    public class LightManager // LIGHT LOSES 3 STRENGTH FOR EACH TILE TRAVELLED
     {
         public int LightMapSize;
         public int[,] Lightmap;
-        public const int MaxLightStrength = 32;
+        public const int MaxLightRange = 16;
+        public const int MaxLightStrength = MaxLightRange * 3;
+        public const int MinLightForMaxBrightness = 24;
         Tile CenterTile;
 
         public LightManager(Camera camera, int renderDistance)
@@ -41,7 +43,7 @@ namespace Caveworks
                         }
                         else if (tile.Building != null)
                         {
-                            Lightmap[x, y] = 64;
+                            Lightmap[x, y] = tile.Building.GetLightLevel();
                         }
                         else
                         {
@@ -54,18 +56,16 @@ namespace Caveworks
                     }
                 }
             }
-            if (MyKeyboard.IsPressed(Keys.L))
-            {
-                Debug.WriteLine("--------------------- cords: " + CenterTile.Position.X + " - " + CenterTile.Position.Y);
-            }
+            Lightmap[LightMapSize / 2, LightMapSize / 2] = MaxLightStrength;
         }
 
         public void UpdateLightmap()
         {
-            for (int i = 0; i < MaxLightStrength/2; i++)
+            for (int i = 0; i < MaxLightRange; i++)
             {
                 SmoothenLightMap();
             }
+            FinishLightMap();
         }
 
 
@@ -89,14 +89,13 @@ namespace Caveworks
                     {
                         light = 0;
                     }
-                    if (light > MaxLightStrength)
+                    if (light > MinLightForMaxBrightness)
                     {
-                        light = MaxLightStrength;
+                        light = MinLightForMaxBrightness;
                     }
-                    color = new Vector4(0, 0, 0, 1 - (light / MaxLightStrength));
+                    color = new Vector4(0, 0, 0, 1 - (light / MinLightForMaxBrightness));
 
                     Game.ShadowSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle((int)screenCords.X, (int)screenCords.Y, camera.Scale, camera.Scale), Color.FromNonPremultiplied(color));
-                
                 }
             }
         }
@@ -119,6 +118,59 @@ namespace Caveworks
             int brightness = Lightmap[tileX, tileY];
 
             if (brightness != -1) // not wall
+            {
+                for (int x = tileX - 1; x <= tileX + 1; x++)
+                {
+                    for (int y = tileY - 1; y <= tileY + 1; y++)
+                    {
+                        if (!(x == tileX && y == tileY)) // not self
+                        {
+                            if (x > 0 && y > 0 && x < LightMapSize && y < LightMapSize) // not outside map
+                            {
+                                if (x == tileX || y == tileY) // direct neighbour
+                                {
+                                    if (Lightmap[x, y] - 3 > brightness)
+                                    {
+                                        brightness = Lightmap[x, y] - 3;
+                                    }
+                                }
+                                else // diagonal neighbour
+                                {
+                                    if (Lightmap[x, y] - 4 > brightness)
+                                    {
+                                        brightness = Lightmap[x, y] - 4;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return brightness;
+        }
+
+
+        public void FinishLightMap()
+        {
+            int[,] newLightmap = new int[LightMapSize, LightMapSize];
+
+            for (int x = 0; x < LightMapSize - 1; x++)
+            {
+                for (int y = 0; y < LightMapSize - 1; y++)
+                {
+                    newLightmap[x, y] = GetFinalBrightness(x, y);
+                }
+            }
+
+            Lightmap = newLightmap;
+        }
+
+
+        public int GetFinalBrightness(int tileX, int tileY)
+        {
+            int brightness = Lightmap[tileX, tileY];
+
+            if (brightness == -1) // wall
             {
                 for (int x = tileX - 1; x <= tileX + 1; x++)
                 {

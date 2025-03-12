@@ -116,7 +116,7 @@ namespace Caveworks
             ItemSpritebatch.Begin(samplerState: SamplerState.PointClamp);
             CreatureSpritebatch.Begin(samplerState: SamplerState.PointClamp);
             WallSpritebatch.Begin(samplerState: SamplerState.PointClamp);
-            ShadowSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+            ShadowSpriteBatch.Begin();
             MainSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             // draw background
