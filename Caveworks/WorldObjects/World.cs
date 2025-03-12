@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Caveworks
 {
@@ -17,6 +19,9 @@ namespace Caveworks
         public MyVector2 WorldMousePos;
         public Tile MouseTile;
         public Tile LastMouseTile;
+
+        [NonSerialized]
+        Task<bool> LightmapTask;
 
 
         public bool Paused { get; set; } = false;
@@ -75,6 +80,9 @@ namespace Caveworks
             Camera.Update();
             Player.Update();
             PlayerBody.Update(DeltaTime);
+            Camera.LightMap.CreateLightmap(Camera, this);
+            LightmapTask = Task.Run(() => Camera.LightMap.UpdateLightmap());
+
             Sounds.PlaceSoundCooldown -= DeltaTime;
 
             foreach (Chunk chunk in ChunkList)
@@ -91,6 +99,12 @@ namespace Caveworks
             Camera.DrawWorld();
             Player.Draw();
             PlayerBody.Draw(Camera);
+
+            if (LightmapTask != null)
+            {
+                LightmapTask.Wait();
+                Camera.LightMap.DrawLightMap(Camera);
+            }
         }
 
 

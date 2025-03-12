@@ -19,7 +19,7 @@ namespace Caveworks
             Coordinates = new MyVector2(coordinates.X , coordinates.Y);
             Scale = scale;
             ScreenCenter = new MyVector2(0, 0);
-            LightMap = new LightManager(this, renderDistance);
+            LightMap = new LightManager(this);
         }
 
         public void Update()
@@ -48,10 +48,6 @@ namespace Caveworks
 
         public void DrawWorld()
         {
-            LightMap.CreateLightmap(this, World);
-            LightMap.UpdateLightmap();
-            LightMap.DrawLightMap(this);
-
             MyVector2 cameraChunk = WorldCordsToChunk(this.Coordinates);
             int camera_x = (int)cameraChunk.X;
             int camera_y = (int)cameraChunk.Y;

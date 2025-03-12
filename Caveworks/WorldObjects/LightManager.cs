@@ -2,23 +2,26 @@
 using System.Diagnostics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace Caveworks
 {
     [Serializable]
     public class LightManager // LIGHT LOSES 3 STRENGTH FOR EACH TILE TRAVELLED
     {
-        public int LightMapSize;
+        public MyVector2Int LightMapSize;
         public int[,] Lightmap;
         public const int MaxLightRange = 16;
         public const int MaxLightStrength = MaxLightRange * 3;
         public const int MinLightForMaxBrightness = 24;
         Tile CenterTile;
 
-        public LightManager(Camera camera, int renderDistance)
+        public LightManager(Camera camera)
         {
-            LightMapSize = (renderDistance * 2 + 1) * Chunk.chunkSize;
-            Lightmap = new int[LightMapSize, LightMapSize];
+            LightMapSize = new MyVector2Int(65 + 30, 37 + 30);
+            Lightmap = new int[LightMapSize.X, LightMapSize.Y];
+            CreateLightmap(camera, camera.World);
         }
 
 
@@ -28,12 +31,12 @@ namespace Caveworks
             Tile tile;
             MyVector2Int globalCords = new MyVector2Int(0, 0);
 
-            for (int x = 0; x < LightMapSize - 1; x++)
+            for (int x = 0; x < LightMapSize.X; x++)
             {
-                for (int y = 0; y < LightMapSize - 1; y++)
+                for (int y = 0; y < LightMapSize.Y; y++)
                 {
-                    globalCords.X = CenterTile.Position.X - LightMapSize / 2 + x;
-                    globalCords.Y = CenterTile.Position.Y - LightMapSize / 2 + y;
+                    globalCords.X = CenterTile.Position.X - LightMapSize.X / 2 + x;
+                    globalCords.Y = CenterTile.Position.Y - LightMapSize.Y / 2 + y;
                     tile = world.TryGlobalCordsToTile(globalCords);
                     if (tile != null)
                     {
@@ -56,16 +59,17 @@ namespace Caveworks
                     }
                 }
             }
-            Lightmap[LightMapSize / 2, LightMapSize / 2] = MaxLightStrength;
+            Lightmap[LightMapSize.X / 2, LightMapSize.Y / 2] = MaxLightStrength;
         }
 
-        public void UpdateLightmap()
+        public bool UpdateLightmap()
         {
             for (int i = 0; i < MaxLightRange; i++)
             {
                 SmoothenLightMap();
             }
             FinishLightMap();
+            return true;
         }
 
 
@@ -76,12 +80,12 @@ namespace Caveworks
             Vector4 color;
             float light;
 
-            for (int x = 0; x < LightMapSize - 1; x++)
+            for (int x = 0; x < LightMapSize.X; x++)
             {
-                for (int y = 0; y < LightMapSize - 1; y++)
+                for (int y = 0; y < LightMapSize.Y; y++)
                 {
-                    worldCords.X = CenterTile.Position.X - LightMapSize / 2 + x;
-                    worldCords.Y = CenterTile.Position.Y - LightMapSize / 2 + y;
+                    worldCords.X = CenterTile.Position.X - LightMapSize.X / 2 + x;
+                    worldCords.Y = CenterTile.Position.Y - LightMapSize.Y / 2 + y;
                     screenCords = camera.WorldToScreenCords(worldCords);
 
                     light = Lightmap[x, y];
@@ -103,9 +107,9 @@ namespace Caveworks
 
         public void SmoothenLightMap()
         {
-            for (int x = 0; x < LightMapSize - 1; x++)
+            for (int x = 0; x < LightMapSize.X; x++)
             {
-                for (int y = 0; y < LightMapSize - 1; y++)
+                for (int y = 0; y < LightMapSize.Y; y++)
                 {
                     Lightmap[x, y] = GetBrightness(x, y);
                 }
@@ -125,7 +129,7 @@ namespace Caveworks
                     {
                         if (!(x == tileX && y == tileY)) // not self
                         {
-                            if (x > 0 && y > 0 && x < LightMapSize && y < LightMapSize) // not outside map
+                            if (x >= 0 && y >= 0 && x < LightMapSize.X && y < LightMapSize.Y) // not outside map
                             {
                                 if (x == tileX || y == tileY) // direct neighbour
                                 {
@@ -152,11 +156,11 @@ namespace Caveworks
 
         public void FinishLightMap()
         {
-            int[,] newLightmap = new int[LightMapSize, LightMapSize];
+            int[,] newLightmap = new int[LightMapSize.X, LightMapSize.Y];
 
-            for (int x = 0; x < LightMapSize - 1; x++)
+            for (int x = 0; x < LightMapSize.X; x++)
             {
-                for (int y = 0; y < LightMapSize - 1; y++)
+                for (int y = 0; y < LightMapSize.Y; y++)
                 {
                     newLightmap[x, y] = GetFinalBrightness(x, y);
                 }
@@ -178,7 +182,7 @@ namespace Caveworks
                     {
                         if (!(x == tileX && y == tileY)) // not self
                         {
-                            if (x > 0 && y > 0 && x < LightMapSize && y < LightMapSize) // not outside map
+                            if (x >= 0 && y >= 0 && x < LightMapSize.X && y < LightMapSize.Y) // not outside map
                             {
                                 if (x == tileX || y == tileY) // direct neighbour
                                 {

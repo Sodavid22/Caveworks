@@ -7,7 +7,6 @@ namespace Caveworks
     public class Game : Microsoft.Xna.Framework.Game
     {
         public static GraphicsDeviceManager Graphics { get; private set; }
-        public static SpriteBatch BackgroundSpriteBatch { get; private set; }
         public static SpriteBatch FloorSpriteBatch { get; private set; }
         public static SpriteBatch ItemSpritebatch { get; private set; }
         public static SpriteBatch CreatureSpritebatch { get; private set; }
@@ -37,7 +36,6 @@ namespace Caveworks
             GameWindow.ToggleVSync(this, Graphics);
 
             // create sprite batches
-            BackgroundSpriteBatch = new SpriteBatch(GraphicsDevice);
             FloorSpriteBatch = new SpriteBatch(GraphicsDevice);
             ItemSpritebatch = new SpriteBatch(GraphicsDevice);
             CreatureSpritebatch = new SpriteBatch(GraphicsDevice);
@@ -111,16 +109,15 @@ namespace Caveworks
         {
             GraphicsDevice.Clear(Color.White);
 
-            BackgroundSpriteBatch.Begin();
             FloorSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
             ItemSpritebatch.Begin(samplerState: SamplerState.PointClamp);
             CreatureSpritebatch.Begin(samplerState: SamplerState.PointClamp);
             WallSpritebatch.Begin(samplerState: SamplerState.PointClamp);
-            ShadowSpriteBatch.Begin();
+            ShadowSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
             MainSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             // draw background
-            Game.BackgroundSpriteBatch.Draw(Textures.MenuBackground, new Rectangle(0, 0, (int)GameWindow.Size.X, (int)GameWindow.Size.Y), Color.White);
+            Game.FloorSpriteBatch.Draw(Textures.MenuBackground, new Rectangle(0, 0, (int)GameWindow.Size.X, (int)GameWindow.Size.Y), Color.White);
 
             // draw screens
             IScene scene = Globals.ActiveScene;
@@ -133,7 +130,6 @@ namespace Caveworks
                 MainSpriteBatch.DrawString(Fonts.DefaultFont, (1 / FpsCounter.Fps + " Frame Time").ToString(), new Vector2(0, 20), Color.White);
             }
 
-            BackgroundSpriteBatch.End();
             FloorSpriteBatch.End();
             ItemSpritebatch.End();
             CreatureSpritebatch.End();

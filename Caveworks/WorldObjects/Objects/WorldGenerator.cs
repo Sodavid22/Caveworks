@@ -71,7 +71,7 @@ namespace Caveworks
                 {
                     if (!(x == tileX && y == tileY))
                     {
-                        if (x > 0 && y > 0 && x < mapDiameter && y < mapDiameter)
+                        if (x >= 0 && y >= 0 && x < mapDiameter && y < mapDiameter)
                         {
                             if (map[x, y] > 0)
                             {
