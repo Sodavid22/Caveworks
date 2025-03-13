@@ -19,7 +19,7 @@ namespace Caveworks
         public int CalculationStage;
         public int CalculationStageCount = 5; // lightmap calculation is distributed to multiple frames to improve performance at the cost of responsivnes
         public const int DirectLightLoss = 8;
-        public const int InDirectLightLoss = 12;
+        public const int InDirectLightLoss = 11;
         Tile CalculatedCenterTile;
         Tile CurrentCenterTile;
 
@@ -34,9 +34,9 @@ namespace Caveworks
         {
             MaxLightRange = maxLightRange;
             MaxLightStrength = MaxLightRange * DirectLightLoss;
-            MinLightForMaxBrightness = MaxLightStrength - 0;
+            MinLightForMaxBrightness = MaxLightStrength - 64;
 
-            LightMapSize = new MyVector2Int(61 + maxLightRange*2, 31 + maxLightRange*2);
+            LightMapSize = new MyVector2Int(63 + maxLightRange*2, 33 + maxLightRange*2);
             CalculatedLightmap = new int[LightMapSize.X, LightMapSize.Y];
             UpscaleMap1 = new int[LightMapSize.X * 2, LightMapSize.Y * 2];
             UpscaleMap2 = new int[LightMapSize.X * 2, LightMapSize.Y * 2];
@@ -139,7 +139,7 @@ namespace Caveworks
                         {
                             light = MinLightForMaxBrightness;
                         }
-                        color = new Vector4(0, 0, 0, 1 - (light / MaxLightStrength));
+                        color = new Vector4(0.1f, 0.1f, 0.1f, 1 - (light / MinLightForMaxBrightness));
 
                         Game.ShadowSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(screenCords.X, screenCords.Y, camera.Scale/2, camera.Scale/2), Color.FromNonPremultiplied(color));
                     }
