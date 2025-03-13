@@ -5,17 +5,21 @@ using Microsoft.Xna.Framework;
 namespace Caveworks
 {
     [Serializable]
-    public class LightManager // LIGHT LOSES 3 STRENGTH FOR EACH TILE TRAVELLED
+    public class LightManager // LIGHT LOSES 6 STRENGTH FOR EACH TILE TRAVELLED
     {
         public MyVector2Int LightMapSize;
         public MyVector2Int FinalLightmapSize;
         public int[,] CalculatedLightmap;
         public int[,] FinalLightMap;
+        int[,] UpscaleMap1;
+        int[,] UpscaleMap2;
         public static int MaxLightRange;
         public static int MaxLightStrength;
         public static int MinLightForMaxBrightness;
         public int CalculationStage;
         public int CalculationStageCount = 5; // lightmap calculation is distributed to multiple frames to improve performance at the cost of responsivnes
+        public const int DirectLightLoss = 8;
+        public const int InDirectLightLoss = 12;
         Tile CalculatedCenterTile;
         Tile CurrentCenterTile;
 
@@ -29,11 +33,15 @@ namespace Caveworks
         public void CalculateLightRanges(int maxLightRange)
         {
             MaxLightRange = maxLightRange;
-            MaxLightStrength = MaxLightRange * 3;
+            MaxLightStrength = MaxLightRange * DirectLightLoss;
             MinLightForMaxBrightness = MaxLightStrength - 0;
 
-            LightMapSize = new MyVector2Int(61 + maxLightRange*2 - 61, 31 + maxLightRange*2 - 31);
+            LightMapSize = new MyVector2Int(61 + maxLightRange*2, 31 + maxLightRange*2);
             CalculatedLightmap = new int[LightMapSize.X, LightMapSize.Y];
+            UpscaleMap1 = new int[LightMapSize.X * 2, LightMapSize.Y * 2];
+            UpscaleMap2 = new int[LightMapSize.X * 2, LightMapSize.Y * 2];
+            FinalLightMap = new int[LightMapSize.X * 2, LightMapSize.Y * 2];
+            FinalLightmapSize = new MyVector2Int(LightMapSize.X * 2, LightMapSize.Y * 2);
         }
 
 
@@ -67,13 +75,13 @@ namespace Caveworks
                     }
                     else
                     {
-                        CalculatedLightmap[x, y] = 16;
+                        CalculatedLightmap[x, y] = 64;
                     }
                 }
             }
-            if (CalculatedLightmap[LightMapSize.X / 2, LightMapSize.Y / 2] < 48)
+            if (CalculatedLightmap[LightMapSize.X / 2, LightMapSize.Y / 2] < MaxLightStrength/2)
             {
-                CalculatedLightmap[LightMapSize.X / 2, LightMapSize.Y / 2] = MinLightForMaxBrightness;
+                CalculatedLightmap[LightMapSize.X / 2, LightMapSize.Y / 2] = MaxLightStrength/2;
             }
         }
 
@@ -87,17 +95,16 @@ namespace Caveworks
                 }
                 CreateLightmap(camera, camera.World);
             }
-            else if (CalculationStage > 0 && CalculationStage < CalculationStageCount - 1)
+            else if (CalculationStage > 0 && CalculationStage < CalculationStageCount)
             {
-                for (int i = 0; i < MathF.Ceiling((float)MaxLightRange/(CalculationStageCount - 2)); i++)
+                for (int i = 0; i <= MaxLightRange/(CalculationStageCount - 1); i++)
                 {
                     SmoothenLightMap();
                 }
             }
             else if (CalculationStage == CalculationStageCount)
             {
-                FinalLightMap = Upscale(CalculatedLightmap, LightMapSize);
-                FinalLightmapSize = new MyVector2Int(LightMapSize.X * 2, LightMapSize.Y * 2);
+                Upscale(CalculatedLightmap, LightMapSize);
                 CurrentCenterTile = CalculatedCenterTile;
                 CalculationStage = -1;
             }
@@ -132,7 +139,7 @@ namespace Caveworks
                         {
                             light = MinLightForMaxBrightness;
                         }
-                        color = new Vector4(0, 0, 0, 1 - (light / MinLightForMaxBrightness));
+                        color = new Vector4(0, 0, 0, 1 - (light / MaxLightStrength));
 
                         Game.ShadowSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(screenCords.X, screenCords.Y, camera.Scale/2, camera.Scale/2), Color.FromNonPremultiplied(color));
                     }
@@ -141,22 +148,21 @@ namespace Caveworks
         }
 
 
-        public int[,] Upscale(int[,] lightmap, MyVector2Int lightmapSize)
+        public void Upscale(int[,] lightmap, MyVector2Int lightmapSize)
         {
-            int[,] upscaledLightmap = new int[lightmapSize.X * 2, lightmapSize.Y * 2];
-            int[,] secondUpscaledLightmap = new int[lightmapSize.X * 2, lightmapSize.Y * 2];
             for (float x = 0; x < lightmapSize.X * 2; x++)
             {
                 for (float y = 0; y < lightmapSize.Y * 2; y++)
                 {
-                    upscaledLightmap[(int)x, (int)y] = lightmap[(int)(x / 2), (int)(y / 2)];
+                    UpscaleMap1[(int)x, (int)y] = lightmap[(int)(x / 2), (int)(y / 2)];
                 }
             }
-            for (int x = 1; x < lightmapSize.X * 2 - 1; x++)
+
+            for (int x = 2; x < lightmapSize.X * 2 - 2; x++)
             {
-                for (int y = 1; y < lightmapSize.Y * 2 - 1; y++)
+                for (int y = 2; y < lightmapSize.Y * 2 - 2; y++)
                 {
-                    secondUpscaledLightmap[x, y] = GetUpscaleBrightness(upscaledLightmap, lightmapSize, x, y);
+                    UpscaleMap2[x, y] = GetUpscaleWallBrightness(UpscaleMap1, lightmapSize, x, y);
                 }
             }
 
@@ -164,11 +170,9 @@ namespace Caveworks
             {
                 for (int y = 1; y < lightmapSize.Y * 2 - 1; y++)
                 {
-                    upscaledLightmap[x, y] = GetUpscaleWallBrightness(secondUpscaledLightmap, lightmapSize, x, y);
+                    FinalLightMap[x, y] = GetUpscaleBrightness(UpscaleMap2, lightmapSize, x, y, UpscaleMap1);
                 }
             }
-
-            return upscaledLightmap;
         }
 
 
@@ -200,16 +204,16 @@ namespace Caveworks
                             {
                                 if (x == tileX || y == tileY) // direct neighbour
                                 {
-                                    if (CalculatedLightmap[x, y] - 3 > brightness)
+                                    if (CalculatedLightmap[x, y] - DirectLightLoss > brightness)
                                     {
-                                        brightness = CalculatedLightmap[x, y] - 3;
+                                        brightness = CalculatedLightmap[x, y] - DirectLightLoss;
                                     }
                                 }
                                 else // diagonal neighbour
                                 {
-                                    if (CalculatedLightmap[x, y] - 4 > brightness)
+                                    if (CalculatedLightmap[x, y] - InDirectLightLoss > brightness)
                                     {
-                                        brightness = CalculatedLightmap[x, y] - 4;
+                                        brightness = CalculatedLightmap[x, y] - InDirectLightLoss;
                                     }
                                 }
                             }
@@ -221,26 +225,60 @@ namespace Caveworks
         }
 
 
-        public int GetUpscaleBrightness(int[,] lightmap, MyVector2Int lightmapSize, int tileX, int tileY)
+        public int GetUpscaleBrightness(int[,] lightmap, MyVector2Int lightmapSize, int tileX, int tileY, int[,] wallLigtmap)
         {
             int brightness = lightmap[tileX, tileY];
             int neighbours = 1;
 
             if (brightness != -1) // not wall
             {
-                for (int x = tileX - 1; x <= tileX + 1; x++)
+                if (wallLigtmap[tileX + 1, tileY] != -1)
                 {
-                    for (int y = tileY - 1; y <= tileY + 1; y++)
+                    if (lightmap[tileX + 1, tileY] > 0)
                     {
-                        if (!(x == tileX && y == tileY)) // not self
-                        {
-                            if (lightmap[x, y] > 0)
-                            {
-                                brightness += lightmap[x, y];
-                                neighbours += 1;
-                            }
-                        }
+                        brightness += lightmap[tileX + 1, tileY];
+                        neighbours += 1;
                     }
+                }
+                else
+                {
+                    neighbours += 0;
+                }
+                if (wallLigtmap[tileX - 1, tileY] != -1)
+                {
+                    if (lightmap[tileX - 1, tileY] > 0)
+                    {
+                        brightness += lightmap[tileX - 1, tileY];
+                        neighbours += 1;
+                    }
+                }
+                else
+                {
+                    neighbours += 0;
+                }
+                if (wallLigtmap[tileX, tileY + 1] != -1)
+                {
+                    if (lightmap[tileX, tileY + 1] > 0)
+                    {
+                        brightness += lightmap[tileX, tileY + 1];
+                        neighbours += 1;
+                    }
+                }
+                else
+                {
+                    neighbours += 0;
+                }
+                if (wallLigtmap[tileX, tileY - 1] != -1)
+                {
+                    if (lightmap[tileX, tileY - 1] > 0)
+                    {
+                        brightness += lightmap[tileX, tileY - 1];
+                        neighbours += 1;
+                    }
+                }
+                else
+                {
+                    neighbours += 0;
                 }
                 return brightness / neighbours;
             }
@@ -256,67 +294,22 @@ namespace Caveworks
 
             if (brightness == -1) // wall
             {
-                for (int x = tileX - 1; x <= tileX + 1; x++)
+                for (int x = tileX - 2; x <= tileX + 2; x += 2)
                 {
-                    for (int y = tileY - 1; y <= tileY + 1; y++)
+                    for (int y = tileY - 2; y <= tileY + 2; y += 2)
                     {
-                        if (!(x == tileX && y == tileY)) // not self
+                        if (x == tileX || y == tileY)
                         {
-                            if (lightmap[x, y] > brightness)
+                            if (lightmap[x, y] - DirectLightLoss > brightness && lightmap[x, y] > 0)
                             {
-                                brightness = lightmap[x, y];
+                                brightness = lightmap[x, y] - DirectLightLoss;
                             }
                         }
-                    }
-                }
-            }
-            return brightness;
-        }
-
-
-        public int[,] FinishLightMap()
-        {
-            int[,] newLightMap = new int[LightMapSize.X, LightMapSize.Y];
-
-            for (int x = 0; x < LightMapSize.X; x++)
-            {
-                for (int y = 0; y < LightMapSize.Y; y++)
-                {
-                    newLightMap[x, y] = GetWallBrightness(x, y);
-                }
-            }
-            return newLightMap;
-        }
-
-
-        public int GetWallBrightness(int tileX, int tileY)
-        {
-            int brightness = CalculatedLightmap[tileX, tileY];
-
-            if (brightness == -1) // wall
-            {
-                for (int x = tileX - 1; x <= tileX + 1; x++)
-                {
-                    for (int y = tileY - 1; y <= tileY + 1; y++)
-                    {
-                        if (!(x == tileX && y == tileY)) // not self
+                        else
                         {
-                            if (x >= 0 && y >= 0 && x < LightMapSize.X && y < LightMapSize.Y) // not outside map
+                            if (lightmap[x, y] - InDirectLightLoss > brightness && lightmap[x, y] > 0)
                             {
-                                if (x == tileX || y == tileY) // direct neighbour
-                                {
-                                    if (CalculatedLightmap[x, y] - 3 > brightness)
-                                    {
-                                        brightness = CalculatedLightmap[x, y] - 3;
-                                    }
-                                }
-                                else // diagonal neighbour
-                                {
-                                    if (CalculatedLightmap[x, y] - 4 > brightness)
-                                    {
-                                        brightness = CalculatedLightmap[x, y] - 4;
-                                    }
-                                }
+                                brightness = lightmap[x, y] - InDirectLightLoss;
                             }
                         }
                     }

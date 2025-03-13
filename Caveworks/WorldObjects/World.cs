@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Caveworks
@@ -95,8 +96,7 @@ namespace Caveworks
             Camera.Update();
             Sounds.PlaceSoundCooldown -= DeltaTime;
 
-            // LightmapTask = Task.Run(() => Camera.LightMap.UpdateLightmap(Camera));
-            Camera.LightMap.UpdateLightmap(Camera);
+            LightmapTask = Task.Run(() => Camera.LightMap.UpdateLightmap(Camera));
 
             foreach (Chunk chunk in ChunkList)
             { 
@@ -113,15 +113,11 @@ namespace Caveworks
             Player.Draw();
             PlayerBody.Draw(Camera);
 
-            /*
             if (LightmapTask != null)
             {
                 LightmapTask.Wait();
-                Camera.LightMap.Upscale();
                 Camera.LightMap.DrawUpscaled(Camera);
             }
-            */
-            Camera.LightMap.DrawUpscaled(Camera);
         }
 
 

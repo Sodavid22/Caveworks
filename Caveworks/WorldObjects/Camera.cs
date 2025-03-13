@@ -67,12 +67,12 @@ namespace Caveworks
 
         public MyVector2Int WorldToScreenCords(MyVector2 worldCoordinates) // world coordinastes to screen coordinates
         {
-            return new MyVector2Int((int)MathF.Round(ScreenCenter.X + ((worldCoordinates.X - Coordinates.X) * Scale)), (int)MathF.Round(ScreenCenter.Y + ((worldCoordinates.Y - Coordinates.Y) * Scale)));
+            return new MyVector2Int((int)MathF.Ceiling(ScreenCenter.X + ((worldCoordinates.X - Coordinates.X) * Scale)), (int)MathF.Ceiling(ScreenCenter.Y + ((worldCoordinates.Y - Coordinates.Y) * Scale)));
         }
 
         public MyVector2Int WorldToScreenCords(MyVector2Int worldCoordinates) // world coordinastes to screen coordinates
         {
-            return new MyVector2Int((int)MathF.Round(ScreenCenter.X + ((worldCoordinates.X - Coordinates.X) * Scale)), (int)MathF.Round(ScreenCenter.Y + ((worldCoordinates.Y - Coordinates.Y) * Scale)));
+            return new MyVector2Int((int)MathF.Ceiling(ScreenCenter.X + ((worldCoordinates.X - Coordinates.X) * Scale)), (int)MathF.Ceiling(ScreenCenter.Y + ((worldCoordinates.Y - Coordinates.Y) * Scale)));
         }
 
 
