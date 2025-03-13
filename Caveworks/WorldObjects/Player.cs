@@ -260,8 +260,8 @@ namespace Caveworks
                 }
                 else
                 {
-                    MyVector2 screenCords = World.Camera.WorldToScreenCords(new MyVector2(World.MouseTile.Position.X + 0.5f, World.MouseTile.Position.Y + 0.5f));
-                    rectangle = new Rectangle((int)screenCords.X, (int)screenCords.Y, World.Camera.Scale * (HeldItem.GetTexture().Width) / 16, World.Camera.Scale * (HeldItem.GetTexture().Height) / 16);
+                    MyVector2Int screenCords = World.Camera.WorldToScreenCords(new MyVector2(World.MouseTile.Position.X + 0.5f, World.MouseTile.Position.Y + 0.5f));
+                    rectangle = new Rectangle(screenCords.X, screenCords.Y, World.Camera.Scale * (HeldItem.GetTexture().Width) / 16, World.Camera.Scale * (HeldItem.GetTexture().Height) / 16);
                 }
 
                 if (HeldItem.CanRotate())
@@ -282,8 +282,8 @@ namespace Caveworks
                 int wallHardness = World.MouseTile.Wall.GetHardness();
                 int rectangleSize = (wallHardness - WallHits) * World.Camera.Scale / wallHardness;
 
-                MyVector2 screenCords = World.Camera.WorldToScreenCords(new MyVector2(World.MouseTile.Position.X + 0.5f, World.MouseTile.Position.Y + 0.5f));
-                Rectangle rectangle = new Rectangle((int)screenCords.X - rectangleSize / 2, (int)screenCords.Y - rectangleSize / 2, rectangleSize, rectangleSize);
+                MyVector2Int screenCords = World.Camera.WorldToScreenCords(new MyVector2(World.MouseTile.Position.X + 0.5f, World.MouseTile.Position.Y + 0.5f));
+                Rectangle rectangle = new Rectangle(screenCords.X - rectangleSize / 2, screenCords.Y - rectangleSize / 2, rectangleSize, rectangleSize);
                 Game.MainSpriteBatch.Draw(Textures.EmptyTexture, rectangle, Color.FromNonPremultiplied(new Vector4(0.5f, 0.5f, 0.5f, 0.5f)));
             }
         }

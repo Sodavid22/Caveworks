@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Caveworks
@@ -33,6 +32,19 @@ namespace Caveworks
             WorldDiameter = worldSize * Chunk.chunkSize;
 
             GenerateWorld();
+
+            /* PERFORMANCE TEST
+            for (int x = 0; x < 100; x++)
+            {
+                for (int y = 0; y < 100; y++)
+                {
+                    new SlowBelt(GlobalCordsToTile(new MyVector2Int(x, y)), new MyVector2Int(1, 0));
+                    new RawIronOreItem(GlobalCordsToTile(new MyVector2Int(x, y)), new MyVector2(0.5f, 0.5f), 1);
+                    new RawIronOreItem(GlobalCordsToTile(new MyVector2Int(x, y)), new MyVector2(0.5f, 0.5f), 1);
+                    new RawIronOreItem(GlobalCordsToTile(new MyVector2Int(x, y)), new MyVector2(0.5f, 0.5f), 1);
+                }
+            }
+            */
 
             Camera = new Camera(this, new MyVector2(worldSize / 2, worldSize / 2), (int)(GameWindow.Size.X / 64));
             Player = new Player(this);
@@ -77,13 +89,14 @@ namespace Caveworks
                 DeltaTime = 0.02f;
             }
 
-            Camera.Update();
+
             Player.Update();
             PlayerBody.Update(DeltaTime);
-            Camera.LightMap.CreateLightmap(Camera, this);
-            LightmapTask = Task.Run(() => Camera.LightMap.UpdateLightmap());
-
+            Camera.Update();
             Sounds.PlaceSoundCooldown -= DeltaTime;
+
+            // LightmapTask = Task.Run(() => Camera.LightMap.UpdateLightmap(Camera));
+            Camera.LightMap.UpdateLightmap(Camera);
 
             foreach (Chunk chunk in ChunkList)
             { 
@@ -100,11 +113,15 @@ namespace Caveworks
             Player.Draw();
             PlayerBody.Draw(Camera);
 
+            /*
             if (LightmapTask != null)
             {
                 LightmapTask.Wait();
-                Camera.LightMap.DrawLightMap(Camera);
+                Camera.LightMap.Upscale();
+                Camera.LightMap.DrawUpscaled(Camera);
             }
+            */
+            Camera.LightMap.DrawUpscaled(Camera);
         }
 
 

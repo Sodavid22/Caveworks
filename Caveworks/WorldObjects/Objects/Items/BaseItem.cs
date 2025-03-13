@@ -70,8 +70,8 @@ namespace Caveworks
 
         public void DrawSimple(Tile tile, Camera camera, Texture2D texture)
         {
-            MyVector2 screenCoordinates = camera.WorldToScreenCords(new MyVector2(Coordinates.X - 0.25f, Coordinates.Y - 0.25f));
-            Game.ItemSpritebatch.Draw(texture, new Rectangle((int)screenCoordinates.X, (int)screenCoordinates.Y, camera.Scale / 2, camera.Scale / 2), Color.White);
+            MyVector2Int screenCoordinates = camera.WorldToScreenCords(new MyVector2(Coordinates.X - 0.25f, Coordinates.Y - 0.25f));
+            Game.ItemSpritebatch.Draw(texture, new Rectangle(screenCoordinates.X, screenCoordinates.Y, camera.Scale / 2, camera.Scale / 2), Color.White);
         }
 
         public void Move(MyVector2 movement)

@@ -51,8 +51,8 @@ namespace Caveworks.WorldObjects.Objects.Buildings.Storage
 
         public override void Draw(Camera camera, float deltaTime)
         {
-            MyVector2 screenCoordinates = camera.WorldToScreenCords(new MyVector2(Position.X, Position.Y));
-            Game.FloorSpriteBatch.Draw(Textures.IronChest, new Rectangle((int)screenCoordinates.X, (int)screenCoordinates.Y, camera.Scale, camera.Scale), Color.White);
+            MyVector2Int screenCoordinates = camera.WorldToScreenCords(Position);
+            Game.FloorSpriteBatch.Draw(Textures.IronChest, new Rectangle(screenCoordinates.X, screenCoordinates.Y, camera.Scale, camera.Scale), Color.White);
         }
     }
 }

@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics;
 namespace Caveworks
 {
-    public static class WorldGenerator
+    public static class WorldGenerator // 0 = empty, 1 = wall, 1 < special tiles
     {
         public static int[,] CaveMap;
 
@@ -73,12 +73,12 @@ namespace Caveworks
                     {
                         if (x >= 0 && y >= 0 && x < mapDiameter && y < mapDiameter)
                         {
-                            if (map[x, y] > 0)
+                            if (map[x, y] > 0) // if wall add neighbour
                             {
                                 neighbours += 1;
                             }
                         }
-                        else
+                        else // if map border
                         {
                             neighbours += 8;
                         }
@@ -101,22 +101,22 @@ namespace Caveworks
                 for (int y = 0; y < mapDiameter; y++)
                 {
                     neighbours = CountNeigbours(map, mapDiameter, x, y);
-                    if (neighbours > split)
+                    if (neighbours > split) // more walls
                     {
-                        if (map[x, y] == 0)
+                        if (map[x, y] == 0) // empty tile to wall
                         {
                             newMap[x, y] = 1;
                         }
-                        else
+                        else // do nothing otherwise
                         {
                             newMap[x, y] = map[x, y];
                         }
                     }
-                    else if (neighbours < split)
+                    else if (neighbours < split) // if more empty tiles make empty
                     {
                         newMap[x, y] = 0;
                     }
-                    else
+                    else // if equal neighbours do nothing
                     {
                         newMap[x, y] = map[x, y];
                     }

@@ -12,6 +12,7 @@ namespace Caveworks
         public static Vector4 InventoryButtonColor { get; set; } = new Vector4(0.4f, 0.5f, 0.55f, 1); // default color
         public static Vector4 InventoryBoxColor { get; set; } = new Vector4(0.3f, 0.4f, 0.45f, 1); // default color
         public static World World { get; set; } = null;
+        public static int LightDistance { get; set; } = 24;
         public static bool ExistsSave {  get; set; } = false;
     }
 }

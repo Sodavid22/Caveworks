@@ -73,8 +73,8 @@ namespace Caveworks
 
         public void Draw(Camera camera)
         {
-            MyVector2 screenCoordinates = camera.WorldToScreenCords(Coordinates);
-            Game.CreatureSpritebatch.Draw(Textures.Player, new Rectangle((int)screenCoordinates.X, (int)screenCoordinates.Y, camera.Scale, camera.Scale), new Rectangle(0, 0, 16, 16), Color.White, Rotation, new Vector2(8, 8), SpriteEffects.None, 0);
+            MyVector2Int screenCoordinates = camera.WorldToScreenCords(Coordinates);
+            Game.CreatureSpritebatch.Draw(Textures.Player, new Rectangle(screenCoordinates.X, screenCoordinates.Y, camera.Scale, camera.Scale), new Rectangle(0, 0, 16, 16), Color.White, Rotation, new Vector2(8, 8), SpriteEffects.None, 0);
         }
 
 

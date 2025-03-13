@@ -10,7 +10,7 @@ namespace Caveworks
         public World World;
         public MyVector2 Coordinates;
         public int Scale;
-        public MyVector2 ScreenCenter;
+        public MyVector2Int ScreenCenter;
         public LightManager LightMap;
 
         public Camera(World world, MyVector2 coordinates, int scale)
@@ -18,14 +18,14 @@ namespace Caveworks
             World = world;
             Coordinates = new MyVector2(coordinates.X , coordinates.Y);
             Scale = scale;
-            ScreenCenter = new MyVector2(0, 0);
+            ScreenCenter = new MyVector2Int(0, 0);
             LightMap = new LightManager(this);
         }
 
         public void Update()
         {
-            ScreenCenter.X = GameWindow.Size.X / 2;
-            ScreenCenter.Y = GameWindow.Size.Y / 2;
+            ScreenCenter.X = (int)GameWindow.Size.X / 2;
+            ScreenCenter.Y = (int)GameWindow.Size.Y / 2;
 
             if (MyKeyboard.GetScrollWheelMovement() > 0) // zoom in
             {
@@ -65,10 +65,16 @@ namespace Caveworks
         }
 
 
-        public MyVector2 WorldToScreenCords(MyVector2 worldCoordinates) // world coordinastes to screen coordinates
+        public MyVector2Int WorldToScreenCords(MyVector2 worldCoordinates) // world coordinastes to screen coordinates
         {
-            return new MyVector2(ScreenCenter.X + ((worldCoordinates.X - Coordinates.X) * Scale), ScreenCenter.Y + ((worldCoordinates.Y - Coordinates.Y) * Scale));
+            return new MyVector2Int((int)MathF.Round(ScreenCenter.X + ((worldCoordinates.X - Coordinates.X) * Scale)), (int)MathF.Round(ScreenCenter.Y + ((worldCoordinates.Y - Coordinates.Y) * Scale)));
         }
+
+        public MyVector2Int WorldToScreenCords(MyVector2Int worldCoordinates) // world coordinastes to screen coordinates
+        {
+            return new MyVector2Int((int)MathF.Round(ScreenCenter.X + ((worldCoordinates.X - Coordinates.X) * Scale)), (int)MathF.Round(ScreenCenter.Y + ((worldCoordinates.Y - Coordinates.Y) * Scale)));
+        }
+
 
         public MyVector2 WorldCordsToChunk(MyVector2 worldCoordinates)
         {

@@ -24,7 +24,7 @@ namespace Caveworks
 
         public void Draw(Camera camera)
         {
-            MyVector2 screenCords = camera.WorldToScreenCords(Position.ToMyVector2());
+            MyVector2Int screenCords = camera.WorldToScreenCords(Position);
             if (screenCords.X > -camera.Scale && screenCords.Y > -camera.Scale && screenCords.X < GameWindow.Size.X && screenCords.Y < GameWindow.Size.Y)
             {
                 if (Wall != null) { Wall.Draw(this, camera); }

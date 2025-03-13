@@ -13,7 +13,10 @@ namespace Caveworks
         readonly static TextBox volumeText = new TextBox(new Vector2(350, 60), Globals.UIButtonColor, 2, "Volume:", Fonts.MenuButtonFont);
         readonly static Slider volumeSlider = new Slider(new Vector2(350, 20), Globals.UIButtonColor, 2, 0, Globals.GlobalVolume * 100, 100);
 
-        readonly static UiElement[] uiElements = { backgroundBox, fullscreenText, fullscreenButton, volumeText, volumeSlider };
+        readonly static TextBox lightText = new TextBox(new Vector2(350, 60), Globals.UIButtonColor, 2, "Light Distance:", Fonts.MenuButtonFont);
+        readonly static Slider lightSlider = new Slider(new Vector2(350, 20), Globals.UIButtonColor, 2, 16, Globals.LightDistance, 32);
+
+        readonly static UiElement[] uiElements = { backgroundBox, fullscreenText, fullscreenButton, volumeText, volumeSlider, lightText, lightSlider};
 
 
         public SettingsScene()
@@ -25,6 +28,9 @@ namespace Caveworks
 
             volumeText.Place(new Vector2(GameWindow.Size.X / 2 - 200, GameWindow.Size.Y / 2 - 70), Anchor.Middle);
             volumeSlider.Place(new Vector2(GameWindow.Size.X / 2 + 200, GameWindow.Size.Y / 2 - 70), Anchor.Middle);
+
+            lightText.Place(new Vector2(GameWindow.Size.X / 2 - 200, GameWindow.Size.Y / 2 - 0), Anchor.Middle);
+            lightSlider.Place(new Vector2(GameWindow.Size.X / 2 + 200, GameWindow.Size.Y / 2 - 0), Anchor.Middle);
         }
 
 
@@ -43,6 +49,7 @@ namespace Caveworks
             }
 
             Globals.GlobalVolume = volumeSlider.GetValue() / 100;
+            Globals.LightDistance = (int)lightSlider.GetValue();
         }
 
 
