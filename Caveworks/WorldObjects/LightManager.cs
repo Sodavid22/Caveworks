@@ -129,19 +129,21 @@ namespace Caveworks
                         worldCords.X = CurrentCenterTile.Position.X - (FinalLightmapSize.X / 4) + ((float)x/2);
                         worldCords.Y = CurrentCenterTile.Position.Y - (FinalLightmapSize.Y / 4) + ((float)y/2);
                         screenCords = camera.WorldToScreenCords(worldCords);
-
-                        light = FinalLightMap[x, y];
-                        if (light < 0)
+                        if (screenCords.X >= -camera.Scale && screenCords.Y >= -camera.Scale & screenCords.X < GameWindow.Size.X && screenCords.Y < GameWindow.Size.Y)
                         {
-                            light = 0;
-                        }
-                        if (light > MinLightForMaxBrightness)
-                        {
-                            light = MinLightForMaxBrightness;
-                        }
-                        color = new Vector4(0.1f, 0.1f, 0.1f, 1 - (light / MinLightForMaxBrightness));
+                            light = FinalLightMap[x, y];
+                            if (light < 0)
+                            {
+                                light = 0;
+                            }
+                            if (light > MinLightForMaxBrightness)
+                            {
+                                light = MinLightForMaxBrightness;
+                            }
+                            color = new Vector4(0.1f, 0.1f, 0.1f, 1 - (light / MinLightForMaxBrightness));
 
-                        Game.ShadowSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(screenCords.X, screenCords.Y, camera.Scale/2, camera.Scale/2), Color.FromNonPremultiplied(color));
+                            Game.ShadowSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(screenCords.X, screenCords.Y, camera.Scale / 2, camera.Scale / 2), Color.FromNonPremultiplied(color));
+                        }
                     }
                 }
             }
@@ -150,11 +152,11 @@ namespace Caveworks
 
         public void Upscale(int[,] lightmap, MyVector2Int lightmapSize)
         {
-            for (float x = 0; x < lightmapSize.X * 2; x++)
+            for (int x = 0; x < lightmapSize.X * 2; x++)
             {
-                for (float y = 0; y < lightmapSize.Y * 2; y++)
+                for (int y = 0; y < lightmapSize.Y * 2; y++)
                 {
-                    UpscaleMap1[(int)x, (int)y] = lightmap[(int)(x / 2), (int)(y / 2)];
+                    UpscaleMap1[x, y] = lightmap[(x / 2), (y / 2)];
                 }
             }
 
