@@ -232,7 +232,7 @@ namespace Caveworks
             int brightness = lightmap[tileX, tileY];
             int neighbours = 1;
 
-            if (brightness != -1) // not wall
+            if (wallLigtmap[tileX, tileY] != -1) // not wall
             {
                 if (wallLigtmap[tileX + 1, tileY] != -1)
                 {
@@ -282,12 +282,8 @@ namespace Caveworks
                 {
                     neighbours += 0;
                 }
-                return brightness / neighbours;
             }
-            else
-            {
-                return -1;
-            }
+            return brightness / neighbours;
         }
 
         public int GetUpscaleWallBrightness(int[,] lightmap, MyVector2Int lightmapSize, int tileX, int tileY)
