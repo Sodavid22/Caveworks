@@ -80,9 +80,9 @@ namespace Caveworks
                     }
                 }
             }
-            if (CalculatedLightmap[LightMapSize.X / 2, LightMapSize.Y / 2] < 16000)
+            if (CalculatedLightmap[LightMapSize.X / 2, LightMapSize.Y / 2] < MaxLightStrength)
             {
-                CalculatedLightmap[LightMapSize.X / 2, LightMapSize.Y / 2] = 16000;
+                CalculatedLightmap[LightMapSize.X / 2, LightMapSize.Y / 2] = MaxLightStrength;
             }
         }
 
