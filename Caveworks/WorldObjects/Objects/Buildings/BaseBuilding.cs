@@ -25,7 +25,7 @@ namespace Caveworks
             {
                 for (int y = 0; y <= size - 1; y++)
                 {
-                    tile.Chunk.World.GlobalCordsToTile(new MyVector2Int(Position.X + x, Position.Y + y)).Building = this;
+                    Globals.World.GlobalCordsToTile(new MyVector2Int(Position.X + x, Position.Y + y)).Building = this;
                 }
             }
         }

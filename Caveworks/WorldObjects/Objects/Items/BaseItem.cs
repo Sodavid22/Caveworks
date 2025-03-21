@@ -99,7 +99,7 @@ namespace Caveworks
         public void UpdateTile()
         {
             Tile.Items.Remove(this);
-            Tile = Tile.Chunk.World.GlobalCordsToTile(Coordinates.ToMyVector2Int());
+            Tile = Globals.World.GlobalCordsToTile(Coordinates.ToMyVector2Int());
             Tile.Items.Add(this);
             Tile.Items = Tile.Items.OrderBy(item => item.Coordinates.X + item.Coordinates.Y).ToList();
         }

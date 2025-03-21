@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
+using SharpDX.DXGI;
 
 namespace Caveworks
 {
     [Serializable]
-    public class LightManager // LIGHT LOSES 6 STRENGTH FOR EACH TILE TRAVELLED
+    public class LightManager
     {
         public MyVector2Int LightMapSize;
         public MyVector2Int FinalLightmapSize;
@@ -17,9 +18,9 @@ namespace Caveworks
         public static int MaxLightStrength;
         public static int MinLightForMaxBrightness;
         public int CalculationStage;
-        public int CalculationStageCount = 5; // lightmap calculation is distributed to multiple frames to improve performance at the cost of responsivnes
-        public const int DirectLightLoss = 8;
-        public const int InDirectLightLoss = 11;
+        public int CalculationStageCount = 9; // lightmap calculation is distributed to multiple frames to improve performance at the cost of responsivnes (max 17)
+        public const int DirectLightLoss = 1000;
+        public const int InDirectLightLoss = 1414;
         Tile CalculatedCenterTile;
         Tile CurrentCenterTile;
 
@@ -34,7 +35,7 @@ namespace Caveworks
         {
             MaxLightRange = maxLightRange;
             MaxLightStrength = MaxLightRange * DirectLightLoss;
-            MinLightForMaxBrightness = MaxLightStrength - 42; // 42 - the answer to everything
+            MinLightForMaxBrightness = MaxLightStrength - 8000; // 42 - the answer to everything
 
             LightMapSize = new MyVector2Int(63 + maxLightRange*2, 33 + maxLightRange*2);
             CalculatedLightmap = new int[LightMapSize.X, LightMapSize.Y];
@@ -75,13 +76,13 @@ namespace Caveworks
                     }
                     else
                     {
-                        CalculatedLightmap[x, y] = 64;
+                        CalculatedLightmap[x, y] = -1;
                     }
                 }
             }
-            if (CalculatedLightmap[LightMapSize.X / 2, LightMapSize.Y / 2] < MaxLightStrength/2)
+            if (CalculatedLightmap[LightMapSize.X / 2, LightMapSize.Y / 2] < 16000)
             {
-                CalculatedLightmap[LightMapSize.X / 2, LightMapSize.Y / 2] = MaxLightStrength/2;
+                CalculatedLightmap[LightMapSize.X / 2, LightMapSize.Y / 2] = 16000;
             }
         }
 

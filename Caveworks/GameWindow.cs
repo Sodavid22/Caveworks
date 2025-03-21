@@ -10,7 +10,7 @@ namespace Caveworks
         private static Vector2 DISPLAY_SIZE = new Vector2((int)GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, (int)GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
 
         // game window size in pixels
-        public static Vector2 Size { get; private set; } = new Vector2((int)DISPLAY_SIZE.X/2, (int)DISPLAY_SIZE.Y/2);
+        public static Vector2 Size { get; private set; } = new Vector2(1280, 720);
 
         // is in fullscreen mode
         public static bool IsFullscreen {get; private set;} = false;
@@ -48,8 +48,8 @@ namespace Caveworks
         {
             if (IsFullscreen)
             {   // disable fullscreen
-                Game.Graphics.PreferredBackBufferWidth = (int) DISPLAY_SIZE.X / 2;
-                Game.Graphics.PreferredBackBufferHeight = (int) DISPLAY_SIZE.Y / 2;
+                Game.Graphics.PreferredBackBufferWidth = (int) 1280;
+                Game.Graphics.PreferredBackBufferHeight = (int) 720;
                 Game.Graphics.ToggleFullScreen();
                 Game.Graphics.IsFullScreen = false;
                 Game.Graphics.ApplyChanges();

@@ -101,7 +101,7 @@ namespace Caveworks
 
             if (newCoordinates.X > Tile.Position.X + 1 || newCoordinates.X < Tile.Position.X || newCoordinates.Y > Tile.Position.Y + 1 || newCoordinates.Y < Tile.Position.Y)
             {
-                Tile = Tile.Chunk.World.GlobalCordsToTile(newCoordinates.ToMyVector2Int());
+                Tile = Globals.World.GlobalCordsToTile(newCoordinates.ToMyVector2Int());
             }
 
             Coordinates = newCoordinates;
@@ -114,7 +114,7 @@ namespace Caveworks
             {
                 for (int y = -1; y <= 1; y++)
                 {
-                    Tile checkedTile = this.Tile.Chunk.World.GetTileByRelativePosition(tile, new MyVector2Int(x, y));
+                    Tile checkedTile = Globals.World.GetTileByRelativePosition(tile, new MyVector2Int(x, y));
                     if (checkedTile != null)
                     {
                         if (checkedTile.Wall != null)

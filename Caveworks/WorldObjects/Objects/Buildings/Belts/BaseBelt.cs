@@ -33,7 +33,7 @@ namespace Caveworks
 
                 if (item.CheckForNewTile())
                 {
-                    Tile nextTile = Tile.Chunk.World.GetTileByRelativePosition(Tile, Rotation);
+                    Tile nextTile = Globals.World.GetTileByRelativePosition(Tile, Rotation);
                     if (nextTile.Building != null)
                     {
                         if (nextTile.Building.GetType().Equals(this.GetType()) && nextTile.Items.Count < MaxItems)
