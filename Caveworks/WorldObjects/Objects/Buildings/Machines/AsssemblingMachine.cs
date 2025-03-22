@@ -1,19 +1,22 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace Caveworks.WorldObjects.Objects.Buildings.Storage
+namespace Caveworks
 {
     [Serializable]
-    class IronChest : BaseBuilding
+    public class AsssemblingMachine : BaseMachine
     {
-        public IronChest(Tile tile) : base(tile, 1)
+        public AsssemblingMachine(Tile tile):base(tile, 3, 5)
         {
-            Inventory = new Inventory(20, Globals.World.Player);
+
         }
 
+        public override int GetLightLevel() { return LightManager.MinLightForMaxBrightness; }
 
         public override bool HasCollision() { return true; }
+
+
+        public override int GetSize() { return 3; }
 
 
         public override bool HasUI() { return true; }
@@ -21,7 +24,7 @@ namespace Caveworks.WorldObjects.Objects.Buildings.Storage
 
         public override void OpenUI()
         {
-            Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 - 70));
+            Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2));
             Sounds.ButtonClick.Play(1);
         }
 
@@ -45,14 +48,14 @@ namespace Caveworks.WorldObjects.Objects.Buildings.Storage
 
         public override BaseItem ToItem()
         {
-            return new IronChestItem(1);
+            return new AsseblingMachineItem(1);
         }
 
 
         public override void Draw(Camera camera, float deltaTime)
         {
             MyVector2Int screenCoordinates = camera.WorldToScreenCords(Position);
-            Game.WallSpritebatch.Draw(Textures.IronChest, new Rectangle(screenCoordinates.X, screenCoordinates.Y, camera.Scale, camera.Scale), Color.White);
+            Game.WallSpritebatch.Draw(Textures.AssemblingMachine, new Rectangle(screenCoordinates.X, screenCoordinates.Y, camera.Scale * 3, camera.Scale * 3), Color.White);
         }
     }
 }

@@ -214,8 +214,8 @@ namespace Caveworks
 
         public void DrawUI()
         {
-            Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(WindowPosition.X - Border - 2, WindowPosition.Y - Border - 2, ButtonSpacing * (RowLength - 1) + ButtonSize + Border * 2 + 4, ButtonSpacing * (Size / RowLength - 1) + ButtonSize + Border * 2 + 4), Color.Black);
-            Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(WindowPosition.X - Border, WindowPosition.Y - Border, ButtonSpacing*(RowLength - 1) + ButtonSize + Border*2, ButtonSpacing*(Size / RowLength - 1) + ButtonSize + Border*2), Color.FromNonPremultiplied(Globals.InventoryBoxColor));
+            Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(WindowPosition.X - Border - 2, WindowPosition.Y - Border - 2, ButtonSpacing * (RowLength - 1) + ButtonSize + Border * 2 + 4, ButtonSpacing * ((int)MathF.Ceiling((float)Size / (float)RowLength) - 1) + ButtonSize + Border * 2 + 4), Color.Black);
+            Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(WindowPosition.X - Border, WindowPosition.Y - Border, ButtonSpacing*(RowLength - 1) + ButtonSize + Border*2, ButtonSpacing*((int)MathF.Ceiling((float)Size / (float)RowLength) - 1) + ButtonSize + Border*2), Color.FromNonPremultiplied(Globals.InventoryBoxColor));
 
             foreach (Button button in Buttons)
             {

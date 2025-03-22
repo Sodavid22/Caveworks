@@ -59,7 +59,8 @@ namespace Caveworks
             Player.Inventory.TryAddItem(new RawIronOreItem(100));
             Player.Inventory.TryAddItem(new RawCopperOreItem(100));
             Player.Inventory.TryAddItem(new RawStoneItem(100));
-            Player.Inventory.TryAddItem(new IronChestItem(50));
+            Player.Inventory.TryAddItem(new IronChestItem(100));
+            Player.Inventory.TryAddItem(new AsseblingMachineItem(100));
 
             WorldMousePos = GetWorldMousePos();
             LastMouseTile = MouseTile;

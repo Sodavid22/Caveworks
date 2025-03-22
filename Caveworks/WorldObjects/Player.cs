@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
+using System.Diagnostics;
 
 namespace Caveworks
 {
@@ -48,7 +49,7 @@ namespace Caveworks
 
                 if (InventoryOpened)
                 {
-                    Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + 50));
+                    Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + 84));
                 }
                 else
                 {
@@ -187,7 +188,7 @@ namespace Caveworks
                             {
                                 OpenedBuilding = World.MouseTile.Building;
                                 OpenedBuilding.OpenUI();
-                                Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + 50));
+                                Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + 84));
                                 InventoryOpened = true;
                             }
                         }
@@ -197,7 +198,7 @@ namespace Caveworks
                         if (World.MouseTile.Building != null)// deconstruct buildings
                         {
                             bool emptyBuilding = true;
-                            if (World.MouseTile.Building.Inventory != null)
+                            if (World.MouseTile.Building.Inventory != null) // has inventory
                             {
                                 for (int i = 0; i < World.MouseTile.Building.Inventory.Size; i++) // clear inventory
                                 {

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
 
 namespace Caveworks
 {
@@ -10,20 +12,19 @@ namespace Caveworks
         public Tile Tile;
         public MyVector2Int Position;
         public MyVector2Int Rotation;
-        public static int Size;
         public Inventory Inventory;
 
 
         public BaseBuilding(Tile tile, int size) // TODO fix placing large buildings on map edge
         {
             Tile = tile;
-            this.Position = tile.Position;
+            Position = tile.Position;
 
 
             Tile.Chunk.Buildings.Add(this);
-            for (int x = 0; x <= size - 1; x++) 
+            for (int x = 0; x < size; x++) 
             {
-                for (int y = 0; y <= size - 1; y++)
+                for (int y = 0; y < size; y++)
                 {
                     Globals.World.GlobalCordsToTile(new MyVector2Int(Position.X + x, Position.Y + y)).Building = this;
                 }
@@ -33,6 +34,8 @@ namespace Caveworks
         public virtual int GetLightLevel() { return 0; }
 
         public virtual bool HasCollision() { return false; }
+
+        public virtual int GetSize() { return 1; }
 
         public virtual bool HasUI() { return false; }
 
@@ -48,7 +51,18 @@ namespace Caveworks
 
         public static void DeleteBuilding(BaseBuilding building)
         {
-            building.Tile.Building = null;
+            Debug.WriteLine("_____");
+            Tile clearedTile;
+
+            for (int x = building.Tile.Position.X; x < building.Tile.Position.X + building.GetSize(); x++)
+            {
+                for (int y = building.Tile.Position.Y; y < building.Tile.Position.Y + building.GetSize(); y++)
+                {
+                    Debug.WriteLine(x + "-" + y);
+                    clearedTile = Globals.World.GlobalCordsToTile(new MyVector2Int(x, y));
+                    clearedTile.Building = null;
+                }
+            }
             building.Tile.Chunk.Buildings.Remove(building);
         }
 

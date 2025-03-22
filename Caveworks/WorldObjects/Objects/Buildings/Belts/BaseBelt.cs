@@ -20,9 +20,6 @@ namespace Caveworks
         }
 
 
-        public override int GetLightLevel() { return LightManager.MaxLightStrength; } //TESTCODE
-
-
         public void UpdateBelt(float deltaTime, float BeltSpeed)
         {
             List<BaseItem> itemList = Tile.Items.ToList();
