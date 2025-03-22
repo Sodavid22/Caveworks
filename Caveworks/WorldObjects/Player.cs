@@ -42,133 +42,72 @@ namespace Caveworks
 
         public void Update()
         {
-            if (MyKeyboard.IsPressed(KeyBindings.PLAYER_INVENTORY_KEY)) // open inventory
+            if (World.MouseTile != World.LastMouseTile) // reset wall mining
             {
-                InventoryOpened = !InventoryOpened;
-                Sounds.ButtonClick.Play(1);
-
-                if (InventoryOpened)
-                {
-                    Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + 84));
-                }
-                else
-                {
-                    Inventory.CloseUI();
-                    if (OpenedBuilding != null)
-                    {
-                        OpenedBuilding.CloseUI();
-                        OpenedBuilding = null;
-                    }
-                }
+                WallHits = 0;
             }
 
-            if (InventoryOpened) // update player inventory
+            if (MyKeyboard.IsPressed(KeyBindings.PLAYER_INVENTORY_KEY))
+            {
+                TogglePlayerInventory();
+            }
+
+            if (InventoryOpened)
             {
                 Inventory.UpdateUI();
             }
 
-            if (OpenedBuilding != null) // update building UI
+            if (OpenedBuilding != null)
             {
                 OpenedBuilding.UpdateUI();
             }
 
             if (MyKeyboard.IsPressed(KeyBindings.ROTATE_KEY))
             {
-                if (ItemRotation.X == 1) // right to down
-                {
-                    ItemRotation.X = 0;
-                    ItemRotation.Y = 1;
-                }
-                else if (ItemRotation.Y == 1) // down to left
-                {
-                    ItemRotation.X = -1;
-                    ItemRotation.Y = 0;
-                }
-                else if (ItemRotation.X == -1) // left to up
-                {
-                    ItemRotation.X = 0;
-                    ItemRotation.Y = -1;
-                }
-                else // up to right
-                {
-                    ItemRotation.X = 1;
-                    ItemRotation.Y = 0;
-                }
+                UpdateRotation();
             }
 
             if (MyKeyboard.IsPressed(KeyBindings.CANCEL_KEY))  
             {
-                if (HeldItem != null) // stop holding item
-                {
-                    if (Inventory.TryAddItem(HeldItem))
-                    {
-                        HeldItem = null;
-                        Sounds.Woosh.Play(1);
-                    }
-                    else
-                    {
-                        BaseItem.Drop(HeldItem);
-                        HeldItem = null;
-                        Sounds.Woosh.Play(1);
-                    }
-                }
+                StopHoldingItem();
             }
 
-            if (World.MouseTile != World.LastMouseTile) // reset wall mining
+            if (MyKeyboard.IsHeld(KeyBindings.PICKUP_KEY))
             {
-                WallHits = 0;
-            }
-
-            if (MyKeyboard.IsHeld(KeyBindings.PICKUP_KEY)) // pickup dropped items
-            {
-                for (int x = -1; x <= 1; x++)
-                {
-                    for (int y = -1; y <= 1; y++)
-                    {
-                        Tile checkedTile = World.GetTileByRelativePosition(World.PlayerBody.Tile, new MyVector2Int(x, y));
-
-                        foreach (BaseItem item in checkedTile.Items.ToList())
-                        {
-                            if (Inventory.TryAddItem(item))
-                            {
-                                checkedTile.Items.Remove(item);
-                            }
-                        }
-                    }
-                }
+                PickupItems();
             }
 
             if (!InventoryOpened)
             {
+                if (MyKeyboard.IsHeld(MouseKey.Right))
+                {
+                    if (World.MouseTile.Building != null)
+                    {
+                        DeconstructBuilding();
+                    }
+                }
+
                 if (HeldItem != null) // holding item
                 {
                     if (MyKeyboard.IsPressed(MouseKey.Left)) // use item
                     {
                         HeldItem.PrimaryUse(ItemRotation);
                     }
-                    else if (MyKeyboard.IsPressed(MouseKey.Right)) // secondary use item
+                    else if (MyKeyboard.IsHeld(MouseKey.Left) && World.MouseTile != World.LastMouseTile) // use items contnuosly
                     {
-                        HeldItem.SecondaryUse(ItemRotation);
+                        HeldItem.PrimaryUse(ItemRotation);
                     }
                     else if (MyKeyboard.IsPressed(KeyBindings.DROP_KEY)) // drop item
                     {
                         BaseItem.Drop(HeldItem);
                         Sounds.Woosh.Play(1);
                     }
-                    else if (MyKeyboard.IsHeld(MouseKey.Left) && World.MouseTile != World.LastMouseTile) // use items contnuosly
-                    {
-                        HeldItem.PrimaryUse(ItemRotation);
-                    }
-                    else if (HeldItem != null && !InventoryOpened && MyKeyboard.IsHeld(MouseKey.Right) && World.MouseTile != World.LastMouseTile) // secondary use item continuosly
-                    {
-                        HeldItem.SecondaryUse(ItemRotation);
-                    }
                 }
                 else // empty hand
                 {
-                    if (MyKeyboard.IsPressed(MouseKey.Left)) // mine walls
+                    if (MyKeyboard.IsPressed(MouseKey.Left))
                     {
-                        if (World.MouseTile.Wall != null)
+                        if (World.MouseTile.Wall != null) // mine walls
                         {
                             if (WallHits >= World.MouseTile.Wall.GetHardness() - 1)
                             {
@@ -190,46 +129,6 @@ namespace Caveworks
                                 OpenedBuilding.OpenUI();
                                 Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + 84));
                                 InventoryOpened = true;
-                            }
-                        }
-                    }
-                    else if (MyKeyboard.IsHeld(MouseKey.Right))
-                    {
-                        if (World.MouseTile.Building != null)// deconstruct buildings
-                        {
-                            bool emptyBuilding = true;
-                            if (World.MouseTile.Building.Inventory != null) // has inventory
-                            {
-                                for (int i = 0; i < World.MouseTile.Building.Inventory.Size; i++) // clear inventory
-                                {
-                                    if (World.MouseTile.Building.Inventory.Items[i] != null)
-                                    {
-                                        if (Inventory.TryAddItem(World.MouseTile.Building.Inventory.Items[i]))
-                                        {
-                                            World.MouseTile.Building.Inventory.Items[i] = null;
-                                        }
-                                        else
-                                        {
-                                            emptyBuilding = false;
-                                        }
-                                    }
-                                }
-                            }
-                            if (emptyBuilding)
-                            {
-                                if (World.Player.Inventory.TryAddItem(World.MouseTile.Building.ToItem())) // remove building
-                                {
-                                    BaseBuilding.DeleteBuilding(World.MouseTile.Building);
-                                    Sounds.PlayPlaceSound();
-                                }
-                                else if(MyKeyboard.IsPressed(MouseKey.Right))
-                                {
-                                    Sounds.ButtonDecline.Play(1);
-                                }
-                            }
-                            else if (MyKeyboard.IsPressed(MouseKey.Right))
-                            {
-                                Sounds.ButtonDecline.Play(1);
                             }
                         }
                     }
@@ -286,6 +185,129 @@ namespace Caveworks
                 MyVector2Int screenCords = World.Camera.WorldToScreenCords(new MyVector2(World.MouseTile.Position.X + 0.5f, World.MouseTile.Position.Y + 0.5f));
                 Rectangle rectangle = new Rectangle(screenCords.X - rectangleSize / 2, screenCords.Y - rectangleSize / 2, rectangleSize, rectangleSize);
                 Game.MainSpriteBatch.Draw(Textures.EmptyTexture, rectangle, Color.FromNonPremultiplied(new Vector4(0.5f, 0.5f, 0.5f, 0.5f)));
+            }
+        }
+
+
+        private void TogglePlayerInventory()
+        {
+            InventoryOpened = !InventoryOpened;
+            Sounds.ButtonClick.Play(1);
+
+            if (InventoryOpened)
+            {
+                Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + 84));
+            }
+            else
+            {
+                Inventory.CloseUI();
+                if (OpenedBuilding != null)
+                {
+                    OpenedBuilding.CloseUI();
+                    OpenedBuilding = null;
+                }
+            }
+        }
+
+
+        private void UpdateRotation()
+        {
+            if (ItemRotation.X == 1) // right to down
+            {
+                ItemRotation.X = 0;
+                ItemRotation.Y = 1;
+            }
+            else if (ItemRotation.Y == 1) // down to left
+            {
+                ItemRotation.X = -1;
+                ItemRotation.Y = 0;
+            }
+            else if (ItemRotation.X == -1) // left to up
+            {
+                ItemRotation.X = 0;
+                ItemRotation.Y = -1;
+            }
+            else // up to right
+            {
+                ItemRotation.X = 1;
+                ItemRotation.Y = 0;
+            }
+        }
+
+        private void StopHoldingItem()
+        {
+            if (HeldItem != null) // stop holding item
+            {
+                if (Inventory.TryAddItem(HeldItem))
+                {
+                    HeldItem = null;
+                    Sounds.Woosh.Play(1);
+                }
+                else
+                {
+                    BaseItem.Drop(HeldItem);
+                    HeldItem = null;
+                    Sounds.Woosh.Play(1);
+                }
+            }
+        }
+
+
+        private void PickupItems()
+        {
+            for (int x = -1; x <= 1; x++)
+            {
+                for (int y = -1; y <= 1; y++)
+                {
+                    Tile checkedTile = World.GetTileByRelativePosition(World.PlayerBody.Tile, new MyVector2Int(x, y));
+
+                    foreach (BaseItem item in checkedTile.Items.ToList())
+                    {
+                        if (Inventory.TryAddItem(item))
+                        {
+                            checkedTile.Items.Remove(item);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        private void DeconstructBuilding()
+        {
+            bool emptyBuilding = true;
+            if (World.MouseTile.Building.Inventory != null) // has inventory
+            {
+                for (int i = 0; i < World.MouseTile.Building.Inventory.Size; i++) // clear inventory
+                {
+                    if (World.MouseTile.Building.Inventory.Items[i] != null)
+                    {
+                        if (Inventory.TryAddItem(World.MouseTile.Building.Inventory.Items[i]))
+                        {
+                            World.MouseTile.Building.Inventory.Items[i] = null;
+                        }
+                        else
+                        {
+                            emptyBuilding = false;
+                        }
+                    }
+                }
+            }
+            if (emptyBuilding)
+            {
+                if (World.Player.Inventory.TryAddItem(World.MouseTile.Building.ToItem())) // if not full inventory
+                {
+                    BaseBuilding.DeleteBuilding(World.MouseTile.Building);
+                    Sounds.PlayPlaceSound();
+                }
+                else if (MyKeyboard.IsPressed(MouseKey.Right))
+                {
+                    Sounds.ButtonDecline.Play(1);
+                }
+            }
+            else if (MyKeyboard.IsPressed(MouseKey.Right))
+            {
+                Sounds.ButtonDecline.Play(1);
             }
         }
     }

@@ -49,9 +49,6 @@ namespace Caveworks
         public virtual bool PrimaryUse(MyVector2Int itemRotation) { return false; }
 
 
-        public virtual bool SecondaryUse(MyVector2Int itemRotation) { return false; }
-
-
         public static void Drop(BaseItem item)
         {
             Tile tile = Globals.World.MouseTile;
