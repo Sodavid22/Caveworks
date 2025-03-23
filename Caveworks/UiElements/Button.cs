@@ -124,6 +124,18 @@ namespace Caveworks
         }
 
 
+        public void SetColor(Color color)
+        {
+            this.color = color;
+        }
+
+
+        public Rectangle GetRectangle()
+        {
+            return rectangle;
+        }
+
+
         public bool IsActivated()
         {
             return Active;

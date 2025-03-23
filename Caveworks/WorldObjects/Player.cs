@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
 using System.Diagnostics;
+using Caveworks.WorldObjects;
 
 namespace Caveworks
 {
@@ -127,7 +128,7 @@ namespace Caveworks
                             {
                                 OpenedBuilding = World.MouseTile.Building;
                                 OpenedBuilding.OpenUI();
-                                Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + 84));
+                                Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + 92));
                                 InventoryOpened = true;
                             }
                         }
@@ -196,7 +197,7 @@ namespace Caveworks
 
             if (InventoryOpened)
             {
-                Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + 84));
+                Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + 92));
             }
             else
             {

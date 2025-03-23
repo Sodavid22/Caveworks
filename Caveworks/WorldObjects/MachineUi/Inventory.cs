@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 
 namespace Caveworks
@@ -9,7 +10,8 @@ namespace Caveworks
         public const int RowLength = 10;
         public const int ButtonSize = 64;
         public const int ButtonSpacing = 70;
-        public const int Border = 10;
+        public const int Border = 2;
+        public const int BorderOffset = 12;
 
         public BaseItem[] Items;
         public int Size;
@@ -25,6 +27,50 @@ namespace Caveworks
             Items = new BaseItem[size];
             Size = size;
             Player = player;
+        }
+
+
+        public int CountItems(BaseItem item)
+        {
+            int count = 0;
+            for (int i = 0; i < Size; i++)
+            {
+                if (Items[i] != null)
+                {
+                    if (Items[i].GetType() == item.GetType())
+                    {
+                        count += Items[i].Count;
+                    }
+                }
+            }
+            return count;
+        }
+
+
+        public bool RemoveItems(BaseItem item)
+        {
+            int remaining = item.Count;
+
+            for (int i = 0; i < Size; i++)
+            {
+                if (Items[i] != null)
+                {
+                    if (Items[i].GetType() == item.GetType())
+                    {
+                        Items[i].Count -= remaining;
+                        if (Items[i].Count <= 0) // not enough items
+                        {
+                            remaining = -Items[i].Count;
+                            Items[i] = null;
+                        }
+                        else
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
         }
 
 
@@ -92,7 +138,7 @@ namespace Caveworks
 
         public void OpenUI(MyVector2Int position)
         {
-            this.WindowPosition = position;
+            WindowPosition = position;
             Buttons = new Button[Size];
 
             for (int i = 0; i < Size; i++)
@@ -174,7 +220,7 @@ namespace Caveworks
                     {
                         if (Items[i].Count > 1) // take half items
                         {
-                            Player.HeldItem = Cloning.DeepClone(Items[i]);
+                            Player.HeldItem = Items[i].DeepClone();
                             Player.HeldItem.Count = Items[i].Count / 2;
                             Items[i].Count -= Player.HeldItem.Count;
                             Sounds.Woosh.Play(1);
@@ -184,7 +230,7 @@ namespace Caveworks
                     {
                         if (Items[i] == null) // put one item to empty tile
                         {
-                            Items[i] = Cloning.DeepClone(Player.HeldItem);
+                            Items[i] = Player.HeldItem.DeepClone();
                             Items[i].Count = 1;
                             Player.HeldItem.Count -= 1;
                             if (Player.HeldItem.Count == 0)
@@ -214,8 +260,11 @@ namespace Caveworks
 
         public void DrawUI()
         {
-            Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(WindowPosition.X - Border - 2, WindowPosition.Y - Border - 2, ButtonSpacing * (RowLength - 1) + ButtonSize + Border * 2 + 4, ButtonSpacing * ((int)MathF.Ceiling((float)Size / (float)RowLength) - 1) + ButtonSize + Border * 2 + 4), Color.Black);
-            Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(WindowPosition.X - Border, WindowPosition.Y - Border, ButtonSpacing*(RowLength - 1) + ButtonSize + Border*2, ButtonSpacing*((int)MathF.Ceiling((float)Size / (float)RowLength) - 1) + ButtonSize + Border*2), Color.FromNonPremultiplied(Globals.InventoryBoxColor));
+            // background
+            Rectangle backRectangle = new Rectangle(WindowPosition.X - Border - BorderOffset, WindowPosition.Y - Border - BorderOffset, ButtonSpacing * (RowLength - 1) + ButtonSize + Border * 2 + BorderOffset * 2, ButtonSpacing * ((int)MathF.Ceiling(Size / (float)RowLength) - 1) + ButtonSize + Border * 2 + BorderOffset * 2);
+            Rectangle frontRectangle = new Rectangle(backRectangle.X + Border, backRectangle.Y + Border, backRectangle.Width - Border * 2, backRectangle.Height - Border * 2);
+            Game.MainSpriteBatch.Draw(Textures.EmptyTexture, backRectangle, Color.Black);
+            Game.MainSpriteBatch.Draw(Textures.EmptyTexture, frontRectangle, Color.FromNonPremultiplied(Globals.InventoryBoxColor));
 
             foreach (Button button in Buttons)
             {
