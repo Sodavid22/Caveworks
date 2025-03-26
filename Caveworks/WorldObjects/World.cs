@@ -51,7 +51,7 @@ namespace Caveworks
             PlayerBody = new PlayerBody(GlobalCordsToTile(new MyVector2Int(WorldDiameter/2, WorldDiameter/2)));
 
             // TESTCODE
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 Player.Inventory.TryAddItem(new SlowBeltItem(100));
             }

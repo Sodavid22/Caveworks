@@ -32,13 +32,16 @@ namespace Caveworks
             }
         }
 
-        public virtual int GetLightLevel() { return 0; }
+        public virtual bool AccteptsItems() { return false; } // does building accept items
 
-        public virtual bool HasCollision() { return false; }
+        public virtual int GetLightLevel() { return 0; } // how bright is the building
 
-        public virtual int GetSize() { return 1; }
+        public virtual bool HasCollision() { return false; } // can player collide with it
 
-        public virtual bool HasUI() { return false; }
+        public virtual int GetSize() { return 1; } // size
+
+        public virtual bool HasUI() { return false; } // can it be interacted with
+
 
         public virtual void OpenUI() { return; }
 

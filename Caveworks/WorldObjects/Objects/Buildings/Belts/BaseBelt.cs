@@ -20,6 +20,16 @@ namespace Caveworks
         }
 
 
+        public override bool AccteptsItems()
+        {
+            if (Tile.Items.Count < MaxItems)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
         public void UpdateBelt(float deltaTime, float BeltSpeed)
         {
             List<BaseItem> itemList = Tile.Items.ToList();
@@ -33,7 +43,7 @@ namespace Caveworks
                     Tile nextTile = Globals.World.GetTileByRelativePosition(Tile, Rotation);
                     if (nextTile.Building != null)
                     {
-                        if (nextTile.Building.GetType().Equals(this.GetType()) && nextTile.Items.Count < MaxItems)
+                        if (nextTile.Building.AccteptsItems())
                         {
                             item.UpdateTile();
                         }

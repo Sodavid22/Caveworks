@@ -59,7 +59,7 @@ namespace Caveworks
             Textures.RawStone = contentManager.Load<Texture2D>("Items/Ores/RawStone");
 
             // buildings:
-            Textures.SlowBelt = contentManager.Load<Texture2D>("Buildings/Belts/SlowBelt");
+            Textures.SlowBelt = contentManager.Load<Texture2D>("Buildings/Belts/GreenBelt");
             Textures.IronChest = contentManager.Load<Texture2D>("Buildings/Storage/IronChest");
             Textures.AssemblingMachine = contentManager.Load<Texture2D>("Buildings/Machines/AssemblingMachine");
         }

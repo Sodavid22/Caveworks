@@ -12,7 +12,9 @@ namespace Caveworks
 
         }
 
+
         public override int GetLightLevel() { return LightManager.MinLightForMaxBrightness; }
+
 
         public override bool HasCollision() { return true; }
 
@@ -22,10 +24,12 @@ namespace Caveworks
 
         public override bool HasUI() { return true; }
 
+
         public override void Update(float deltaTime)
         {
             Crafter.Update(deltaTime);
         }
+
 
         public override void OpenUI()
         {
@@ -47,6 +51,7 @@ namespace Caveworks
             Inventory.DrawUI();
             Crafter.DrawUI();
         }
+
 
         public override void CloseUI()
         {
