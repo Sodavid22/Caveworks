@@ -23,7 +23,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Buildings/Belts/SlowBelt.png
+/build:Buildings/Belts/SlowBelt.png;Buildings/Belts/GreenBelt.png
 
 #begin Buildings/Machines/AssemblingMachine.png
 /importer:TextureImporter
