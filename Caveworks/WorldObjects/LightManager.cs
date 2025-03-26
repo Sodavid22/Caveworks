@@ -35,7 +35,7 @@ namespace Caveworks
         {
             MaxLightRange = maxLightRange;
             MaxLightStrength = MaxLightRange * DirectLightLoss;
-            MinLightForMaxBrightness = MaxLightStrength - 8000; // 42 - the answer to everything
+            MinLightForMaxBrightness = MaxLightStrength - 8000;
 
             LightMapSize = new MyVector2Int(63 + maxLightRange*2, 33 + maxLightRange*2);
             CalculatedLightmap = new int[LightMapSize.X, LightMapSize.Y];
