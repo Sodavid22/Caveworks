@@ -38,18 +38,9 @@ namespace Caveworks
             {
                 bool collided = false;
 
-                if (item.CheckForNewTile())
+                if (item.CheckForNewTile(Tile))
                 {
-                    Tile nextTile = Globals.World.GetTileByRelativePosition(Tile, Rotation);
-                    if (nextTile.Building != null)
-                    {
-                        if (nextTile.Building.AccteptsItems())
-                        {
-                            item.UpdateTile();
-                        }
-                        else { collided = true; }
-                    }
-                    else{ collided = true; }
+                    collided = !TryToGiveItem(item); // if you cant give item act like there is a wall
                 }
 
                 if (Rotation.X == 0)
@@ -130,6 +121,30 @@ namespace Caveworks
                     }
                 }
             }
+        }
+
+
+        public bool TryToGiveItem(BaseItem item)
+        {
+            Tile nextTile = Globals.World.GetTileByRelativePosition(Tile, Rotation);
+            if (nextTile.Building != null)
+            {
+                if (nextTile.Building.AccteptsItems())
+                {
+                    if (nextTile.Building.Inventory == null) // no inventory
+                    {
+                        item.UpdateTiles(Tile);
+                        return true;
+                    }
+                    else if (nextTile.Building.Crafter == null) // only inventory
+                    {
+                        return nextTile.Building.Inventory.TryAddItem(item);
+                    }
+                    return false;
+                }
+                else return false;
+            }
+            else return false;
         }
     }
 }

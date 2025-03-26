@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Caveworks
@@ -8,19 +9,16 @@ namespace Caveworks
     [Serializable]
     public class BaseItem
     {
-        public Tile Tile;
         public MyVector2 Coordinates;
         public int Count;
         public const int StackSize = 100;
-        static float DropCooldown = 0;
 
         public BaseItem(Tile tile, MyVector2 position, int count)
         {
-            this.Tile = tile;
             this.Coordinates = new MyVector2(tile.Position.X + position.X, tile.Position.Y + position.Y);
             this.Count = count;
 
-            Tile.Items.Add(this);
+            tile.Items.Add(this);
         }
 
 
@@ -51,10 +49,15 @@ namespace Caveworks
 
         public static void Drop(BaseItem item)
         {
+            Stopwatch stopwatch = new Stopwatch();
+
             Tile tile = Globals.World.MouseTile;
+
+            stopwatch.Start();
             BaseItem newItem = Cloning.DeepClone(item);
+            stopwatch.Stop();
+
             newItem.Count = 1;
-            newItem.Tile = tile;
             newItem.Coordinates = Globals.World.WorldMousePos;
             item.Count -= 1;
             if (item.Count == 0)
@@ -62,6 +65,8 @@ namespace Caveworks
                 Globals.World.Player.HeldItem = null;
             }
             tile.Items.Add(newItem);
+
+            Debug.WriteLine(stopwatch.Elapsed);
         }
 
 
@@ -71,21 +76,10 @@ namespace Caveworks
             Game.ItemSpritebatch.Draw(texture, new Rectangle(screenCoordinates.X, screenCoordinates.Y, camera.Scale / 2, camera.Scale / 2), Color.White);
         }
 
-        public void Move(MyVector2 movement)
+
+        public bool CheckForNewTile(Tile tile)
         {
-            Coordinates.X += movement.X;
-            Coordinates.Y += movement.Y;
-
-            if (CheckForNewTile())
-            {
-                UpdateTile();
-            }
-        }
-
-
-        public bool CheckForNewTile()
-        {
-            if (Coordinates.X < Tile.Position.X || Coordinates.Y < Tile.Position.Y || Coordinates.X > Tile.Position.X + 1 || Coordinates.Y > Tile.Position.Y + 1)
+            if (Coordinates.X < tile.Position.X || Coordinates.Y < tile.Position.Y || Coordinates.X > tile.Position.X + 1 || Coordinates.Y > tile.Position.Y + 1)
             {
                 return true;
             }
@@ -93,12 +87,18 @@ namespace Caveworks
         }
 
 
-        public void UpdateTile()
+        public void UpdateTiles(Tile tile)
         {
-            Tile.Items.Remove(this);
-            Tile = Globals.World.GlobalCordsToTile(Coordinates.ToMyVector2Int());
-            Tile.Items.Add(this);
-            Tile.Items = Tile.Items.OrderBy(item => item.Coordinates.X + item.Coordinates.Y).ToList();
+            tile.Items.Remove(this);
+            tile = Globals.World.GlobalCordsToTile(Coordinates.ToMyVector2Int());
+            tile.Items.Add(this);
+            tile.Items = tile.Items.OrderBy(item => item.Coordinates.X + item.Coordinates.Y).ToList();
+        }
+
+
+        public void RemoveFromTile(Tile tile)
+        {
+            tile.Items.Remove(this);
         }
     }
 }

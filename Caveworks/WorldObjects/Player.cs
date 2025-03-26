@@ -266,7 +266,7 @@ namespace Caveworks
                     {
                         if (Inventory.TryAddItem(item))
                         {
-                            checkedTile.Items.Remove(item);
+                            item.RemoveFromTile(checkedTile);
                         }
                     }
                 }

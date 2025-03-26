@@ -8,8 +8,6 @@ namespace Caveworks
     [Serializable]
     public class BaseMachine : BaseBuilding
     {
-        public RecipeCrafter Crafter;
-
         public BaseMachine(Tile tile, int size, int inventorySize) : base(tile, size)
         {
             this.Inventory = new Inventory(inventorySize, Globals.World.Player);

@@ -14,6 +14,7 @@ namespace Caveworks
         public MyVector2Int Position;
         public MyVector2Int Rotation;
         public Inventory Inventory;
+        public RecipeCrafter Crafter;
 
 
         public BaseBuilding(Tile tile, int size) // TODO fix placing large buildings on map edge
