@@ -30,6 +30,16 @@ namespace Caveworks
         }
 
 
+        public BaseItem GetFirstItem()
+        {
+            foreach (BaseItem item in Items)
+            {
+                return item;
+            }
+            return null;
+        }
+
+
         public int CountItems(BaseItem item)
         {
             int count = 0;
@@ -99,40 +109,6 @@ namespace Caveworks
                 }
             }
             return false;
-        }
-
-
-        public bool TryAddItem(BaseItem item, int position)
-        {
-            if (Items[position].GetType() == item.GetType())
-            {
-                if (Items[position].Count + item.Count <= BaseItem.StackSize)
-                {
-                    Items[position].Count += item.Count;
-                    item.Count = 0;
-                    return true;
-                }
-                else
-                {
-                    item.Count -= BaseItem.StackSize - Items[position].Count;
-                    Items[position].Count = BaseItem.StackSize;
-                    return false;
-                }
-            }
-            else if (Items[position] == null)
-            {
-                Items[position] = item;
-                return true;
-            }
-            return false;
-        }
-
-
-        public BaseItem RemoveItem(int position)
-        {
-            BaseItem item = Items[position];
-            Items[position] = null;
-            return item;
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
@@ -32,6 +33,8 @@ namespace Caveworks
 
         public void UpdateBelt(float deltaTime, float BeltSpeed)
         {
+            TryToGetItem();
+
             List<BaseItem> itemList = Tile.Items.ToList();
 
             foreach (var item in itemList)
@@ -124,7 +127,7 @@ namespace Caveworks
         }
 
 
-        public bool TryToGiveItem(BaseItem item)
+        private bool TryToGiveItem(BaseItem item)
         {
             Tile nextTile = Globals.World.GetTileByRelativePosition(Tile, Rotation);
             if (nextTile.Building != null)
@@ -138,13 +141,98 @@ namespace Caveworks
                     }
                     else if (nextTile.Building.Crafter == null) // only inventory
                     {
-                        return nextTile.Building.Inventory.TryAddItem(item);
+                        if (nextTile.Building.Inventory.TryAddItem(item))
+                        {
+                            item.RemoveFromTile(Tile);
+                        }
                     }
-                    return false;
+                    else
+                    {
+                        if (nextTile.Building.Crafter.SelectedRecipe != null)
+                        {
+                            if (nextTile.Building.Crafter.SelectedRecipe.ItemIsIngredient(item))
+                            {
+                                if (nextTile.Building.Inventory.CountItems(item) < BaseMachine.ItemLimit)
+                                {
+                                    if (nextTile.Building.Inventory.TryAddItem(item))
+                                    {
+                                        item.RemoveFromTile(Tile);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-                else return false;
             }
-            else return false;
+            return false;
+        }
+
+
+        private void TryToGetItem()
+        {
+            Tile backTile = Globals.World.GetTileByRelativePosition(Tile, new MyVector2Int(-Rotation.X, -Rotation.Y));
+
+            if (Tile.Items.Count < MaxItems)
+            {
+                if (backTile.Building != null)
+                {
+                    if (backTile.Building.Inventory != null)
+                    {
+                        if (backTile.Building.Crafter != null) // assembling machine
+                        {
+                            if (backTile.Building.Crafter.SelectedRecipe != null)
+                            {
+                                if (backTile.Building.Inventory.CountItems(backTile.Building.Crafter.SelectedRecipe.Result) > 0)
+                                {
+                                    BaseItem newItem = Cloning.DeepClone(backTile.Building.Crafter.SelectedRecipe.Result);
+                                    backTile.Building.Inventory.RemoveItems(newItem);
+                                    AddItem(newItem);
+                                }
+                            }
+                        }
+                        else // storage building
+                        {
+                            if (backTile.Building.Inventory.GetFirstItem() != null)
+                            {
+                                BaseItem newItem = Cloning.DeepClone(backTile.Building.Inventory.GetFirstItem());
+                                newItem.Count = 1;
+                                backTile.Building.Inventory.RemoveItems(newItem);
+                                AddItem(newItem);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        private void AddItem(BaseItem item)
+        {
+            if (Rotation.X == 0) // up or down
+            {
+                item.Coordinates.X = Tile.Position.X + 0.5f;
+                if (Rotation.Y == 1) // down
+                {
+                    item.Coordinates.Y = Tile.Position.Y;
+                }
+                else // down
+                {
+                    item.Coordinates.Y = Tile.Position.Y + 1;
+                }
+            }
+            else // left or right
+            {
+                item.Coordinates.Y = Tile.Position.Y + 0.5f;
+                if (Rotation.X == 1) // right
+                {
+                    item.Coordinates.X = Tile.Position.X;
+                }
+                else // left
+                {
+                    item.Coordinates.X = Tile.Position.X + 1;
+                }
+            }
+            item.AddToTile(Tile);
         }
     }
 }

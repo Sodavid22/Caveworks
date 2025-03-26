@@ -13,6 +13,12 @@ namespace Caveworks.WorldObjects.Objects.Buildings.Storage
         }
 
 
+        public override bool AccteptsItems()
+        {
+            return true;
+        }
+
+
         public override bool HasCollision() { return true; }
 
 

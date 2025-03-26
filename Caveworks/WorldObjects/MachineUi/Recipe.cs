@@ -16,5 +16,18 @@ namespace Caveworks
             Result = result;
             Time = time;
         }
+
+
+        public bool ItemIsIngredient(BaseItem item)
+        {
+            foreach (BaseItem ingredient in Ingredients)
+            {
+                if (ingredient.GetType() == item.GetType())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

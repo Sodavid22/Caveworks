@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Direct2D1.Effects;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -49,24 +50,16 @@ namespace Caveworks
 
         public static void Drop(BaseItem item)
         {
-            Stopwatch stopwatch = new Stopwatch();
-
             Tile tile = Globals.World.MouseTile;
-
-            stopwatch.Start();
             BaseItem newItem = Cloning.DeepClone(item);
-            stopwatch.Stop();
-
+            item.Count -= 1;
             newItem.Count = 1;
             newItem.Coordinates = Globals.World.WorldMousePos;
-            item.Count -= 1;
             if (item.Count == 0)
             {
                 Globals.World.Player.HeldItem = null;
             }
-            tile.Items.Add(newItem);
-
-            Debug.WriteLine(stopwatch.Elapsed);
+            newItem.AddToTile(tile);
         }
 
 
@@ -99,6 +92,13 @@ namespace Caveworks
         public void RemoveFromTile(Tile tile)
         {
             tile.Items.Remove(this);
+        }
+
+
+        public void AddToTile(Tile tile)
+        {
+            tile.Items.Add(this);
+            tile.Items = tile.Items.OrderBy(item => item.Coordinates.X + item.Coordinates.Y).ToList();
         }
     }
 }

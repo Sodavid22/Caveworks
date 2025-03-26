@@ -61,12 +61,15 @@ namespace Caveworks
 
                 if (CraftingProgress > SelectedRecipe.Time)
                 {
-                    if (Inventory.TryAddItem(Cloning.DeepClone(SelectedRecipe.Result)))
+                    if (Inventory.CountItems(SelectedRecipe.Result) < BaseMachine.ItemLimit)
                     {
-                        CraftingProgress = 0;
-                        foreach (BaseItem recipeItem in SelectedRecipe.Ingredients)
+                        if (Inventory.TryAddItem(Cloning.DeepClone(SelectedRecipe.Result)))
                         {
-                            Inventory.RemoveItems(recipeItem);
+                            CraftingProgress = 0;
+                            foreach (BaseItem recipeItem in SelectedRecipe.Ingredients)
+                            {
+                                Inventory.RemoveItems(recipeItem);
+                            }
                         }
                     }
                 }

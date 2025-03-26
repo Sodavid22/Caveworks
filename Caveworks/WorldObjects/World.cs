@@ -145,14 +145,7 @@ namespace Caveworks
 
         public Tile GetTileByRelativePosition(Tile tile, MyVector2Int relativePosition)
         {
-            if (tile.Position.X + relativePosition.X >= 0 && tile.Position.Y + relativePosition.Y >= 0)
-            {
-                if (tile.Position.X + relativePosition.X < WorldDiameter && tile.Position.Y + relativePosition.Y < WorldDiameter)
-                {
-                    return GlobalCordsToTile(new MyVector2Int(tile.Position.X + relativePosition.X, tile.Position.Y + relativePosition.Y));
-                }
-            }
-            return null;
+            return GlobalCordsToTile(new MyVector2Int(tile.Position.X + relativePosition.X, tile.Position.Y + relativePosition.Y));
         }
 
 
