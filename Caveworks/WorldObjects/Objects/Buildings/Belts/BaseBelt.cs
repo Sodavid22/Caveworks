@@ -185,6 +185,7 @@ namespace Caveworks
                                 if (backTile.Building.Inventory.CountItems(backTile.Building.Crafter.SelectedRecipe.Result) > 0)
                                 {
                                     BaseItem newItem = Cloning.DeepClone(backTile.Building.Crafter.SelectedRecipe.Result);
+                                    newItem.Count = 1;
                                     backTile.Building.Inventory.RemoveItems(newItem);
                                     AddItem(newItem);
                                 }

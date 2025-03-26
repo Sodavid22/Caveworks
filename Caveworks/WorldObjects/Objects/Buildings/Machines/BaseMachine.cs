@@ -12,7 +12,7 @@ namespace Caveworks
         public BaseMachine(Tile tile, int size, int inventorySize) : base(tile, size)
         {
             this.Inventory = new Inventory(inventorySize, Globals.World.Player);
-            this.Crafter = new RecipeCrafter(new List<Recipe> { RecipeList.SlowBeltRecipe, RecipeList.IronChestRecipe }, Inventory);
+            this.Crafter = new RecipeCrafter(new List<Recipe> { RecipeList.Stonification, RecipeList.IronChestRecipe }, Inventory);
         }
 
 
