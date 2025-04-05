@@ -10,8 +10,8 @@ namespace Caveworks
     public class RecipeCrafter
     {
         public const int RowLength = 10;
-        public const int ButtonSize = 64;
-        public const int ButtonSpacing = 70;
+        public const int ButtonSize = 72;
+        public const int ButtonSpacing = 80;
         public const int Border = 2;
         public const int BorderOffset = 12;
 
@@ -59,7 +59,7 @@ namespace Caveworks
                     CraftingProgress += deltaTime;
                 }
 
-                if (CraftingProgress > SelectedRecipe.Time)
+                if (CraftingProgress > SelectedRecipe.CraftingTime)
                 {
                     if (Inventory.CountItems(SelectedRecipe.Result) < BaseMachine.ItemLimit)
                     {
@@ -87,7 +87,7 @@ namespace Caveworks
                 int x = i % RowLength;
                 int y = i / RowLength;
 
-                Buttons[i] = new Button(new Vector2(ButtonSize, ButtonSize), Globals.InventoryButtonColor, 2, "", Fonts.DefaultFontBold);
+                Buttons[i] = new Button(new Vector2(ButtonSize, ButtonSize), Globals.InventoryButtonColor, 2, "", Fonts.MediumFont);
                 Buttons[i].SetTexture(RecipeList[i].Result.GetTexture());
                 Buttons[i].Place(new Vector2(position.X + x * ButtonSpacing, position.Y - y * ButtonSpacing - BorderOffset*2 - Border), Anchor.BottomLeft);
             }
@@ -111,9 +111,18 @@ namespace Caveworks
             {
                 if (Buttons[i].IsPressed(MouseKey.Left))
                 {
-                    SelectedRecipe = RecipeList[i];
-                    SelectedRecipePosition = i;
-                    CraftingProgress = 0;
+                    if (SelectedRecipe != RecipeList[i])
+                    {
+                        SelectedRecipe = RecipeList[i];
+                        SelectedRecipePosition = i;
+                        CraftingProgress = 0;
+                    }
+                    else
+                    {
+                        SelectedRecipe = null;
+                        SelectedRecipePosition = -1;
+                        CraftingProgress = 0;
+                    }
                 }
             }
         }
@@ -131,17 +140,29 @@ namespace Caveworks
             
             if (SelectedRecipe != null)// crafting progress
             {
-                Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(frontRectangle.X, frontRectangle.Y, SelectedRecipe.Time * ProgressbarScale + Border, ProgressbarOffset), Color.Black);
-                Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(frontRectangle.X, frontRectangle.Y, (int)(Math.Min(CraftingProgress, SelectedRecipe.Time) * ProgressbarScale), ProgressbarOffset - Border), Color.LightSkyBlue);
+                Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(frontRectangle.X, frontRectangle.Y, (int)(SelectedRecipe.CraftingTime * ProgressbarScale + Border), ProgressbarOffset), Color.Black);
+                Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(frontRectangle.X, frontRectangle.Y, (int)(Math.Min(CraftingProgress, SelectedRecipe.CraftingTime) * ProgressbarScale), ProgressbarOffset - Border), Color.LightSkyBlue);
+            }
+            else
+            {
+                Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(frontRectangle.X, frontRectangle.Y, ProgressbarOffset, ProgressbarOffset), Color.Black);
             }
 
 
-            for (int i = 0; i < RecipeList.Count; i++)
+            for (int i = 0; i < RecipeList.Count; i++) // draw buttons
             {
                 Buttons[i].Draw();
-                if (i == SelectedRecipePosition)
+                if (i == SelectedRecipePosition) // highlight selected recipe
                 {
                     Game.MainSpriteBatch.Draw(Textures.EmptyTexture, Buttons[i].GetRectangle(), Color.FromNonPremultiplied(new Vector4(0, 0, 1, 0.2f)));
+                }
+            }
+
+            for (int i = 0; i < RecipeList.Count; i++) // draw recipe info
+            {
+                if (Buttons[i].IsHovered())
+                {
+                    RecipeList[i].Draw(MyKeyboard.GetMousePosition());
                 }
             }
         }

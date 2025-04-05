@@ -5,9 +5,9 @@ namespace Caveworks
 {
     public class CreditsScene : IScene
     {
-        readonly static TextBox backgroundBox = new TextBox(new Vector2(800, 400), Globals.UITextBoxColor, 4, "", Fonts.MenuButtonFont);
+        readonly static TextBox backgroundBox = new TextBox(new Vector2(800, 400), Globals.UITextBoxColor, 4, "", Fonts.LargeFont);
 
-        readonly static TextBox madeByTextBox = new TextBox(new Vector2(600, 60), Globals.UITextBoxColor, 2, "Made by: David Sobek", Fonts.MenuButtonFont);
+        readonly static TextBox madeByTextBox = new TextBox(new Vector2(600, 60), Globals.UITextBoxColor, 2, "Made by: David Sobek", Fonts.LargeFont);
 
         // TESTCODE
         readonly static Button imageButton = new Button(new Vector2(64, 64), Globals.UIButtonColor, 2, Textures.Player);

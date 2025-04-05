@@ -27,8 +27,7 @@ namespace Caveworks.WorldObjects.Objects.Buildings.Storage
 
         public override void OpenUI()
         {
-            Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 - 70));
-            Sounds.ButtonClick.Play(1);
+            Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 - Inventory.ButtonSpacing));
         }
 
 

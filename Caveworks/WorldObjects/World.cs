@@ -107,7 +107,7 @@ namespace Caveworks
 
         public void Draw()
         {
-            if (Paused) Game.MainSpriteBatch.DrawString(Fonts.MenuButtonFont, "PAUSED", new Vector2(GameWindow.Size.X / 2 - 100, GameWindow.Size.Y / 2), Color.White);
+            if (Paused) Game.MainSpriteBatch.DrawString(Fonts.LargeFont, "PAUSED", new Vector2(GameWindow.Size.X / 2 - 100, GameWindow.Size.Y / 2), Color.White);
 
             Camera.DrawWorld();
             Player.Draw();

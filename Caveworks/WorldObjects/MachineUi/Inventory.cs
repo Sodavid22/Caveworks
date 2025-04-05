@@ -8,8 +8,8 @@ namespace Caveworks
     public class Inventory
     {
         public const int RowLength = 10;
-        public const int ButtonSize = 64;
-        public const int ButtonSpacing = 70;
+        public const int ButtonSize = 72;
+        public const int ButtonSpacing = 80;
         public const int Border = 2;
         public const int BorderOffset = 12;
 
@@ -122,7 +122,7 @@ namespace Caveworks
                 int x = i % RowLength;
                 int y = i / RowLength;
 
-                Buttons[i] = new Button(new Vector2(ButtonSize, ButtonSize), Globals.InventoryButtonColor, 2, "", Fonts.DefaultFontBold);
+                Buttons[i] = new Button(new Vector2(ButtonSize, ButtonSize), Globals.InventoryButtonColor, 2, "", Fonts.MediumFont);
                 Buttons[i].Place(new Vector2(position.X + x * ButtonSpacing, position.Y + y * ButtonSpacing), Anchor.TopLeft);
                 Buttons[i].Mute();
             }

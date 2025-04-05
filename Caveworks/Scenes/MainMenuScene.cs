@@ -5,11 +5,11 @@ namespace Caveworks
 {
     public class MainMenuScene : IScene
     {
-        readonly static Button continueButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Continue", Fonts.MenuButtonFont);
-        readonly static Button startButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Start", Fonts.MenuButtonFont);
-        readonly static Button settingsButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Settings", Fonts.MenuButtonFont);
-        readonly static Button creditsButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Credits", Fonts.MenuButtonFont);
-        readonly static Button exitButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Exit", Fonts.MenuButtonFont);
+        readonly static Button continueButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Continue", Fonts.LargeFont);
+        readonly static Button startButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Start", Fonts.LargeFont);
+        readonly static Button settingsButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Settings", Fonts.LargeFont);
+        readonly static Button creditsButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Credits", Fonts.LargeFont);
+        readonly static Button exitButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Exit", Fonts.LargeFont);
 
         readonly static UiElement[] uiElements = { continueButton, startButton, settingsButton, creditsButton, exitButton };
 

@@ -7,7 +7,7 @@ namespace Caveworks
 {
     public class Slider : UiElement
     {
-        readonly static SpriteFont font = Fonts.DefaultFont;
+        readonly static SpriteFont font = Fonts.SmallFont;
 
         protected int knobSize = 2;
         protected float sliderPosition; // value 0.0 - 1.0
@@ -89,7 +89,7 @@ namespace Caveworks
             Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle((int)(rectangle.X + (sliderPosition * rectangle.Width) - knobSize/2 + border), rectangle.Y - knobSize/4 + border, knobSize - border*2, knobSize - border*2), color);
 
             // text
-            Game.MainSpriteBatch.DrawString(font, value.ToString(), new Vector2((int)(rectangle.X + (sliderPosition * rectangle.Width) - knobSize/2 + (knobSize - textSize.X) / 2), rectangle.Y - knobSize/4 + (knobSize - textSize.Y) / 2), Color.Black);
+            Game.MainSpriteBatch.DrawString(font, value.ToString(), new Vector2((int)(rectangle.X + (sliderPosition * rectangle.Width) - knobSize/2 + (knobSize - textSize.X) / 2), (int)(rectangle.Y - knobSize/4 + (knobSize - textSize.Y) / 2)), Color.Black);
         }
 
 

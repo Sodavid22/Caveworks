@@ -128,8 +128,7 @@ namespace Caveworks
                             {
                                 OpenedBuilding = World.MouseTile.Building;
                                 OpenedBuilding.OpenUI();
-                                Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + 92));
-                                InventoryOpened = true;
+                                TogglePlayerInventory();
                             }
                         }
                     }
@@ -176,9 +175,9 @@ namespace Caveworks
                 }
 
                 Game.MainSpriteBatch.Draw(HeldItem.GetTexture(), rectangle, new Rectangle(0, 0, HeldItem.GetTexture().Width, HeldItem.GetTexture().Height), Color.FromNonPremultiplied(new Vector4(1, 1, 1, 0.5f)), itemRotationAngle, new Vector2(HeldItem.GetTexture().Width / 2, HeldItem.GetTexture().Height / 2), SpriteEffects.None, 0);
-                Game.MainSpriteBatch.DrawString(Fonts.DefaultFont, HeldItem.Count.ToString(), new Vector2((int)MyKeyboard.GetMousePosition().X + 16, (int)MyKeyboard.GetMousePosition().Y + 2), Color.Black);
+                Game.MainSpriteBatch.DrawString(Fonts.SmallFont, HeldItem.Count.ToString(), new Vector2((int)MyKeyboard.GetMousePosition().X + 16, (int)MyKeyboard.GetMousePosition().Y + 2), Color.Black);
             }
-            else if (World.MouseTile.Wall != null) // block mining progress
+            else if (World.MouseTile.Wall != null && !InventoryOpened) // block mining progress
             {
                 int wallHardness = World.MouseTile.Wall.GetHardness();
                 int rectangleSize = (wallHardness - WallHits) * World.Camera.Scale / wallHardness;
@@ -197,7 +196,7 @@ namespace Caveworks
 
             if (InventoryOpened)
             {
-                Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + 92));
+                Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + Inventory.ButtonSpacing + Inventory.Border * 4 + Inventory.BorderOffset));
             }
             else
             {

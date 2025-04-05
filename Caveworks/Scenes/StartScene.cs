@@ -5,12 +5,12 @@ namespace Caveworks
 {
     internal class StartScene : IScene
     {
-        readonly static TextBox backgroundBox = new TextBox(new Vector2(800, 400), Globals.UITextBoxColor, 4, "", Fonts.MenuButtonFont);
+        readonly static TextBox backgroundBox = new TextBox(new Vector2(800, 400), Globals.UITextBoxColor, 4, "", Fonts.LargeFont);
 
-        readonly static TextBox worldSizeText = new TextBox(new Vector2(350, 60), Globals.UIButtonColor, 2, "World size:", Fonts.MenuButtonFont);
+        readonly static TextBox worldSizeText = new TextBox(new Vector2(350, 60), Globals.UIButtonColor, 2, "World size:", Fonts.LargeFont);
         readonly static Slider worldSizeSlider = new Slider(new Vector2(350, 20), Globals.UIButtonColor, 2, 4, 16, 32);
 
-        readonly static Button startButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Start", Fonts.MenuButtonFont);
+        readonly static Button startButton = new Button(new Vector2(200, 60), Globals.UIButtonColor, 2, "Start", Fonts.LargeFont);
 
         readonly static UiElement[] uiElements = { backgroundBox, worldSizeText, worldSizeSlider, startButton };
 

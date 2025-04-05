@@ -5,15 +5,15 @@ namespace Caveworks
 {
     public class SettingsScene : IScene
     {
-        readonly static TextBox backgroundBox = new TextBox(new Vector2(800, 400), Globals.UITextBoxColor, 4, "", Fonts.MenuButtonFont);
+        readonly static TextBox backgroundBox = new TextBox(new Vector2(800, 400), Globals.UITextBoxColor, 4, "", Fonts.LargeFont);
 
-        readonly static TextBox fullscreenText = new TextBox(new Vector2(350, 60), Globals.UIButtonColor, 2, "Fullscreen:", Fonts.MenuButtonFont);
-        readonly static Button fullscreenButton = new Button(new Vector2(350, 60), Globals.UIButtonColor, 2, GameWindow.IsFullscreen.ToString(), Fonts.MenuButtonFont);
+        readonly static TextBox fullscreenText = new TextBox(new Vector2(350, 60), Globals.UIButtonColor, 2, "Fullscreen:", Fonts.LargeFont);
+        readonly static Button fullscreenButton = new Button(new Vector2(350, 60), Globals.UIButtonColor, 2, GameWindow.IsFullscreen.ToString(), Fonts.LargeFont);
 
-        readonly static TextBox volumeText = new TextBox(new Vector2(350, 60), Globals.UIButtonColor, 2, "Volume:", Fonts.MenuButtonFont);
+        readonly static TextBox volumeText = new TextBox(new Vector2(350, 60), Globals.UIButtonColor, 2, "Volume:", Fonts.LargeFont);
         readonly static Slider volumeSlider = new Slider(new Vector2(350, 20), Globals.UIButtonColor, 2, 0, Globals.GlobalVolume * 100, 100);
 
-        readonly static TextBox lightText = new TextBox(new Vector2(350, 60), Globals.UIButtonColor, 2, "Light Distance:", Fonts.MenuButtonFont);
+        readonly static TextBox lightText = new TextBox(new Vector2(350, 60), Globals.UIButtonColor, 2, "Light Distance:", Fonts.LargeFont);
         readonly static Slider lightSlider = new Slider(new Vector2(350, 20), Globals.UIButtonColor, 2, 16, Globals.LightDistance, 24);
 
         readonly static UiElement[] uiElements = { backgroundBox, fullscreenText, fullscreenButton, volumeText, volumeSlider, lightText, lightSlider};

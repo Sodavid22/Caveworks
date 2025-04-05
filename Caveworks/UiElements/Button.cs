@@ -158,5 +158,11 @@ namespace Caveworks
         {
             Muted = true;
         }
+
+
+        public bool IsHovered()
+        {
+            return Hovered;
+        }
     }
 }

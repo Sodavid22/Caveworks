@@ -31,6 +31,7 @@ namespace Caveworks
         }
 
 
+
         public void CalculateLightRanges(int maxLightRange)
         {
             MaxLightRange = maxLightRange;
