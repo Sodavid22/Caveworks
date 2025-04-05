@@ -1,18 +1,20 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
 
+
 namespace Caveworks
 {
     [Serializable]
-    internal class IronChestItem : BaseItem
+    public class ElectricLightItem : BaseItem
     {
-        public IronChestItem(Tile tile, MyVector2 position, int count) : base(tile, position, count) { }
-        public IronChestItem(int count) : base(count) { }
+        public ElectricLightItem(Tile tile, MyVector2 position, int count) : base(tile, position, count) { }
+
+        public ElectricLightItem(int count) : base(count) { }
 
 
         public override Texture2D GetTexture()
         {
-            return Textures.IronChest;
+            return Textures.ElectricLight;
         }
 
 
@@ -22,7 +24,7 @@ namespace Caveworks
 
             if (tile.Wall == null & tile.Building == null & Globals.World.PlayerBody.Tile != tile)
             {
-                new IronChest(tile);
+                new ElectricLight(tile);
                 Sounds.PlayPlaceSound();
                 Count -= 1;
                 if (Count == 0)

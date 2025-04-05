@@ -1,5 +1,4 @@
-﻿using Caveworks.WorldObjects;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 
 namespace Caveworks
@@ -11,9 +10,6 @@ namespace Caveworks
         {
 
         }
-
-
-        public override int GetLightLevel() { return LightManager.MinLightForMaxBrightness; }
 
 
         public override int GetSize() { return 3; }

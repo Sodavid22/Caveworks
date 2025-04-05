@@ -1,8 +1,5 @@
-﻿using Caveworks.WorldObjects;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
-using System.Drawing;
 
 namespace Caveworks
 {
@@ -42,7 +39,6 @@ namespace Caveworks
         public virtual int GetSize() { return 1; } // size
 
         public virtual bool HasUI() { return false; } // can it be interacted with
-
 
         public virtual void OpenUI() { return; }
 

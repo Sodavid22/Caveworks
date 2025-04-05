@@ -1,8 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace Caveworks.WorldObjects.Objects.Buildings.Storage
+namespace Caveworks
 {
     [Serializable]
     class IronChest : BaseBuilding

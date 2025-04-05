@@ -25,6 +25,30 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/Belts/SlowBelt.png;Buildings/Belts/GreenBelt.png
 
+#begin Buildings/Light/ElectricLight.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Light/ElectricLight.png
+
+#begin Buildings/Light/Fireplace.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Light/Fireplace.png
+
 #begin Buildings/Machines/AssemblingMachine.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -2,8 +2,6 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
-using System.Diagnostics;
-using Caveworks.WorldObjects;
 
 namespace Caveworks
 {
