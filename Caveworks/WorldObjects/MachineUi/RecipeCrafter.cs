@@ -87,7 +87,7 @@ namespace Caveworks
                 int x = i % RowLength;
                 int y = i / RowLength;
 
-                Buttons[i] = new Button(new Vector2(ButtonSize, ButtonSize), Globals.InventoryButtonColor, 2, "", Fonts.MediumFont);
+                Buttons[i] = new Button(new Vector2(ButtonSize, ButtonSize), Globals.CraftingBoxColor, 2, RecipeList[i].Result.Count.ToString(), Fonts.MediumFont);
                 Buttons[i].SetTexture(RecipeList[i].Result.GetTexture());
                 Buttons[i].Place(new Vector2(position.X + x * ButtonSpacing, position.Y - y * ButtonSpacing - BorderOffset*2 - Border), Anchor.BottomLeft);
             }
@@ -154,7 +154,7 @@ namespace Caveworks
                 Buttons[i].Draw();
                 if (i == SelectedRecipePosition) // highlight selected recipe
                 {
-                    Game.MainSpriteBatch.Draw(Textures.EmptyTexture, Buttons[i].GetRectangle(), Color.FromNonPremultiplied(new Vector4(0, 0, 1, 0.2f)));
+                    Game.MainSpriteBatch.Draw(Textures.EmptyTexture, Buttons[i].GetRectangle(), Color.FromNonPremultiplied(new Vector4(0, 0, 1, 0.1f)));
                 }
             }
 
