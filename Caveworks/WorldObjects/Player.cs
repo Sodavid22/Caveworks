@@ -96,7 +96,7 @@ namespace Caveworks
                     {
                         HeldItem.PrimaryUse(ItemRotation);
                     }
-                    else if (MyKeyboard.IsPressed(KeyBindings.DROP_KEY)) // drop item
+                    else if (MyKeyboard.IsPressed(KeyBindings.DROP_KEY) && World.MouseTile.Wall == null) // drop item
                     {
                         BaseItem.Drop(HeldItem);
                         Sounds.Woosh.Play(1);

@@ -12,7 +12,7 @@ namespace Caveworks
         }
 
 
-        public override bool AccteptsItems()
+        public override bool AccteptsItems(BaseBuilding building)
         {
             return true;
         }

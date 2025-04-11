@@ -16,7 +16,7 @@ namespace Caveworks
         }
 
 
-        public override bool AccteptsItems() { return true; }
+        public override bool AccteptsItems(BaseBuilding building) { return true; }
 
 
         public override bool HasCollision() { return true; }

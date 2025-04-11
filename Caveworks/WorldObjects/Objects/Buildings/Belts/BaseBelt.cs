@@ -21,7 +21,7 @@ namespace Caveworks
         }
 
 
-        public override bool AccteptsItems()
+        public override bool AccteptsItems(BaseBuilding building)
         {
             if (Tile.Items.Count < MaxItems)
             {
@@ -132,7 +132,7 @@ namespace Caveworks
             Tile nextTile = Globals.World.GetTileByRelativePosition(Tile, Rotation);
             if (nextTile.Building != null)
             {
-                if (nextTile.Building.AccteptsItems())
+                if (nextTile.Building.AccteptsItems(this))
                 {
                     if (nextTile.Building.Inventory == null) // no inventory
                     {

@@ -30,7 +30,7 @@ namespace Caveworks
             }
         }
 
-        public virtual bool AccteptsItems() { return false; } // does building accept items
+        public virtual bool AccteptsItems(BaseBuilding building) { return false; } // does building accept items
 
         public virtual int GetLightLevel() { return 0; } // how bright is the building
 
