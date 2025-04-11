@@ -30,11 +30,13 @@ namespace Caveworks
             }
         }
 
-        public virtual bool AccteptsItems(BaseBuilding building) { return false; } // does building accept items
+        public virtual bool AccteptsItems(BaseBuilding building) { return false; } // does this building accept items
 
         public virtual int GetLightLevel() { return 0; } // how bright is the building
 
         public virtual bool HasCollision() { return false; } // can player collide with it
+
+        public virtual bool IsTransportBuilding() { return false; } // is for transporting items
 
         public virtual int GetSize() { return 1; } // size
 
@@ -52,14 +54,12 @@ namespace Caveworks
 
         public static void DeleteBuilding(BaseBuilding building)
         {
-            Debug.WriteLine("_____");
             Tile clearedTile;
 
             for (int x = building.Tile.Position.X; x < building.Tile.Position.X + building.GetSize(); x++)
             {
                 for (int y = building.Tile.Position.Y; y < building.Tile.Position.Y + building.GetSize(); y++)
                 {
-                    Debug.WriteLine(x + "-" + y);
                     clearedTile = Globals.World.GlobalCordsToTile(new MyVector2Int(x, y));
                     clearedTile.Building = null;
                 }

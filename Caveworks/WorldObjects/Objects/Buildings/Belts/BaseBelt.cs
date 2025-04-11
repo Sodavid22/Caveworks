@@ -21,6 +21,12 @@ namespace Caveworks
         }
 
 
+        public override bool IsTransportBuilding()
+        {
+            return true;
+        }
+
+
         public override bool AccteptsItems(BaseBuilding building)
         {
             if (Tile.Items.Count < MaxItems)

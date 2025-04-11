@@ -63,6 +63,7 @@ namespace Caveworks
             Player.Inventory.TryAddItem(new ElectricLightItem(100));
             Player.Inventory.TryAddItem(new FireplaceItem(100));
             Player.Inventory.TryAddItem(new CrossroadItem(100));
+            Player.Inventory.TryAddItem(new SplitterItem(100));
 
             WorldMousePos = GetWorldMousePos();
             LastMouseTile = MouseTile;

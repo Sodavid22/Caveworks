@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using System.Diagnostics;
 
 namespace Caveworks
 {
@@ -8,8 +7,6 @@ namespace Caveworks
     public class Crossroad : BaseBuilding
     {
         public const float Offset = 0.01f;
-        public BaseItem XItem;
-        public BaseItem YItem;
 
 
         public Crossroad(Tile tile) : base(tile, 1) { }
@@ -21,29 +18,42 @@ namespace Caveworks
         }
 
 
+        public override bool IsTransportBuilding()
+        {
+            return true;
+        }
+
+
         public override BaseItem ToItem()
         {
-            if (XItem != null)
-            {
-                XItem.UpdateTiles(Tile);
-            }
-            if (YItem != null)
-            {
-                YItem.UpdateTiles(Tile);
-            }
             return new CrossroadItem(1);
         }
 
 
         public override bool AccteptsItems(BaseBuilding building)
         {
-            if (building.Position.Y == Tile.Position.Y && XItem == null)
+            Tile targetTile;
+            if (building.Position.Y == Tile.Position.Y && Tile.Items.Count == 0) // left right
             {
-                return true;
+                targetTile = Globals.World.GetTileByRelativePosition(Tile, new MyVector2Int(Tile.Position.X - building.Position.X, 0));
+                if (targetTile.Building != null)
+                {
+                    if (targetTile.Building.IsTransportBuilding() && targetTile.Building.AccteptsItems(this))
+                    {
+                        return true;
+                    }
+                }
             }
-            if (building.Position.X == Tile.Position.X && YItem == null)
+            if (building.Position.X == Tile.Position.X && Tile.Items.Count == 0 ) // up down
             {
-                return true;
+                targetTile = Globals.World.GetTileByRelativePosition(Tile, new MyVector2Int(0, Tile.Position.Y - building.Position.Y));
+                if (targetTile.Building != null)
+                {
+                    if (targetTile.Building.IsTransportBuilding() && targetTile.Building.AccteptsItems(this))
+                    {
+                        return true;
+                    }
+                }
             }
             return false;
         }
@@ -51,59 +61,32 @@ namespace Caveworks
 
         public override void Update(float deltaTime)
         {
-            if (Tile.Items.Count > 0)
+            foreach (BaseItem item in Tile.Items.ToArray())
             {
-                if (MathF.Abs(Tile.Position.X + 0.5f - Tile.Items[0].Coordinates.X) > MathF.Abs(Tile.Position.Y + 0.5f - Tile.Items[0].Coordinates.Y)) // displaced on X axis
+                if (MathF.Abs(Tile.Position.X + 0.5f - item.Coordinates.X) > MathF.Abs(Tile.Position.Y + 0.5f - item.Coordinates.Y)) // X axis or Y axis
                 {
-                    XItem = Tile.Items[0];
-                    Tile.Items[0].RemoveFromTile(Tile);
-                }
-                else  // displaced on Y axis
-                {
-                    YItem = Tile.Items[0];
-                    Tile.Items[0].RemoveFromTile(Tile);
-                }
-            }
-
-            if (XItem != null)
-            {
-                if (XItem.Coordinates.X < Tile.Position.X + 0.5f) // left to right
-                {
-                    if (Globals.World.GetTileByRelativePosition(Tile, new MyVector2Int(1, 0)).Items.Count < 4)
+                    if (item.Coordinates.X < Tile.Position.X + 0.5f) // left to right
                     {
-                        XItem.Coordinates.X = Tile.Position.X + 1 + Offset;
-                        XItem.UpdateTiles(Tile);
-                        XItem = null;
+                        item.Coordinates.X = Tile.Position.X + 1 + Offset;
+                        item.UpdateTiles(Tile);
+                    }
+                    else if (item.Coordinates.X > Tile.Position.X + 0.5f) // right to left
+                    {
+                        item.Coordinates.X = Tile.Position.X - Offset;
+                        item.UpdateTiles(Tile);
                     }
                 }
-                else if (XItem.Coordinates.X > Tile.Position.X + 0.5f) // right to left
+                else
                 {
-                    if (Globals.World.GetTileByRelativePosition(Tile, new MyVector2Int(-1, 0)).Items.Count < 4)
+                    if (item.Coordinates.Y < Tile.Position.Y + 0.5f) // up to down
                     {
-                        XItem.Coordinates.X = Tile.Position.X - Offset;
-                        XItem.UpdateTiles(Tile);
-                        XItem = null;
+                        item.Coordinates.Y = Tile.Position.Y + 1 + Offset;
+                        item.UpdateTiles(Tile);
                     }
-                }
-            }
-            if (YItem != null)
-            { 
-                if (YItem.Coordinates.Y < Tile.Position.Y + 0.5f) // up to down
-                {
-                    if (Globals.World.GetTileByRelativePosition(Tile, new MyVector2Int(0, 1)).Items.Count < 4)
+                    else if (item.Coordinates.Y > Tile.Position.Y + 0.5f) // down to up
                     {
-                        YItem.Coordinates.Y = Tile.Position.Y + 1 + Offset;
-                        YItem.UpdateTiles(Tile);
-                        YItem = null;
-                    }
-                }
-                else if (YItem.Coordinates.Y > Tile.Position.Y + 0.5f) // down to up
-                {
-                    if (Globals.World.GetTileByRelativePosition(Tile, new MyVector2Int(0, -1)).Items.Count < 4)
-                    {
-                        YItem.Coordinates.Y = Tile.Position.Y - Offset;
-                        YItem.UpdateTiles(Tile);
-                        YItem = null;
+                        item.Coordinates.Y = Tile.Position.Y - Offset;
+                        item.UpdateTiles(Tile);
                     }
                 }
             }
