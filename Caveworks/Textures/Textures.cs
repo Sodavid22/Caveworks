@@ -45,6 +45,7 @@ namespace Caveworks
         public static Texture2D StoneFurnaceLit2 { get; private set; }
         public static Texture2D StoneFurnaceLit3 { get; private set; }
         public static Texture2D Drill { get; private set; }
+        public static Texture2D ResearchLab { get; private set; }
 
         public static void Load(ContentManager contentManager)
         {
@@ -86,6 +87,7 @@ namespace Caveworks
             Textures.StoneFurnaceLit2 = contentManager.Load<Texture2D>("Buildings/Machines/StoneFurnaceLit2");
             Textures.StoneFurnaceLit3 = contentManager.Load<Texture2D>("Buildings/Machines/StoneFurnaceLit3");
             Textures.Drill = contentManager.Load<Texture2D>("Buildings/Machines/Drill");
+            Textures.ResearchLab = contentManager.Load<Texture2D>("Buildings/Machines/ResearchLab");
         }
     }
 }

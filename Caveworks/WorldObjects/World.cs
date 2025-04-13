@@ -12,6 +12,7 @@ namespace Caveworks
         public Chunk[,] ChunkList;
         public Camera Camera;
         public Player Player;
+        public ResearchManager Research;
         public PlayerBody PlayerBody;
         public float DeltaTime = 0;
 
@@ -49,6 +50,7 @@ namespace Caveworks
             Camera = new Camera(this, new MyVector2(worldSize / 2, worldSize / 2), (int)(GameWindow.Size.X / 64));
             Player = new Player(this);
             PlayerBody = new PlayerBody(GlobalCordsToTile(new MyVector2Int(WorldDiameter/2, WorldDiameter/2)));
+            Research = new ResearchManager();
 
             // TESTCODE
             for (int i = 0; i < 5; i++)
@@ -66,6 +68,7 @@ namespace Caveworks
             Player.PlayerInventory.TryAddItem(new SplitterItem(100));
             Player.PlayerInventory.TryAddItem(new StoneFurnaceItem(100));
             Player.PlayerInventory.TryAddItem(new DrillItem(100));
+            Player.PlayerInventory.TryAddItem(new ResearchLabItem(100));
 
             WorldMousePos = GetWorldMousePos();
             LastMouseTile = MouseTile;
@@ -100,6 +103,7 @@ namespace Caveworks
             Player.Update(DeltaTime);
             PlayerBody.Update(DeltaTime);
             Camera.Update();
+            Research.Update();
             Sounds.PlaceSoundCooldown -= DeltaTime;
 
             LightmapTask = Task.Run(() => Camera.LightMap.UpdateLightmap(Camera));
@@ -118,6 +122,7 @@ namespace Caveworks
             Camera.DrawWorld();
             Player.Draw();
             PlayerBody.Draw(Camera);
+            Research.Draw();
 
             if (LightmapTask != null)
             {

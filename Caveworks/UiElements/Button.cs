@@ -82,7 +82,7 @@ namespace Caveworks
             // draw text
             if (Text != null)
             {
-                Game.MainSpriteBatch.DrawString(Font, Text, new Vector2((int)(rectangle.X + rectangle.Width / 2 - textSize.X / 2), (int)(rectangle.Y + rectangle.Height / 2 - textSize.Y / 2)), Color.Black);
+                Game.MainSpriteBatch.DrawString(Font, Text, new Vector2((int)(rectangle.X + rectangle.Width / 2 - textSize.X / 2 + 2), (int)(rectangle.Y + rectangle.Height / 2 - textSize.Y / 2)), Color.Black); // +2 to X coordinates makes it look better
             }
         }
 
