@@ -133,6 +133,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/Machines/Drill.png
 
+#begin Buildings/Machines/ResearchLab.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Machines/ResearchLab.png
+
 #begin Buildings/Machines/StoneFurnace.png
 /importer:TextureImporter
 /processor:TextureProcessor
