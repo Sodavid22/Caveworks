@@ -9,10 +9,10 @@ namespace Caveworks
     {
         public const int ItemLimit = 10;
 
-        public BaseMachine(Tile tile, int size, int inventorySize) : base(tile, size)
+        public BaseMachine(Tile tile, int size, int inventorySize, List<Recipe> recipeList) : base(tile, size)
         {
             this.Inventory = new Inventory(inventorySize, Globals.World.Player);
-            this.Crafter = new RecipeCrafter(new List<Recipe> { RecipeList.Stonification, RecipeList.IronChestRecipe }, Inventory);
+            this.Crafter = new RecipeCrafter(recipeList, Inventory, false);
         }
 
 

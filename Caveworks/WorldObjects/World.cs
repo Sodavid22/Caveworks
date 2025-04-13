@@ -53,17 +53,19 @@ namespace Caveworks
             // TESTCODE
             for (int i = 0; i < 5; i++)
             {
-                Player.Inventory.TryAddItem(new SlowBeltItem(100));
+                Player.PlayerInventory.TryAddItem(new SlowBeltItem(100));
             }
-            Player.Inventory.TryAddItem(new RawIronOreItem(100));
-            Player.Inventory.TryAddItem(new RawCopperOreItem(100));
-            Player.Inventory.TryAddItem(new RawStoneItem(100));
-            Player.Inventory.TryAddItem(new IronChestItem(100));
-            Player.Inventory.TryAddItem(new AsseblingMachineItem(100));
-            Player.Inventory.TryAddItem(new ElectricLightItem(100));
-            Player.Inventory.TryAddItem(new FireplaceItem(100));
-            Player.Inventory.TryAddItem(new CrossroadItem(100));
-            Player.Inventory.TryAddItem(new SplitterItem(100));
+            Player.PlayerInventory.TryAddItem(new RawIronOreItem(100));
+            Player.PlayerInventory.TryAddItem(new RawCopperOreItem(100));
+            Player.PlayerInventory.TryAddItem(new RawStoneItem(100));
+            Player.PlayerInventory.TryAddItem(new IronChestItem(100));
+            Player.PlayerInventory.TryAddItem(new AsseblingMachineItem(100));
+            Player.PlayerInventory.TryAddItem(new ElectricLightItem(100));
+            Player.PlayerInventory.TryAddItem(new FireplaceItem(100));
+            Player.PlayerInventory.TryAddItem(new CrossroadItem(100));
+            Player.PlayerInventory.TryAddItem(new SplitterItem(100));
+            Player.PlayerInventory.TryAddItem(new StoneFurnaceItem(100));
+            Player.PlayerInventory.TryAddItem(new DrillItem(100));
 
             WorldMousePos = GetWorldMousePos();
             LastMouseTile = MouseTile;
@@ -95,7 +97,7 @@ namespace Caveworks
             }
 
 
-            Player.Update();
+            Player.Update(DeltaTime);
             PlayerBody.Update(DeltaTime);
             Camera.Update();
             Sounds.PlaceSoundCooldown -= DeltaTime;

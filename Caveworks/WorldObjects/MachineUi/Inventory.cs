@@ -34,7 +34,10 @@ namespace Caveworks
         {
             foreach (BaseItem item in Items)
             {
-                return item;
+                if (item != null)
+                {
+                    return item;
+                }
             }
             return null;
         }

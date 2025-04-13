@@ -1,12 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
 
 namespace Caveworks
 {
     [Serializable]
     public class AsssemblingMachine : BaseMachine
     {
-        public AsssemblingMachine(Tile tile):base(tile, 3, 4)
+        public AsssemblingMachine(Tile tile):base(tile, 3, 4, new List<Recipe> { RecipeList.Stonification, RecipeList.IronChestRecipe })
         {
 
         }

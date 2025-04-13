@@ -11,15 +11,18 @@ namespace Caveworks
             tile.Wall = this;
         }
 
-        public override bool IsDestructible() { return true; }
+        public override bool IsDestructible() { return false; }
 
 
-        public override int GetHardness() { return 10; }
+        public override int GetHardness() { return 8; }
 
 
-        public override void WhenMined(Player player, Tile wallTile)
+        public override int GetDrillTime() { return 4; }
+
+
+        public override BaseItem GetItem(Tile wallTile)
         {
-            player.Inventory.TryAddItem(new RawIronOreItem(1));
+            return new RawIronOreItem(1);
         }
 
 

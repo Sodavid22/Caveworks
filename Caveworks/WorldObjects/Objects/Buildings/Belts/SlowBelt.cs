@@ -7,7 +7,7 @@ namespace Caveworks
     [Serializable]
     public class SlowBelt : BaseBelt
     {
-        public static float BeltSpeed = 2;
+        public static float BeltSpeed = 1;
 
 
         public SlowBelt(Tile tile, MyVector2Int rotation) : base(tile, rotation) { }

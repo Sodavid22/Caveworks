@@ -35,8 +35,16 @@ namespace Caveworks
         public static Texture2D AssemblingMachine { get; private set; }
         public static Texture2D ElectricLight { get; private set; }
         public static Texture2D Fireplace { get; private set; }
+        public static Texture2D Fireplace2 { get; private set; }
+        public static Texture2D Fireplace3 { get; private set; }
+        public static Texture2D FireplaceMask { get; private set; }
         public static Texture2D Crossroad { get; private set; }
         public static Texture2D Splitter { get; private set; }
+        public static Texture2D StoneFurnace { get; private set; }
+        public static Texture2D StoneFurnaceLit { get; private set; }
+        public static Texture2D StoneFurnaceLit2 { get; private set; }
+        public static Texture2D StoneFurnaceLit3 { get; private set; }
+        public static Texture2D Drill { get; private set; }
 
         public static void Load(ContentManager contentManager)
         {
@@ -68,8 +76,16 @@ namespace Caveworks
             Textures.AssemblingMachine = contentManager.Load<Texture2D>("Buildings/Machines/AssemblingMachine");
             Textures.ElectricLight = contentManager.Load<Texture2D>("Buildings/Light/ElectricLight");
             Textures.Fireplace = contentManager.Load<Texture2D>("Buildings/Light/Fireplace");
+            Textures.Fireplace2 = contentManager.Load<Texture2D>("Buildings/Light/Fireplace2");
+            Textures.Fireplace3 = contentManager.Load<Texture2D>("Buildings/Light/Fireplace3");
+            Textures.FireplaceMask = contentManager.Load<Texture2D>("Buildings/Light/FireplaceMask");
             Textures.Crossroad = contentManager.Load<Texture2D>("Buildings/Belts/Crossroad");
             Textures.Splitter = contentManager.Load<Texture2D>("Buildings/Belts/Splitter");
+            Textures.StoneFurnace = contentManager.Load<Texture2D>("Buildings/Machines/StoneFurnace");
+            Textures.StoneFurnaceLit = contentManager.Load<Texture2D>("Buildings/Machines/StoneFurnaceLit");
+            Textures.StoneFurnaceLit2 = contentManager.Load<Texture2D>("Buildings/Machines/StoneFurnaceLit2");
+            Textures.StoneFurnaceLit3 = contentManager.Load<Texture2D>("Buildings/Machines/StoneFurnaceLit3");
+            Textures.Drill = contentManager.Load<Texture2D>("Buildings/Machines/Drill");
         }
     }
 }

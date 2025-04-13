@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Caveworks
 {
@@ -9,38 +10,46 @@ namespace Caveworks
     public class Player
     {
         public World World;
-        public Inventory Inventory;
+        public Inventory PlayerInventory;
         public bool InventoryOpened;
         public BaseItem HeldItem;
         public MyVector2Int ItemRotation;
         public int WallHits = 0;
         public BaseBuilding OpenedBuilding;
+        public RecipeCrafter Crafter;
 
 
         public Player(World world)
         {
             World = world;
-            Inventory = new Inventory(30, this);
+            PlayerInventory = new Inventory(30, this);
             InventoryOpened = false;
             HeldItem = null;
             ItemRotation = new MyVector2Int(1, 0);
+            Crafter = new RecipeCrafter(new List<Recipe> { RecipeList.IronChestRecipe }, PlayerInventory, true);
         }
 
 
         public void CloseUi()
         {
-            Inventory.CloseUI();
+            PlayerInventory.CloseUI();
             InventoryOpened = false;
             if (OpenedBuilding != null)
             {
                 OpenedBuilding.CloseUI();
                 OpenedBuilding = null;
             }
+            else
+            {
+                Crafter.CloseUI();
+            }
         }
 
 
-        public void Update()
+        public void Update(float deltaTime)
         {
+            Crafter.Update(deltaTime);
+
             if (World.MouseTile != World.LastMouseTile) // reset wall mining
             {
                 WallHits = 0;
@@ -53,7 +62,11 @@ namespace Caveworks
 
             if (InventoryOpened)
             {
-                Inventory.UpdateUI();
+                PlayerInventory.UpdateUI();
+                if (OpenedBuilding == null)
+                {
+                    Crafter.UpdateUI();
+                }
             }
 
             if (OpenedBuilding != null)
@@ -110,11 +123,15 @@ namespace Caveworks
                         {
                             if (WallHits >= World.MouseTile.Wall.GetHardness() - 1)
                             {
-                                World.MouseTile.Wall.WhenMined(this, World.MouseTile);
+                                PlayerInventory.TryAddItem(World.MouseTile.Wall.GetItem(World.MouseTile));
+                                if (World.MouseTile.Wall.IsDestructible())
+                                {
+                                    World.MouseTile.Wall = null;
+                                }
                                 WallHits = 0;
                                 Sounds.Pickaxe.Play(1);
                             }
-                            else if (World.MouseTile.Wall.IsDestructible())
+                            else if (World.MouseTile.Wall.IsMineable())
                             {
                                 WallHits += 1;
                                 Sounds.Pickaxe.Play(1);
@@ -139,7 +156,11 @@ namespace Caveworks
         {
             if (InventoryOpened) // draw inventory
             {
-                Inventory.DrawUI();
+                PlayerInventory.DrawUI();
+                if (OpenedBuilding == null)
+                {
+                    Crafter.DrawUI();
+                }
             }
 
             if (OpenedBuilding != null)
@@ -158,7 +179,15 @@ namespace Caveworks
                 }
                 else
                 {
-                    MyVector2Int screenCords = World.Camera.WorldToScreenCords(new MyVector2(World.MouseTile.Position.X + 0.5f, World.MouseTile.Position.Y + 0.5f));
+                    MyVector2Int screenCords;
+                    if (HeldItem.GetTexture().Width == 32)
+                    {
+                        screenCords = World.Camera.WorldToScreenCords(new MyVector2(World.MouseTile.Position.X + 1f, World.MouseTile.Position.Y + 1f));
+                    }
+                    else
+                    {
+                        screenCords = World.Camera.WorldToScreenCords(new MyVector2(World.MouseTile.Position.X + 0.5f, World.MouseTile.Position.Y + 0.5f));
+                    }
                     rectangle = new Rectangle(screenCords.X, screenCords.Y, World.Camera.Scale * (HeldItem.GetTexture().Width) / 16, World.Camera.Scale * (HeldItem.GetTexture().Height) / 16);
                 }
 
@@ -194,15 +223,23 @@ namespace Caveworks
 
             if (InventoryOpened)
             {
-                Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + Inventory.ButtonSpacing + Inventory.Border * 4 + Inventory.BorderOffset));
+                PlayerInventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + Inventory.ButtonSpacing + Inventory.Border * 4 + Inventory.BorderOffset));
+                if (OpenedBuilding == null)
+                {
+                    Crafter.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 + Inventory.ButtonSpacing + Inventory.Border * 4 + Inventory.BorderOffset));
+                }
             }
             else
             {
-                Inventory.CloseUI();
+                PlayerInventory.CloseUI();
                 if (OpenedBuilding != null)
                 {
                     OpenedBuilding.CloseUI();
                     OpenedBuilding = null;
+                }
+                else
+                {
+                    Crafter.CloseUI();
                 }
             }
         }
@@ -236,7 +273,7 @@ namespace Caveworks
         {
             if (HeldItem != null) // stop holding item
             {
-                if (Inventory.TryAddItem(HeldItem))
+                if (PlayerInventory.TryAddItem(HeldItem))
                 {
                     HeldItem = null;
                     Sounds.Woosh.Play(1);
@@ -261,7 +298,7 @@ namespace Caveworks
 
                     foreach (BaseItem item in checkedTile.Items.ToList())
                     {
-                        if (Inventory.TryAddItem(item))
+                        if (PlayerInventory.TryAddItem(item))
                         {
                             item.RemoveFromTile(checkedTile);
                         }
@@ -280,7 +317,7 @@ namespace Caveworks
                 {
                     if (World.MouseTile.Building.Inventory.Items[i] != null)
                     {
-                        if (Inventory.TryAddItem(World.MouseTile.Building.Inventory.Items[i]))
+                        if (PlayerInventory.TryAddItem(World.MouseTile.Building.Inventory.Items[i]))
                         {
                             World.MouseTile.Building.Inventory.Items[i] = null;
                         }
@@ -293,7 +330,7 @@ namespace Caveworks
             }
             if (emptyBuilding)
             {
-                if (World.Player.Inventory.TryAddItem(World.MouseTile.Building.ToItem())) // if not full inventory
+                if (World.Player.PlayerInventory.TryAddItem(World.MouseTile.Building.ToItem())) // if not full inventory
                 {
                     BaseBuilding.DeleteBuilding(World.MouseTile.Building);
                     Sounds.PlayPlaceSound();

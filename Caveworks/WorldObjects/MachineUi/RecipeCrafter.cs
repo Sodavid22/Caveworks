@@ -24,18 +24,20 @@ namespace Caveworks
         public Recipe SelectedRecipe;
         public int SelectedRecipePosition;
         public float CraftingProgress;
+        public bool IgnoreLimits;
 
         [NonSerialized]
         Button[] Buttons;
 
 
-        public RecipeCrafter(List<Recipe> recipeList, Inventory inventory)
+        public RecipeCrafter(List<Recipe> recipeList, Inventory inventory, bool ignoreLimits)
         {
             RecipeList = recipeList;
             Inventory = inventory;
             SelectedRecipe = null;
             SelectedRecipePosition = -1;
             CraftingProgress = 0;
+            IgnoreLimits = ignoreLimits;
         }
 
 
@@ -61,7 +63,7 @@ namespace Caveworks
 
                 if (CraftingProgress > SelectedRecipe.CraftingTime)
                 {
-                    if (Inventory.CountItems(SelectedRecipe.Result) < BaseMachine.ItemLimit)
+                    if (Inventory.CountItems(SelectedRecipe.Result) < BaseMachine.ItemLimit || IgnoreLimits)
                     {
                         if (Inventory.TryAddItem(Cloning.DeepClone(SelectedRecipe.Result)))
                         {
