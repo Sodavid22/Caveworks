@@ -26,7 +26,7 @@ namespace Caveworks
                 }
             }
 
-            AddOreVein(CaveMap, worldDiameter, 20, 10, 10);
+            AddOreVein(CaveMap, worldDiameter, 16, 5, 10);
 
             for (int i = 0; i < 8; i++)
             {
@@ -191,12 +191,20 @@ namespace Caveworks
             veinX = mapDiameter / 2 + veinX;
             veinY = mapDiameter / 2 + veinY;
 
-            for (int x = -size/2; x <= size/2; x++)
+            for (int i=0; i<5; i++)
             {
-                for (int y = -size/2; y <= size/2; y++)
+                int offsetX = random.Next(-size / 2, size / 2);
+                int offsetY = random.Next(-size / 2, size / 2);
+
+                for (int x = -size / 2; x <= size / 2; x++)
                 {
-                    if (x*x+y*y < size*size/4)
-                    map[veinX + x, veinY + y] = wallType;
+                    for (int y = -size / 2; y <= size / 2; y++)
+                    {
+                        if (x * x + y * y < size * size / 4)
+                        {
+                            map[veinX + x + offsetX, veinY + y + offsetY] = wallType;
+                        }
+                    }
                 }
             }
         }
