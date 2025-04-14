@@ -4,18 +4,18 @@ using System;
 namespace Caveworks
 {
     [Serializable]
-    internal class StoneWall : BaseWall
+    internal class StoneWallStronger : BaseWall
     {
-        public StoneWall(Tile tile)
+        public StoneWallStronger(Tile tile)
         {
             tile.Wall = this;
         }
 
 
-        public override int GetHardness() { return 3; }
+        public override int GetHardness() { return 6; }
 
 
-        public override int GetDrillTime() { return 8; }
+        public override int GetDrillTime() { return 4; }
 
 
         public override BaseItem GetItem(Tile wallTile)
@@ -28,7 +28,7 @@ namespace Caveworks
         {
             MyVector2Int screenCoordinates = camera.WorldToScreenCords(tile.Position);
             Rectangle wallRectangle = new Rectangle(screenCoordinates.X, screenCoordinates.Y, camera.Scale, camera.Scale);
-            Game.WallSpritebatch.Draw(Textures.StoneWall, wallRectangle, Color.White);
+            Game.WallSpritebatch.Draw(Textures.StoneWallStronger, wallRectangle, Color.White);
         }
     }
 }

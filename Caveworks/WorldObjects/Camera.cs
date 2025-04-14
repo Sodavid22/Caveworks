@@ -40,6 +40,11 @@ namespace Caveworks
             
             if (Scale < GameWindow.Size.X / 64) { Scale = (int)(GameWindow.Size.X / 64); } // zoom maximum
 
+            if (Scale % 2 != 0)
+            {
+                Scale -= 1;
+            }
+
             if (World.PlayerBody != null)
             {
                 this.Coordinates = World.PlayerBody.Coordinates;

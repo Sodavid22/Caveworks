@@ -18,6 +18,8 @@ namespace Caveworks
 
         // walls:
         public static Texture2D StoneWall { get; private set; }
+        public static Texture2D StoneWallStronger { get; private set; }
+        public static Texture2D StoneWallStrongest { get; private set; }
         public static Texture2D RawIronOreWall { get; private set; }
 
         // creatures
@@ -61,6 +63,8 @@ namespace Caveworks
 
             // walls:
             Textures.StoneWall = contentManager.Load<Texture2D>("Walls/StoneWall");
+            Textures.StoneWallStronger = contentManager.Load<Texture2D>("Walls/StoneWallStronger");
+            Textures.StoneWallStrongest = contentManager.Load<Texture2D>("Walls/StoneWallStrongest");
             Textures.RawIronOreWall = contentManager.Load<Texture2D>("Walls/RawIronOreWall");
 
             // creatures:

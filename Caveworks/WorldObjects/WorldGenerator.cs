@@ -1,18 +1,17 @@
 ﻿using SharpDX;
 using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 namespace Caveworks
 {
     public static class WorldGenerator // 0 = empty, 1 = wall, 1 < special tiles
     {
         public static int[,] CaveMap;
 
-        enum Walls
-        {
-            None = 0,
-            Stone = 1,
-            Iron = 10,
-        }
+        /*
+        0 = nothing
+        1 = wall
+        10 = iron ore
+        */
 
         public static Chunk[,] GenerateWorld(World world, int worldSize, int worldDiameter)
         {
@@ -27,7 +26,7 @@ namespace Caveworks
                 }
             }
 
-            AddOreVein(CaveMap, worldDiameter, 20, 10, 2);
+            AddOreVein(CaveMap, worldDiameter, 20, 10, 10);
 
             for (int i = 0; i < 8; i++)
             {
@@ -149,9 +148,20 @@ namespace Caveworks
 
                             if (tileValue == 1)
                             {
-                                new StoneWall(tile);
+                                if (MathF.Pow(world.WorldDiameter/2 - tile.Position.X, 2) + MathF.Pow(world.WorldDiameter/2 - tile.Position.Y, 2) > MathF.Pow(128, 2))
+                                {
+                                    new StoneWallStrongest(tile);
+                                }
+                                else if (MathF.Pow(world.WorldDiameter / 2 - tile.Position.X, 2) + MathF.Pow(world.WorldDiameter / 2 - tile.Position.Y, 2) > MathF.Pow(64, 2))
+                                {
+                                    new StoneWallStronger(tile);
+                                }
+                                else
+                                {
+                                    new StoneWall(tile);
+                                }
                             }
-                            else if (tileValue == 2)
+                            else if (tileValue == 10)
                             {
                                 new RawIronOreWall(tile);
                             }

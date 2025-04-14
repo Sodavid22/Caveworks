@@ -117,10 +117,17 @@ namespace Caveworks
             MainSpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             // draw background
-            Game.FloorSpriteBatch.Draw(Textures.MenuBackground, new Rectangle(0, 0, (int)GameWindow.Size.X, (int)GameWindow.Size.Y), Color.White);
+            if (Globals.ActiveScene.GetType() != typeof(WorldScene))
+            {
+                Game.FloorSpriteBatch.Draw(Textures.MenuBackground, new Rectangle(0, 0, (int)GameWindow.Size.X, (int)GameWindow.Size.Y), Color.White);
+            }
+            else
+            {
+                Game.FloorSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(0, 0, (int)GameWindow.Size.X, (int)GameWindow.Size.Y), Color.Black);
+            }
 
-            // draw screens
-            IScene scene = Globals.ActiveScene;
+                // draw screens
+                IScene scene = Globals.ActiveScene;
             scene.Draw(gameTime);
 
             // draw FPS counter

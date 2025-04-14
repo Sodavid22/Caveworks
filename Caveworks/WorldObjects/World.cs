@@ -127,6 +127,7 @@ namespace Caveworks
             if (LightmapTask != null)
             {
                 LightmapTask.Wait();
+                // TEST - unhash before use
                 Camera.LightMap.DrawUpscaled(Camera);
             }
         }
