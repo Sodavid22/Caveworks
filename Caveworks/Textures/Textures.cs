@@ -21,6 +21,8 @@ namespace Caveworks
         public static Texture2D StoneWallStronger { get; private set; }
         public static Texture2D StoneWallStrongest { get; private set; }
         public static Texture2D RawIronOreWall { get; private set; }
+        public static Texture2D RawCopperOreWall { get; private set; }
+        public static Texture2D RawCoalWall { get; private set; }
 
         // creatures
         public static Texture2D Player {  get; private set; }
@@ -29,6 +31,12 @@ namespace Caveworks
         public static Texture2D RawIronOre { get; private set; }
         public static Texture2D RawCopperOre { get; private set; }
         public static Texture2D RawStone { get; private set; }
+        public static Texture2D RawCoal { get; private set; }
+        public static Texture2D CopperPlate { get; private set; }
+        public static Texture2D IronPlate { get; private set; }
+        public static Texture2D CopperWire { get; private set; }
+        public static Texture2D IronGear { get; private set; }
+        public static Texture2D GreenCircuit { get; private set; }
 
         // buildings
 
@@ -66,6 +74,8 @@ namespace Caveworks
             Textures.StoneWallStronger = contentManager.Load<Texture2D>("Walls/StoneWallStronger");
             Textures.StoneWallStrongest = contentManager.Load<Texture2D>("Walls/StoneWallStrongest");
             Textures.RawIronOreWall = contentManager.Load<Texture2D>("Walls/RawIronOreWall");
+            Textures.RawCopperOreWall = contentManager.Load<Texture2D>("Walls/RawCopperOreWall");
+            Textures.RawCoalWall = contentManager.Load<Texture2D>("Walls/RawCoalWall");
 
             // creatures:
             Textures.Player = contentManager.Load<Texture2D>("Creatures/Player");
@@ -74,6 +84,12 @@ namespace Caveworks
             Textures.RawIronOre = contentManager.Load<Texture2D>("Items/Ores/RawIronOre");
             Textures.RawCopperOre = contentManager.Load<Texture2D>("Items/Ores/RawCopperOre");
             Textures.RawStone = contentManager.Load<Texture2D>("Items/Ores/RawStone");
+            Textures.RawCoal = contentManager.Load<Texture2D>("Items/Ores/RawCoal");
+            Textures.CopperPlate = contentManager.Load<Texture2D>("Items/Parts/CopperPlate");
+            Textures.IronPlate = contentManager.Load<Texture2D>("Items/Parts/IronPlate");
+            Textures.CopperWire = contentManager.Load<Texture2D>("Items/Parts/CopperWire");
+            Textures.IronGear = contentManager.Load<Texture2D>("Items/Parts/IronGear");
+            Textures.GreenCircuit = contentManager.Load<Texture2D>("Items/Parts/GreenCircuit");
 
             // buildings:
             Textures.SlowBelt = contentManager.Load<Texture2D>("Buildings/Belts/GreenBelt");

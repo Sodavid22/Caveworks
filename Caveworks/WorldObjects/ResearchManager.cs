@@ -21,9 +21,8 @@ namespace Caveworks
 
         public ResearchManager()
         {
-            ResearchGoals.Add(new List<BaseItem> { new RawStoneItem(4), new RawIronOreItem(2) });
-            ResearchGoals.Add(new List<BaseItem> { new RawStoneItem(8), new RawIronOreItem(4) });
-            ResearchGoals.Add(new List<BaseItem> { new RawStoneItem(16), new RawIronOreItem(8) });
+            ResearchGoals.Add(new List<BaseItem> { new IronPlate(10), new CopperPlate(10) });
+            ResearchGoals.Add(new List<BaseItem> { new GreenCircuit(10)});
 
             CurrentItemGoals = ResearchGoals[CurrentResearch];
             RemainingItems = Cloning.DeepClone(ResearchGoals[CurrentResearch]);
@@ -54,7 +53,9 @@ namespace Caveworks
                 Globals.World.Player.CloseUi();
                 if (CurrentResearch == 1)
                 {
-                    Globals.World.Player.Crafter.RecipeList.Add(RecipeList.Stonification);
+                    Globals.World.Player.Crafter.RecipeList = new List<Recipe> { RecipeList.IronGear, RecipeList.CopperWire, RecipeList.GreenCircuit, RecipeList.StoneFurnace,
+            RecipeList.AssemblingMachine, RecipeList.Drill, RecipeList.ResearchLab, RecipeList.SlowBelt, RecipeList.CrossRoad, RecipeList.Splitter,
+            RecipeList.ElectricLight, RecipeList.Fireplace, RecipeList.IronChest};
                 }
             }
         }

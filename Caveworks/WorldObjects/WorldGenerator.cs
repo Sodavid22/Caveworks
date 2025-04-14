@@ -11,6 +11,8 @@ namespace Caveworks
         0 = nothing
         1 = wall
         10 = iron ore
+        11 = copper ore
+        12 = coal
         */
 
         public static Chunk[,] GenerateWorld(World world, int worldSize, int worldDiameter)
@@ -26,7 +28,9 @@ namespace Caveworks
                 }
             }
 
-            AddOreVein(CaveMap, worldDiameter, 16, 5, 10);
+            AddOreVein(CaveMap, worldDiameter, 8, 5, 10);
+            AddOreVein(CaveMap, worldDiameter, 16, 5, 12);
+            AddOreVein(CaveMap, worldDiameter, 24, 5, 11);
 
             for (int i = 0; i < 8; i++)
             {
@@ -146,7 +150,7 @@ namespace Caveworks
                             new StoneFloor(tile);
                             tileValue = map[chunk_x * Chunk.chunkSize + tile_x, chunk_y * Chunk.chunkSize + tile_y];
 
-                            if (tileValue == 1)
+                            if (tileValue == 1) // walls
                             {
                                 if (MathF.Pow(world.WorldDiameter/2 - tile.Position.X, 2) + MathF.Pow(world.WorldDiameter/2 - tile.Position.Y, 2) > MathF.Pow(128, 2))
                                 {
@@ -161,9 +165,18 @@ namespace Caveworks
                                     new StoneWall(tile);
                                 }
                             }
+                            // ores
                             else if (tileValue == 10)
                             {
                                 new RawIronOreWall(tile);
+                            }
+                            else if (tileValue == 11)
+                            {
+                                new RawCopperOreWall(tile);
+                            }
+                            else if (tileValue == 12)
+                            {
+                                new RawCoalWall(tile);
                             }
                         }
                     }

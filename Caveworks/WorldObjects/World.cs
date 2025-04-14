@@ -52,7 +52,10 @@ namespace Caveworks
             PlayerBody = new PlayerBody(GlobalCordsToTile(new MyVector2Int(WorldDiameter/2, WorldDiameter/2)));
             Research = new ResearchManager();
 
+
+            Player.PlayerInventory.TryAddItem(new ResearchLabItem(1));
             // TESTCODE
+            /*
             for (int i = 0; i < 5; i++)
             {
                 Player.PlayerInventory.TryAddItem(new SlowBeltItem(100));
@@ -69,6 +72,7 @@ namespace Caveworks
             Player.PlayerInventory.TryAddItem(new StoneFurnaceItem(100));
             Player.PlayerInventory.TryAddItem(new DrillItem(100));
             Player.PlayerInventory.TryAddItem(new ResearchLabItem(100));
+            */
 
             WorldMousePos = GetWorldMousePos();
             LastMouseTile = MouseTile;
@@ -128,7 +132,7 @@ namespace Caveworks
             {
                 LightmapTask.Wait();
                 // TEST - unhash before use
-                // Camera.LightMap.DrawUpscaled(Camera);
+                Camera.LightMap.DrawUpscaled(Camera);
             }
         }
 

@@ -11,7 +11,7 @@ namespace Caveworks
         float FireTimer = 0;
 
 
-        public StoneFurnace(Tile tile):base(tile, 2, 3, new List<Recipe> { RecipeList.Stonification })
+        public StoneFurnace(Tile tile):base(tile, 2, 3, new List<Recipe> { RecipeList.IronSmelting, RecipeList.CopperSmelting })
         {
 
         }

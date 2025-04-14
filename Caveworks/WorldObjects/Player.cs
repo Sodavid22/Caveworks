@@ -26,7 +26,7 @@ namespace Caveworks
             InventoryOpened = false;
             HeldItem = null;
             ItemRotation = new MyVector2Int(1, 0);
-            Crafter = new RecipeCrafter(new List<Recipe> { RecipeList.IronChestRecipe }, PlayerInventory, true);
+            Crafter = new RecipeCrafter(new List<Recipe> { RecipeList.Fireplace, RecipeList.StoneFurnace, RecipeList.IronChest }, PlayerInventory, true);
         }
 
 
