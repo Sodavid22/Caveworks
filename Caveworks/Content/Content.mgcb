@@ -493,6 +493,12 @@
 /processorParam:Quality=Best
 /build:SoundEffects/Items/woosh.wav
 
+#begin SoundEffects/Machines/burning.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Machines/burning.wav
+
 #begin SoundEffects/UI/ding.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

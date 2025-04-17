@@ -78,6 +78,7 @@ namespace Caveworks
                 if (Globals.World != null)
                 {
                     Globals.World.Player.CloseUi();
+                    Globals.World.Sound.StopSound();
                 }
             }
 

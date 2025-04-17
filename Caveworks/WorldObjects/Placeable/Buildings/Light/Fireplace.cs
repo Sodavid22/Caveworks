@@ -16,6 +16,8 @@ namespace Caveworks
             Brightness = LightManager.MaxLightStrength;
         }
 
+        public override int GetSoundType() { return 1; }
+
 
         public override bool HasCollision() { return true; } // can player collide with it
 

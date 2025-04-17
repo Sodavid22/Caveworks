@@ -32,6 +32,8 @@ namespace Caveworks
 
         public virtual bool AccteptsItems(BaseBuilding building) { return false; } // does this building accept items
 
+        public virtual int GetSoundType() { return 0; } // how bright is the building
+
         public virtual int GetLightLevel() { return 0; } // how bright is the building
 
         public virtual bool HasCollision() { return false; } // can player collide with it

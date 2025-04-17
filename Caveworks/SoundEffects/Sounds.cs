@@ -16,6 +16,9 @@ namespace Caveworks
         private static MySoundEffect Thud { get; set; }
         public static MySoundEffect Woosh { get; private set; }
 
+        // single instance
+        public static MySoundEffectInstance Burning;
+
 
         public static void Load(ContentManager contentManager)
         {
@@ -27,6 +30,9 @@ namespace Caveworks
             Pickaxe = new MySoundEffect(contentManager.Load<SoundEffect>("SoundEffects/Items/pickaxe"), 0.2f);
             Thud = new MySoundEffect(contentManager.Load<SoundEffect>("SoundEffects/Items/thud"), 0.2f);
             Woosh = new MySoundEffect(contentManager.Load<SoundEffect>("SoundEffects/Items/woosh"), 0.6f);
+
+            // single instance
+            Burning = new MySoundEffectInstance(contentManager.Load<SoundEffect>("SoundEffects/Machines/burning"), 0.2f);
         }
 
 

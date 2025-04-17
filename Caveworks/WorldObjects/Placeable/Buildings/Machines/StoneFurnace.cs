@@ -17,6 +17,16 @@ namespace Caveworks
         }
 
 
+        public override int GetSoundType()
+        {
+            if (Crafter.CraftingProgress > 0)
+            {
+                return 1;
+            }
+            return 0;
+        }
+
+
         public override int GetSize() { return 2; }
 
 
