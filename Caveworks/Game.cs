@@ -134,7 +134,7 @@ namespace Caveworks
             if (FpsCounter.Active)
             {
                 MainSpriteBatch.DrawString(Fonts.SmallFont, (FpsCounter.Fps + " FPS").ToString(), new Vector2(0, 0), Color.White);
-                MainSpriteBatch.DrawString(Fonts.SmallFont, (1 / FpsCounter.Fps + " Frame CraftingTime").ToString(), new Vector2(0, 20), Color.White);
+                MainSpriteBatch.DrawString(Fonts.SmallFont, (1 / FpsCounter.Fps + " FrameTime").ToString(), new Vector2(0, 20), Color.White);
             }
 
             FloorSpriteBatch.End();

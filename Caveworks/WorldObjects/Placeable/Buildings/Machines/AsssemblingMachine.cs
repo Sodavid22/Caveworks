@@ -1,16 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
 
 namespace Caveworks
 {
     [Serializable]
     public class AsssemblingMachine : BaseMachine
     {
-        public AsssemblingMachine(Tile tile):base(tile, 3, 4, new List<Recipe> { RecipeList.IronGear, RecipeList.CopperWire, RecipeList.GreenCircuit, RecipeList.StoneFurnace,
-            RecipeList.AssemblingMachine, RecipeList.Drill, RecipeList.ResearchLab, RecipeList.SlowBelt, RecipeList.CrossRoad, RecipeList.Splitter,
-            RecipeList.ElectricLight, RecipeList.IronChest}) { }
+        public AsssemblingMachine(Tile tile):base(tile, 3, 4, RecipeList.AssemblingMachineRecipes) { }
 
 
         public override int GetSize() { return 3; }

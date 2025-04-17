@@ -5,8 +5,6 @@ namespace Caveworks
     [Serializable]
     public class BaseWall
     {
-        public virtual bool IsMineable() { return true; }
-
         public virtual bool IsDestructible() { return true; }
 
         public virtual int GetHardness() { return 0; }

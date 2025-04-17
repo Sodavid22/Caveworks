@@ -1,6 +1,5 @@
 ﻿using SharpDX;
 using System;
-using System.Collections.Generic;
 namespace Caveworks
 {
     public static class WorldGenerator // 0 = empty, 1 = wall, 1 < special tiles
@@ -134,6 +133,7 @@ namespace Caveworks
             int tileValue;
             Chunk chunk;
             Chunk[,] ChunkList = new Chunk[worldSize, worldSize];
+            Random random = new Random();
 
             for (int chunk_x = 0; chunk_x < worldSize; chunk_x++)
             {
@@ -147,8 +147,16 @@ namespace Caveworks
                         for (int tile_y = 0; tile_y < Chunk.chunkSize; tile_y++)
                         {
                             tile = chunk.TileList[tile_x, tile_y];
-                            new StoneFloor(tile);
                             tileValue = map[chunk_x * Chunk.chunkSize + tile_x, chunk_y * Chunk.chunkSize + tile_y];
+
+                            if (random.NextDouble() < 0.8)
+                            {
+                                new StoneFloor(tile);
+                            }
+                            else
+                            {
+                                new StoneFloor2(tile);
+                            }
 
                             if (chunk_x * Chunk.chunkSize + tile_x < 3 || chunk_y * Chunk.chunkSize + tile_y < 3 || chunk_x * Chunk.chunkSize + tile_x > worldSize * Chunk.chunkSize - 4 || chunk_y * Chunk.chunkSize + tile_y > worldSize * Chunk.chunkSize - 4)
                             {

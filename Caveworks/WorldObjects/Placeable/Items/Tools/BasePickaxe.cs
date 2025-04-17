@@ -13,7 +13,7 @@ namespace Caveworks.WorldObjects.Placeable.Items.Tools
         public override bool CanUseContinuosly() { return false; }
 
 
-        public virtual bool UsePickaxe(int strength, int radius)
+        public virtual bool UsePickaxe(int strength, int radius, int efficiency)
         {
             Tile mouseTile = Globals.World.MouseTile;
             Player player = Globals.World.Player;
@@ -24,30 +24,37 @@ namespace Caveworks.WorldObjects.Placeable.Items.Tools
                 used = true;
                 if (player.WallHits >= mouseTile.Wall.GetHardness() - 1)
                 {
-                    player.PlayerInventory.TryAddItem(Globals.World.MouseTile.Wall.GetItem(mouseTile));
                     player.WallHits = 0;
                     Sounds.Pickaxe.Play(1);
+                    Tile tile;
 
-                    if (mouseTile.Wall.IsDestructible())
+                    for (int x = mouseTile.Position.X - radius; x <= mouseTile.Position.X + radius; x++)
                     {
-                        Tile tile;
-                        for (int x = mouseTile.Position.X - radius; x <= mouseTile.Position.X + radius; x++)
+                        for (int y = mouseTile.Position.Y - radius; y <= mouseTile.Position.Y + radius; y++)
                         {
-                            for (int y = mouseTile.Position.Y - radius; y <= mouseTile.Position.Y + radius; y++)
+                            tile = Globals.World.GlobalCordsToTile(new MyVector2Int(x, y));
+                            if (tile.Wall != null)
                             {
-                                tile = Globals.World.GlobalCordsToTile(new MyVector2Int(x, y));
-                                if (tile.Wall != null)
+                                if (tile.Wall.IsDestructible())
                                 {
-                                    if (tile.Wall.IsDestructible())
-                                    {
+                                    player.PlayerInventory.TryAddItem(tile.Wall.GetItem(mouseTile));
                                     Globals.World.GlobalCordsToTile(new MyVector2Int(x, y)).Wall = null;
+                                }
+                                else
+                                {
+                                    if (x == mouseTile.Position.X && y == mouseTile.Position.Y)
+                                    {
+                                        for (int i = 0; i < efficiency; i++)
+                                        {
+                                            player.PlayerInventory.TryAddItem(tile.Wall.GetItem(mouseTile));
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-                else if (Globals.World.MouseTile.Wall.IsMineable())
+                else
                 {
                     player.WallHits += strength;
                     Sounds.Pickaxe.Play(1);

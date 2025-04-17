@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Caveworks
 {
@@ -28,7 +27,7 @@ namespace Caveworks
             InventoryOpened = false;
             HeldItem = null;
             ItemRotation = new MyVector2Int(1, 0);
-            Crafter = new RecipeCrafter(new List<Recipe> { RecipeList.Fireplace, RecipeList.StoneFurnace, RecipeList.IronChest }, PlayerInventory, true);
+            Crafter = new RecipeCrafter(RecipeList.PlayerRecipes, PlayerInventory, true);
         }
 
 
@@ -184,7 +183,7 @@ namespace Caveworks
                                 WallHits = 0;
                                 Sounds.Pickaxe.Play(1);
                             }
-                            else if (World.MouseTile.Wall.IsMineable())
+                            else
                             {
                                 WallHits += 1;
                                 Sounds.Pickaxe.Play(1);

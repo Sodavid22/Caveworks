@@ -21,8 +21,8 @@ namespace Caveworks
 
         public ResearchManager()
         {
-            ResearchGoals.Add(new List<BaseItem> { new IronPlate(10), new CopperPlate(10) });
-            ResearchGoals.Add(new List<BaseItem> { new GreenCircuit(10)});
+            ResearchGoals.Add(new List<BaseItem> { new IronPlate(1), new CopperPlate(1) });
+            ResearchGoals.Add(new List<BaseItem> { new GreenCircuit(1)});
 
             CurrentItemGoals = ResearchGoals[CurrentResearch];
             RemainingItems = Cloning.DeepClone(ResearchGoals[CurrentResearch]);
@@ -32,6 +32,12 @@ namespace Caveworks
         public void Update()
         {
             bool finished = true;
+
+            if (CurrentResearch > ResearchGoals.Count)
+            {
+                finished = false;
+            }
+
             foreach (BaseItem item in RemainingItems)
             {
                 if (item.Count > 0)
@@ -45,6 +51,7 @@ namespace Caveworks
             {
                 CurrentResearch += 1;
                 Sounds.Ding.Play(1);
+
                 if (CurrentResearch < ResearchGoals.Count)
                 {
                     CurrentItemGoals = ResearchGoals[CurrentResearch];
@@ -54,9 +61,13 @@ namespace Caveworks
                 Globals.World.Player.CloseUi();
                 if (CurrentResearch == 1)
                 {
-                    Globals.World.Player.Crafter.RecipeList = new List<Recipe> { RecipeList.IronGear, RecipeList.CopperWire, RecipeList.GreenCircuit, RecipeList.StoneFurnace,
-            RecipeList.AssemblingMachine, RecipeList.Drill, RecipeList.ResearchLab, RecipeList.SlowBelt, RecipeList.CrossRoad, RecipeList.Splitter,
-            RecipeList.ElectricLight, RecipeList.Fireplace, RecipeList.IronChest};
+                    foreach (Recipe recipe in RecipeList.AssemblingMachineRecipes)
+                    {
+                        if (!RecipeList.PlayerRecipes.Contains(recipe))
+                        {
+                            RecipeList.PlayerRecipes.Add(recipe);
+                        }
+                    }
                 }
             }
         }

@@ -37,19 +37,16 @@ namespace Caveworks
 
             if (wallTile.Wall != null)
             {
-                if (wallTile.Wall.IsMineable())
+                if (DrillTimer > wallTile.Wall.GetDrillTime())
                 {
-                    if (DrillTimer > wallTile.Wall.GetDrillTime())
+                    if (dropTile.Wall == null && dropTile.Building != null)
                     {
-                        if (dropTile.Wall == null && dropTile.Building != null)
+                        if (dropTile.Building.IsTransportBuilding() && dropTile.Building.AccteptsItems(this))
                         {
-                            if (dropTile.Building.IsTransportBuilding() && dropTile.Building.AccteptsItems(this))
-                            {
-                                BaseItem item = wallTile.Wall.GetItem(wallTile);
-                                item.Coordinates = new MyVector2(Tile.Position.X + 0.5f - Rotation.X * 0.6f, Tile.Position.Y + 0.5f - Rotation.Y * 0.6f);
-                                item.AddToTile(dropTile);
-                                DrillTimer = 0;
-                            }
+                            BaseItem item = wallTile.Wall.GetItem(wallTile);
+                            item.Coordinates = new MyVector2(Tile.Position.X + 0.5f - Rotation.X * 0.6f, Tile.Position.Y + 0.5f - Rotation.Y * 0.6f);
+                            item.AddToTile(dropTile);
+                            DrillTimer = 0;
                         }
                     }
                 }

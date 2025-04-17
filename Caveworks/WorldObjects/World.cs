@@ -79,6 +79,7 @@ namespace Caveworks
             Player.PlayerInventory.TryAddItem(new IronGear(100));
             Player.PlayerInventory.TryAddItem(new CopperWire(100));
             Player.PlayerInventory.TryAddItem(new PickaxeStone(100));
+            Player.PlayerInventory.TryAddItem(new GreenCircuit(100));
 
 
             WorldMousePos = GetWorldMousePos();
