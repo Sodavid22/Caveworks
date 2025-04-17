@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Diagnostics;
 
 namespace Caveworks
 {
@@ -84,6 +85,7 @@ namespace Caveworks
                                 {
                                     Inventory.Items[0] = null;
                                 }
+                                break;
                             }
                         }
                     }

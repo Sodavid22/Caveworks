@@ -73,6 +73,9 @@ namespace Caveworks
             Player.PlayerInventory.TryAddItem(new DrillItem(100));
             Player.PlayerInventory.TryAddItem(new ResearchLabItem(100));
             */
+            Player.PlayerInventory.TryAddItem(new IronPlate(100));
+            Player.PlayerInventory.TryAddItem(new CopperPlate(100));
+            Player.PlayerInventory.TryAddItem(new ResearchLabItem(10));
 
             WorldMousePos = GetWorldMousePos();
             LastMouseTile = MouseTile;
