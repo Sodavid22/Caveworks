@@ -121,6 +121,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/Machines/AssemblingMachine.png
 
+#begin Buildings/Machines/AssemblingMachineWorking.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Machines/AssemblingMachineWorking.png
+
 #begin Buildings/Machines/Drill.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -46,6 +46,7 @@ namespace Caveworks
         public static Texture2D SlowBelt { get; private set; }
         public static Texture2D IronChest { get; private set; }
         public static Texture2D AssemblingMachine { get; private set; }
+        public static Texture2D AssemblingMachineWorking { get; private set; }
         public static Texture2D ElectricLight { get; private set; }
         public static Texture2D Fireplace { get; private set; }
         public static Texture2D Fireplace2 { get; private set; }
@@ -101,6 +102,7 @@ namespace Caveworks
             Textures.SlowBelt = contentManager.Load<Texture2D>("Buildings/Belts/GreenBelt");
             Textures.IronChest = contentManager.Load<Texture2D>("Buildings/Storage/IronChest");
             Textures.AssemblingMachine = contentManager.Load<Texture2D>("Buildings/Machines/AssemblingMachine");
+            Textures.AssemblingMachineWorking = contentManager.Load<Texture2D>("Buildings/Machines/AssemblingMachineWorking");
             Textures.ElectricLight = contentManager.Load<Texture2D>("Buildings/Light/ElectricLight");
             Textures.Fireplace = contentManager.Load<Texture2D>("Buildings/Light/Fireplace");
             Textures.Fireplace2 = contentManager.Load<Texture2D>("Buildings/Light/Fireplace2");

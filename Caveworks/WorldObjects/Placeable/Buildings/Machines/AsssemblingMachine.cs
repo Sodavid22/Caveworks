@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 
@@ -9,11 +10,7 @@ namespace Caveworks
     {
         public AsssemblingMachine(Tile tile):base(tile, 3, 4, new List<Recipe> { RecipeList.IronGear, RecipeList.CopperWire, RecipeList.GreenCircuit, RecipeList.StoneFurnace,
             RecipeList.AssemblingMachine, RecipeList.Drill, RecipeList.ResearchLab, RecipeList.SlowBelt, RecipeList.CrossRoad, RecipeList.Splitter,
-            RecipeList.ElectricLight, RecipeList.IronChest
-        })
-        {
-
-        }
+            RecipeList.ElectricLight, RecipeList.IronChest}) { }
 
 
         public override int GetSize() { return 3; }
@@ -33,8 +30,17 @@ namespace Caveworks
 
         public override void Draw(Camera camera, float deltaTime)
         {
+            Texture2D texture;
+            if (Crafter.CraftingProgress > 0)
+            {
+                texture = Textures.AssemblingMachineWorking;
+            }
+            else
+            {
+                texture = Textures.AssemblingMachine;
+            }
             MyVector2Int screenCoordinates = camera.WorldToScreenCords(Position);
-            Game.WallSpritebatch.Draw(Textures.AssemblingMachine, new Rectangle(screenCoordinates.X, screenCoordinates.Y, camera.Scale * 3, camera.Scale * 3), Color.White);
+            Game.WallSpritebatch.Draw(texture, new Rectangle(screenCoordinates.X, screenCoordinates.Y, camera.Scale * 3, camera.Scale * 3), Color.White);
         }
     }
 }
