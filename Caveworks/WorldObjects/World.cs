@@ -15,6 +15,7 @@ namespace Caveworks
         public ResearchManager Research;
         public PlayerBody PlayerBody;
         public float DeltaTime = 0;
+        public float SlowBeltTimer = 0;
 
         public MyVector2 WorldMousePos;
         public Tile MouseTile;
@@ -107,6 +108,12 @@ namespace Caveworks
             if (DeltaTime > 0.02f)
             {
                 DeltaTime = 0.02f;
+            }
+
+            SlowBeltTimer += DeltaTime;
+            if (SlowBeltTimer > 0.25)
+            {
+                SlowBeltTimer -= 0.25f;
             }
 
 

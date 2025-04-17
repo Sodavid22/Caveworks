@@ -44,6 +44,9 @@ namespace Caveworks
         // buildings
 
         public static Texture2D SlowBelt { get; private set; }
+        public static Texture2D SlowBelt2 { get; private set; }
+        public static Texture2D SlowBelt3 { get; private set; }
+        public static Texture2D SlowBelt4 { get; private set; }
         public static Texture2D IronChest { get; private set; }
         public static Texture2D AssemblingMachine { get; private set; }
         public static Texture2D AssemblingMachineWorking { get; private set; }
@@ -100,6 +103,9 @@ namespace Caveworks
 
             // buildings:
             Textures.SlowBelt = contentManager.Load<Texture2D>("Buildings/Belts/GreenBelt");
+            Textures.SlowBelt2 = contentManager.Load<Texture2D>("Buildings/Belts/GreenBelt2");
+            Textures.SlowBelt3 = contentManager.Load<Texture2D>("Buildings/Belts/GreenBelt3");
+            Textures.SlowBelt4 = contentManager.Load<Texture2D>("Buildings/Belts/GreenBelt4");
             Textures.IronChest = contentManager.Load<Texture2D>("Buildings/Storage/IronChest");
             Textures.AssemblingMachine = contentManager.Load<Texture2D>("Buildings/Machines/AssemblingMachine");
             Textures.AssemblingMachineWorking = contentManager.Load<Texture2D>("Buildings/Machines/AssemblingMachineWorking");
