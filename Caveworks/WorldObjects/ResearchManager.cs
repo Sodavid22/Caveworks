@@ -44,6 +44,7 @@ namespace Caveworks
             if (finished)
             {
                 CurrentResearch += 1;
+                Sounds.Ding.Play(1);
                 if (CurrentResearch < ResearchGoals.Count)
                 {
                     CurrentItemGoals = ResearchGoals[CurrentResearch];

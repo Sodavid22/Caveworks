@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Diagnostics;
 
 namespace Caveworks
 {
@@ -68,26 +68,22 @@ namespace Caveworks
         {
             if (Inventory.Items[0] != null && Globals.World.Research.RemainingItems.Count > 0)
             {
-                ResearchTimer += deltaTime;
-
-                if (ResearchTimer > ResearchCooldown)
+                foreach (BaseItem item in Globals.World.Research.RemainingItems)
                 {
-                    foreach (BaseItem item in Globals.World.Research.RemainingItems)
+                    if (item.GetType() == Inventory.Items[0].GetType())
                     {
-                        if (item.GetType() == Inventory.Items[0].GetType())
+                        ResearchTimer += deltaTime;
+                        if (item.Count > 0 && ResearchTimer > ResearchCooldown)
                         {
-                            if (item.Count > 0)
+                            ResearchTimer = 0;
+                            item.Count -= 1;
+                            Inventory.Items[0].Count -= 1;
+                            if (Inventory.Items[0].Count == 0)
                             {
-                                ResearchTimer = 0;
-                                item.Count -= 1;
-                                Inventory.Items[0].Count -= 1;
-                                if (Inventory.Items[0].Count == 0)
-                                {
-                                    Inventory.Items[0] = null;
-                                }
-                                break;
+                                Inventory.Items[0] = null;
                             }
                         }
+                        break;
                     }
                 }
             }
@@ -96,8 +92,17 @@ namespace Caveworks
 
         public override void Draw(Camera camera, float deltaTime)
         {
+            Texture2D texture;
+            if (Inventory.Items[0] == null)
+            {
+                texture = Textures.ResearchLab;
+            }
+            else
+            {
+                texture = Textures.ResearchLabLit;
+            }
             MyVector2Int screenCoordinates = camera.WorldToScreenCords(Position);
-            Game.WallSpritebatch.Draw(Textures.ResearchLab, new Rectangle(screenCoordinates.X, screenCoordinates.Y, camera.Scale * 3, camera.Scale * 3), Color.White);
+            Game.WallSpritebatch.Draw(texture, new Rectangle(screenCoordinates.X, screenCoordinates.Y, camera.Scale * 3, camera.Scale * 3), Color.White);
         }
     }
 }

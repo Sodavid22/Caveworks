@@ -20,6 +20,7 @@ namespace Caveworks
         public static Texture2D StoneWall { get; private set; }
         public static Texture2D StoneWallStronger { get; private set; }
         public static Texture2D StoneWallStrongest { get; private set; }
+        public static Texture2D StoneWallPermanent{ get; private set; }
         public static Texture2D RawIronOreWall { get; private set; }
         public static Texture2D RawCopperOreWall { get; private set; }
         public static Texture2D RawCoalWall { get; private set; }
@@ -56,6 +57,7 @@ namespace Caveworks
         public static Texture2D StoneFurnaceLit3 { get; private set; }
         public static Texture2D Drill { get; private set; }
         public static Texture2D ResearchLab { get; private set; }
+        public static Texture2D ResearchLabLit { get; private set; }
 
         public static void Load(ContentManager contentManager)
         {
@@ -73,6 +75,7 @@ namespace Caveworks
             Textures.StoneWall = contentManager.Load<Texture2D>("Walls/StoneWall");
             Textures.StoneWallStronger = contentManager.Load<Texture2D>("Walls/StoneWallStronger");
             Textures.StoneWallStrongest = contentManager.Load<Texture2D>("Walls/StoneWallStrongest");
+            Textures.StoneWallPermanent = contentManager.Load<Texture2D>("Walls/StoneWallPermanent");
             Textures.RawIronOreWall = contentManager.Load<Texture2D>("Walls/RawIronOreWall");
             Textures.RawCopperOreWall = contentManager.Load<Texture2D>("Walls/RawCopperOreWall");
             Textures.RawCoalWall = contentManager.Load<Texture2D>("Walls/RawCoalWall");
@@ -108,6 +111,7 @@ namespace Caveworks
             Textures.StoneFurnaceLit3 = contentManager.Load<Texture2D>("Buildings/Machines/StoneFurnaceLit3");
             Textures.Drill = contentManager.Load<Texture2D>("Buildings/Machines/Drill");
             Textures.ResearchLab = contentManager.Load<Texture2D>("Buildings/Machines/ResearchLab");
+            Textures.ResearchLabLit = contentManager.Load<Texture2D>("Buildings/Machines/ResearchLabLit");
         }
     }
 }

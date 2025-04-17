@@ -145,6 +145,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/Machines/ResearchLab.png
 
+#begin Buildings/Machines/ResearchLabLit.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Machines/ResearchLabLit.png
+
 #begin Buildings/Machines/StoneFurnace.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -295,30 +307,6 @@
 /processorParam:TextureFormat=Color
 /build:Items/Ores/RawCoal.png
 
-#begin Items/Ores/RawCoal.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Items/Ores/RawCoal.png
-
-#begin Items/Ores/RawCopperOre.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Items/Ores/RawCopperOre.png
-
 #begin Items/Ores/RawCopperOre.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -342,30 +330,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Items/Ores/RawIronOre.png
-
-#begin Items/Ores/RawIronOre.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Items/Ores/RawIronOre.png
-
-#begin Items/Ores/RawStone.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Items/Ores/RawStone.png
 
 #begin Items/Ores/RawStone.png
 /importer:TextureImporter
@@ -457,6 +421,12 @@
 /processorParam:Quality=Best
 /build:SoundEffects/Items/woosh.wav
 
+#begin SoundEffects/UI/ding.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/UI/ding.wav
+
 #begin SoundEffects/UI/modern-ui-decline.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -522,6 +492,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Walls/StoneWall.png
+
+#begin Walls/StoneWallPermanent.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Walls/StoneWallPermanent.png
 
 #begin Walls/StoneWallStronger.png
 /importer:TextureImporter

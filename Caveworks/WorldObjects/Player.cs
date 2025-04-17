@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Caveworks
 {
@@ -17,6 +18,7 @@ namespace Caveworks
         public int WallHits = 0;
         public BaseBuilding OpenedBuilding;
         public RecipeCrafter Crafter;
+        public bool CanReachMouse;
 
 
         public Player(World world)
@@ -46,9 +48,51 @@ namespace Caveworks
         }
 
 
+        private bool CanReach(Tile targetTile)
+        {
+            MyVector2 startCords = new MyVector2(World.PlayerBody.Tile.Position.X + 0.5f, World.PlayerBody.Tile.Position.Y + 0.5f);
+            MyVector2 targetCords = new MyVector2(targetTile.Position.X + 0.5f, targetTile.Position.Y + 0.5f);
+            List<Tile> HitTiles = new List<Tile>();
+            Tile checkedTile;
+
+            if (World.PlayerBody.Tile == targetTile)
+            {
+                return true;
+            }
+
+            MyVector2 direction = new MyVector2(targetCords.X - startCords.X, targetCords.Y - startCords.Y);
+            float distance = MathF.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
+            direction = new MyVector2(direction.X / distance, direction.Y / distance);
+
+            for (float i = 0.5f; i<=distance; i+=0.25f)
+            {
+                checkedTile = World.GlobalCordsToTile(new MyVector2Int((int)(startCords.X + direction.X * i), (int)(startCords.Y + direction.Y * i)));
+                if (checkedTile.Wall != null)
+                {
+                    if (!HitTiles.Contains(checkedTile))
+                    {
+                        HitTiles.Add(checkedTile);
+                        if (HitTiles.Count == 1)
+                        {
+                            if ((checkedTile.Position.X - targetTile.Position.X) + (checkedTile.Position.Y - targetTile.Position.Y) > 0)
+                            return false;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+
         public void Update(float deltaTime)
         {
             Crafter.Update(deltaTime);
+
+            CanReachMouse = CanReach(World.MouseTile);
 
             if (World.MouseTile != World.LastMouseTile) // reset wall mining
             {
@@ -89,7 +133,7 @@ namespace Caveworks
                 PickupItems();
             }
 
-            if (!InventoryOpened)
+            if (!InventoryOpened && CanReachMouse)
             {
                 if (MyKeyboard.IsHeld(MouseKey.Right))
                 {
@@ -163,7 +207,7 @@ namespace Caveworks
                 }
             }
 
-            if (OpenedBuilding != null)
+            if (OpenedBuilding != null) // draw building UI
             {
                 OpenedBuilding.DrawUI();
             }
@@ -213,6 +257,17 @@ namespace Caveworks
                 Rectangle rectangle = new Rectangle(screenCords.X - rectangleSize / 2, screenCords.Y - rectangleSize / 2, rectangleSize, rectangleSize);
                 Game.MainSpriteBatch.Draw(Textures.EmptyTexture, rectangle, Color.FromNonPremultiplied(new Vector4(0.5f, 0.5f, 0.5f, 0.5f)));
             }
+
+            /*
+            if (!InventoryOpened)
+            {
+                if (!CanReachMouse) // out of reach indicator
+                {
+                    Vector2 mousePos = MyKeyboard.GetMousePosition();
+                    Game.MainSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle((int)mousePos.X - 1, (int)mousePos.Y - 1, 3, 3), Color.Black);
+                }
+            }
+            */
         }
 
 

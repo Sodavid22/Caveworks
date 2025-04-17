@@ -150,33 +150,40 @@ namespace Caveworks
                             new StoneFloor(tile);
                             tileValue = map[chunk_x * Chunk.chunkSize + tile_x, chunk_y * Chunk.chunkSize + tile_y];
 
-                            if (tileValue == 1) // walls
+                            if (chunk_x * Chunk.chunkSize + tile_x < 3 || chunk_y * Chunk.chunkSize + tile_y < 3 || chunk_x * Chunk.chunkSize + tile_x > worldSize * Chunk.chunkSize - 4 || chunk_y * Chunk.chunkSize + tile_y > worldSize * Chunk.chunkSize - 4)
                             {
-                                if (MathF.Pow(world.WorldDiameter/2 - tile.Position.X, 2) + MathF.Pow(world.WorldDiameter/2 - tile.Position.Y, 2) > MathF.Pow(128, 2))
-                                {
-                                    new StoneWallStrongest(tile);
-                                }
-                                else if (MathF.Pow(world.WorldDiameter / 2 - tile.Position.X, 2) + MathF.Pow(world.WorldDiameter / 2 - tile.Position.Y, 2) > MathF.Pow(64, 2))
-                                {
-                                    new StoneWallStronger(tile);
-                                }
-                                else
-                                {
-                                    new StoneWall(tile);
-                                }
+                                new StoneWallPermanent(tile);
                             }
-                            // ores
-                            else if (tileValue == 10)
+                            else
                             {
-                                new RawIronOreWall(tile);
-                            }
-                            else if (tileValue == 11)
-                            {
-                                new RawCopperOreWall(tile);
-                            }
-                            else if (tileValue == 12)
-                            {
-                                new RawCoalWall(tile);
+                                if (tileValue == 1) // walls
+                                {
+                                    if (MathF.Pow(world.WorldDiameter / 2 - tile.Position.X, 2) + MathF.Pow(world.WorldDiameter / 2 - tile.Position.Y, 2) > MathF.Pow(128, 2))
+                                    {
+                                        new StoneWallStrongest(tile);
+                                    }
+                                    else if (MathF.Pow(world.WorldDiameter / 2 - tile.Position.X, 2) + MathF.Pow(world.WorldDiameter / 2 - tile.Position.Y, 2) > MathF.Pow(64, 2))
+                                    {
+                                        new StoneWallStronger(tile);
+                                    }
+                                    else
+                                    {
+                                        new StoneWall(tile);
+                                    }
+                                }
+                                // ores
+                                else if (tileValue == 10)
+                                {
+                                    new RawIronOreWall(tile);
+                                }
+                                else if (tileValue == 11)
+                                {
+                                    new RawCopperOreWall(tile);
+                                }
+                                else if (tileValue == 12)
+                                {
+                                    new RawCoalWall(tile);
+                                }
                             }
                         }
                     }

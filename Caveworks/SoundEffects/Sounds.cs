@@ -9,6 +9,7 @@ namespace Caveworks
         public static MySoundEffect ButtonClick {  get; private set; }
         public static MySoundEffect ButtonDecline { get; private set; }
         public static MySoundEffect ButtonClick2 { get; private set; }
+        public static MySoundEffect Ding { get; private set; }
 
 
         public static MySoundEffect Pickaxe { get; private set; }
@@ -21,6 +22,7 @@ namespace Caveworks
             ButtonClick = new MySoundEffect(contentManager.Load<SoundEffect>("SoundEffects/UI/modern-ui-hover"), 1.0f);
             ButtonDecline = new MySoundEffect(contentManager.Load<SoundEffect>("SoundEffects/UI/modern-ui-decline"), 1.0f);
             ButtonClick2 = new MySoundEffect(contentManager.Load<SoundEffect>("SoundEffects/UI/ui-button-click"), 1.0f);
+            Ding = new MySoundEffect(contentManager.Load<SoundEffect>("SoundEffects/UI/ding"), 1.0f);
 
             Pickaxe = new MySoundEffect(contentManager.Load<SoundEffect>("SoundEffects/Items/pickaxe"), 0.2f);
             Thud = new MySoundEffect(contentManager.Load<SoundEffect>("SoundEffects/Items/thud"), 0.2f);
