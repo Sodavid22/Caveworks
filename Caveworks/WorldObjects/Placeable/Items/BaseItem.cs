@@ -39,6 +39,9 @@ namespace Caveworks
         public virtual Texture2D GetTexture() { return null; }
 
 
+        public virtual bool CanUseContinuosly() { return true; }
+
+
         public virtual bool CanRotate() { return false; }
 
 

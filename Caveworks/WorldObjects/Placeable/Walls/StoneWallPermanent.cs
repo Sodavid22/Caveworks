@@ -14,10 +14,10 @@ namespace Caveworks
         public override bool IsDestructible() { return false; }
 
 
-        public override int GetHardness() { return 9; }
+        public override int GetHardness() { return 10; }
 
 
-        public override int GetDrillTime() { return 2; }
+        public override int GetDrillTime() { return 8; }
 
 
         public override BaseItem GetItem(Tile wallTile)

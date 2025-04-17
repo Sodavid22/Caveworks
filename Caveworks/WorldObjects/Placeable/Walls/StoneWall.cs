@@ -12,7 +12,7 @@ namespace Caveworks
         }
 
 
-        public override int GetHardness() { return 3; }
+        public override int GetHardness() { return 4; }
 
 
         public override int GetDrillTime() { return 8; }

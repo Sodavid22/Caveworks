@@ -38,6 +38,8 @@ namespace Caveworks
         public static Texture2D CopperWire { get; private set; }
         public static Texture2D IronGear { get; private set; }
         public static Texture2D GreenCircuit { get; private set; }
+        public static Texture2D PickaxeStone { get; private set; }
+
 
         // buildings
 
@@ -93,6 +95,7 @@ namespace Caveworks
             Textures.CopperWire = contentManager.Load<Texture2D>("Items/Parts/CopperWire");
             Textures.IronGear = contentManager.Load<Texture2D>("Items/Parts/IronGear");
             Textures.GreenCircuit = contentManager.Load<Texture2D>("Items/Parts/GreenCircuit");
+            Textures.PickaxeStone = contentManager.Load<Texture2D>("Items/Tools/PickaxeStone");
 
             // buildings:
             Textures.SlowBelt = contentManager.Load<Texture2D>("Buildings/Belts/GreenBelt");

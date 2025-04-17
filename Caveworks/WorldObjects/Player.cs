@@ -50,7 +50,7 @@ namespace Caveworks
 
         private bool CanReach(Tile targetTile)
         {
-            MyVector2 startCords = new MyVector2(World.PlayerBody.Tile.Position.X + 0.5f, World.PlayerBody.Tile.Position.Y + 0.5f);
+            MyVector2 startCords = new MyVector2(World.PlayerBody.Coordinates.X, World.PlayerBody.Coordinates.Y);
             MyVector2 targetCords = new MyVector2(targetTile.Position.X + 0.5f, targetTile.Position.Y + 0.5f);
             List<Tile> HitTiles = new List<Tile>();
             Tile checkedTile;
@@ -60,31 +60,40 @@ namespace Caveworks
                 return true;
             }
 
-            MyVector2 direction = new MyVector2(targetCords.X - startCords.X, targetCords.Y - startCords.Y);
-            float distance = MathF.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
-            direction = new MyVector2(direction.X / distance, direction.Y / distance);
-
-            for (float i = 0.5f; i<=distance; i+=0.25f)
+            for (float x = -0.25f; x <= 0.25f; x+= 0.25f)
             {
-                checkedTile = World.GlobalCordsToTile(new MyVector2Int((int)(startCords.X + direction.X * i), (int)(startCords.Y + direction.Y * i)));
-                if (checkedTile.Wall != null)
+                for (float y = -0.25f; y <= 0.25f; y+= 0.25f)
                 {
-                    if (!HitTiles.Contains(checkedTile))
+                    MyVector2 direction = new MyVector2(targetCords.X + x - startCords.X, targetCords.Y + y - startCords.Y);
+                    float distance = MathF.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
+                    direction = new MyVector2(direction.X / distance, direction.Y / distance);
+
+                    for (float i = 0.5f; i <= distance; i += 0.25f)
                     {
-                        HitTiles.Add(checkedTile);
-                        if (HitTiles.Count == 1)
+                        checkedTile = World.GlobalCordsToTile(new MyVector2Int((int)(startCords.X + direction.X * i), (int)(startCords.Y + direction.Y * i)));
+                        if (checkedTile.Wall != null)
                         {
-                            if ((checkedTile.Position.X - targetTile.Position.X) + (checkedTile.Position.Y - targetTile.Position.Y) > 0)
-                            return false;
-                        }
-                        else
-                        {
-                            return false;
+                            if (!HitTiles.Contains(checkedTile))
+                            {
+                                HitTiles.Add(checkedTile);
+                            }
                         }
                     }
+                    if (HitTiles.Count == 0)
+                    {
+                        return true;
+                    }
+                    else if (HitTiles.Count == 1)
+                    {
+                        if ((HitTiles[0].Position.X - targetTile.Position.X) + (HitTiles[0].Position.Y - targetTile.Position.Y) == 0)
+                        {
+                            return true;
+                        }
+                    }
+                    HitTiles.Clear();
                 }
             }
-            return true;
+            return false;
         }
 
 
@@ -149,7 +158,7 @@ namespace Caveworks
                     {
                         HeldItem.PrimaryUse(ItemRotation);
                     }
-                    else if (MyKeyboard.IsHeld(MouseKey.Left) && World.MouseTile != World.LastMouseTile) // use items contnuosly
+                    else if (MyKeyboard.IsHeld(MouseKey.Left) && World.MouseTile != World.LastMouseTile && HeldItem.CanUseContinuosly()) // use items contnuosly
                     {
                         HeldItem.PrimaryUse(ItemRotation);
                     }
@@ -248,7 +257,8 @@ namespace Caveworks
                 Game.MainSpriteBatch.Draw(HeldItem.GetTexture(), rectangle, new Rectangle(0, 0, HeldItem.GetTexture().Width, HeldItem.GetTexture().Height), Color.FromNonPremultiplied(new Vector4(1, 1, 1, 0.5f)), itemRotationAngle, new Vector2(HeldItem.GetTexture().Width / 2, HeldItem.GetTexture().Height / 2), SpriteEffects.None, 0);
                 Game.MainSpriteBatch.DrawString(Fonts.SmallFont, HeldItem.Count.ToString(), new Vector2((int)MyKeyboard.GetMousePosition().X + 16, (int)MyKeyboard.GetMousePosition().Y + 2), Color.Black);
             }
-            else if (World.MouseTile.Wall != null && !InventoryOpened) // block mining progress
+
+            if (World.MouseTile.Wall != null && !InventoryOpened) // block mining progress
             {
                 int wallHardness = World.MouseTile.Wall.GetHardness();
                 int rectangleSize = (wallHardness - WallHits) * World.Camera.Scale / wallHardness;

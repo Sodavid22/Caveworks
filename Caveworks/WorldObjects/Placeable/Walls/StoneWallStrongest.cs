@@ -12,10 +12,10 @@ namespace Caveworks
         }
 
 
-        public override int GetHardness() { return 9; }
+        public override int GetHardness() { return 8; }
 
 
-        public override int GetDrillTime() { return 2; }
+        public override int GetDrillTime() { return 8; }
 
 
         public override BaseItem GetItem(Tile wallTile)
