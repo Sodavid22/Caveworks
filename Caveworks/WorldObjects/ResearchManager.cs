@@ -19,10 +19,10 @@ namespace Caveworks
         static int Border = 2;
 
 
-        public ResearchManager()
+        public ResearchManager(World world)
         {
-            ResearchGoals.Add(new List<BaseItem> { new IronPlate(1), new CopperPlate(1) });
-            ResearchGoals.Add(new List<BaseItem> { new GreenCircuit(1)});
+            ResearchGoals.Add(new List<BaseItem> { new IronPlate((int)(10 * world.ResearchMult)), new CopperPlate((int)(10 * world.ResearchMult)) });
+            ResearchGoals.Add(new List<BaseItem> { new GreenCircuit((int)(10 * world.ResearchMult)) });
 
             CurrentItemGoals = ResearchGoals[CurrentResearch];
             RemainingItems = Cloning.DeepClone(ResearchGoals[CurrentResearch]);
@@ -32,6 +32,11 @@ namespace Caveworks
         public void Update()
         {
             bool finished = true;
+
+            if (CurrentResearch == ResearchGoals.Count)
+            {
+                Globals.ActiveScene = new EndScene();
+            }
 
             if (CurrentResearch > ResearchGoals.Count)
             {

@@ -11,10 +11,10 @@ namespace Caveworks
         readonly static Button fullscreenButton = new Button(new Vector2(350, 60), Globals.UIButtonColor, 2, GameWindow.IsFullscreen.ToString(), Fonts.LargeFont);
 
         readonly static TextBox volumeText = new TextBox(new Vector2(350, 60), Globals.UIButtonColor, 2, "Volume:", Fonts.LargeFont);
-        readonly static Slider volumeSlider = new Slider(new Vector2(350, 20), Globals.UIButtonColor, 2, 0, Globals.GlobalVolume * 100, 100);
+        readonly static Slider volumeSlider = new Slider(new Vector2(350, 20), Globals.UIButtonColor, 2, 0, Globals.GlobalVolume * 100, 100, 0);
 
         readonly static TextBox lightText = new TextBox(new Vector2(350, 60), Globals.UIButtonColor, 2, "Light Distance:", Fonts.LargeFont);
-        readonly static Slider lightSlider = new Slider(new Vector2(350, 20), Globals.UIButtonColor, 2, 16, Globals.LightDistance, 24);
+        readonly static Slider lightSlider = new Slider(new Vector2(350, 20), Globals.UIButtonColor, 2, 16, Globals.LightDistance, 24, 0);
 
         readonly static UiElement[] uiElements = { backgroundBox, fullscreenText, fullscreenButton, volumeText, volumeSlider, lightText, lightSlider};
 
@@ -31,6 +31,16 @@ namespace Caveworks
 
             lightText.Place(new Vector2(GameWindow.Size.X / 2 - 200, GameWindow.Size.Y / 2 - 0), Anchor.Middle);
             lightSlider.Place(new Vector2(GameWindow.Size.X / 2 + 200, GameWindow.Size.Y / 2 - 0), Anchor.Middle);
+
+
+            if (GameWindow.IsFullscreen)
+            {
+                fullscreenButton.SetText("Enabled");
+            }
+            else
+            {
+                fullscreenButton.SetText("Disabled");
+            }
         }
 
 
@@ -44,7 +54,14 @@ namespace Caveworks
             if (fullscreenButton.IsPressed(MouseKey.Left))
             {
                 GameWindow.ToggleFullscreen();
-                fullscreenButton.SetText(GameWindow.IsFullscreen.ToString());
+                if (GameWindow.IsFullscreen)
+                {
+                    fullscreenButton.SetText("Enabled");
+                }
+                else
+                {
+                    fullscreenButton.SetText("Disabled");
+                }
                 Globals.ActiveScene = new SettingsScene();
             }
 

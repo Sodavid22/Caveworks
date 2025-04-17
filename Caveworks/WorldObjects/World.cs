@@ -16,6 +16,7 @@ namespace Caveworks
         public PlayerBody PlayerBody;
         public float DeltaTime = 0;
         public float SlowBeltTimer = 0;
+        public float ResearchMult;
 
         public MyVector2 WorldMousePos;
         public Tile MouseTile;
@@ -28,10 +29,11 @@ namespace Caveworks
         public bool Paused { get; set; } = false;
 
 
-        public World(int worldSize)
+        public World(int worldSize, float researchMult)
         {
             WorldSize = worldSize;
             WorldDiameter = worldSize * Chunk.chunkSize;
+            ResearchMult = researchMult;
 
             GenerateWorld();
 
@@ -51,7 +53,7 @@ namespace Caveworks
             Camera = new Camera(this, new MyVector2(worldSize / 2, worldSize / 2), (int)(GameWindow.Size.X / 64));
             Player = new Player(this);
             PlayerBody = new PlayerBody(GlobalCordsToTile(new MyVector2Int(WorldDiameter/2, WorldDiameter/2)));
-            Research = new ResearchManager();
+            Research = new ResearchManager(this);
 
 
             Player.PlayerInventory.TryAddItem(new ResearchLabItem(1));

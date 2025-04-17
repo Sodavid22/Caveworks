@@ -10,6 +10,7 @@ namespace Caveworks
         readonly static SpriteFont font = Fonts.SmallFont;
 
         protected int knobSize = 2;
+        protected int precision;
         protected float sliderPosition; // value 0.0 - 1.0
         protected float value; // min - max value
         protected float minValue;
@@ -20,7 +21,7 @@ namespace Caveworks
         protected bool hovered;
 
 
-        public Slider(Vector2 size, Vector4 color, int border, float minValue, float startValue, float maxValue) : base(size, color, border)
+        public Slider(Vector2 size, Vector4 color, int border, float minValue, float startValue, float maxValue, int precision) : base(size, color, border)
         {
             this.sliderPosition = (startValue - minValue) / (maxValue - minValue);
             this.value = startValue;
@@ -28,6 +29,7 @@ namespace Caveworks
             this.maxValue = maxValue;
             this.textSize = font.MeasureString(value.ToString());
             this.knobSize = (int)size.Y * 2;
+            this.precision = precision;
         }
 
 
@@ -63,10 +65,10 @@ namespace Caveworks
 
             if (moving)
             { 
-                sliderPosition = (float)Math.Round((MyKeyboard.GetMousePosition().X - rectangle.X) / rectangle.Width, 2);
+                sliderPosition = (MyKeyboard.GetMousePosition().X - rectangle.X) / rectangle.Width;
                 sliderPosition = Math.Clamp(sliderPosition, 0, 1);
                 value = minValue + sliderPosition * (maxValue - minValue);
-                value = (float)Math.Round(value);
+                value = (float)Math.Round(value, precision);
                 textSize = font.MeasureString(value.ToString());
             }
         }
