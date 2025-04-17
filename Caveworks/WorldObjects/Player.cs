@@ -153,9 +153,20 @@ namespace Caveworks
 
                 if (HeldItem != null) // holding item
                 {
-                    if (MyKeyboard.IsPressed(MouseKey.Left)) // use item
+                    if (MyKeyboard.IsPressed(MouseKey.Left)) // use item or open building UI
                     {
-                        HeldItem.PrimaryUse(ItemRotation);
+                        if (!HeldItem.PrimaryUse(ItemRotation)) // try to use item
+                        {
+                            if (World.MouseTile.Building != null) // open building UI
+                            {
+                                if (World.MouseTile.Building.HasUI())
+                                {
+                                    OpenedBuilding = World.MouseTile.Building;
+                                    OpenedBuilding.OpenUI();
+                                    TogglePlayerInventory();
+                                }
+                            }
+                        }
                     }
                     else if (MyKeyboard.IsHeld(MouseKey.Left) && World.MouseTile != World.LastMouseTile && HeldItem.CanUseContinuosly()) // use items contnuosly
                     {
