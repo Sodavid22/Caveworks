@@ -20,14 +20,14 @@ namespace Caveworks
         public bool CanReachMouse;
 
 
-        public Player(World world)
+        public Player(World world, List<Recipe> recipeList)
         {
             World = world;
             PlayerInventory = new Inventory(30, this);
             InventoryOpened = false;
             HeldItem = null;
             ItemRotation = new MyVector2Int(1, 0);
-            Crafter = new RecipeCrafter(RecipeList.PlayerRecipes, PlayerInventory, true);
+            Crafter = new RecipeCrafter(recipeList, PlayerInventory, true);
         }
 
 

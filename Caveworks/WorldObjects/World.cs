@@ -10,6 +10,7 @@ namespace Caveworks
         public int WorldSize;
         public int WorldDiameter;
         public Chunk[,] ChunkList;
+        public RecipeList RecipeList;
         public Camera Camera;
         public Player Player;
         public ResearchManager Research;
@@ -50,15 +51,16 @@ namespace Caveworks
             }
             */
 
+            RecipeList = new RecipeList();
             Camera = new Camera(this, new MyVector2(worldSize / 2, worldSize / 2), (int)(GameWindow.Size.X / 64));
-            Player = new Player(this);
+            Player = new Player(this, RecipeList.PlayerRecipes);
             PlayerBody = new PlayerBody(GlobalCordsToTile(new MyVector2Int(WorldDiameter/2, WorldDiameter/2)));
             Research = new ResearchManager(this);
 
 
             Player.PlayerInventory.TryAddItem(new ResearchLabItem(1));
             // TESTCODE
-            
+            /*
             for (int i = 0; i < 2; i++)
             {
                 Player.PlayerInventory.TryAddItem(new SlowBeltItem(100));
@@ -82,7 +84,10 @@ namespace Caveworks
             Player.PlayerInventory.TryAddItem(new CopperWire(100));
             Player.PlayerInventory.TryAddItem(new PickaxeStone(100));
             Player.PlayerInventory.TryAddItem(new GreenCircuit(100));
-
+            */
+            Player.PlayerInventory.TryAddItem(new CopperPlate(100));
+            Player.PlayerInventory.TryAddItem(new IronPlate(100));
+            Player.PlayerInventory.TryAddItem(new GreenCircuit(100));
 
             WorldMousePos = GetWorldMousePos();
             LastMouseTile = MouseTile;
@@ -123,7 +128,6 @@ namespace Caveworks
             Player.Update(DeltaTime);
             PlayerBody.Update(DeltaTime);
             Camera.Update();
-            Research.Update();
             Sounds.PlaceSoundCooldown -= DeltaTime;
 
             LightmapTask = Task.Run(() => Camera.LightMap.UpdateLightmap(Camera));
@@ -132,6 +136,8 @@ namespace Caveworks
             { 
                 chunk.Update(DeltaTime);
             }
+
+            Research.Update();
         }
 
 

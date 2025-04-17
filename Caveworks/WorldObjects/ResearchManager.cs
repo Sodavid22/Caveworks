@@ -66,11 +66,11 @@ namespace Caveworks
                 Globals.World.Player.CloseUi();
                 if (CurrentResearch == 1)
                 {
-                    foreach (Recipe recipe in RecipeList.AssemblingMachineRecipes)
+                    foreach (Recipe recipe in Globals.World.RecipeList.AssemblingMachineRecipes)
                     {
-                        if (!RecipeList.PlayerRecipes.Contains(recipe))
+                        if (!Globals.World.RecipeList.PlayerRecipes.Contains(recipe))
                         {
-                            RecipeList.PlayerRecipes.Add(recipe);
+                            Globals.World.RecipeList.PlayerRecipes.Add(recipe);
                         }
                     }
                 }

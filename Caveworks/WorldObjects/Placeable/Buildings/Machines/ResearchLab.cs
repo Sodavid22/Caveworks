@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Direct3D9;
 using System;
 
 namespace Caveworks
@@ -23,7 +24,17 @@ namespace Caveworks
         }
 
 
-        public override int GetLightLevel() { return LightManager.MinLightForMaxBrightness; }
+        public override int GetLightLevel()
+        {
+            if (Inventory.Items[0] != null)
+            {
+                return LightManager.MinLightForMaxBrightness;
+            }
+            else
+            {
+                return 0;
+            }
+        }
 
 
         public override int GetSize() { return 3; }

@@ -7,7 +7,7 @@ namespace Caveworks
     [Serializable]
     public class AsssemblingMachine : BaseMachine
     {
-        public AsssemblingMachine(Tile tile):base(tile, 3, 4, RecipeList.AssemblingMachineRecipes) { }
+        public AsssemblingMachine(Tile tile):base(tile, 3, 4, Globals.World.RecipeList.AssemblingMachineRecipes) { }
 
 
         public override int GetSize() { return 3; }
