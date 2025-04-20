@@ -5,14 +5,14 @@ using System;
 namespace Caveworks
 {
     [Serializable]
-    internal class PickaxeStone : BasePickaxe
+    internal class PickaxeIron : BasePickaxe
     {
-        public PickaxeStone(Tile tile, MyVector2 position, int count) : base(tile, position, count) { }
-        public PickaxeStone(int count) : base(count) { }
+        public PickaxeIron(Tile tile, MyVector2 position, int count) : base(tile, position, count) { }
+        public PickaxeIron(int count) : base(count) { }
 
         public override bool PrimaryUse(MyVector2Int itemRotation)
         {
-            bool used = base.UsePickaxe(1, 1, 2);
+            bool used = base.UsePickaxe(2, 1, 4);
             Random random = new Random();
             if (used && random.NextDouble() <= 0.05)
             {
@@ -27,7 +27,7 @@ namespace Caveworks
 
         public override Texture2D GetTexture()
         {
-            return Textures.PickaxeStone;
+            return Textures.PickaxeIron;
         }
 
 

@@ -60,9 +60,8 @@ namespace Caveworks
             Sound = new SoundManager(this);
 
 
-            Player.PlayerInventory.TryAddItem(new ElevatorItem(1));
             // TESTCODE
-            
+            /*
             for (int i = 0; i < 2; i++)
             {
                 Player.PlayerInventory.TryAddItem(new SlowBeltItem(100));
@@ -86,7 +85,7 @@ namespace Caveworks
             Player.PlayerInventory.TryAddItem(new CopperWire(100));
             Player.PlayerInventory.TryAddItem(new PickaxeStone(100));
             Player.PlayerInventory.TryAddItem(new GreenCircuit(100));
-            
+            */
 
             WorldMousePos = GetWorldMousePos();
             LastMouseTile = MouseTile;

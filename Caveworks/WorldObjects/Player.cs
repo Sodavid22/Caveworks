@@ -27,7 +27,7 @@ namespace Caveworks
             InventoryOpened = false;
             HeldItem = null;
             ItemRotation = new MyVector2Int(1, 0);
-            Crafter = new RecipeCrafter(recipeList, PlayerInventory, true, 2);
+            Crafter = new RecipeCrafter(recipeList, PlayerInventory, true, 1);
         }
 
 
@@ -184,7 +184,9 @@ namespace Caveworks
                     {
                         if (World.MouseTile.Wall != null) // mine walls
                         {
-                            if (WallHits >= World.MouseTile.Wall.GetHardness() - 1)
+                            WallHits += 1;
+                            Sounds.Pickaxe.Play(1);
+                            if (WallHits >= World.MouseTile.Wall.GetHardness())
                             {
                                 PlayerInventory.TryAddItem(World.MouseTile.Wall.GetItem(World.MouseTile));
                                 if (World.MouseTile.Wall.IsDestructible())
@@ -192,12 +194,6 @@ namespace Caveworks
                                     World.MouseTile.Wall = null;
                                 }
                                 WallHits = 0;
-                                Sounds.Pickaxe.Play(1);
-                            }
-                            else
-                            {
-                                WallHits += 1;
-                                Sounds.Pickaxe.Play(1);
                             }
                         }
                         else if (World.MouseTile.Building != null) // open building UI

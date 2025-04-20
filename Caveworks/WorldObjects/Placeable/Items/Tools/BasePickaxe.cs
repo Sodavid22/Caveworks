@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Caveworks.WorldObjects.Placeable.Items.Tools
@@ -22,10 +23,12 @@ namespace Caveworks.WorldObjects.Placeable.Items.Tools
             if (mouseTile.Wall != null) // mine walls
             {
                 used = true;
-                if (player.WallHits >= mouseTile.Wall.GetHardness() - 1)
+                player.WallHits += strength;
+                Sounds.Pickaxe.Play(1);
+                
+                if (player.WallHits >= mouseTile.Wall.GetHardness())
                 {
                     player.WallHits = 0;
-                    Sounds.Pickaxe.Play(1);
                     Tile tile;
 
                     for (int x = mouseTile.Position.X - radius; x <= mouseTile.Position.X + radius; x++)
@@ -53,11 +56,6 @@ namespace Caveworks.WorldObjects.Placeable.Items.Tools
                             }
                         }
                     }
-                }
-                else
-                {
-                    player.WallHits += strength;
-                    Sounds.Pickaxe.Play(1);
                 }
             }
 
