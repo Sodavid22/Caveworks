@@ -23,7 +23,7 @@ namespace Caveworks
         {
             ResearchGoals.Add(new List<BaseItem> { new IronGear((int)(10 * world.ResearchMult))});
             ResearchGoals.Add(new List<BaseItem> { new GreenCircuit((int)(100 * world.ResearchMult)) });
-            ResearchGoals.Add(new List<BaseItem> { new ElectricEngine((int)(200 * world.ResearchMult)) });
+            ResearchGoals.Add(new List<BaseItem> { new GreenCircuit((int)(200 * world.ResearchMult)), new ElectricEngine((int)(200 * world.ResearchMult)) });
 
             CurrentItemGoals = ResearchGoals[CurrentResearch];
             RemainingItems = Cloning.DeepClone(ResearchGoals[CurrentResearch]);
