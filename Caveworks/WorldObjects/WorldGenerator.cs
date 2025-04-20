@@ -31,6 +31,14 @@ namespace Caveworks
             AddOreVein(CaveMap, worldDiameter, 16, 5, 12);
             AddOreVein(CaveMap, worldDiameter, 24, 5, 11);
 
+            AddOreVein(CaveMap, worldDiameter, 32, 5, 10);
+            AddOreVein(CaveMap, worldDiameter, 40, 5, 12);
+            AddOreVein(CaveMap, worldDiameter, 48, 5, 11);
+
+            AddOreVein(CaveMap, worldDiameter, 56, 5, 10);
+            AddOreVein(CaveMap, worldDiameter, 64, 5, 12);
+            AddOreVein(CaveMap, worldDiameter, 72, 5, 11);
+
             for (int i = 0; i < 8; i++)
             {
                 CaveMap = Smoothen(CaveMap, worldDiameter);
