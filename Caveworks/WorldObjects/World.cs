@@ -60,7 +60,7 @@ namespace Caveworks
             Sound = new SoundManager(this);
 
 
-            Player.PlayerInventory.TryAddItem(new ResearchLabItem(1));
+            Player.PlayerInventory.TryAddItem(new ElevatorItem(1));
             // TESTCODE
             
             for (int i = 0; i < 2; i++)
@@ -79,7 +79,7 @@ namespace Caveworks
             Player.PlayerInventory.TryAddItem(new SplitterItem(100));
             Player.PlayerInventory.TryAddItem(new StoneFurnaceItem(100));
             Player.PlayerInventory.TryAddItem(new DrillItem(100));
-            Player.PlayerInventory.TryAddItem(new ResearchLabItem(100));
+            Player.PlayerInventory.TryAddItem(new ElevatorItem(100));
             Player.PlayerInventory.TryAddItem(new CopperPlate(100));
             Player.PlayerInventory.TryAddItem(new IronPlate(100));
             Player.PlayerInventory.TryAddItem(new IronGear(100));

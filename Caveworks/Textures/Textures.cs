@@ -63,8 +63,10 @@ namespace Caveworks
         public static Texture2D StoneFurnaceLit2 { get; private set; }
         public static Texture2D StoneFurnaceLit3 { get; private set; }
         public static Texture2D Drill { get; private set; }
-        public static Texture2D ResearchLab { get; private set; }
-        public static Texture2D ResearchLabLit { get; private set; }
+        public static Texture2D Drill2 { get; private set; }
+        public static Texture2D Drill3 { get; private set; }
+        public static Texture2D Elevator { get; private set; }
+        public static Texture2D Elevator2 { get; private set; }
 
         public static void Load(ContentManager contentManager)
         {
@@ -123,8 +125,10 @@ namespace Caveworks
             Textures.StoneFurnaceLit2 = contentManager.Load<Texture2D>("Buildings/Machines/StoneFurnaceLit2");
             Textures.StoneFurnaceLit3 = contentManager.Load<Texture2D>("Buildings/Machines/StoneFurnaceLit3");
             Textures.Drill = contentManager.Load<Texture2D>("Buildings/Machines/Drill");
-            Textures.ResearchLab = contentManager.Load<Texture2D>("Buildings/Machines/ResearchLab");
-            Textures.ResearchLabLit = contentManager.Load<Texture2D>("Buildings/Machines/ResearchLabLit");
+            Textures.Drill2 = contentManager.Load<Texture2D>("Buildings/Machines/Drill2");
+            Textures.Drill3 = contentManager.Load<Texture2D>("Buildings/Machines/Drill3");
+            Textures.Elevator = contentManager.Load<Texture2D>("Buildings/Machines/Elevator");
+            Textures.Elevator2 = contentManager.Load<Texture2D>("Buildings/Machines/Elevator2");
         }
     }
 }

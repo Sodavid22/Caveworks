@@ -18,6 +18,9 @@ namespace Caveworks
 
         // single instance
         public static MySoundEffectInstance Burning;
+        public static MySoundEffectInstance Machine;
+        public static MySoundEffectInstance Machine2;
+        public static MySoundEffectInstance Drill;
 
 
         public static void Load(ContentManager contentManager)
@@ -33,6 +36,9 @@ namespace Caveworks
 
             // single instance
             Burning = new MySoundEffectInstance(contentManager.Load<SoundEffect>("SoundEffects/Machines/burning"), 0.2f);
+            Machine = new MySoundEffectInstance(contentManager.Load<SoundEffect>("SoundEffects/Machines/machine"), 1.0f);
+            Machine2 = new MySoundEffectInstance(contentManager.Load<SoundEffect>("SoundEffects/Machines/machine2"), 1.0f);
+            Drill = new MySoundEffectInstance(contentManager.Load<SoundEffect>("SoundEffects/Machines/drill"), 0.2f);
         }
 
 

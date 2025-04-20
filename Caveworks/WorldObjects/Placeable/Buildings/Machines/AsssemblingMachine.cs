@@ -7,10 +7,20 @@ namespace Caveworks
     [Serializable]
     public class AsssemblingMachine : BaseMachine
     {
-        public AsssemblingMachine(Tile tile):base(tile, 3, 4, Globals.World.RecipeList.AssemblingMachineRecipes) { }
+        public AsssemblingMachine(Tile tile):base(tile, 3, 4, Globals.World.RecipeList.AssemblingMachineRecipes, 1) { }
 
 
         public override int GetSize() { return 3; }
+
+
+        public override int GetSoundType()
+        {
+            if (Crafter.CraftingProgress > 0)
+            {
+                return 2;
+            }
+            return 0;
+        }
 
 
         public override void Update(float deltaTime)

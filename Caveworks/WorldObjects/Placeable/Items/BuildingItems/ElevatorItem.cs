@@ -5,10 +5,10 @@ using System.Windows.Forms;
 namespace Caveworks
 {
     [Serializable]
-    public class ResearchLabItem : BaseItem
+    public class ElevatorItem : BaseItem
     {
-        public ResearchLabItem(Tile tile, MyVector2 position, int count) : base(tile, position, count) { }
-        public ResearchLabItem(int count) : base(count) { }
+        public ElevatorItem(Tile tile, MyVector2 position, int count) : base(tile, position, count) { }
+        public ElevatorItem(int count) : base(count) { }
 
 
         public override bool CanRotate()
@@ -19,7 +19,7 @@ namespace Caveworks
 
         public override Texture2D GetTexture()
         {
-            return Textures.ResearchLab;
+            return Textures.Elevator;
         }
 
 
@@ -42,7 +42,7 @@ namespace Caveworks
             }
             if (canPlace)
             {
-                new ResearchLab(Globals.World.GetTileByRelativePosition(tile, new MyVector2Int(-1, -1)));
+                new Elevator(Globals.World.GetTileByRelativePosition(tile, new MyVector2Int(-1, -1)));
                 Sounds.PlayPlaceSound();
                 Count -= 1;
                 if (Count == 0)

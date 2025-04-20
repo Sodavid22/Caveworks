@@ -6,13 +6,13 @@ using System;
 namespace Caveworks
 {
     [Serializable]
-    class ResearchLab : BaseBuilding
+    class Elevator : BaseBuilding
     {
         float ResearchCooldown = 2;
         float ResearchTimer = 0;
 
 
-        public ResearchLab(Tile tile) : base(tile, 3)
+        public Elevator(Tile tile) : base(tile, 3)
         {
             Inventory = new Inventory(1, Globals.World.Player);
         }
@@ -24,17 +24,7 @@ namespace Caveworks
         }
 
 
-        public override int GetLightLevel()
-        {
-            if (Inventory.Items[0] != null)
-            {
-                return LightManager.MinLightForMaxBrightness;
-            }
-            else
-            {
-                return 0;
-            }
-        }
+        public override int GetLightLevel() { return LightManager.MinLightForMaxBrightness; }
 
 
         public override int GetSize() { return 3; }
@@ -71,7 +61,7 @@ namespace Caveworks
 
         public override BaseItem ToItem()
         {
-            return new ResearchLabItem(1);
+            return new ElevatorItem(1);
         }
 
 
@@ -106,11 +96,11 @@ namespace Caveworks
             Texture2D texture;
             if (Inventory.Items[0] == null)
             {
-                texture = Textures.ResearchLab;
+                texture = Textures.Elevator;
             }
             else
             {
-                texture = Textures.ResearchLabLit;
+                texture = Textures.Elevator2;
             }
             MyVector2Int screenCoordinates = camera.WorldToScreenCords(Position);
             Game.WallSpritebatch.Draw(texture, new Rectangle(screenCoordinates.X, screenCoordinates.Y, camera.Scale * 3, camera.Scale * 3), Color.White);

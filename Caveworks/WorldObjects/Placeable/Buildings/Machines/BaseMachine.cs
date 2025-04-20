@@ -7,12 +7,12 @@ namespace Caveworks
     [Serializable]
     public class BaseMachine : BaseBuilding
     {
-        public const int ItemLimit = 10;
+        public const int ItemLimit = 16;
 
-        public BaseMachine(Tile tile, int size, int inventorySize, List<Recipe> recipeList) : base(tile, size)
+        public BaseMachine(Tile tile, int size, int inventorySize, List<Recipe> recipeList, float craftingSpeed) : base(tile, size)
         {
             this.Inventory = new Inventory(inventorySize, Globals.World.Player);
-            this.Crafter = new RecipeCrafter(recipeList, Inventory, false);
+            this.Crafter = new RecipeCrafter(recipeList, Inventory, false, craftingSpeed);
         }
 
 

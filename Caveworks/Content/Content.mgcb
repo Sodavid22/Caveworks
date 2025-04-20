@@ -25,6 +25,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/Belts/Crossroad.png
 
+#begin Buildings/Belts/Crossroad.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Belts/Crossroad.png
+
 #begin Buildings/Belts/GreenBelt.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -36,6 +48,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Buildings/Belts/GreenBelt.png
+
+#begin Buildings/Belts/GreenBelt.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Belts/GreenBelt.png
+
+#begin Buildings/Belts/GreenBelt2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Belts/GreenBelt2.png
 
 #begin Buildings/Belts/GreenBelt2.png
 /importer:TextureImporter
@@ -61,6 +97,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/Belts/GreenBelt3.png
 
+#begin Buildings/Belts/GreenBelt3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Belts/GreenBelt3.png
+
 #begin Buildings/Belts/GreenBelt4.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -72,6 +120,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Buildings/Belts/GreenBelt4.png
+
+#begin Buildings/Belts/GreenBelt4.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Belts/GreenBelt4.png
+
+#begin Buildings/Belts/Splitter.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Belts/Splitter.png
 
 #begin Buildings/Belts/Splitter.png
 /importer:TextureImporter
@@ -97,6 +169,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/Light/ElectricLight.png
 
+#begin Buildings/Light/ElectricLight.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Light/ElectricLight.png
+
 #begin Buildings/Light/Fireplace.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -108,6 +192,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Buildings/Light/Fireplace.png
+
+#begin Buildings/Light/Fireplace.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Light/Fireplace.png
+
+#begin Buildings/Light/Fireplace2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Light/Fireplace2.png
 
 #begin Buildings/Light/Fireplace2.png
 /importer:TextureImporter
@@ -133,6 +241,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/Light/Fireplace3.png
 
+#begin Buildings/Light/Fireplace3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Light/Fireplace3.png
+
 #begin Buildings/Light/FireplaceMask.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -144,6 +264,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Buildings/Light/FireplaceMask.png
+
+#begin Buildings/Light/FireplaceMask.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Light/FireplaceMask.png
+
+#begin Buildings/Machines/AssemblingMachine.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Machines/AssemblingMachine.png
 
 #begin Buildings/Machines/AssemblingMachine.png
 /importer:TextureImporter
@@ -169,6 +313,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/Machines/AssemblingMachineWorking.png
 
+#begin Buildings/Machines/AssemblingMachineWorking.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Machines/AssemblingMachineWorking.png
+
 #begin Buildings/Machines/Drill.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -180,6 +336,102 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Buildings/Machines/Drill.png
+
+#begin Buildings/Machines/Drill.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Machines/Drill.png
+
+#begin Buildings/Machines/Drill2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Machines/Drill2.png
+
+#begin Buildings/Machines/Drill3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Machines/Drill3.png
+
+#begin Buildings/Machines/Elevator.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Machines/Elevator.png
+
+#begin Buildings/Machines/Elevator.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Machines/Elevator.png
+
+#begin Buildings/Machines/Elevator2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Machines/Elevator2.png
+
+#begin Buildings/Machines/Elevator2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Machines/Elevator2.png
+
+#begin Buildings/Machines/ResearchLab.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Machines/ResearchLab.png
 
 #begin Buildings/Machines/ResearchLab.png
 /importer:TextureImporter
@@ -205,6 +457,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/Machines/ResearchLabLit.png
 
+#begin Buildings/Machines/ResearchLabLit.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Machines/ResearchLabLit.png
+
 #begin Buildings/Machines/StoneFurnace.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -216,6 +480,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Buildings/Machines/StoneFurnace.png
+
+#begin Buildings/Machines/StoneFurnace.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Machines/StoneFurnace.png
+
+#begin Buildings/Machines/StoneFurnaceLit.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Machines/StoneFurnaceLit.png
 
 #begin Buildings/Machines/StoneFurnaceLit.png
 /importer:TextureImporter
@@ -241,6 +529,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/Machines/StoneFurnaceLit2.png
 
+#begin Buildings/Machines/StoneFurnaceLit2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Machines/StoneFurnaceLit2.png
+
 #begin Buildings/Machines/StoneFurnaceLit3.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -252,6 +552,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Buildings/Machines/StoneFurnaceLit3.png
+
+#begin Buildings/Machines/StoneFurnaceLit3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Machines/StoneFurnaceLit3.png
+
+#begin Buildings/Storage/IronChest.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Storage/IronChest.png
 
 #begin Buildings/Storage/IronChest.png
 /importer:TextureImporter
@@ -498,6 +822,24 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:SoundEffects/Machines/burning.wav
+
+#begin SoundEffects/Machines/drill.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Machines/drill.mp3
+
+#begin SoundEffects/Machines/machine.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Machines/machine.mp3
+
+#begin SoundEffects/Machines/machine2.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Machines/machine2.mp3
 
 #begin SoundEffects/UI/ding.wav
 /importer:WavImporter

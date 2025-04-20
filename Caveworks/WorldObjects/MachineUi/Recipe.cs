@@ -40,7 +40,7 @@ namespace Caveworks
         }
 
 
-        public void Draw(Vector2 position)
+        public void Draw(Vector2 position, float craftingSpeed)
         {
             // background
             int width = BoxSpacing * Ingredients.Length + Border * 2 + BoxOffset * 2;
@@ -60,7 +60,7 @@ namespace Caveworks
                 Game.MainSpriteBatch.DrawString(Fonts.MediumFont, Ingredients[i].Count.ToString(), new Vector2((int)(boxRectangle.X + BoxSize/2 - textSize.X/2), (int)(boxRectangle.Y + BoxSize/2 - textSize.Y/2)), Color.Black);
             }
 
-            Game.MainSpriteBatch.DrawString(Fonts.SmallFont, CraftingTime + " sec", new Vector2((int)(frontRectangle.X + BoxOffset * 2), (int)(frontRectangle.Y + BoxSpacing + BoxOffset)), Color.Black);
+            Game.MainSpriteBatch.DrawString(Fonts.SmallFont, CraftingTime / craftingSpeed + " sec", new Vector2((int)(frontRectangle.X + BoxOffset * 2), (int)(frontRectangle.Y + BoxSpacing + BoxOffset)), Color.Black);
         }
     }
 }

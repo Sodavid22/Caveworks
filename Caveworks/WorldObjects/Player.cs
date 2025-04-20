@@ -27,7 +27,7 @@ namespace Caveworks
             InventoryOpened = false;
             HeldItem = null;
             ItemRotation = new MyVector2Int(1, 0);
-            Crafter = new RecipeCrafter(recipeList, PlayerInventory, true);
+            Crafter = new RecipeCrafter(recipeList, PlayerInventory, true, 2);
         }
 
 

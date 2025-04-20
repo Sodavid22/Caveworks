@@ -18,6 +18,7 @@ namespace Caveworks
         public const int ProgressbarOffset = 10;
         public const int ProgressbarScale = 40;
 
+        public float CraftingSpeed;
         MyVector2Int WindowPosition;
         public Inventory Inventory;
         public List<Recipe> RecipeList;
@@ -30,7 +31,7 @@ namespace Caveworks
         Button[] Buttons;
 
 
-        public RecipeCrafter(List<Recipe> recipeList, Inventory inventory, bool ignoreLimits)
+        public RecipeCrafter(List<Recipe> recipeList, Inventory inventory, bool ignoreLimits, float craftingSpeed)
         {
             RecipeList = recipeList;
             Inventory = inventory;
@@ -38,6 +39,7 @@ namespace Caveworks
             SelectedRecipePosition = -1;
             CraftingProgress = 0;
             IgnoreLimits = ignoreLimits;
+            CraftingSpeed = craftingSpeed;
         }
 
 
@@ -58,7 +60,7 @@ namespace Caveworks
 
                 if (canCraft)
                 {
-                    CraftingProgress += deltaTime;
+                    CraftingProgress += deltaTime * CraftingSpeed;
                 }
 
                 if (CraftingProgress > SelectedRecipe.CraftingTime)
@@ -164,7 +166,7 @@ namespace Caveworks
             {
                 if (Buttons[i].IsHovered())
                 {
-                    RecipeList[i].Draw(MyKeyboard.GetMousePosition());
+                    RecipeList[i].Draw(MyKeyboard.GetMousePosition(), CraftingSpeed);
                 }
             }
         }
