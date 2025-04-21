@@ -28,14 +28,11 @@ namespace Caveworks
 
         public override int GetSoundType()
         {
-            /*
             if (WallTile != null)
             {
                 return 4;
             }
             return 0;
-            */
-            return 4;
         }
 
 
