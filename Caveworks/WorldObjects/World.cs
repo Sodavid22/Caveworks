@@ -105,7 +105,7 @@ namespace Caveworks
                 MouseTile = newMouseTile;
             }
 
-            if (MyKeyboard.IsPressed(KeyBindings.PAUE_KEY))
+            if (MyKeyboard.IsPressed(KeyBindings.PAUSE_KEY))
             {
                 Sounds.ButtonClick2.Play(1.0f);
                 Paused = !Paused;

@@ -78,7 +78,7 @@ namespace Caveworks
             Textures.EmptyTexture.SetData(new[] { Color.White });
 
             // background
-            Textures.MenuBackground = contentManager.Load<Texture2D>("factorio_background");
+            Textures.MenuBackground = contentManager.Load<Texture2D>("background");
 
             // floors:
             Textures.StoneFloor = contentManager.Load<Texture2D>("Floors/StoneFloor");
