@@ -12,7 +12,7 @@ namespace Caveworks
 
         public override bool PrimaryUse(MyVector2Int itemRotation)
         {
-            bool used = base.UsePickaxe(2, 1, 4);
+            bool used = base.UsePickaxe(2, 1, 2);
             Random random = new Random();
             if (used && random.NextDouble() <= 0.05)
             {

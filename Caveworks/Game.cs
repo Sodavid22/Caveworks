@@ -127,9 +127,8 @@ namespace Caveworks
                 Game.FloorSpriteBatch.Draw(Textures.EmptyTexture, new Rectangle(0, 0, (int)GameWindow.Size.X, (int)GameWindow.Size.Y), Color.Black);
             }
 
-                // draw screens
-                IScene scene = Globals.ActiveScene;
-            scene.Draw(gameTime);
+            // draw screens
+            Globals.ActiveScene.Draw(gameTime);
 
             // draw FPS counter
             if (FpsCounter.Active)
