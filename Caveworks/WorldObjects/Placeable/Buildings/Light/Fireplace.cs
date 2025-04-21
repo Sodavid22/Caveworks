@@ -13,16 +13,26 @@ namespace Caveworks
 
         public Fireplace(Tile tile) : base(tile, 1)
         {
-            Brightness = LightManager.MaxLightStrength;
+            Brightness = 1;
         }
 
-        public override int GetSoundType() { return 1; }
+        public override int GetSoundType()
+        {
+            if (Brightness > 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
 
 
         public override bool HasCollision() { return true; } // can player collide with it
 
 
-        public override int GetLightLevel() { return (int)Brightness; } // how bright is the building
+        public override int GetLightLevel() { return (int)(Brightness * LightManager.MaxLightStrength); } // how bright is the building
 
 
         public override BaseItem ToItem()
@@ -46,7 +56,7 @@ namespace Caveworks
                 FireTimer = 0;
             }
 
-            Brightness -= (LightManager.MaxLightStrength * deltaTime) / BurnTime;
+            Brightness -= deltaTime / BurnTime;
             if (Brightness < 0)
             {
                 Brightness = 0;
@@ -73,7 +83,7 @@ namespace Caveworks
             MyVector2Int screenCoordinates = camera.WorldToScreenCords(Position);
             Game.WallSpritebatch.Draw(texture, new Rectangle(screenCoordinates.X, screenCoordinates.Y, camera.Scale, camera.Scale), Color.White);
 
-            float overlayStrength = 1 - Brightness / LightManager.MaxLightStrength;
+            float overlayStrength = 1 - Brightness;
             if (overlayStrength > 0.5 && overlayStrength < 1) { overlayStrength = 0.5f; }
             Game.WallSpritebatch.Draw(Textures.FireplaceMask, new Rectangle(screenCoordinates.X, screenCoordinates.Y, camera.Scale, camera.Scale), Color.FromNonPremultiplied(new Vector4(1, 1, 1, overlayStrength)));
         }
