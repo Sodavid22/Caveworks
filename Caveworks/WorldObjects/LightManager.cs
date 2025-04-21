@@ -18,7 +18,7 @@ namespace Caveworks
         public static int MaxLightStrength;
         public static int MinLightForMaxBrightness;
         public int CalculationStage;
-        public int CalculationStageCount = 9; // lightmap calculation is distributed to multiple frames to improve performance at the cost of responsivnes (max 17)
+        public int CalculationStageCount = 5; // lightmap calculation is distributed to multiple frames to improve performance at the cost of responsivnes (max 17)
         public const int DirectLightLoss = 1000;
         public const int InDirectLightLoss = 1414;
         Tile CalculatedCenterTile;
