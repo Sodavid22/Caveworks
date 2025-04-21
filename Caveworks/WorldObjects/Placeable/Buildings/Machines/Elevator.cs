@@ -20,6 +20,13 @@ namespace Caveworks
 
         public override bool AccteptsItems(BaseBuilding building)
         {
+            if (Inventory.GetFirstItem() != null)
+            {
+                if (Inventory.GetFirstItem().Count > 7)
+                {
+                    return false;
+                }
+            }
             return true;
         }
 
