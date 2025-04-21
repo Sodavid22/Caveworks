@@ -8,7 +8,7 @@ namespace Caveworks
     {
         public IronChest(Tile tile) : base(tile, 1)
         {
-            Inventory = new Inventory(20, Globals.World.Player);
+            Inventory = new Inventory(10, Globals.World.Player);
         }
 
 
@@ -26,7 +26,7 @@ namespace Caveworks
 
         public override void OpenUI()
         {
-            Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2 - Inventory.ButtonSpacing));
+            Inventory.OpenUI(new MyVector2Int((int)GameWindow.Size.X / 2 - ((Inventory.ButtonSpacing * (Inventory.RowLength - 1) + Inventory.ButtonSize) / 2), (int)GameWindow.Size.Y / 2));
         }
 
 
