@@ -28,7 +28,7 @@ namespace Caveworks
 
         public override int GetSoundType()
         {
-            if (WallTile != null)
+            if (WallTile.Wall != null)
             {
                 return 4;
             }

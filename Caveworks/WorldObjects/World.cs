@@ -67,7 +67,7 @@ namespace Caveworks
                 Player.PlayerInventory.TryAddItem(new SlowBeltItem(100));
             }
 
-            /*
+            
             Player.PlayerInventory.TryAddItem(new RawIronOreItem(100));
             Player.PlayerInventory.TryAddItem(new RawCopperOreItem(100));
             Player.PlayerInventory.TryAddItem(new RawStoneItem(100));
@@ -88,7 +88,7 @@ namespace Caveworks
             Player.PlayerInventory.TryAddItem(new PickaxeStone(100));
             Player.PlayerInventory.TryAddItem(new GreenCircuit(100));
             Player.PlayerInventory.TryAddItem(new ElectricEngine(100));
-            */
+            
 
             WorldMousePos = GetWorldMousePos();
             LastMouseTile = MouseTile;
