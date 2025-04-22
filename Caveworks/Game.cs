@@ -97,11 +97,13 @@ namespace Caveworks
             }
 
             //TEST CODE
+            /*
             if (MyKeyboard.IsPressed(Microsoft.Xna.Framework.Input.Keys.L))
             {
                 Sounds.ButtonClick2.Play(1.0f);
                 Globals.ActiveScene = new EndScene();
             }
+            */
 
             // update scenes
             IScene scene = Globals.ActiveScene;
