@@ -51,7 +51,6 @@ namespace Caveworks
                 }
             }
 
-            Debug.WriteLine(color[0] + " " + color[1] + " " + color[2]);
             backgroundBox.ChangeColor(Color.FromNonPremultiplied(new Vector4(color[0], color[1], color[2], 1)));
         }
 
