@@ -38,7 +38,7 @@ namespace Caveworks
             Burning = new MySoundEffectInstance(contentManager.Load<SoundEffect>("SoundEffects/Machines/burning"), 0.2f);
             Machine = new MySoundEffectInstance(contentManager.Load<SoundEffect>("SoundEffects/Machines/machine"), 1.0f);
             Machine2 = new MySoundEffectInstance(contentManager.Load<SoundEffect>("SoundEffects/Machines/machine2"), 1.0f);
-            Drill = new MySoundEffectInstance(contentManager.Load<SoundEffect>("SoundEffects/Machines/drill"), 0.2f);
+            Drill = new MySoundEffectInstance(contentManager.Load<SoundEffect>("SoundEffects/Machines/drill"), 0.4f);
         }
 
 
