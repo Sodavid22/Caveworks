@@ -61,7 +61,7 @@ namespace Caveworks
             Sound = new SoundManager(this);
 
 
-            // TESTCODE
+            // TEST CODE
             
             for (int i = 0; i < 2; i++)
             {
@@ -92,7 +92,7 @@ namespace Caveworks
 
             Player.PlayerInventory.TryAddItem(new PickaxeStone(100));
             Player.PlayerInventory.TryAddItem(new PickaxeIron(100));
-
+            
 
             WorldMousePos = GetWorldMousePos();
             LastMouseTile = MouseTile;

@@ -22,8 +22,8 @@ namespace Caveworks
         public ResearchManager(World world)
         {
             ResearchGoals.Add(new List<BaseItem> { new IronGear((int)(10 * world.ResearchMult))});
-            ResearchGoals.Add(new List<BaseItem> { new GreenCircuit((int)(10 * world.ResearchMult)) });
-            ResearchGoals.Add(new List<BaseItem> { new GreenCircuit((int)(20 * world.ResearchMult)), new ElectricEngine((int)(20 * world.ResearchMult)) });
+            ResearchGoals.Add(new List<BaseItem> { new GreenCircuit((int)(100 * world.ResearchMult)), new ElectricEngine((int)(100 * world.ResearchMult)) });
+            ResearchGoals.Add(new List<BaseItem> { new AsseblingMachineItem((int)(100 * world.ResearchMult)), new DrillItem((int)(100 * world.ResearchMult)) });
 
             CurrentItemGoals = ResearchGoals[CurrentResearch];
             RemainingItems = Cloning.DeepClone(ResearchGoals[CurrentResearch]);
@@ -73,6 +73,7 @@ namespace Caveworks
 
                 if (CurrentResearch == ResearchGoals.Count)
                 {
+                    Globals.World.Sound.StopSound();
                     Globals.ActiveScene = new EndScene();
                 }
             }

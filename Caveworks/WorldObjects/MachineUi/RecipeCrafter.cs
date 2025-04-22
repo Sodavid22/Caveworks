@@ -91,7 +91,14 @@ namespace Caveworks
                 int x = i % RowLength;
                 int y = i / RowLength;
 
-                Buttons[i] = new Button(new Vector2(ButtonSize, ButtonSize), Globals.CraftingBoxColor, 2, RecipeList[i].Result.Count.ToString(), Fonts.MediumFont);
+                if (RecipeList[i].Result.Count > 1)
+                {
+                    Buttons[i] = new Button(new Vector2(ButtonSize, ButtonSize), Globals.CraftingBoxColor, 2, RecipeList[i].Result.Count.ToString(), Fonts.MediumFont);
+                }
+                else
+                {
+                    Buttons[i] = new Button(new Vector2(ButtonSize, ButtonSize), Globals.CraftingBoxColor, 2, null, Fonts.MediumFont);
+                }
                 Buttons[i].SetTexture(RecipeList[i].Result.GetTexture());
                 Buttons[i].Place(new Vector2(position.X + x * ButtonSpacing, position.Y - y * ButtonSpacing - BorderOffset*2 - Border), Anchor.BottomLeft);
             }
