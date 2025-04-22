@@ -43,5 +43,10 @@ namespace Caveworks
             this.text = text;
             textSize = font.MeasureString(text);
         }
+
+        public void ChangeColor(Color color)
+        {
+            this.color = color;
+        }
     }
 }

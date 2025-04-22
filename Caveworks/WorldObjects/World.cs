@@ -104,6 +104,7 @@ namespace Caveworks
         {
             WorldMousePos = GetWorldMousePos();
             Tile newMouseTile = TryGlobalCordsToTile(WorldMousePos.ToMyVector2Int());
+
             if (newMouseTile != null)
             {
                 LastMouseTile = MouseTile;
@@ -128,7 +129,6 @@ namespace Caveworks
             {
                 SlowBeltTimer -= 0.25f;
             }
-
 
             Player.Update(DeltaTime);
             PlayerBody.Update(DeltaTime);
