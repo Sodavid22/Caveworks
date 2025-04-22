@@ -13,7 +13,7 @@ namespace Caveworks
         public RecipeList()
         {
         PlayerRecipes = new List<Recipe> { StoneFurnace, Elevator, Fireplace, PickaxeStone, PickaxeIron, IronGear };
-        AssemblingMachineRecipes = new List<Recipe> { StoneFurnace, PickaxeStone, PickaxeIron, IronGear, IronPipe, CopperWire, GreenCircuit, AssemblingMachine, Drill, ElectricLight, SlowBelt, CrossRoad, Splitter, IronChest, ElectricEngine};
+        AssemblingMachineRecipes = new List<Recipe> { StoneFurnace, Elevator, Fireplace, PickaxeStone, PickaxeIron, IronGear, IronPipe, CopperWire, GreenCircuit, ElectricEngine, AssemblingMachine, Drill, ElectricLight, SlowBelt, CrossRoad, Splitter, IronChest};
         StoneFurnaceRecipes = new List<Recipe> { IronSmelting, CopperSmelting };
         }
 

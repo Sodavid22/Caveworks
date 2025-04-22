@@ -22,8 +22,8 @@ namespace Caveworks
         public ResearchManager(World world)
         {
             ResearchGoals.Add(new List<BaseItem> { new IronGear((int)(10 * world.ResearchMult))});
-            ResearchGoals.Add(new List<BaseItem> { new GreenCircuit((int)(100 * world.ResearchMult)) });
-            ResearchGoals.Add(new List<BaseItem> { new GreenCircuit((int)(200 * world.ResearchMult)), new ElectricEngine((int)(200 * world.ResearchMult)) });
+            ResearchGoals.Add(new List<BaseItem> { new GreenCircuit((int)(10 * world.ResearchMult)) });
+            ResearchGoals.Add(new List<BaseItem> { new GreenCircuit((int)(20 * world.ResearchMult)), new ElectricEngine((int)(20 * world.ResearchMult)) });
 
             CurrentItemGoals = ResearchGoals[CurrentResearch];
             RemainingItems = Cloning.DeepClone(ResearchGoals[CurrentResearch]);
@@ -34,12 +34,7 @@ namespace Caveworks
         {
             bool finished = true;
 
-            if (CurrentResearch == ResearchGoals.Count)
-            {
-                Globals.ActiveScene = new EndScene();
-            }
-
-            if (CurrentResearch > ResearchGoals.Count)
+            if (CurrentResearch >= ResearchGoals.Count)
             {
                 finished = false;
             }
@@ -74,6 +69,11 @@ namespace Caveworks
                             Globals.World.RecipeList.PlayerRecipes.Add(recipe);
                         }
                     }
+                }
+
+                if (CurrentResearch == ResearchGoals.Count)
+                {
+                    Globals.ActiveScene = new EndScene();
                 }
             }
         }

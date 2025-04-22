@@ -31,9 +31,6 @@ namespace Caveworks
         }
 
 
-        public override int GetLightLevel() { return LightManager.MinLightForMaxBrightness; }
-
-
         public override int GetSize() { return 3; }
 
 
@@ -74,24 +71,28 @@ namespace Caveworks
 
         public override void Update(float deltaTime)
         {
-            if (Inventory.Items[0] != null && Globals.World.Research.RemainingItems.Count > 0)
+            if (Inventory.Items[0] != null)
             {
-                foreach (BaseItem item in Globals.World.Research.RemainingItems)
+                ResearchTimer += deltaTime;
+                if (ResearchTimer > ResearchCooldown)
                 {
-                    if (item.GetType() == Inventory.Items[0].GetType())
+                    foreach (BaseItem item in Globals.World.Research.RemainingItems)
                     {
-                        ResearchTimer += deltaTime;
-                        if (item.Count > 0 && ResearchTimer > ResearchCooldown)
+                        if (item.GetType() == Inventory.Items[0].GetType())
                         {
-                            ResearchTimer = 0;
-                            item.Count -= 1;
-                            Inventory.Items[0].Count -= 1;
-                            if (Inventory.Items[0].Count == 0)
+                            if (item.Count > 0)
                             {
-                                Inventory.Items[0] = null;
+                                item.Count -= 1;
                             }
+                            break;
                         }
-                        break;
+                    }
+
+                    ResearchTimer = 0;
+                    Inventory.Items[0].Count -= 1;
+                    if (Inventory.Items[0].Count == 0)
+                    {
+                        Inventory.Items[0] = null;
                     }
                 }
             }
