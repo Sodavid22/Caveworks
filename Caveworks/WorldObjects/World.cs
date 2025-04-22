@@ -62,32 +62,37 @@ namespace Caveworks
 
 
             // TESTCODE
-            /*
+            
             for (int i = 0; i < 2; i++)
             {
                 Player.PlayerInventory.TryAddItem(new SlowBeltItem(100));
             }
-            Player.PlayerInventory.TryAddItem(new RawIronOreItem(100));
-            Player.PlayerInventory.TryAddItem(new RawCopperOreItem(100));
-            Player.PlayerInventory.TryAddItem(new RawStoneItem(100));
-            Player.PlayerInventory.TryAddItem(new RawCoalItem(100));
-            Player.PlayerInventory.TryAddItem(new IronChestItem(100));
-            Player.PlayerInventory.TryAddItem(new AsseblingMachineItem(100));
-            Player.PlayerInventory.TryAddItem(new ElectricLightItem(100));
-            Player.PlayerInventory.TryAddItem(new FireplaceItem(100));
             Player.PlayerInventory.TryAddItem(new CrossroadItem(100));
             Player.PlayerInventory.TryAddItem(new SplitterItem(100));
-            Player.PlayerInventory.TryAddItem(new StoneFurnaceItem(100));
+            Player.PlayerInventory.TryAddItem(new ElectricLightItem(100));
+            Player.PlayerInventory.TryAddItem(new FireplaceItem(100));
+            Player.PlayerInventory.TryAddItem(new AsseblingMachineItem(100));
             Player.PlayerInventory.TryAddItem(new DrillItem(100));
             Player.PlayerInventory.TryAddItem(new ElevatorItem(100));
+            Player.PlayerInventory.TryAddItem(new StoneFurnaceItem(100));
+            Player.PlayerInventory.TryAddItem(new IronChestItem(100));
+            
+            Player.PlayerInventory.TryAddItem(new RawCoalItem(100));
+            Player.PlayerInventory.TryAddItem(new RawCopperOreItem(100));
+            Player.PlayerInventory.TryAddItem(new RawIronOreItem(100));
+            Player.PlayerInventory.TryAddItem(new RawStoneItem(100));
+
             Player.PlayerInventory.TryAddItem(new CopperPlate(100));
-            Player.PlayerInventory.TryAddItem(new IronPlate(100));
-            Player.PlayerInventory.TryAddItem(new IronGear(100));
             Player.PlayerInventory.TryAddItem(new CopperWire(100));
-            Player.PlayerInventory.TryAddItem(new PickaxeStone(100));
-            Player.PlayerInventory.TryAddItem(new GreenCircuit(100));
             Player.PlayerInventory.TryAddItem(new ElectricEngine(100));
-            */
+            Player.PlayerInventory.TryAddItem(new GreenCircuit(100));
+            Player.PlayerInventory.TryAddItem(new IronGear(100));
+            Player.PlayerInventory.TryAddItem(new IronPipe(100));
+            Player.PlayerInventory.TryAddItem(new IronPlate(100));
+
+            Player.PlayerInventory.TryAddItem(new PickaxeStone(100));
+            Player.PlayerInventory.TryAddItem(new PickaxeIron(100));
+
 
             WorldMousePos = GetWorldMousePos();
             LastMouseTile = MouseTile;

@@ -14,7 +14,7 @@ namespace Caveworks
         public override bool IsDestructible() { return false; }
 
 
-        public override int GetHardness() { return 8; }
+        public override int GetHardness() { return 6; }
 
 
         public override int GetDrillTime() { return 4; }
