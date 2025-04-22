@@ -30,25 +30,24 @@ namespace Caveworks
             AddOreVein(CaveMap, worldDiameter, 8, 5, 10);
             AddOreVein(CaveMap, worldDiameter, 16, 5, 12);
             AddOreVein(CaveMap, worldDiameter, 24, 5, 11);
+
+            AddOreVein(CaveMap, worldDiameter, 32, 5, 10);
+            AddOreVein(CaveMap, worldDiameter, 40, 5, 12);
+            AddOreVein(CaveMap, worldDiameter, 48, 5, 11);
+            
             for (int i = 0; i < 2; i++)
-            {
-                AddOreVein(CaveMap, worldDiameter, 32, 5, 10);
-                AddOreVein(CaveMap, worldDiameter, 40, 5, 12);
-                AddOreVein(CaveMap, worldDiameter, 48, 5, 11);
-            }
-            for (int i = 0; i < 3; i++)
             {
                 AddOreVein(CaveMap, worldDiameter, 56, 5, 10);
                 AddOreVein(CaveMap, worldDiameter, 64, 5, 12);
                 AddOreVein(CaveMap, worldDiameter, 72, 5, 11);
             }
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 3; i++)
             {
                 AddOreVein(CaveMap, worldDiameter, 80, 5, 10);
                 AddOreVein(CaveMap, worldDiameter, 88, 5, 12);
                 AddOreVein(CaveMap, worldDiameter, 96, 5, 11);
             }
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 4; i++)
             {
                 AddOreVein(CaveMap, worldDiameter, 104, 5, 10);
                 AddOreVein(CaveMap, worldDiameter, 112, 5, 12);
