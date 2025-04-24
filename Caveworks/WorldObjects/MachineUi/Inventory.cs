@@ -91,24 +91,30 @@ namespace Caveworks
         {
             for (int i = 0; i < Size; i++)
             {
+                if (Items[i] != null)
+                {
+                    if (Items[i].GetType() == item.GetType())
+                    {
+                        if (Items[i].Count + item.Count <= BaseItem.StackSize)
+                        {
+                            Items[i].Count += item.Count;
+                            item.Count = 0;
+                            return true;
+                        }
+                        else
+                        {
+                            item.Count -= BaseItem.StackSize - Items[i].Count;
+                            Items[i].Count = BaseItem.StackSize;
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < Size; i++)
+            {
                 if (Items[i] == null)
                 {
                     Items[i] = item;
                     return true;
-                }
-                else if (Items[i].GetType() == item.GetType())
-                {
-                    if (Items[i].Count + item.Count <= BaseItem.StackSize)
-                    {
-                        Items[i].Count += item.Count;
-                        item.Count = 0;
-                        return true;
-                    }
-                    else
-                    {
-                        item.Count -= BaseItem.StackSize - Items[i].Count;
-                        Items[i].Count = BaseItem.StackSize;
-                    }
                 }
             }
             return false;

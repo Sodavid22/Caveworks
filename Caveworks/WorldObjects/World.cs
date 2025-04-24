@@ -62,7 +62,7 @@ namespace Caveworks
 
 
             // TEST CODE
-            /*
+            
             for (int i = 0; i < 2; i++)
             {
                 Player.PlayerInventory.TryAddItem(new SlowBeltItem(100));
@@ -92,7 +92,7 @@ namespace Caveworks
 
             Player.PlayerInventory.TryAddItem(new PickaxeStone(100));
             Player.PlayerInventory.TryAddItem(new PickaxeIron(100));
-            */
+            
 
             WorldMousePos = GetWorldMousePos();
             LastMouseTile = MouseTile;
