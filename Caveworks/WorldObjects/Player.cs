@@ -351,7 +351,9 @@ namespace Caveworks
                 }
                 else
                 {
-                    BaseItem.Drop(HeldItem);
+                    Tile tile = Globals.World.PlayerBody.Tile;
+                    HeldItem.Coordinates = Globals.World.PlayerBody.Tile.Position.ToMyVector2();
+                    HeldItem.AddToTile(tile);
                     HeldItem = null;
                     Sounds.Woosh.Play(1);
                 }
